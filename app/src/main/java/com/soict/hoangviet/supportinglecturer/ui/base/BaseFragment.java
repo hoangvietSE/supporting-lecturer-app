@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import com.soict.hoangviet.supportinglecturer.utils.LoadingUtil;
 
-public abstract class BaseFragment extends Fragment implements BaseView {
+import dagger.android.support.DaggerFragment;
+
+public abstract class BaseFragment extends DaggerFragment implements BaseView {
     private LoadingUtil mLoadingUtil;
 
     @Nullable
