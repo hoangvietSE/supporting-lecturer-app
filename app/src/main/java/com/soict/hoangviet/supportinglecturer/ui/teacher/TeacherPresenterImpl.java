@@ -1,5 +1,7 @@
 package com.soict.hoangviet.supportinglecturer.ui.teacher;
 
+import android.content.Context;
+
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenter;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
@@ -12,8 +14,8 @@ import io.reactivex.disposables.CompositeDisposable;
 public class TeacherPresenterImpl<V extends BaseView> extends BasePresenterImpl<V> implements TeacherPresenter<V> {
 
     @Inject
-    public TeacherPresenterImpl(ISharePreference mSharePreference, CompositeDisposable mCompositeDisposable) {
-        super(mSharePreference, mCompositeDisposable);
+    public TeacherPresenterImpl(Context context, ISharePreference mSharePreference, CompositeDisposable mCompositeDisposable) {
+        super(context, mSharePreference, mCompositeDisposable);
     }
 
 }

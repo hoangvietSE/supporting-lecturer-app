@@ -1,31 +1,30 @@
-package com.soict.hoangviet.supportinglecturer.custom;
+package com.soict.hoangviet.supportinglecturer.customview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RelativeLayout;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-public abstract class CustomViewConstraintLayout extends ConstraintLayout {
+public abstract class CustomViewRelativeLayout extends RelativeLayout {
     private int layoutRes = getLayoutRes();
     private int[] styableRes = getStyableRes();
     private AttributeSet attrs;
     protected View view;
 
-    public CustomViewConstraintLayout(Context context) {
+    public CustomViewRelativeLayout(Context context) {
         super(context);
         init();
     }
 
-    public CustomViewConstraintLayout(Context context, AttributeSet attrs) {
+    public CustomViewRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.attrs = attrs;
         init();
     }
 
-    public CustomViewConstraintLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomViewRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.attrs = attrs;
         init();
@@ -44,7 +43,7 @@ public abstract class CustomViewConstraintLayout extends ConstraintLayout {
         initView();
         initListener();
         initData();
-        if(styableRes!=null){
+        if (styableRes != null) {
             TypedArray mTypedArray = getContext().getTheme().obtainStyledAttributes(attrs, styableRes, 0, 0);
             initDataFromStyable(mTypedArray);
         }

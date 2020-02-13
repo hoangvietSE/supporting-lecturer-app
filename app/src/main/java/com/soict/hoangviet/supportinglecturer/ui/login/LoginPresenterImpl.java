@@ -1,18 +1,20 @@
-package com.soict.hoangviet.supportinglecturer.ui.main;
+package com.soict.hoangviet.supportinglecturer.ui.login;
 
 import android.content.Context;
 
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
+import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
 
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 
-public class MainPresenterImpl<V extends MainView> extends BasePresenterImpl<V> implements MainPresenter<V> {
+public class LoginPresenterImpl<V extends BaseView> extends BasePresenterImpl<V> implements LoginPresenter<V> {
 
     @Inject
-    public MainPresenterImpl(Context context, ISharePreference mSharePreference, CompositeDisposable mCompositeDisposable) {
+    public LoginPresenterImpl(Context context, ISharePreference mSharePreference, CompositeDisposable mCompositeDisposable) {
         super(context, mSharePreference, mCompositeDisposable);
     }
+
 }

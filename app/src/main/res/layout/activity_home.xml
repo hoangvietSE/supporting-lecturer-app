@@ -84,7 +84,7 @@
         android:scaleType="fitEnd"
         android:src="@drawable/ic_home_bottom" />
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cvHome"
         card_view:cardCornerRadius="@dimen/space_4"
         android:layout_width="wrap_content"
@@ -141,5 +141,5 @@
                     tools:text="Mike Hoffman" />
             </LinearLayout>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

@@ -1,10 +1,15 @@
 package com.soict.hoangviet.supportinglecturer.di.builder;
 
+import com.soict.hoangviet.supportinglecturer.ui.home.HomeActivity;
+import com.soict.hoangviet.supportinglecturer.ui.home.module.HomeActivityModule;
+import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
+import com.soict.hoangviet.supportinglecturer.ui.login.module.LoginActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.main.MainActivity;
 import com.soict.hoangviet.supportinglecturer.ui.main.module.MainActivityModule;
+import com.soict.hoangviet.supportinglecturer.ui.splash.SplashActivity;
+import com.soict.hoangviet.supportinglecturer.ui.splash.module.SplashActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.module.TeacherActivityModule;
-
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -12,6 +17,15 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = {MainActivityModule.class})
     abstract MainActivity bindMainActivity();
+
+    @ContributesAndroidInjector(modules = {SplashActivityModule.class})
+    abstract SplashActivity bindSplashActivity();
+
+    @ContributesAndroidInjector(modules = {LoginActivityModule.class})
+    abstract LoginActivity bindLoginActivity();
+
+    @ContributesAndroidInjector(modules = {HomeActivityModule.class})
+    abstract HomeActivity bindHomeActivity();
 
     @ContributesAndroidInjector(modules = {TeacherActivityModule.class})
     abstract TeacherActivity bindTeacherActivity();

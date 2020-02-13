@@ -3,18 +3,20 @@ package com.soict.hoangviet.supportinglecturer.ui.base;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 import com.soict.hoangviet.supportinglecturer.utils.LoadingUtil;
+import com.soict.hoangviet.supportinglecturer.widget.LoadingDialog;
 
 import butterknife.Unbinder;
-import dagger.android.AndroidInjection;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public abstract class BaseActivity extends DaggerAppCompatActivity implements BaseView {
     private LoadingUtil mLoadingUtil;
+    private LoadingDialog dialog;
     private Unbinder mUnbinder;
+    public static long lastClickTime = System.currentTimeMillis();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,10 +35,9 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
 
     protected abstract Unbinder getButterKnifeBinder();
 
-    public static long lastClickTime = System.currentTimeMillis();
-
     private void initProgressDialog() {
         mLoadingUtil = LoadingUtil.getInstance(this);
+        dialog = new LoadingDialog(this, LoadingDialog.LOAD);
     }
 
     protected boolean avoidDuplicateClick() {
@@ -50,7 +51,10 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
 
     @Override
     public void showLoading() {
-        mLoadingUtil.show();
+//        mLoadingUtil.show();
+        dialog.setMode(LoadingDialog.LOAD);
+        dialog.setLoadingText(getString(R.string.dialog_loading));
+        dialog.show();
     }
 
     @Override
@@ -61,9 +65,40 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
         }
     }
 
+    public void showErrorDialog(String message, String content, LoadingDialog.OnLiveClickListener listener) {
+        dialog.setMode(LoadingDialog.ERROR);
+        dialog.setText(message);
+        dialog.setSubtext(content);
+        dialog.setNegativeButton(false);
+        dialog.setAffirmativeClickListener(listener);
+        dialog.show();
+    }
+
+    public void showCautionDialog(String message, String content, LoadingDialog.OnLiveClickListener listener) {
+        dialog.setMode(LoadingDialog.CAUTION);
+        dialog.setText(message);
+        dialog.setSubtext(content);
+        dialog.setNegativeButton(false);
+        dialog.setAffirmativeClickListener(listener);
+        dialog.show();
+    }
+
+    public void showConfirmDialog(String message, String content, LoadingDialog.OnLiveClickListener listener) {
+        dialog.setMode(LoadingDialog.CAUTION);
+        dialog.setText(message);
+        dialog.setSubtext(content);
+        dialog.setAffirmativeClickListener(listener);
+        dialog.setNegativeButton(true);
+        dialog.setNegativeClickListener(liveDialog -> liveDialog.dismiss());
+        dialog.show();
+    }
+
     @Override
     public void hideLoading() {
-        mLoadingUtil.hidden();
+//        mLoadingUtil.hidden();
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     protected abstract void initView();

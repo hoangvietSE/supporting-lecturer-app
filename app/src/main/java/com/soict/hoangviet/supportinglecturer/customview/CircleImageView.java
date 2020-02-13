@@ -1,4 +1,4 @@
-package com.soict.hoangviet.supportinglecturer.custom;
+package com.soict.hoangviet.supportinglecturer.customview;
 
 import android.content.Context;
 import android.graphics.Bitmap;

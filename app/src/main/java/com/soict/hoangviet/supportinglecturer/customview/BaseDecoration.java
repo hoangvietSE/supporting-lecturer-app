@@ -1,4 +1,4 @@
-package com.soict.hoangviet.supportinglecturer.custom;
+package com.soict.hoangviet.supportinglecturer.customview;
 
 import android.graphics.Rect;
 import android.view.View;

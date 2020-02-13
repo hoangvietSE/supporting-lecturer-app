@@ -19,7 +19,11 @@ public class TeacherActivity extends BaseActivity implements TeacherView {
 
     @Override
     protected void initView() {
+        onAttachPresenter();
+    }
 
+    private void onAttachPresenter() {
+        mPresenter.onAttach(this);
     }
 
     @Override

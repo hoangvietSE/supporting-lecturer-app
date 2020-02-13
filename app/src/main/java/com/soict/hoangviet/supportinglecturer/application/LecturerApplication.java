@@ -3,6 +3,7 @@ package com.soict.hoangviet.supportinglecturer.application;
 import android.app.Activity;
 import android.app.Application;
 
+import com.deploygate.sdk.DeployGate;
 import com.soict.hoangviet.supportinglecturer.di.component.DaggerAppComponent;
 
 import javax.inject.Inject;
@@ -24,6 +25,11 @@ public class LecturerApplication extends Application implements HasActivityInjec
                 .application(this)
                 .build()
                 .inject(this);
+        initDeployedGate();
+    }
+
+    private void initDeployedGate() {
+        DeployGate.install(this);
     }
 
     @Override
