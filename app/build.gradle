@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'deploygate'
 
 android {
     compileSdkVersion 29
@@ -12,15 +13,91 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/rxjava.PROPERTIES'
+        exclude 'META-INF/RXJAVA.properties'
+        exclude 'META-INF/RXJAVA.PROPERTIES'
+        exclude 'META-INF/rxjava'
+        exclude 'META-INF/RXJAVA'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('D:\\Android\\KeySigning\\keyDebug.jks')
+            storePassword "Aa234566"
+            keyAlias "key-debug"
+            keyPassword "Aa234566"
+        }
+        release {
+            storeFile file('D:\\Android\\KeySigning\\keyRelease.jks')
+            storePassword "Aa234566"
+            keyAlias "key-release"
+            keyPassword "Aa234566"
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'BASE_URL', '"https://v2.convertapi.com/convert/"'
+            buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
+            versionNameSuffix "-debug"
+        }
+        stage {
+            signingConfig signingConfigs.debug
+            buildConfigField 'String', 'BASE_URL', '"https://v2.convertapi.com/convert/"'
+            buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
+            versionNameSuffix "-stage"
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'BASE_URL', '"https://v2.convertapi.com/convert/"'
+            buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
+            versionNameSuffix "-release"
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        develop {
+            dimension "version"
+            applicationId "com.soict.hoangviet.supportinglecturer.dev"
+            resValue "string", "app_name", "Ứng dụng hỗ trợ giảng dạy development"
+        }
+        product {
+            dimension "version"
+            applicationId "com.soict.hoangviet.supportinglecturer"
+            resValue "string", "app_name", "Ứng dụng hỗ trợ giảng dạy"
+        }
     }
 }
 
@@ -58,4 +135,32 @@ dependencies {
     //Butterknife
     implementation "com.jakewharton:butterknife:$butter_knife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butter_knife_version"
+
+    implementation 'life.knowledge4:k4l-video-trimmer:1.0'
+    implementation project(':pen-v5.1.0_full')
+    implementation 'com.karumi:dexter:5.0.0'
+    implementation 'life.knowledge4:k4l-video-trimmer:1.0'
+    implementation 'com.obsez.android.lib.filechooser:filechooser:1.1.10'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.github.pedroSG94.rtmp-rtsp-stream-client-java:rtplibrary:1.7.6'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev120-1.19.0'
+    implementation 'com.google.http-client:google-http-client-android:1.25.0'
+    implementation 'com.google.api-client:google-api-client-android:1.25.0'
+    implementation files('libs/sdk-v1.0.1.jar')
+    implementation 'com.camerakit:camerakit:1.0.0-beta3.11'
+    implementation 'com.camerakit:jpegkit:0.1.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'
+    implementation 'com.googlecode.mp4parser:isoparser:1.1.9'
+    implementation 'com.writingminds:FFmpegAndroid:0.3.2'
+    implementation 'life.knowledge4:k4l-video-trimmer:1.0'
+    implementation 'com.deploygate:sdk:4.2.0'
+    implementation 'com.github.duanhong169:colorpicker:1.1.6'
+
 }

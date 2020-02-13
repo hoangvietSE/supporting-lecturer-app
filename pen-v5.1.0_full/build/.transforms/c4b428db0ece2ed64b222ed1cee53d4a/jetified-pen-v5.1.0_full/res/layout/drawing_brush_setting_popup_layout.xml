@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- content -->
+
+    <HorizontalScrollView
+        android:id="@+id/drawing_brush_setting_popup_horizontal_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <!-- for rotation -->
+            <RelativeLayout
+                android:id="@+id/drawing_brush_setting_popup_total_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <!--android:background="@android:color/holo_blue_light"-->
+
+                <RelativeLayout
+                    android:id="@+id/drawing_brush_setting_popup_view"
+                    android:layout_width="@dimen/drawing_brush_setting_popup_layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/drawing_brush_setting_popup_layout_left_margin">
+
+                    <RelativeLayout
+                        android:id="@+id/drawing_brush_setting_popup_view_body"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="@dimen/drawing_brush_setting_popup_view_body_top_margin">
+
+                        <RelativeLayout
+                            android:id="@+id/drawing_brush_setting_popup_bg_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/spen_common_setting_bg">
+                        </RelativeLayout>
+
+                        <!-- title layout -->
+
+                        <RelativeLayout
+                            android:id="@+id/drawing_brush_setting_popup_view_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/drawing_brush_setting_popup_view_title_layout_height"
+                            android:layout_alignParentTop="true">
+
+                            <!-- title -->
+
+                            <TextView
+                                android:id="@+id/drawing_brush_setting_popup_view_title_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:paddingEnd="@dimen/drawing_brush_setting_popup_view_title_text_padding"
+                                android:paddingStart="@dimen/drawing_brush_setting_popup_view_title_text_padding"
+                                android:singleLine="true"
+                                android:text="@string/pen_string_setting"
+                                android:textColor="@color/setting_title_string_color"
+                                android:textSize="@dimen/drawing_brush_setting_popup_view_title_text_size" />
+
+                            <!-- DONE button -->
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#00000000">
+
+                                <TextView
+                                    android:id="@+id/drawing_brush_setting_popup_view_title_done"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:focusable="true"
+                                    android:gravity="center"
+                                    android:paddingEnd="@dimen/setting_title_text_padding"
+                                    android:paddingStart="@dimen/setting_title_text_padding"
+                                    android:text="@string/pen_string_close"
+                                    android:textColor="#f46a4e"
+                                    android:textSize="@dimen/drawing_brush_setting_popup_view_title_done_size" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <ScrollView
+                            android:id="@+id/drawing_brush_setting_popup_body_scrollview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/drawing_brush_setting_popup_view_title"
+                            android:scrollbarSize="@dimen/drawing_brush_setting_popup_scrollbar_size"
+                            android:fillViewport="true">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="fill_parent">
+
+                                <!-- preview layout -->
+
+                                <RelativeLayout
+                                    android:id="@+id/drawing_brush_setting_popup_preview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginBottom="@dimen/drawing_brush_preview_layout_margin_bottom">
+
+                                    <ImageView
+                                        android:id="@+id/drawing_brush_setting_popup_preview_bg"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/drawing_brush_preview_layout_height"
+                                        android:layout_marginEnd="@dimen/drawing_brush_preview_margin_side"
+                                        android:layout_marginStart="@dimen/drawing_brush_preview_margin_side"
+                                        android:background="@drawable/brush_pen_preview_shape" />
+
+                                    <ImageView
+                                        android:id="@+id/drawing_brush_setting_popup_preview_eraser_bg"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/drawing_brush_preview_layout_height"
+                                        android:layout_marginEnd="@dimen/drawing_brush_preview_margin_side"
+                                        android:layout_marginStart="@dimen/drawing_brush_preview_margin_side"
+                                        android:background="#FF121212"
+                                        android:visibility="gone" />
+                                </RelativeLayout>
+
+                                <!-- Eraser preview layout -->
+                                <RelativeLayout
+                                    android:id="@+id/drawing_brush_setting_popup_eraser_preview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/drawing_brush_setting_popup_preview"
+                                    android:layout_marginBottom="@dimen/drawing_brush_preview_layout_margin_bottom">
+
+                                    <ImageView
+                                        android:id="@+id/drawing_brush_setting_popup_eraser_preview_bg"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/drawing_brush_preview_layout_height_eraser"
+                                        android:layout_marginEnd="@dimen/drawing_brush_preview_margin_side"
+                                        android:layout_marginStart="@dimen/drawing_brush_preview_margin_side"
+                                        android:background="@drawable/brush_pen_preview_shape" />
+
+                                    <ImageView
+                                        android:id="@+id/drawing_brush_setting_popup_eraser_preview_pattern_image"
+                                        android:layout_width="@dimen/drawing_brush_preview_eraser_preview_width"
+                                        android:layout_height="@dimen/drawing_brush_preview_eraser_preview_height"
+                                        android:layout_centerInParent="true" />
+                                </RelativeLayout>
+
+                                <!-- seekbar button -->
+                                <RelativeLayout
+                                    android:id="@+id/drawing_brush_setting_popup_seekbar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/drawing_brush_setting_popup_eraser_preview">
+
+                                </RelativeLayout>
+
+                                <!-- clear button -->
+                                <RelativeLayout
+                                    android:id="@+id/drawing_brush_setting_popup_clear_button"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/drawing_brush_setting_popup_clear_button_height"
+                                    android:layout_below="@+id/drawing_brush_setting_popup_seekbar"
+                                    android:layout_marginLeft="8px"
+                                    android:layout_marginRight="8px"
+                                    android:background="#00000000">
+
+                                    <Button
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/drawing_brush_setting_popup_clear_button_height"
+                                        android:background="#00000000"
+                                        android:focusable="true"
+                                        android:gravity="center"
+                                        android:textColor="#000000"
+                                        android:textSize="@dimen/drawing_brush_setting_popup_erase_all_text_size" />
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/drawing_brush_setting_popup_erase_all_border_line"
+                                        android:layout_alignParentTop="true"
+                                        android:background="#ffc7c7c7" />
+                                </RelativeLayout>
+                            </RelativeLayout>
+                        </ScrollView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</FrameLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawing_brush_type_layout"
+    android:layout_width="@dimen/drawing_brush_type_view_open_width_tablet"
+    android:layout_height="match_parent"
+    android:background="#fafafa" >
+
+    <!-- swipe view -->
+    <RelativeLayout
+        android:id="@+id/drawing_brush_type_swipe_view"
+        android:layout_width="@dimen/drawing_brush_type_view_arrow_width_tablet"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:focusable="false"
+        android:visibility="gone">
+    </RelativeLayout>
+
+    <!-- arrow view -->
+    <RelativeLayout
+        android:id="@+id/drawing_brush_type_arrow_view"
+        android:layout_width="@dimen/drawing_brush_type_view_arrow_width_tablet"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:clickable="false">
+
+        <include
+            android:id="@+id/menu_pen1"
+            layout="@layout/drawing_setting_pen_view"
+            android:layout_width="@dimen/drawing_brush_type_button_width"
+            android:layout_height="@dimen/drawing_brush_type_button_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/drawing_brush_type_button_margin_left"
+            />
+
+        <include
+            android:id="@+id/menu_pen2"
+            layout="@layout/drawing_setting_pen_view"
+            android:layout_width="@dimen/drawing_brush_type_button_width"
+            android:layout_height="@dimen/drawing_brush_type_button_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/drawing_brush_type_button_margin_left"
+            android:focusable="false"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawing_brush_type_setting_layout"
+        android:layout_width="@dimen/drawing_brush_type_airview_button_width_tablet"
+        android:layout_height="@dimen/drawing_brush_type_button_height_tablet"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent" >
+
+        <RelativeLayout
+            android:id="@+id/drawing_brush_type_setting_view"
+            android:layout_width="@dimen/drawing_brush_type_setting_button_width_tablet"
+            android:layout_height="@dimen/drawing_brush_type_setting_view_height_tablet"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/drawing_brush_type_setting_button_margin_start_tablet">
+            <ImageView
+                android:id="@+id/drawing_brush_type_setting_button"
+                android:layout_width="@dimen/drawing_brush_type_setting_button_width_tablet"
+                android:layout_height="@dimen/drawing_brush_type_setting_button_height_tablet"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawing_brush_type_setting_layout_talkback"
+        android:layout_width="@dimen/drawing_brush_type_airview_button_width_tablet"
+        android:layout_height="@dimen/drawing_brush_type_button_height_tablet"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent" >
+
+        <ImageButton
+            android:id="@+id/drawing_brush_type_setting_layout_airview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"/>
+    </RelativeLayout>
+
+</RelativeLayout>

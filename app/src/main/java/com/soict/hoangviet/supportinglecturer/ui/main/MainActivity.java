@@ -19,10 +19,6 @@ public class MainActivity extends BaseActivity implements MainView {
     @Inject
     MainPresenter<MainView> mPresenter;
 
-
-    @BindView(R.id.tv_test)
-    TextView tvTest;
-
     @Override
     protected Unbinder getButterKnifeBinder() {
         return ButterKnife.bind(this);
@@ -31,8 +27,6 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     protected void initView() {
         onAttachPresenter();
-        tvTest.setText("Hoang Tien Viet");
-
     }
 
     private void onAttachPresenter() {

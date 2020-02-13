@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/remover_layout_total_width"
+    android:layout_height="wrap_content" >
+
+    <!-- ScrollView -->
+
+    <com.samsung.android.sdk.pen.settingui.SpenHorizontalScrollView
+        android:id="@+id/setting_remover_view_hscroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbarSize="0dp"
+        android:background="@drawable/spen_common_setting_bg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="@dimen/remover_layout_total_width"
+                android:layout_height="wrap_content" >
+
+                <!-- title layout -->
+
+                <RelativeLayout
+                    android:id="@+id/setting_remover_view_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="#00000000" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="0dp"
+                        android:gravity="start|center_vertical"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp"
+                        android:singleLine="true"
+                        android:textColor="@color/setting_title_string_color"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:minWidth="0dp"
+                        android:paddingStart="@dimen/setting_title_text_padding"
+                        android:paddingEnd="@dimen/setting_title_text_padding"
+                        android:textColor="#f46a4e"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <!-- scroll view -->
+
+                <com.samsung.android.sdk.pen.settingui.SpenScrollView
+                    android:id="@+id/setting_remover_scrollview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/setting_remover_view_title"
+                    android:fillViewport="true" >
+
+                    <!-- body layout -->
+
+                    <RelativeLayout
+                        android:id="@+id/setting_remover_body_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- radio button -->
+
+                        <RadioGroup
+                            android:id="@+id/remover_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="0dp" >
+
+                            <RadioButton
+                                android:id="@+id/remover_radio_button_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="42dp"
+                                android:checked="true"
+                                android:gravity="center_vertical|start"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginStart="14dp"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="5dp"
+                                android:textColor="#252525"
+                                android:textSize="14sp"
+                                android:includeFontPadding="false" />
+
+                            <RadioButton
+                                android:id="@+id/remover_radio_button_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="42dp"
+                                android:checked="false"
+                                android:gravity="center_vertical|start"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginStart="14dp"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="5dp"
+                                android:textColor="#252525"
+                                android:textSize="14sp"
+                                android:includeFontPadding="false" />
+                        </RadioGroup>
+
+                        <!-- radio ripple button -->
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+
+                            <RelativeLayout
+                                android:id="@+id/remover_radio_ripple_button_view_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:background="#00000000" >
+
+                                <Button
+                                    android:id="@+id/remover_radio_ripple_button_1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="42dp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/remover_radio_ripple_button_view_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="48dp"
+                                android:background="#00000000" >
+
+                                <Button
+                                    android:id="@+id/remover_radio_ripple_button_2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="42dp" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <!-- seekbar -->
+
+                        <RelativeLayout
+                            android:id="@+id/remover_cutter_seekbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/remover_radio_group"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="1dp">
+                            <!--ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2px"
+                                android:layout_marginEnd="10px"
+                                android:layout_marginStart="10px"
+                                android:layout_alignParentTop="true"
+                                android:background="#ffc7c7c7" /-->
+                        </RelativeLayout>
+
+                        <!-- eraseAll button -->
+
+                        <RelativeLayout
+                            android:id="@+id/remover_body_erase_all"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/remover_cutter_seekbar"
+                            android:layout_marginEnd="0px"
+                            android:layout_marginStart="0px"
+                            android:layout_marginTop="13dp"
+                            android:background="#00000000" >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="41dp"
+                                android:background="#00000000"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:textColor="#000000"
+                                android:textSize="14sp" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2px"
+                                android:layout_alignParentTop="true"
+                                android:background="#ffc7c7c7" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </com.samsung.android.sdk.pen.settingui.SpenScrollView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </com.samsung.android.sdk.pen.settingui.SpenHorizontalScrollView>
+
+</RelativeLayout>

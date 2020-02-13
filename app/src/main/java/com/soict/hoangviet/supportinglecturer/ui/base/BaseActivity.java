@@ -9,6 +9,7 @@ import com.soict.hoangviet.supportinglecturer.utils.Define;
 import com.soict.hoangviet.supportinglecturer.utils.LoadingUtil;
 
 import butterknife.Unbinder;
+import dagger.android.AndroidInjection;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public abstract class BaseActivity extends DaggerAppCompatActivity implements BaseView {

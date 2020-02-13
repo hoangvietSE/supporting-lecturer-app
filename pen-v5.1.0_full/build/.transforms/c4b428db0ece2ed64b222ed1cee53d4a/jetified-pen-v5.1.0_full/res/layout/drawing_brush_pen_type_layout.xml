@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/drawing_brush_type_setting_layout_talkback"
+        android:layout_width="@dimen/drawing_brush_type_button_width"
+        android:layout_height="@dimen/drawing_brush_type_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent">
+
+        <ImageButton
+            android:id="@+id/drawing_brush_type_setting_layout_airview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"/>
+    </RelativeLayout>
+</merge>

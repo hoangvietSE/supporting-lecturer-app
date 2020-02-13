@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/brush_pen_type_layout"
+    android:layout_width="@dimen/palette_pen_type_view_open_width"
+    android:layout_height="match_parent"
+    android:background="#fafafa" >
+
+    <!-- swipe view -->
+    <RelativeLayout
+        android:id="@+id/brush_pen_type_swipe_view"
+        android:layout_width="@dimen/palette_pen_type_view_arrow_width"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:focusable="false"
+        android:visibility="gone">
+    </RelativeLayout>
+
+    <!-- arrow view -->
+    <RelativeLayout
+        android:id="@+id/brush_pen_type_arrow_view"
+        android:layout_width="@dimen/palette_pen_type_view_arrow_width"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/brush_pen_type_arrow_touch_view"
+            android:layout_width="@dimen/palette_pen_type_view_arrow_width"
+            android:layout_height="45.5dp"
+            android:layout_centerInParent="true" />
+
+        <RelativeLayout
+            android:id="@+id/brush_pen_type_arrow_button_parent"
+            android:layout_width="@dimen/palette_pen_type_view_arrow_width"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:focusable="true" >
+
+            <ImageButton
+                android:id="@+id/brush_pen_type_arrow_button"
+                android:layout_width="11.5dp"
+                android:layout_height="11.5dp"
+                android:layout_centerInParent="true" />
+
+            <ImageButton
+                android:id="@+id/brush_pen_type_arrow_ripple_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="2px"
+            android:layout_height="95.5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="#cdcdcd"/>
+        <ImageView
+            android:id="@+id/brush_arrow_focus_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:background="@drawable/snote_popup_pensetting_focused"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/brush_pen_type_setting_layout"
+        android:layout_width="@dimen/palette_pen_type_airview_button_width"
+        android:layout_height="@dimen/palette_pen_type_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent" >
+
+        <RelativeLayout
+            android:id="@+id/brush_pen_type_setting_view"
+            android:layout_width="@dimen/palette_pen_type_setting_button_width"
+            android:layout_height="@dimen/palette_pen_type_setting_view_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/palette_pen_type_setting_button_margin_start">
+            <ImageView
+                android:id="@+id/brush_pen_type_setting_button"
+                android:layout_width="@dimen/palette_pen_type_setting_button_width"
+                android:layout_height="@dimen/palette_pen_type_setting_button_height"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/brush_pen_type_setting_layout_talkback"
+        android:layout_width="@dimen/palette_pen_type_airview_button_width"
+        android:layout_height="@dimen/palette_pen_type_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent" >
+
+        <ImageButton
+            android:id="@+id/brush_pen_type_setting_layout_airview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"/>
+    </RelativeLayout>
+
+</RelativeLayout>

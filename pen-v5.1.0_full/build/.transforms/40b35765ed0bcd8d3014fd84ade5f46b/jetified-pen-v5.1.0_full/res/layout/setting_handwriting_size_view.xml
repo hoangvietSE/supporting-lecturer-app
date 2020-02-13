@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/handwriting_size_setting_layout"
+    android:layout_width="@dimen/common_total_layout_width"
+    android:layout_height="@dimen/handwriting_size_setting_height"
+    android:paddingTop="@dimen/handwriting_size_setting_padding_top">
+
+    <RelativeLayout
+        android:id="@+id/handwriting_size_button_1"
+        android:layout_width="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_height="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_marginStart="@dimen/handwriting_size_setting_margin_start"
+        android:focusable="true">
+
+        <RelativeLayout
+            android:layout_width="@dimen/handwriting_color_setting_circle_size"
+            android:layout_height="@dimen/handwriting_color_setting_circle_size"
+            android:layout_centerInParent="true">
+
+            <com.samsung.android.sdk.pen.settingui.SpenPenPreview
+                android:id="@+id/handwriting_size_button_preview_1"
+                android:layout_width="@dimen/handwriting_size_setting_preview_width"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/handwriting_size_button_2"
+        android:layout_width="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_height="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_marginStart="@dimen/handwriting_color_setting_circle_margin"
+        android:layout_toEndOf="@+id/handwriting_size_button_1"
+        android:focusable="true">
+
+        <RelativeLayout
+            android:layout_width="@dimen/handwriting_color_setting_circle_size"
+            android:layout_height="@dimen/handwriting_color_setting_circle_size"
+            android:layout_centerInParent="true">
+
+            <com.samsung.android.sdk.pen.settingui.SpenPenPreview
+                android:id="@+id/handwriting_size_button_preview_2"
+                android:layout_width="@dimen/handwriting_size_setting_preview_width"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/handwriting_size_button_3"
+        android:layout_width="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_height="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_marginStart="@dimen/handwriting_color_setting_circle_margin"
+        android:layout_toEndOf="@+id/handwriting_size_button_2"
+        android:focusable="true">
+
+        <RelativeLayout
+            android:layout_width="@dimen/handwriting_color_setting_circle_size"
+            android:layout_height="@dimen/handwriting_color_setting_circle_size"
+            android:layout_centerInParent="true">
+
+            <com.samsung.android.sdk.pen.settingui.SpenPenPreview
+                android:id="@+id/handwriting_size_button_preview_3"
+                android:layout_width="@dimen/handwriting_size_setting_preview_width"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/handwriting_size_button_4"
+        android:layout_width="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_height="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_marginStart="@dimen/handwriting_color_setting_circle_margin"
+        android:layout_toEndOf="@+id/handwriting_size_button_3"
+        android:focusable="true">
+
+        <RelativeLayout
+            android:layout_width="@dimen/handwriting_color_setting_circle_size"
+            android:layout_height="@dimen/handwriting_color_setting_circle_size"
+            android:layout_centerInParent="true">
+
+            <com.samsung.android.sdk.pen.settingui.SpenPenPreview
+                android:id="@+id/handwriting_size_button_preview_4"
+                android:layout_width="@dimen/handwriting_size_setting_preview_width"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/handwriting_size_button_5"
+        android:layout_width="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_height="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_marginStart="@dimen/handwriting_color_setting_circle_margin"
+        android:layout_toEndOf="@+id/handwriting_size_button_4"
+        android:focusable="true">
+
+        <RelativeLayout
+            android:layout_width="@dimen/handwriting_color_setting_circle_size"
+            android:layout_height="@dimen/handwriting_color_setting_circle_size"
+            android:layout_centerInParent="true">
+
+            <com.samsung.android.sdk.pen.settingui.SpenPenPreview
+                android:id="@+id/handwriting_size_button_preview_5"
+                android:layout_width="@dimen/handwriting_size_setting_preview_width"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/handwriting_size_selector"
+        android:padding="@dimen/handwriting_color_setting_focus_circle_padding_small"
+        android:layout_width="@dimen/handwriting_color_setting_focus_circle_size"
+        android:layout_height="@dimen/handwriting_color_setting_focus_circle_size" />
+
+</RelativeLayout>

@@ -5,6 +5,7 @@ import android.app.Application;
 import com.soict.hoangviet.supportinglecturer.application.LecturerApplication;
 import com.soict.hoangviet.supportinglecturer.di.builder.ActivityBuilder;
 import com.soict.hoangviet.supportinglecturer.di.module.AppModule;
+import com.soict.hoangviet.supportinglecturer.di.module.NetworkModule;
 
 import javax.inject.Singleton;
 
@@ -16,7 +17,8 @@ import dagger.android.AndroidInjectionModule;
 @Component(modules = {
         AndroidInjectionModule.class,
         ActivityBuilder.class,
-        AppModule.class})
+        AppModule.class,
+        NetworkModule.class})
 public interface AppComponent {
     void inject(LecturerApplication baseApplication);
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <!-- body layout -->
+    <RelativeLayout
+        android:id="@+id/drawing_brush_body_layout"
+        android:layout_width="@dimen/drawing_brush_setting_width"
+        android:layout_height="@dimen/drawing_brush_setting_height"
+        android:background="@drawable/drawing_palette_bg" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawing_brush_consume_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/drawing_brush_body_layout"
+        android:background="@android:color/transparent"
+        android:visibility="gone"/>
+
+</RelativeLayout>

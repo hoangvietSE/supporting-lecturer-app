@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- content -->
+
+    <LinearLayout
+        android:layout_width="@dimen/setting_color_picker_popup_width"
+        android:layout_height="@dimen/setting_color_picker_popup_height"
+        android:orientation="vertical">
+
+        <!-- preview container -->
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/setting_color_picker_preview_layout_margin_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_color_picker_preview_layout_height"
+            android:layout_marginEnd="@dimen/setting_color_picker_preview_layout_side_margin"
+            android:layout_marginStart="@dimen/setting_color_picker_preview_layout_side_margin"
+            android:background="@drawable/color_picker_dialog_preview_bg_shape">
+
+            <!-- preview -->
+
+            <LinearLayout
+                android:id="@+id/color_picker_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/setting_color_picker_preview_color_height"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <!-- picked color -->
+
+                <View
+                    android:layout_width="@dimen/setting_color_picker_preview_color_width"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/note_color_picker_current_color_preview_bg" />
+
+                <!-- current color -->
+
+                <View
+                    android:layout_width="@dimen/setting_color_picker_preview_color_width"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/note_color_picker_new_color_preview_bg" />
+            </LinearLayout>
+
+            <!-- Current color text -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/color_picker_preview"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:paddingStart="2dp"
+                android:paddingEnd="14dp"
+                android:textColor="#5d5d5d"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/color_picker_preview"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:paddingStart="14dp"
+                android:paddingEnd="2dp"
+                android:textColor="#5d5d5d"
+                android:textSize="13dp" />
+
+        </RelativeLayout>
+
+        <!-- Color Wheel -->
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/setting_color_picker_color_wheel_margin_top"
+            android:layout_width="@dimen/setting_color_picker_color_wheel_size"
+            android:layout_height="@dimen/setting_color_picker_color_wheel_size"
+            android:layout_gravity="center_horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Cursor -->
+
+                    <View
+                        android:layout_width="42dp"
+                        android:layout_height="42dp" />
+                </FrameLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!-- V seekbar -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_color_picker_seekbar_layout_height"
+            android:layout_marginEnd="22dp"
+            android:layout_marginStart="22dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:max="255"
+                android:maxHeight="@dimen/setting_color_picker_seekbar_height"
+                android:minHeight="@dimen/setting_color_picker_seekbar_height" />
+
+        </RelativeLayout>
+
+        <!-- Recent colors layout -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setting_color_picker_recent_color_layout_margin_top"
+            android:layout_marginStart="@dimen/setting_color_picker_recent_color_layout_side_margin"
+            android:layout_marginEnd="@dimen/setting_color_picker_recent_color_layout_side_margin"
+            android:visibility="gone">
+
+            <!-- Title -->
+            <RelativeLayout
+                android:id="@+id/recent_color_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/setting_color_picker_recent_color_text_margin_start"
+                android:layout_marginEnd="@dimen/setting_color_picker_recent_color_text_margin_start" >
+                <TextView
+                    android:id="@+id/recent_color_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="#979797"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"/>
+
+                <!-- divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_color_picker_divider_height"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/recent_color_title"
+                    android:layout_marginStart="6dp"
+                    android:background="#d4d4d4" />
+            </RelativeLayout>
+
+            <!-- Pallet Layout -->
+
+            <View
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/recent_color_title_layout"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="@dimen/color_picker_popup_color_focus_wheel_thickness" />
+
+            <View
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/recent_color_title_layout"
+                android:layout_marginStart="47.2dp"
+                android:layout_marginTop="13dp" />
+
+            <View
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/recent_color_title_layout"
+                android:layout_marginStart="91.4dp"
+                android:layout_marginTop="13dp" />
+
+            <View
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/recent_color_title_layout"
+                android:layout_marginStart="135.6dp"
+                android:layout_marginTop="13dp" />
+
+            <View
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/recent_color_title_layout"
+                android:layout_marginStart="179.8dp"
+                android:layout_marginTop="13dp" />
+
+            <View
+                android:id="@+id/color_picker_recent_color_last"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/recent_color_title_layout"
+                android:layout_marginStart="224dp"
+                android:layout_marginTop="13dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/color_picker_spuitBtn_view"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/recent_color_title_layout"
+                android:layout_marginStart="224dp"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/drawing_color_setting_ic_spoid" />
+
+        </RelativeLayout>
+
+        <!-- button layout -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="13dp" >
+
+            <!-- CANCEL Button -->
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/setting_color_picker_text_button_height"
+                android:layout_toStartOf="@+id/setting_color_picker_done_button"
+                android:background="@drawable/setting_dialog_action_button_ripple" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingEnd="14dp"
+                    android:paddingStart="14dp"
+                    android:singleLine="true"
+                    android:textColor="#f46a4e"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <!-- DONE button -->
+            <RelativeLayout
+                android:id="@+id/setting_color_picker_done_button"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/setting_color_picker_text_button_height"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/setting_dialog_action_button_ripple" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingEnd="14dp"
+                    android:paddingStart="14dp"
+                    android:textColor="#f46a4e"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

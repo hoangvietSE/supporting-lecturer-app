@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':pen-v5.1.0_full'
 rootProject.name='Supporting Lecturer'

@@ -13,8 +13,7 @@ import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
 @Module
-public
-class AppModule {
+public class AppModule {
 
     @Provides
     @Singleton
