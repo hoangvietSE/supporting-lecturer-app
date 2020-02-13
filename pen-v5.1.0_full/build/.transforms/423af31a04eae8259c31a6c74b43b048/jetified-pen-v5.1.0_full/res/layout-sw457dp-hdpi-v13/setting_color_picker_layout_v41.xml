@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- content -->
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="683dp"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <!-- title layout -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:background="#00000000">
+
+            <!-- title -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingEnd="22dp"
+                android:paddingStart="22dp"
+                android:singleLine="true"
+                android:textColor="#676767"
+                android:textSize="17sp" />
+
+            <!-- DONE button -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:paddingEnd="22dp"
+                android:paddingStart="22dp"
+                android:textColor="#f46a4e"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <!-- preview container -->
+
+        <RelativeLayout
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/color_picker_dialog_preview_bg_shape">
+
+            <!-- preview -->
+
+            <LinearLayout
+                android:id="@+id/color_picker_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <!-- picked color -->
+
+                <View
+                    android:layout_width="76dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/note_color_picker_current_color_preview_bg" />
+
+                <!-- current color -->
+
+                <View
+                    android:layout_width="76dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/note_color_picker_new_color_preview_bg" />
+            </LinearLayout>
+
+            <!-- Current color text -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/color_picker_preview"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:paddingStart="2dp"
+                android:paddingEnd="16dp"
+                android:textColor="#5d5d5d"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/color_picker_preview"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:paddingStart="16dp"
+                android:paddingEnd="2dp"
+                android:textColor="#5d5d5d"
+                android:textSize="13dp" />
+
+        </RelativeLayout>
+
+        <!-- Color Wheel -->
+
+        <RelativeLayout
+            android:layout_marginTop="28dp"
+            android:layout_width="296dp"
+            android:layout_height="296dp"
+            android:layout_gravity="center_horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Cursor -->
+
+                    <View
+                        android:layout_width="35dp"
+                        android:layout_height="35dp" />
+                </FrameLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!-- V seekbar -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="89dp">
+
+            <View
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <SeekBar
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:max="255"
+                android:maxHeight="15dp"
+                android:minHeight="15dp" />
+
+        </RelativeLayout>
+
+        <!-- Recent colors layout -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_marginStart="33dp"
+            android:visibility="gone">
+
+            <!-- Title -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_vertical"
+                android:textColor="#7e7e7e"
+                android:textSize="16sp" />
+
+            <!-- Pallet Layout -->
+
+            <View
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="46dp" />
+
+            <View
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="58dp"
+                android:layout_marginTop="46dp" />
+
+            <View
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="115dp"
+                android:layout_marginTop="46dp" />
+
+            <View
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="172dp"
+                android:layout_marginTop="46dp" />
+
+            <View
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="229dp"
+                android:layout_marginTop="46dp" />
+
+            <View
+                android:id="@+id/color_picker_recent_color_last"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="286dp"
+                android:layout_marginTop="46dp"
+                android:layout_marginEnd="2dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/color_picker_spuitBtn_view"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="286dp"
+                android:layout_marginTop="46dp"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/drawing_color_setting_ic_spoid" />
+
+            <!-- divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4px"
+                android:layout_marginEnd="32dp"
+                android:background="#B2d9d9d9" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

@@ -10,6 +10,9 @@ import com.soict.hoangviet.supportinglecturer.ui.splash.SplashActivity;
 import com.soict.hoangviet.supportinglecturer.ui.splash.module.SplashActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.module.TeacherActivityModule;
+import com.soict.hoangviet.supportinglecturer.ui.video.VideoActivity;
+import com.soict.hoangviet.supportinglecturer.ui.video.module.VideoActivityModule;
+
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -29,4 +32,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {TeacherActivityModule.class})
     abstract TeacherActivity bindTeacherActivity();
+
+    @ContributesAndroidInjector(modules = {VideoActivityModule.class})
+    abstract VideoActivity bindVideoActivity();
 }

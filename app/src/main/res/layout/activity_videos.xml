@@ -19,7 +19,7 @@
                 app:expandedTitleGravity="top"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/tbVideo"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
@@ -33,7 +33,7 @@
                         android:text="@string/tv.title.action.bar"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_20" />
-                </android.support.v7.widget.Toolbar>
+                </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 

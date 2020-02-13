@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <!-- Left Button -->
+    <ImageButton
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="11dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"/>
+    
+    <!-- Right Button -->
+    <ImageButton
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="61dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"/>
+    
+    <!-- Enter Button -->
+    <ImageButton
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="111dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"/>
+    
+    <!-- Up Button -->
+    <ImageButton
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="111dp"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:focusable="true"/>
+    
+    <!-- Down Button -->
+    <ImageButton
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="61dp"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:focusable="true"/>
+    
+    <!-- Close Button -->
+    <ImageButton
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="11dp"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:focusable="true"/>
+    
+    <!-- Handler -->
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="28dp"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"/>
+
+</RelativeLayout>

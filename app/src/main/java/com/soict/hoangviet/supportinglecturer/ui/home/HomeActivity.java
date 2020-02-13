@@ -84,19 +84,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     }
 
     private void initEvent() {
-        if (!NetworkUtil.isConnectedToNetwork(this)) {
-            mSharePreference.setLoginStatus(Define.KeyPreference.IS_LOGINED, false);
-            if (mSharePreference.getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
-                mSharePreference.setLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK, false);
-                mSharePreference.setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, "");
-                mSharePreference.setUserId(Define.KeyPreference.USER_ID, "");
-                LoginManager.getInstance().logOut();
-            } else {
-                mSharePreference.setLoginStatusFromGoogle(Define.KeyPreference.LOGIN_FROM_GOOGLE, false);
-                mSharePreference.setAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME, "");
-                mSharePreference.setRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE, "");
-            }
-        }
+        mPresenter.checkConnectedToNetwork(this);
         changeUI(mSharePreference.getLoginStatus(Define.KeyPreference.IS_LOGINED));
         llLiveStream.setOnClickListener(this);
         llCreateVideo.setOnClickListener(this);
@@ -130,6 +118,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
             case R.id.llLiveStream:
                 if (!mSharePreference.getLoginStatus(Define.KeyPreference.IS_LOGINED)) {
                     showCautionDialog(getString(R.string.dialog_syntax_login), "", liveDialog -> {
+                        liveDialog.dismiss();
                         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivityForResult(intent, Define.RequestCode.REQUEST_LOGIN);
                     });
@@ -171,31 +160,20 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
 //                startActivity(intentList);
                 break;
             case R.id.llHomeProfile:
-                if (!mSharePreference.getLoginStatus(Define.KeyPreference.IS_LOGINED)) {
-                    Intent intentLogin = new Intent(HomeActivity.this, LoginActivity.class);
-                    startActivityForResult(intentLogin, Define.RequestCode.REQUEST_LOGIN);
-                } else {
-                    showConfirmDialog(getString(R.string.dialog_confirm_logout), "", liveDialog -> {
-                        if (mSharePreference.getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
-                            AccessToken accessToken = AccessToken.getCurrentAccessToken();
-                            boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-                            if (isLoggedIn) {
-                                mSharePreference.setLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK, false);
-                                mSharePreference.setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, "");
-                                mSharePreference.setUserId(Define.KeyPreference.USER_ID, "");
-                                LoginManager.getInstance().logOut();
-                            }
-                        } else {
-                            mSharePreference.setLoginStatusFromGoogle(Define.KeyPreference.LOGIN_FROM_GOOGLE, false);
-                            mSharePreference.setAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME, "");
-                            mSharePreference.setRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE, "");
-                        }
-                        mSharePreference.setLoginStatus(Define.KeyPreference.IS_LOGINED, false);
-                        liveDialog.dismiss();
-                        changeUI(false);
-                    });
-                }
+                mPresenter.onLoginButtonClick();
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Define.RequestCode.REQUEST_LOGIN) {
+            if (resultCode == RESULT_OK) {
+                changeUI(mSharePreference.getLoginStatus(Define.KeyPreference.IS_LOGINED));
+            }
+        } else if (requestCode == Define.RequestCode.REQUEST_RECOVERY_ACCOUNT) {
+//            changeUI(AppPreferences.INSTANCE.getKeyBoolean(Constants.KeyPreference.IS_LOGINED));
         }
     }
 
@@ -278,6 +256,26 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
                 tvName.setText(mSharePreference.getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME));
             }
         }
+    }
+
+    @Override
+    public void goToLoginScreen() {
+        Intent intentLogin = new Intent(HomeActivity.this, LoginActivity.class);
+        startActivityForResult(intentLogin, Define.RequestCode.REQUEST_LOGIN);
+    }
+
+    @Override
+    public void showConfirmLogout() {
+        showConfirmDialog(getString(R.string.dialog_confirm_logout), "", liveDialog -> {
+            if (mSharePreference.getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
+                mPresenter.logoutFacebook();
+            } else {
+                mPresenter.logoutGoogle();
+            }
+            liveDialog.dismiss();
+            mSharePreference.setLoginStatus(Define.KeyPreference.IS_LOGINED, false);
+            changeUI(false);
+        });
     }
 
     private class CreateLiveEventTask extends AsyncTask<String, Void, EventData> {

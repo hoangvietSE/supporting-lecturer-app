@@ -3,7 +3,7 @@
     226981998041-iutk0tsccke1drjaqlpc2ung74qta131.apps.googleusercontent.com
     <string name="facebook_app_id">1192417877622499</string>
     <string name="fb_login_protocol_scheme">fb1192417877622499</string>
-    <string name="google_services_api_key">AIzaSyDaYr1XN7y8a9Ow_4vtt6Iad7CUmI4SQkQ</string>
+    <string name="google_services_api_key">AIzaSyDqb5zA6rS1Pf-PaAqHDeilZewyfxP_dgc</string>
 
     <!-- ERROR -->
     <string name="error">error</string>
