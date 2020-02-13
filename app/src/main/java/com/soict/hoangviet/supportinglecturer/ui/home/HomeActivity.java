@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
-import com.facebook.login.LoginManager;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.google.api.services.youtube.YouTube;
 import com.soict.hoangviet.supportinglecturer.R;
@@ -24,8 +23,8 @@ import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePrefere
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
+import com.soict.hoangviet.supportinglecturer.ui.video.VideoActivity;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
-import com.soict.hoangviet.supportinglecturer.utils.NetworkUtil;
 import com.soict.hoangviet.supportinglecturer.utils.PermissionUtil;
 import com.soict.hoangviet.supportinglecturer.youtube.EventData;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
@@ -156,8 +155,8 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
                 }
                 break;
             case R.id.llCreateVideo:
-//                Intent intentList = new Intent(HomeActivity.this, ListVideoActivity.class);
-//                startActivity(intentList);
+                Intent intentList = new Intent(HomeActivity.this, VideoActivity.class);
+                startActivity(intentList);
                 break;
             case R.id.llHomeProfile:
                 mPresenter.onLoginButtonClick();

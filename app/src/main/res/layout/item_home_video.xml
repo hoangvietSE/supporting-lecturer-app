@@ -80,8 +80,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/space_8"
-                    android:paddingRight="@dimen/space_8"
                     android:paddingTop="@dimen/space_8"
+                    android:paddingRight="@dimen/space_8"
                     android:text="Video.name.mp4"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_20" />
@@ -90,9 +90,9 @@
                     android:id="@+id/tvItemHomeDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/space_8"
                     android:paddingLeft="@dimen/space_8"
                     android:paddingRight="@dimen/space_8"
+                    android:paddingBottom="@dimen/space_8"
                     android:text="23m:09s, 10/12/2018"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/text_18" />

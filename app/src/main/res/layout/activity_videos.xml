@@ -43,11 +43,12 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.soict.hoangviet.supportinglecturer.base.BaseRecyclerView
                 android:id="@+id/rvVideos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/space_8" />
+                android:padding="@dimen/space_8"
+                app:brv_text_no_result="@string/list_video_no_result" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

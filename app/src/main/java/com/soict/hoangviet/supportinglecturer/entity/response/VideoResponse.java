@@ -4,19 +4,19 @@ package com.soict.hoangviet.supportinglecturer.entity.response;
  * Created by TrinhBK on 9/21/2018.
  */
 
-public class Video {
+public class VideoResponse {
 
     private String videoName;
     private String videoThumb;
     private long videoDate;
     private String videoPath;
 
-    public Video(String videoName, String videoPath) {
+    public VideoResponse(String videoName, String videoPath) {
         this.videoName = videoName;
         this.videoPath = videoPath;
     }
 
-    public Video(String videoName, String videoPath, long videoDate) {
+    public VideoResponse(String videoName, String videoPath, long videoDate) {
         this.videoName = videoName;
         this.videoPath = videoPath;
         this.videoDate = videoDate;

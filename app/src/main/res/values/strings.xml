@@ -47,4 +47,7 @@
     <string name="teacher_save_negative">Không</string>
     <string name="teacher_save_positive">Đồng ý</string>
 
+<!--    ListVideo-->
+    <string name="list_video_no_result">Bạn chưa có video bài giảng nào</string>
+
 </resources>
