@@ -1,5 +1,7 @@
 package com.soict.hoangviet.supportinglecturer.di.builder;
 
+import com.soict.hoangviet.supportinglecturer.ui.edit.EditActivity;
+import com.soict.hoangviet.supportinglecturer.ui.edit.module.EditActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.home.HomeActivity;
 import com.soict.hoangviet.supportinglecturer.ui.home.module.HomeActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
@@ -35,4 +37,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {VideoActivityModule.class})
     abstract VideoActivity bindVideoActivity();
+
+    @ContributesAndroidInjector(modules = {EditActivityModule.class})
+    abstract EditActivity bindEditActivity();
 }

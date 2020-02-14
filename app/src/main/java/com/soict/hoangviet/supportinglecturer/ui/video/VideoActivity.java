@@ -1,5 +1,8 @@
 package com.soict.hoangviet.supportinglecturer.ui.video;
 
+import android.content.Intent;
+import android.net.Uri;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,7 +14,10 @@ import com.soict.hoangviet.supportinglecturer.adapter.VideoAdapter;
 import com.soict.hoangviet.supportinglecturer.base.BaseRecyclerView;
 import com.soict.hoangviet.supportinglecturer.entity.response.VideoResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
+import com.soict.hoangviet.supportinglecturer.ui.edit.EditActivity;
+import com.soict.hoangviet.supportinglecturer.utils.Define;
 
+import java.io.File;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,12 +57,14 @@ public class VideoActivity extends BaseActivity implements VideoView {
         videoAdapter = new VideoAdapter(this, new VideoAdapter.OnClickVideo() {
             @Override
             public void onItemWatchVideo(int position) {
-
+                openVideo(videoAdapter.getItem(position, VideoResponse.class));
             }
 
             @Override
             public void onItemCropVideo(int position) {
-
+                Intent intent = new Intent(VideoActivity.this, EditActivity.class);
+                intent.putExtra(Define.IntentKey.EXTRA_VIDEO_URL, videoAdapter.getItem(position, VideoResponse.class).getVideoPath());
+                startActivity(intent);
             }
 
             @Override
@@ -66,7 +74,7 @@ public class VideoActivity extends BaseActivity implements VideoView {
 
             @Override
             public void onItemDeleteVideo(int position) {
-
+                deleteVideo(videoAdapter.getItem(position, VideoResponse.class), position);
             }
         }, false);
         rvVideo.setAdapter(videoAdapter);
@@ -75,6 +83,24 @@ public class VideoActivity extends BaseActivity implements VideoView {
         });
         rvVideo.setListLayoutManager(LinearLayoutManager.VERTICAL);
     }
+
+    private void deleteVideo(VideoResponse item, int position) {
+        showConfirmDialog("Bạn muốn xóa video " + item.getVideoName() + " khỏi hệ thống?", "", liveDialog -> {
+            File fileDelete = new File(item.getVideoPath());
+            if (fileDelete.exists()) {
+                fileDelete.delete();
+            }
+            videoAdapter.removeModel(position);
+            liveDialog.dismiss();
+        });
+    }
+
+    private void openVideo(VideoResponse item) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getVideoPath()));
+        intent.setDataAndType(Uri.parse(item.getVideoPath()), "video/mp4");
+        startActivity(intent);
+    }
+
 
     private void initToolbar() {
         setSupportActionBar(tbVideo);
