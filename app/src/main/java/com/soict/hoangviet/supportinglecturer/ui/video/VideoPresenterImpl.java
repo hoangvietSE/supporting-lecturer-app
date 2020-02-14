@@ -2,11 +2,9 @@ package com.soict.hoangviet.supportinglecturer.ui.video;
 
 import android.content.Context;
 import android.os.Environment;
-
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.entity.response.VideoResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;

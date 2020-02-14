@@ -222,7 +222,7 @@
         android:textSize="@dimen/text_16"
         android:textStyle="bold" />
 
-    <com.trinhbk.lecturelivestream.customview.MovableFloatingActionButton
+    <com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionButton
         android:id="@+id/mfa_top_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -231,7 +231,7 @@
         android:layout_margin="@dimen/space_16"
         android:src="@drawable/ic_top_down" />
 
-    <com.trinhbk.lecturelivestream.customview.AutoFitTextureView
+    <com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView
         android:id="@+id/textureView"
         android:layout_width="180dp"
         android:layout_height="230dp"

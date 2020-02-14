@@ -3,10 +3,9 @@ package com.soict.hoangviet.supportinglecturer.ui.video;
 import android.content.Intent;
 import android.net.Uri;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.soict.hoangviet.supportinglecturer.R;
@@ -15,6 +14,7 @@ import com.soict.hoangviet.supportinglecturer.base.BaseRecyclerView;
 import com.soict.hoangviet.supportinglecturer.entity.response.VideoResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.edit.EditActivity;
+import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 
 import java.io.File;
@@ -31,13 +31,13 @@ public class VideoActivity extends BaseActivity implements VideoView {
     @Inject
     VideoPresenter<VideoView> mPresenter;
     public static final String TAG = VideoActivity.class.getSimpleName();
+    public static final int EDIT_VIDEO_RESULT = 1001;
+    public static final int EDIT_VIDEO_REQUEST = 1000;
     private VideoAdapter videoAdapter;
     @BindView(R.id.tbVideo)
     Toolbar tbVideo;
     @BindView(R.id.fabHome)
-    FloatingActionButton fabCall;
-    @BindView(R.id.srlVideos)
-    SwipeRefreshLayout srlVideo;
+    FloatingActionButton fabHome;
     @BindView(R.id.rvVideos)
     BaseRecyclerView rvVideo;
 
@@ -64,7 +64,7 @@ public class VideoActivity extends BaseActivity implements VideoView {
             public void onItemCropVideo(int position) {
                 Intent intent = new Intent(VideoActivity.this, EditActivity.class);
                 intent.putExtra(Define.IntentKey.EXTRA_VIDEO_URL, videoAdapter.getItem(position, VideoResponse.class).getVideoPath());
-                startActivity(intent);
+                startActivityForResult(intent, EDIT_VIDEO_REQUEST);
             }
 
             @Override
@@ -120,7 +120,10 @@ public class VideoActivity extends BaseActivity implements VideoView {
 
     @Override
     protected void initListener() {
-
+        fabHome.setOnClickListener(view -> {
+            Intent intent = new Intent(VideoActivity.this, TeacherActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -134,6 +137,14 @@ public class VideoActivity extends BaseActivity implements VideoView {
             rvVideo.refresh(videoResponseList);
         } else {
             rvVideo.addItem(videoResponseList);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EDIT_VIDEO_REQUEST && resultCode == EDIT_VIDEO_RESULT) {
+            mPresenter.fetchVideo(true);
         }
     }
 }

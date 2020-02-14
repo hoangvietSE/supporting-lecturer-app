@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
+import com.soict.hoangviet.supportinglecturer.ui.video.VideoActivity;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 
 import javax.inject.Inject;
@@ -40,6 +41,7 @@ public class EditActivity extends BaseActivity implements EditView {
             videoTrimmer.setOnTrimVideoListener(new OnTrimVideoListener() {
                 @Override
                 public void getResult(Uri uri) {
+                    setResult(VideoActivity.EDIT_VIDEO_RESULT);
                     finish();
                 }
 

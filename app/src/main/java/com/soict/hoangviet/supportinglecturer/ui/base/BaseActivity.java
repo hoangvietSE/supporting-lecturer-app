@@ -100,6 +100,7 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
             dialog.dismiss();
         }
     }
+    protected abstract int getLayoutRes();
 
     protected abstract void initView();
 
@@ -107,5 +108,4 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
 
     protected abstract void initListener();
 
-    protected abstract int getLayoutRes();
 }

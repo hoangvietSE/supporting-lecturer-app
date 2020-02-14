@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.supportinglecturer.entity.response.VideoResponse;
@@ -20,6 +21,7 @@ public class VideoAdapter extends EndlessLoadingRecyclerViewAdapter {
 
     public VideoAdapter(Context context, OnClickVideo listener, boolean enableSelectedMode) {
         super(context, enableSelectedMode);
+        this.listener = listener;
     }
 
     @Override
@@ -50,6 +52,8 @@ public class VideoAdapter extends EndlessLoadingRecyclerViewAdapter {
 //        TextView tvShare;
         @BindView(R.id.tvItemVideoDelete)
         TextView tvDelete;
+        @BindView(R.id.swipeRevealLayout)
+        SwipeRevealLayout swipeRevealLayout;
 
         public VideoViewHolder(View itemView) {
             super(itemView);
@@ -63,6 +67,9 @@ public class VideoAdapter extends EndlessLoadingRecyclerViewAdapter {
             tvVideoDetail.setOnClickListener(view -> {
                 listener.onItemWatchVideo(getAdapterPosition());
             });
+            if(swipeRevealLayout.isOpened()){
+                swipeRevealLayout.close(true);
+            }
             tvEdit.setOnClickListener(view -> {
                 listener.onItemCropVideo(getAdapterPosition());
             });

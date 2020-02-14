@@ -37,7 +37,7 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <RelativeLayout
             android:id="@+id/srlVideos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -49,7 +49,7 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/space_8"
                 app:brv_text_no_result="@string/list_video_no_result" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </RelativeLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabHome"
