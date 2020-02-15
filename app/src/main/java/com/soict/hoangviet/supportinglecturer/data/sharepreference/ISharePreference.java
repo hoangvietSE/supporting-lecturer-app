@@ -11,6 +11,8 @@ public interface ISharePreference {
 
     void setRtmpFacebook(String key, String value);
 
+    String getRtmpFacebook(String key);
+
     void setUserId(String key, String userId);
 
     String getUserId(String key);

@@ -6,28 +6,25 @@ import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.os.Environment;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.obsez.android.lib.filechooser.ChooserDialog;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.pen.Spen;
 import com.samsung.android.sdk.pen.SpenSettingEraserInfo;
 import com.samsung.android.sdk.pen.SpenSettingPenInfo;
 import com.samsung.android.sdk.pen.SpenSettingTextInfo;
-import com.samsung.android.sdk.pen.SpenSettingViewInterface;
 import com.samsung.android.sdk.pen.document.SpenNoteDoc;
 import com.samsung.android.sdk.pen.document.SpenObjectBase;
+import com.samsung.android.sdk.pen.document.SpenObjectContainer;
 import com.samsung.android.sdk.pen.document.SpenObjectImage;
+import com.samsung.android.sdk.pen.document.SpenObjectStroke;
 import com.samsung.android.sdk.pen.document.SpenObjectTextBox;
 import com.samsung.android.sdk.pen.document.SpenPageDoc;
 import com.samsung.android.sdk.pen.engine.SpenContextMenuItemInfo;
@@ -45,20 +42,12 @@ import com.samsung.android.sdk.pen.settingui.SpenSettingEraserLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingPenLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingTextLayout;
 import com.soict.hoangviet.supportinglecturer.R;
-import com.soict.hoangviet.supportinglecturer.customview.settime.SettingTimeTempBushDFragment;
-import com.soict.hoangviet.supportinglecturer.customview.settingvideo.SettingVideoDFragment;
-import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
-import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import top.defaults.colorpicker.ColorPickerPopup;
 
 public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     @BindView(R.id.spenViewLayout)
@@ -67,7 +56,6 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     protected FrameLayout penViewContainer;
     @BindView(R.id.tvPageNumber)
     protected TextView tvNumberPage;
-
     private final int CONTEXT_MENU_RUN_ID = 0;
     protected SpenNoteDoc mPenNoteDoc;
     protected SpenPageDoc mPenPageDoc;
@@ -82,6 +70,13 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     protected boolean isShowSetTime = true;
     private Handler mStrokeHandler;
     private int timeTempBush = 2;
+    protected final int MODE_PEN = 0;
+    protected final int MODE_IMG_OBJ = 1;
+    protected final int MODE_TEXT_OBJ = 2;
+    protected int mMode = MODE_PEN;
+    private int mToolType = SpenSurfaceView.TOOL_SPEN;
+    protected SpenObjectRuntimeInfo mObjectRuntimeInfo;
+
     @Override
     protected void initView() {
         super.initView();
@@ -142,7 +137,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
 
         // After adding a page to NoteDoc, get an instance and set it as a member variable.
         mPenPageDoc = mPenNoteDoc.appendPage();
-        setBackgroundColor(backgorundColor);
+        setBackgroundSdk(backgorundColor);
         mPenPageDoc.clearHistory();
 
         // Set PageDoc to View.
@@ -393,7 +388,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
         return realRect;
     }
 
-    private RectF getRealPoint(float x, float y, float width, float height) {
+    protected RectF getRealPoint(float x, float y, float width, float height) {
         float panX = mPenSurfaceView.getPan().x;
         float panY = mPenSurfaceView.getPan().y;
         float zoom = mPenSurfaceView.getZoomRatio();
@@ -420,7 +415,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
         return false;
     };
 
-    private void setBackgroundColor(Integer backgroundColor){
+    protected void setBackgroundSdk(Integer backgroundColor) {
         if (backgroundColor != null) {
             mPenPageDoc.setBackgroundColor(backgroundColor);
         } else {
@@ -505,5 +500,105 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
             mPenSurfaceView.update();
         }
     };
+
+    @NonNull
+    protected SpenTouchListener touchListenerBrush() {
+        return (view, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP && event.getToolType(0) == mToolType) {
+                // Checks whether the control is generated or not.
+                SpenControlBase control = mPenSurfaceView.getControl();
+                if (control == null) {
+                    // When touching the screen in Insert ObjectImage mode.
+                    if (mMode == MODE_IMG_OBJ) {
+//                     Set the Bitmap file to ObjectImage.
+                        SpenObjectImage imgObj = new SpenObjectImage();
+                        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_add_shape);
+                        imgObj.setImage(imageBitmap);
+//                     Specify the location where ObjectImage is inserted and add PageDoc.
+                        float imgWidth = imageBitmap.getWidth();
+                        float imgHeight = imageBitmap.getHeight();
+                        RectF rect1 = getRealPoint(event.getX(), event.getY(), imgWidth, imgHeight);
+                        imgObj.setRect(rect1, true);
+                        mPenPageDoc.appendObject(imgObj);
+                        mPenSurfaceView.update();
+                        imageBitmap.recycle();
+                        return true;
+//                     When touching the screen in Insert ObjectTextBox mode.
+                    } else if (mPenSurfaceView.getToolTypeAction(mToolType) == SpenSurfaceView.ACTION_TEXT) {
+                        // Specify the location where ObjectTextBox is inserted and add PageDoc.
+                        SpenObjectTextBox textObj = new SpenObjectTextBox();
+                        RectF rect1 = getRealPoint(event.getX(), event.getY(), 0, 0);
+                        rect1.right += 200;
+                        rect1.bottom += 50;
+                        textObj.setRect(rect1, true);
+                        mPenPageDoc.appendObject(textObj);
+                        mPenPageDoc.selectObject(textObj);
+                        mPenSurfaceView.update();
+                    }
+                }
+            }
+            return false;
+        };
+    }
+
+    protected void createObjectRuntime() {
+        if (mSpenObjectRuntimeInfoList == null || mSpenObjectRuntimeInfoList.size() == 0) {
+            return;
+        }
+        try {
+            for (SpenObjectRuntimeInfo info : mSpenObjectRuntimeInfoList) {
+                if (info.name.equalsIgnoreCase("Video")) {
+                    mVideoRuntime = mSpenObjectRuntimeManager.createObjectRuntime(info);
+                    mObjectRuntimeInfo = info;
+                    startObjectRuntime();
+                    return;
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startObjectRuntime() {
+        if (mVideoRuntime == null) {
+            return;
+        }
+        SpenObjectBase objectBase = null;
+        switch (mVideoRuntime.getType()) {
+            case SpenObjectRuntimeInterface.TYPE_NONE:
+                return;
+            case SpenObjectRuntimeInterface.TYPE_IMAGE:
+                objectBase = new SpenObjectImage();
+                break;
+            case SpenObjectRuntimeInterface.TYPE_STROKE:
+                objectBase = new SpenObjectStroke();
+                break;
+            case SpenObjectRuntimeInterface.TYPE_CONTAINER:
+                objectBase = new SpenObjectContainer();
+                break;
+            default:
+                break;
+        }
+        if (objectBase == null) {
+//            Toast.makeText(this, "Has no selected object.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        objectBase.setSorInfo(mObjectRuntimeInfo.className);
+        objectBase.setOutOfViewEnabled(false);
+        mVideoRuntime.setListener(objectRuntimeListener);
+        mPenPageDoc.appendObject(objectBase);
+        mPenPageDoc.selectObject(objectBase);
+        mPenSurfaceView.update();
+        mPenSurfaceView.getControl().setContextMenuVisible(false);
+        mVideoRuntime.start(objectBase,
+                new RectF(0, 0, mPenPageDoc.getWidth(), mPenPageDoc.getHeight()),
+                mPenSurfaceView.getPan(), mPenSurfaceView.getZoomRatio(),
+                mPenSurfaceView.getFrameStartPosition(), penViewLayout);
+    }
 
 }

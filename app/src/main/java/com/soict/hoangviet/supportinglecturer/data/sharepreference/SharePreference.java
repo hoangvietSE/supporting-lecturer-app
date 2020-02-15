@@ -89,6 +89,11 @@ public class SharePreference implements ISharePreference {
     }
 
     @Override
+    public String getRtmpFacebook(String key) {
+        return get(Define.PREF_FILE_NAME, key, String.class);
+    }
+
+    @Override
     public void setUserId(String key, String userId) {
         put(Define.PREF_FILE_NAME, key, userId);
     }

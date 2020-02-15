@@ -3,10 +3,13 @@ package com.soict.hoangviet.supportinglecturer.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Surface;
@@ -118,5 +121,19 @@ public class DeviceUtil {
             e.printStackTrace();
         }
 
+    }
+
+    public static String getRealPathFromURI(Context context, Uri contentURI) {
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        // Get the cursor
+        Cursor cursor = context.getContentResolver().query(contentURI, filePathColumn, null, null, null);
+        // Move to first row
+        cursor.moveToFirst();
+        //Get the column index of MediaStore.Images.Media.DATA
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        //Gets the String value in the column
+        String imgDecodableString = cursor.getString(columnIndex);
+        cursor.close();
+        return imgDecodableString;
     }
 }
