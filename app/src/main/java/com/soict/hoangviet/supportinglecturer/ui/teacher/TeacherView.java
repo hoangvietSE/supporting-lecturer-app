@@ -2,6 +2,7 @@ package com.soict.hoangviet.supportinglecturer.ui.teacher;
 
 import android.content.Intent;
 
+import com.soict.hoangviet.supportinglecturer.entity.response.FileResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
 
 public interface TeacherView extends BaseView {
@@ -16,4 +17,6 @@ public interface TeacherView extends BaseView {
     void setImageRecordStop();
 
     void endEventTask(String broadcastID);
+
+    void showFileConvert(FileResponse response);
 }

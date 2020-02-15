@@ -59,13 +59,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '"https://v2.convertapi.com/convert/"'
-            buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
+            buildConfigField("String", "API_KEY", "\"L9LbnJA0icf9EoHB\"")
             versionNameSuffix "-debug"
         }
         stage {
             signingConfig signingConfigs.debug
             buildConfigField 'String', 'BASE_URL', '"https://v2.convertapi.com/convert/"'
-            buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
+            buildConfigField("String", "API_KEY", "\"L9LbnJA0icf9EoHB\"")
             versionNameSuffix "-stage"
         }
         release {
@@ -73,7 +73,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '"https://v2.convertapi.com/convert/"'
-            buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
+            buildConfigField("String", "API_KEY", "\"L9LbnJA0icf9EoHB\"")
             versionNameSuffix "-release"
         }
     }

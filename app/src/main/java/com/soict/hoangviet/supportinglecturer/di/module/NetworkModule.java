@@ -2,6 +2,7 @@ package com.soict.hoangviet.supportinglecturer.di.module;
 
 import com.soict.hoangviet.supportinglecturer.BuildConfig;
 import com.soict.hoangviet.supportinglecturer.data.network.ApiInterface;
+import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +11,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,7 +22,13 @@ public class NetworkModule {
     @Provides
     @Singleton
     OkHttpClient provideHttpClient() {
-        return new OkHttpClient.Builder()
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            httpClient.addInterceptor(logging);
+        }
+        return httpClient
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
@@ -37,5 +45,11 @@ public class NetworkModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return retrofit.create(ApiInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    Repository provideRepository(ApiInterface apiInterface) {
+        return new Repository(apiInterface);
     }
 }

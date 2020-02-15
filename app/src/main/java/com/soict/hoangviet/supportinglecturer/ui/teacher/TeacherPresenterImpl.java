@@ -11,13 +11,12 @@ import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.pedro.rtplibrary.rtmp.RtmpDisplay;
-import com.soict.hoangviet.supportinglecturer.R;
+import com.soict.hoangviet.supportinglecturer.BuildConfig;
+import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
-import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenter;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
-import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
-import com.soict.hoangviet.supportinglecturer.utils.RecordUtil;
+import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeNewSingleton;
 
@@ -30,6 +29,7 @@ import okhttp3.MultipartBody;
 import top.defaults.colorpicker.ColorPickerPopup;
 
 public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterImpl<V> implements TeacherPresenter<V> {
+    private Repository repository;
     private static final int DISPLAY_WIDTH = 1920;
     private static final int DISPLAY_HEIGHT = 1080;
     private static final String TAG = TeacherPresenterImpl.class.getSimpleName();
@@ -39,8 +39,9 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
     private int bitRate;
 
     @Inject
-    public TeacherPresenterImpl(Context context, ISharePreference mSharePreference, CompositeDisposable mCompositeDisposable) {
+    public TeacherPresenterImpl(Context context, Repository repository, ISharePreference mSharePreference, CompositeDisposable mCompositeDisposable) {
         super(context, mSharePreference, mCompositeDisposable);
+        this.repository = repository;
     }
 
     @Override
@@ -65,7 +66,22 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
 
     @Override
     public void getFilePDF(MultipartBody.Part body) {
+        getmCompositeDisposable().add(
+                repository.getFilePDF(body, BuildConfig.API_KEY)
+                        .doOnSubscribe(disposable -> {
+                            getView().showLoading();
+                        })
+                        .doFinally(() -> {
 
+                        })
+                        .subscribe(
+                                response -> {
+                                    getView().showFileConvert(response);
+                                }, throwable -> {
+                                    ToastUtil.show(getContext(), throwable.getMessage());
+                                    getView().hideLoading();
+                                })
+        );
     }
 
     @Override

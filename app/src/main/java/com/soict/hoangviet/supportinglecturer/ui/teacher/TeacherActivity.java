@@ -37,6 +37,7 @@ import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionButton;
 import com.soict.hoangviet.supportinglecturer.customview.settime.SettingTimeTempBushDFragment;
 import com.soict.hoangviet.supportinglecturer.customview.settingvideo.SettingVideoDFragment;
+import com.soict.hoangviet.supportinglecturer.entity.response.FileResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseSamsungSpenSdkActivity;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 import com.soict.hoangviet.supportinglecturer.utils.FileUtil;
@@ -45,6 +46,7 @@ import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
 
 import net.ossrs.rtmp.ConnectCheckerRtmp;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -55,6 +57,7 @@ import butterknife.Unbinder;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Response;
 
 public class TeacherActivity extends BaseSamsungSpenSdkActivity implements TeacherView, SettingVideoDFragment.OnClickSettingVideo, ConnectCheckerRtmp, SettingTimeTempBushDFragment.OnClickSettingTime, View.OnTouchListener {
     @Inject
@@ -489,6 +492,12 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         endEventTask.execute(broadcastID);
     }
 
+    @Override
+    public void showFileConvert(FileResponse response) {
+        SlowAsyncTask slowAsyncTask = new SlowAsyncTask();
+        slowAsyncTask.execute(response);
+    }
+
     private void callGalleryForInputImage(int requestCode) {
         // Get an image from the gallery.
         try {
@@ -730,4 +739,33 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
             ibRedo.setEnabled(redoable);
         }
     };
+
+    private class SlowAsyncTask extends AsyncTask<FileResponse, Void, Void> {
+
+        @Override
+        protected Void doInBackground(FileResponse... fileResponses) {
+            for (int i = 0; i < fileResponses[0].getFiles().size(); i++) {
+                File file = FileUtil.saveImage(fileResponses[0].getFiles().get(i).getFileName(), fileResponses[0].getFiles().get(i).getFileData());
+                mPenPageDoc.setBackgroundImage(file.getAbsolutePath());
+                mPenPageDoc.setBackgroundImageMode(SpenPageDoc.BACKGROUND_IMAGE_MODE_FIT);
+                mPenPageDoc = mPenNoteDoc.insertPage(mPenNoteDoc.getPageIndexById(mPenPageDoc.getId()) + 1);
+                mPresenter.getBackgroundColor();
+                mPenPageDoc.clearHistory();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+//            super.onPreExecute();
+            showLoading();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+            hideLoading();
+            mPenSurfaceView.update();
+        }
+    }
 }

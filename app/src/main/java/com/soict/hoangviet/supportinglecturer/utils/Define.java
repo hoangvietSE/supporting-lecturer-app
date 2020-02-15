@@ -68,6 +68,8 @@ public class Define {
             public static final String KEYWORD_SEARCH = "s";
             public static final String BEARER = "Bearer ";
             public static final String AUTHORIZATION = "Authorization";
+            public static final String SECRET = "Secret";
+
 
         }
 
