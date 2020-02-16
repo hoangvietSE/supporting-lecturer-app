@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -56,6 +57,10 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     protected FrameLayout penViewContainer;
     @BindView(R.id.tvPageNumber)
     protected TextView tvNumberPage;
+    @BindView(R.id.ivUndo)
+    protected ImageButton ibUndo;
+    @BindView(R.id.ivRedo)
+    protected ImageButton ibRedo;
     private final int CONTEXT_MENU_RUN_ID = 0;
     protected SpenNoteDoc mPenNoteDoc;
     protected SpenPageDoc mPenPageDoc;
@@ -183,13 +188,13 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
         @Override
         public void onUndoable(SpenPageDoc page, boolean undoable) {
             // Enable or disable Undo button depending on its availability.
-            // TODO: undo?
+            ibUndo.setEnabled(undoable);
         }
 
         @Override
         public void onRedoable(SpenPageDoc page, boolean redoable) {
             // Enable or disable Redo button depending on its availability.
-            // TODO: redo?
+            ibRedo.setEnabled(redoable);
         }
     };
 

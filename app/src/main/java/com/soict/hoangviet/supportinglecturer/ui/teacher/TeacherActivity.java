@@ -40,6 +40,7 @@ import com.soict.hoangviet.supportinglecturer.customview.settingvideo.SettingVid
 import com.soict.hoangviet.supportinglecturer.entity.response.FileResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseSamsungSpenSdkActivity;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
+import com.soict.hoangviet.supportinglecturer.utils.DialogUtil;
 import com.soict.hoangviet.supportinglecturer.utils.FileUtil;
 import com.soict.hoangviet.supportinglecturer.utils.RecordUtil;
 import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
@@ -87,22 +88,18 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     ImageButton ibRecognizeShape;
     @BindView(R.id.ibAddPage)
     ImageButton ibAddPage;
-    @BindView(R.id.ivUndo)
-    ImageButton ibUndo;
-    @BindView(R.id.ivRedo)
-    ImageButton ibRedo;
     @BindView(R.id.ibRecord)
     ImageButton ibRecord;
     @BindView(R.id.ibSave)
     ImageButton ibSave;
     @BindView(R.id.llMenuMore)
     LinearLayout llMenuMore;
-    @BindView(R.id.simpleChronometer)
-    Chronometer simpleChronometer;
     @BindView(R.id.mfa_top_down)
     MovableFloatingActionButton mfaTopDown;
     @BindView(R.id.drawView)
     RelativeLayout drawView;
+    @BindView(R.id.simpleChronometer)
+    Chronometer chronometer;
     private int mToolType = SpenSurfaceView.TOOL_SPEN;
     private final int CONTEXT_MENU_RUN_ID = 0;
     private long onTimeRecord = -1;
@@ -120,7 +117,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private boolean isSaveRecord = true;
     private ArrayList<String> listRecordsPath = new ArrayList<>();
     private ArrayList<String> listRecordsName = new ArrayList<>();
-    private Chronometer chronometer;
     private Boolean runningChronometer = false;
     private Long pauseOffset = 0L;
     private int mScreenDensity;
@@ -150,6 +146,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     protected void initView() {
         super.initView();
         onAttachPresenter();
+        initMedia();
     }
 
     private void onAttachPresenter() {
@@ -158,7 +155,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     @Override
     protected void initData() {
-        initMedia();
     }
 
     private void initMedia() {
@@ -372,7 +368,46 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     }
 
     private void showConfirmSaveDialog() {
+        DialogUtil.showConfirmDialog(
+                this,
+                R.string.app_name,
+                R.string.teacher_save_question,
+                R.mipmap.ic_launcher,
+                R.string.teacher_save_negative,
+                R.string.teacher_save_positive,
+                (dialogInterface, postion) -> {
+                    normalSave();
+                    finish();
+                },
+                (dialogInterface, postion) -> {
+                    normalSave();
+                    startActivity(new Intent(this, TeacherActivity.class));
+                    finish();
+                }
+        );
+    }
 
+    private void normalSave() {
+        closeSettingView();
+//                    Toast.makeText(TeacherActivity.this, "Video is saved", Toast.LENGTH_SHORT).show();
+        Log.v(TAG, "Stopping Recording");
+        stopScreenSharing();
+        if (checkSessionRecord == true && listRecordsPath.size() >= 2) {
+            RecordUtil.getInstance().appendVideo(listRecordsPath, listRecordsName);
+        }
+        clearRecord();
+    }
+
+    private void clearRecord() {
+        recordStatus = 0;
+        checkSessionRecord = false;
+        listRecordsName.clear();
+        listRecordsPath.clear();
+        showListVideo();
+    }
+
+    private void showListVideo() {
+        ToastUtil.show(this, getString(R.string.teacher_save_success));
     }
 
     @Override
@@ -719,24 +754,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                     mPenSurfaceView.updateRedo(userData);
                 }
             }
-        }
-    };
-
-    private SpenPageDoc.HistoryListener mHistoryListener = new SpenPageDoc.HistoryListener() {
-        @Override
-        public void onCommit(SpenPageDoc page) {
-        }
-
-        @Override
-        public void onUndoable(SpenPageDoc page, boolean undoable) {
-            // Enable or disable Undo button depending on its availability.
-            ibUndo.setEnabled(undoable);
-        }
-
-        @Override
-        public void onRedoable(SpenPageDoc page, boolean redoable) {
-            // Enable or disable Redo button depending on its availability.
-            ibRedo.setEnabled(redoable);
         }
     };
 
