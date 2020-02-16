@@ -447,11 +447,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     }
 
     @Override
-    public void onNewBitrateRtmp(long bitrate) {
-
-    }
-
-    @Override
     public void onDisconnectRtmp() {
 
     }
