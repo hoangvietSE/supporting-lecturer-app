@@ -88,6 +88,16 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
         initSamSungPen();
     }
 
+    @Override
+    protected void initData() {
+        super.initData();
+    }
+
+    @Override
+    protected void initListener() {
+        super.initListener();
+    }
+
     private void initSamSungPen() {
         // Initialize Pen.
         boolean isSpenFeatureEnabled = false;

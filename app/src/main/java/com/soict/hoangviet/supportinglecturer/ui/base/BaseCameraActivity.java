@@ -3,6 +3,7 @@ package com.soict.hoangviet.supportinglecturer.ui.base;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -13,21 +14,27 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.DisplayMetrics;
 import android.util.Size;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.View;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView;
+import com.soict.hoangviet.supportinglecturer.ui.main.MainActivity;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 
 import java.util.Arrays;
 
 import butterknife.BindView;
 
-public abstract class BaseCameraActivity extends BaseActivity {
+public abstract class BaseCameraActivity extends BaseActivity implements View.OnTouchListener {
     @BindView(R.id.textureView)
     protected AutoFitTextureView textureView;
     private CameraDevice.StateCallback stateCallback;
@@ -43,11 +50,38 @@ public abstract class BaseCameraActivity extends BaseActivity {
     private String cameraId;
     CameraCharacteristics characteristics;
     static final int REQUEST_CAMERA_PERMISSION = 1009;
+    private int lastAction;
+    private float dX;
+    private float dY;
+    private int screenHight;
+    private int screenWidth;
 
     @Override
     protected void initView() {
         initStateCallback();
         initTextureListener();
+        initOnTouch();
+    }
+
+    @Override
+    protected void initListener() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+        } else {
+            textureView.setOnTouchListener(this);
+        }
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    private void initOnTouch() {
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        screenHight = displaymetrics.heightPixels;
+        screenWidth = displaymetrics.widthPixels;
     }
 
     private void initStateCallback() {
@@ -202,5 +236,33 @@ public abstract class BaseCameraActivity extends BaseActivity {
         }
     }
 
-
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        float newX, newY;
+        switch (motionEvent.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                dX = view.getX() - motionEvent.getRawX();
+                dY = view.getY() - motionEvent.getRawY();
+                lastAction = MotionEvent.ACTION_DOWN;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                newX = motionEvent.getRawX() + dX;
+                newY = motionEvent.getRawY() + dY;
+                // check if the view out of screen
+                if ((newX <= 0 || newX >= screenWidth-view.getWidth()) || (newY <= 0 || newY >= screenHight-view.getHeight())) {
+                    lastAction = MotionEvent.ACTION_MOVE;
+                    break;
+                }
+                view.setX(newX);
+                view.setY(newY);
+                lastAction = MotionEvent.ACTION_MOVE;
+                break;
+            case MotionEvent.ACTION_UP:
+                if (lastAction == MotionEvent.ACTION_DOWN)
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
 }

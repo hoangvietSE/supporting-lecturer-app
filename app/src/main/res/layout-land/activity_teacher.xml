@@ -229,6 +229,7 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tvPageNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -255,7 +256,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/llMenuMore"
             android:layout_gravity="top|start"
-            android:layout_margin="@dimen/space_16"
+
+            android:scaleX="0.6"
+            android:scaleY="0.6"
             android:src="@drawable/ic_top_down" />
 
         <com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionButton
@@ -264,7 +267,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/mfa_top_down"
             android:layout_gravity="top|start"
-            android:layout_marginLeft="@dimen/space_16"
+
+            android:scaleX="0.6"
+            android:scaleY="0.6"
             android:src="@drawable/ic_left_right" />
 
     </RelativeLayout>

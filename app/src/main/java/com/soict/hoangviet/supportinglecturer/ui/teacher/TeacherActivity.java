@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.obsez.android.lib.filechooser.ChooserDialog;
 import com.pedro.rtplibrary.rtmp.RtmpDisplay;
@@ -100,6 +101,13 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     RelativeLayout drawView;
     @BindView(R.id.simpleChronometer)
     Chronometer chronometer;
+    //LANDSCAPE
+    @Nullable
+    @BindView(R.id.mfa_left_right)
+    MovableFloatingActionButton mfaLeftRight;
+    @Nullable
+    @BindView(R.id.rl_camera)
+    RelativeLayout rlCamera;
     private int mToolType = SpenSurfaceView.TOOL_SPEN;
     private final int CONTEXT_MENU_RUN_ID = 0;
     private long onTimeRecord = -1;
@@ -123,6 +131,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private static RtmpDisplay rtmpDisplay;
     private int recordStatus = 0;
     private boolean checkSessionRecord = false;
+
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -155,6 +164,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     @Override
     protected void initData() {
+        super.initData();
     }
 
     private void initMedia() {
@@ -171,6 +181,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     @Override
     protected void initListener() {
+        super.initListener();
         ibBrush.setOnClickListener(view -> {
 //            mPenSurfaceView.closeControl();
             mPenSurfaceView.stopTemporaryStroke();
@@ -365,6 +376,28 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         });
 
         selectButton(ibBrush);
+
+
+        mfaTopDown.setOnClickListener(view -> {
+            if (llMenuMore.getVisibility() == View.VISIBLE) {
+                llMenuMore.setVisibility(View.GONE);
+                tvNumberPage.setVisibility(View.GONE);
+            } else {
+                llMenuMore.setVisibility(View.VISIBLE);
+                tvNumberPage.setVisibility(View.VISIBLE);
+            }
+        });
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mfaLeftRight.setOnClickListener(view -> {
+                if (rlCamera.getVisibility() == View.VISIBLE) {
+                    rlCamera.setVisibility(View.GONE);
+                } else {
+                    rlCamera.setVisibility(View.VISIBLE);
+                }
+            });
+        } else {
+
+        }
     }
 
     private void showConfirmSaveDialog() {
@@ -408,11 +441,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     private void showListVideo() {
         ToastUtil.show(this, getString(R.string.teacher_save_success));
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        return false;
     }
 
     @Override
