@@ -27,7 +27,6 @@ import androidx.core.app.ActivityCompat;
 
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView;
-import com.soict.hoangviet.supportinglecturer.ui.main.MainActivity;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 
 import java.util.Arrays;

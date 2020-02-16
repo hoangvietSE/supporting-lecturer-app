@@ -8,6 +8,7 @@ import android.graphics.RectF;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.util.SparseIntArray;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -111,14 +113,10 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private int mToolType = SpenSurfaceView.TOOL_SPEN;
     private final int CONTEXT_MENU_RUN_ID = 0;
     private long onTimeRecord = -1;
-    private static final int DISPLAY_WIDTH = 1920;
-    private static final int DISPLAY_HEIGHT = 1080;
     private static final int REQUEST_CODE_SELECT_IMAGE_BACKGROUND = 99;
     private static final int REQUEST_CODE_SELECT_IMAGE = 98;
     private static final int REQUEST_CODE_RECORD = 94;
     private static final int REQUEST_CODE_STREAM = 95;
-    static final int REQUEST_CAMERA_PERMISSION = 1009;
-    static final int PICK_PDF_CODE = 1010;
     //Check state orientation of output image
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final long MIN_TIME_RECORD = 6000L;
@@ -131,6 +129,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private static RtmpDisplay rtmpDisplay;
     private int recordStatus = 0;
     private boolean checkSessionRecord = false;
+    //Keep Screen alway on
+    protected PowerManager.WakeLock mWakeLock;
 
 
     static {
@@ -155,6 +155,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     protected void initView() {
         super.initView();
         onAttachPresenter();
+        keepScreenAlwayOn();
         initMedia();
     }
 
@@ -177,6 +178,10 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         } else {
             return rtmpDisplay;
         }
+    }
+
+    private void keepScreenAlwayOn() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
@@ -353,8 +358,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                     stopCountUpTimer();
                 }
             } else {
-                checkSessionRecord = true;
-                recordStatus = 1;
                 if (listRecordsName.size() >= 1 && listRecordsPath.size() >= 1) {
                     mPresenter.onResumeRecord(RecordUtil.baseDir + "/" + listRecordsName.get(listRecordsName.size() - 1) + listRecordsName.size() + ".mp4", listRecordsName.get(listRecordsName.size() - 1) + listRecordsName.size());
                     ToastUtil.show(this, getString(R.string.teacher_save_resume));
@@ -451,6 +454,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     @Override
     public void onDone(String pathVideo, int bitRate, int frameRate, String originName) {
+        checkSessionRecord = true;
+        recordStatus = 1;
         mPresenter.onDoneSettingVideo(pathVideo, bitRate, frameRate, originName);
     }
 
@@ -806,6 +811,23 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 //            super.onPostExecute(aVoid);
             hideLoading();
             mPenSurfaceView.update();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - onTimeRecord < MIN_TIME_RECORD) {
+            showCautionDialog(getResources().getString(R.string.teacher_min_time_record_error), "", liveDialog -> {
+                liveDialog.dismiss();
+            });
+        } else {
+            if (isSaveRecord) {
+                super.onBackPressed();
+            } else {
+                showCautionDialog(getResources().getString(R.string.teacher_no_save_error), "", liveDialog -> {
+                    liveDialog.dismiss();
+                });
+            }
         }
     }
 }
