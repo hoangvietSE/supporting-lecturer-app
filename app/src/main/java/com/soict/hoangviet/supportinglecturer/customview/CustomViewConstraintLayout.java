@@ -8,6 +8,8 @@ import android.view.View;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import butterknife.ButterKnife;
+
 public abstract class CustomViewConstraintLayout extends ConstraintLayout {
     private int layoutRes = getLayoutRes();
     private int[] styableRes = getStyableRes();
@@ -41,10 +43,11 @@ public abstract class CustomViewConstraintLayout extends ConstraintLayout {
 
     private void initLayout() {
         view = LayoutInflater.from(getContext()).inflate(layoutRes, this, true);
+        ButterKnife.bind(this, view);
         initView();
         initListener();
         initData();
-        if(styableRes!=null){
+        if (styableRes != null) {
             TypedArray mTypedArray = getContext().getTheme().obtainStyledAttributes(attrs, styableRes, 0, 0);
             initDataFromStyable(mTypedArray);
         }

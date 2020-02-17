@@ -8,6 +8,8 @@ import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
 import com.soict.hoangviet.supportinglecturer.ui.login.module.LoginActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.main.MainActivity;
 import com.soict.hoangviet.supportinglecturer.ui.main.module.MainActivityModule;
+import com.soict.hoangviet.supportinglecturer.ui.setting.SettingActivity;
+import com.soict.hoangviet.supportinglecturer.ui.setting.module.SettingActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.splash.SplashActivity;
 import com.soict.hoangviet.supportinglecturer.ui.splash.module.SplashActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
@@ -40,4 +42,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {EditActivityModule.class})
     abstract EditActivity bindEditActivity();
+
+    @ContributesAndroidInjector(modules = {SettingActivityModule.class})
+    abstract SettingActivity bindSettingActivity();
 }

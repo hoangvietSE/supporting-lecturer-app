@@ -44,6 +44,7 @@ import com.soict.hoangviet.supportinglecturer.customview.settingvideo.SettingVid
 import com.soict.hoangviet.supportinglecturer.entity.response.FileResponse;
 import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseSamsungSpenSdkActivity;
+import com.soict.hoangviet.supportinglecturer.ui.setting.SettingActivity;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 import com.soict.hoangviet.supportinglecturer.utils.DialogUtil;
 import com.soict.hoangviet.supportinglecturer.utils.FileUtil;
@@ -109,6 +110,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     RelativeLayout drawView;
     @BindView(R.id.simpleChronometer)
     Chronometer chronometer;
+    @BindView(R.id.imv_setting)
+    ImageView imvSetting;
     //LANDSCAPE
     @Nullable
     @BindView(R.id.mfa_left_right)
@@ -216,7 +219,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 mPenSurfaceView.setToolTypeAction(mToolType, SpenSettingViewInterface.ACTION_STROKE);
             }
         });
-
         ibTempBrush.setOnClickListener(view -> {
             mPenSurfaceView.startTemporaryStroke();
             if (!isShowSetTime) {
@@ -230,7 +232,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
             mPenSurfaceView.setToolTypeAction(mToolType, SpenSettingViewInterface.ACTION_STROKE);
 //            }
         });
-
         ibEraser.setOnClickListener(view -> {
             // If it is in eraser tool mode.
             if (mPenSurfaceView.getToolTypeAction(mToolType) == SpenSurfaceView.ACTION_ERASER) {
@@ -249,28 +250,23 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 mPenSurfaceView.setToolTypeAction(mToolType, SpenSurfaceView.ACTION_ERASER);
             }
         });
-
         ivAddImage.setOnClickListener(view -> {
             closeSettingView();
             mPresenter.showColorPicker(this, view);
         });
-
         ibInsertImage.setOnClickListener(view -> {
             closeSettingView();
             callGalleryForInputImage(REQUEST_CODE_SELECT_IMAGE);
         });
-
         ibAddCamera.setOnClickListener(view -> {
             ibAddCamera.setClickable(false);
             mPenSurfaceView.closeControl();
             createObjectRuntime();
         });
-
         ibCaptureScreen.setOnClickListener(view -> {
             closeSettingView();
 //            capturePenSurfaceView();
         });
-
         ibAddText.setOnClickListener(view -> {
             mPenSurfaceView.closeControl();
             mPenSurfaceView.stopTemporaryStroke();
@@ -293,19 +289,16 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 mPenSurfaceView.setToolTypeAction(mToolType, SpenSurfaceView.ACTION_TEXT);
             }
         });
-
         ibSelection.setOnClickListener(view -> {
             selectButton(ibSelection);
             mPenSurfaceView.setToolTypeAction(mToolType, SpenSurfaceView.ACTION_SELECTION);
         });
-
         ibRecognizeShape.setOnClickListener(view -> {
             mMode = MODE_PEN;
             selectButton(ibRecognizeShape);
             mPenSurfaceView.closeControl();
             mPenSurfaceView.setToolTypeAction(mToolType, SpenSurfaceView.ACTION_RECOGNITION);
         });
-
         ibInsertFile.setOnClickListener(view -> {
             mPenSurfaceView.closeControl();
             closeSettingView();
@@ -332,7 +325,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                     .show();
 
         });
-
         ibAddPage.setOnClickListener(view -> {
             mPenSurfaceView.setPageEffectListener(() -> ibAddPage.setClickable(true));
             mPenSurfaceView.closeControl();
@@ -347,10 +339,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         });
         ibUndo.setOnClickListener(undoRedoOnClickListener);
         ibUndo.setEnabled(mPenPageDoc.isUndoable());
-
         ibRedo.setOnClickListener(undoRedoOnClickListener);
         ibRedo.setEnabled(mPenPageDoc.isRedoable());
-
         ibRecord.setOnClickListener(view -> {
             if (recordStatus == IS_RECORDING) {
                 if (System.currentTimeMillis() - onTimeRecord < MIN_TIME_RECORD) {
@@ -378,7 +368,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 }
             }
         });
-
         ibSave.setOnClickListener(view -> {
             if (System.currentTimeMillis() - onTimeRecord < MIN_TIME_RECORD) {
                 showCautionDialog(getResources().getString(R.string.teacher_min_time_record_error), "", liveDialog -> {
@@ -388,10 +377,10 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 showConfirmSaveDialog();
             }
         });
-
         selectButton(ibBrush);
-
-
+        imvSetting.setOnClickListener(view -> {
+            startActivity(SettingActivity.class);
+        });
         mfaTopDown.setOnClickListener(view -> {
             if (llMenuMore.getVisibility() == View.VISIBLE) {
                 llMenuMore.setVisibility(View.GONE);
@@ -410,30 +399,31 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 }
             });
         } else {
-
         }
     }
 
     private void showConfirmSaveDialog() {
-        DialogUtil.showConfirmDialog(
-                this,
-                R.string.app_name,
-                R.string.teacher_save_question,
-                R.mipmap.ic_launcher,
-                R.string.teacher_save_negative,
-                R.string.teacher_save_positive,
-                (dialogInterface, postion) -> {
-                    normalSave();
-                    EventBus.getDefault().postSticky(new RecordSuccessEvent());
-                    finish();
-                },
-                (dialogInterface, postion) -> {
-                    normalSave();
-                    EventBus.getDefault().postSticky(new RecordSuccessEvent());
-                    startActivity(new Intent(this, TeacherActivity.class));
-                    finish();
-                }
-        );
+        if (checkSessionRecord) {
+            DialogUtil.showConfirmDialog(
+                    this,
+                    R.string.app_name,
+                    R.string.teacher_save_question,
+                    R.mipmap.ic_launcher,
+                    R.string.teacher_save_negative,
+                    R.string.teacher_save_positive,
+                    (dialogInterface, postion) -> {
+                        normalSave();
+                        EventBus.getDefault().postSticky(new RecordSuccessEvent());
+                        finish();
+                    },
+                    (dialogInterface, postion) -> {
+                        normalSave();
+                        EventBus.getDefault().postSticky(new RecordSuccessEvent());
+                        startActivity(new Intent(this, TeacherActivity.class));
+                        finish();
+                    }
+            );
+        }
     }
 
     private void normalSave() {

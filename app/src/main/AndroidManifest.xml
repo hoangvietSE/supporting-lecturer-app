@@ -42,10 +42,10 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.home.HomeActivity" />
-        <activity
-            android:name=".ui.teacher.TeacherActivity" />
+        <activity android:name=".ui.teacher.TeacherActivity" />
         <activity android:name=".ui.video.VideoActivity" />
         <activity android:name=".ui.edit.EditActivity" />
+        <activity android:name=".ui.setting.SettingActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

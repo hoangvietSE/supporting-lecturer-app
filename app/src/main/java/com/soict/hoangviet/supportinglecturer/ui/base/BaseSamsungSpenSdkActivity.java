@@ -35,6 +35,7 @@ import com.samsung.android.sdk.pen.engine.SpenFlickListener;
 import com.samsung.android.sdk.pen.engine.SpenObjectRuntime;
 import com.samsung.android.sdk.pen.engine.SpenObjectRuntimeInfo;
 import com.samsung.android.sdk.pen.engine.SpenObjectRuntimeManager;
+import com.samsung.android.sdk.pen.engine.SpenSimpleSurfaceView;
 import com.samsung.android.sdk.pen.engine.SpenSurfaceView;
 import com.samsung.android.sdk.pen.engine.SpenTextChangeListener;
 import com.samsung.android.sdk.pen.engine.SpenTouchListener;
@@ -193,6 +194,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
             mPenSurfaceView.setToolTypeAction(SpenSurfaceView.TOOL_FINGER, SpenSurfaceView.ACTION_STROKE);
 //                    Toast.makeText(TeacherActivity.this, "Device does not support Spen. \n You can draw stroke by finger.", Toast.LENGTH_SHORT).show();
         }
+//        mPenSurfaceView.setToolTypeAction(SpenSimpleSurfaceView.TOOL_FINGER, SpenSimpleSurfaceView.ACTION_NONE);
     }
 
     private SpenPageDoc.HistoryListener mHistoryListener = new SpenPageDoc.HistoryListener() {

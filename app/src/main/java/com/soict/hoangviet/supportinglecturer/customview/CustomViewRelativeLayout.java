@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import butterknife.ButterKnife;
+
 public abstract class CustomViewRelativeLayout extends RelativeLayout {
     private int layoutRes = getLayoutRes();
     private int[] styableRes = getStyableRes();
@@ -40,6 +42,7 @@ public abstract class CustomViewRelativeLayout extends RelativeLayout {
 
     private void initLayout() {
         view = LayoutInflater.from(getContext()).inflate(layoutRes, this, true);
+        ButterKnife.bind(this, view);
         initView();
         initListener();
         initData();

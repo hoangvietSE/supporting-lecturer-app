@@ -1,5 +1,6 @@
 package com.soict.hoangviet.supportinglecturer.ui.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -100,6 +101,11 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
             dialog.dismiss();
         }
     }
+
+    protected <T> void startActivity(Class<T> tClass) {
+        startActivity(new Intent(this, tClass));
+    }
+
     protected abstract int getLayoutRes();
 
     protected abstract void initView();

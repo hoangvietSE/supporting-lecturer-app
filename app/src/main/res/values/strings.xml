@@ -1,5 +1,5 @@
 <resources>
-<!--    <string name="app_name">Ngoại ngữ 24h</string>-->
+    <!--    <string name="app_name">Ngoại ngữ 24h</string>-->
     226981998041-iutk0tsccke1drjaqlpc2ung74qta131.apps.googleusercontent.com
     <string name="facebook_app_id">1192417877622499</string>
     <string name="fb_login_protocol_scheme">fb1192417877622499</string>
@@ -47,7 +47,13 @@
     <string name="teacher_save_negative">Không</string>
     <string name="teacher_save_positive">Đồng ý</string>
 
-<!--    ListVideo-->
+    <!--    ListVideo-->
     <string name="list_video_no_result">Bạn chưa có video bài giảng nào</string>
+
+    <!--    Setting-->
+    <string name="setting_toolbar_title">Cài đặt</string>
+    <string name="setting_row_notification">Cài đặt thông báo</string>
+    <string name="setting_row_language">Cài đặt ngôn ngữ</string>
+    <string name="setting_row_zoom">Cài đặt chế độ màn hình</string>
 
 </resources>

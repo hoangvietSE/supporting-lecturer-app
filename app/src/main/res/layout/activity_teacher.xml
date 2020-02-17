@@ -223,6 +223,15 @@
         android:textSize="@dimen/text_16"
         android:textStyle="bold" />
 
+    <ImageView
+        android:id="@+id/imv_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPageNumber"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/content_padding_10_dp"
+        android:src="@drawable/ic_setting" />
+
     <com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionButton
         android:id="@+id/mfa_top_down"
         android:layout_width="wrap_content"
