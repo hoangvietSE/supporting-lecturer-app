@@ -16,7 +16,6 @@ import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
-import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeNewSingleton;
 
@@ -78,7 +77,7 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
                                 response -> {
                                     getView().showFileConvert(response);
                                 }, throwable -> {
-                                    ToastUtil.show(getContext(), throwable.getMessage());
+                                    handleFailure(throwable);
                                     getView().hideLoading();
                                 })
         );
