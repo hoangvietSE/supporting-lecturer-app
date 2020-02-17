@@ -12,6 +12,14 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <declare-styleable name="BaseRecyclerView">
         <attr name="brv_padding" format="dimension" />
         <attr name="brv_padding_start" format="dimension" />

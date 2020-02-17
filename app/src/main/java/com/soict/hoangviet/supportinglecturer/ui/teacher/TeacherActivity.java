@@ -123,6 +123,9 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private static final int REQUEST_CODE_SELECT_IMAGE = 98;
     private static final int REQUEST_CODE_RECORD = 94;
     private static final int REQUEST_CODE_STREAM = 95;
+    private static final int IS_CLOSED_RECORD = 0;
+    private static final int IS_RECORDING = 1;
+
     //Check state orientation of output image
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final long MIN_TIME_RECORD = 6000L;
@@ -349,13 +352,13 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         ibRedo.setEnabled(mPenPageDoc.isRedoable());
 
         ibRecord.setOnClickListener(view -> {
-            if (recordStatus == 1) {
+            if (recordStatus == IS_RECORDING) {
                 if (System.currentTimeMillis() - onTimeRecord < MIN_TIME_RECORD) {
                     showCautionDialog(getResources().getString(R.string.teacher_min_time_record_error), "", liveDialog -> {
                         liveDialog.dismiss();
                     });
                 } else {
-                    recordStatus = 0;
+                    recordStatus = IS_CLOSED_RECORD;
                     closeSettingView();
 //                    Toast.makeText(TeacherActivity.this, "Video is saved", Toast.LENGTH_SHORT).show();
                     Log.v(TAG, "Stopping Recording");
@@ -365,6 +368,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 }
             } else {
                 if (listRecordsName.size() >= 1 && listRecordsPath.size() >= 1) {
+                    checkSessionRecord = true;
+                    recordStatus = IS_RECORDING;
                     mPresenter.onResumeRecord(RecordUtil.baseDir + "/" + listRecordsName.get(listRecordsName.size() - 1) + listRecordsName.size() + ".mp4", listRecordsName.get(listRecordsName.size() - 1) + listRecordsName.size());
                     ToastUtil.show(this, getString(R.string.teacher_save_resume));
                 } else {
@@ -463,7 +468,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     @Override
     public void onDone(String pathVideo, int bitRate, int frameRate, String originName) {
         checkSessionRecord = true;
-        recordStatus = 1;
+        recordStatus = IS_RECORDING;
         mPresenter.onDoneSettingVideo(pathVideo, bitRate, frameRate, originName);
     }
 

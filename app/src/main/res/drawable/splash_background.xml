@@ -3,7 +3,7 @@
     <item android:drawable="@color/white" />
     <item>
         <bitmap
-            android:gravity="center"
+            android:gravity="top|fill_horizontal"
             android:src="@drawable/bg_login" />
     </item>
 </layer-list>
