@@ -20,7 +20,7 @@ public class SplashPresenterImpl<V extends SplashView> extends BasePresenterImpl
 
     @Override
     public void checkNetworkConnection() {
-        if (!NetworkUtil.isConnectedToNetwork(getContext())) {
+        if (NetworkUtil.isConnectedToNetwork(getContext())) {
             getView().onNetworkConnection(true);
         } else {
             getView().onNetworkConnection(false);

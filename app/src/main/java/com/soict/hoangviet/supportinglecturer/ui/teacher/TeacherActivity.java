@@ -32,6 +32,7 @@ import com.pedro.rtplibrary.rtmp.RtmpDisplay;
 import com.samsung.android.sdk.pen.SpenSettingViewInterface;
 import com.samsung.android.sdk.pen.document.SpenObjectImage;
 import com.samsung.android.sdk.pen.document.SpenPageDoc;
+import com.samsung.android.sdk.pen.engine.SpenSetPageDocListener;
 import com.samsung.android.sdk.pen.engine.SpenSurfaceView;
 import com.samsung.android.sdk.pen.settingui.SpenSettingEraserLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingPenLayout;
@@ -41,6 +42,7 @@ import com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionBu
 import com.soict.hoangviet.supportinglecturer.customview.settime.SettingTimeTempBushDFragment;
 import com.soict.hoangviet.supportinglecturer.customview.settingvideo.SettingVideoDFragment;
 import com.soict.hoangviet.supportinglecturer.entity.response.FileResponse;
+import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseSamsungSpenSdkActivity;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 import com.soict.hoangviet.supportinglecturer.utils.DialogUtil;
@@ -49,6 +51,10 @@ import com.soict.hoangviet.supportinglecturer.utils.RecordUtil;
 import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
 
 import net.ossrs.rtmp.ConnectCheckerRtmp;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -413,10 +419,12 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 R.string.teacher_save_positive,
                 (dialogInterface, postion) -> {
                     normalSave();
+                    EventBus.getDefault().postSticky(new RecordSuccessEvent());
                     finish();
                 },
                 (dialogInterface, postion) -> {
                     normalSave();
+                    EventBus.getDefault().postSticky(new RecordSuccessEvent());
                     startActivity(new Intent(this, TeacherActivity.class));
                     finish();
                 }
@@ -763,24 +771,21 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         }
     }
 
-    private View.OnClickListener undoRedoOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (mPenPageDoc == null) {
-                return;
+    private View.OnClickListener undoRedoOnClickListener = view -> {
+        if (mPenPageDoc == null) {
+            return;
+        }
+        // Undo button is clicked.
+        if (view.equals(ibUndo)) {
+            if (mPenPageDoc.isUndoable()) {
+                SpenPageDoc.HistoryUpdateInfo[] userData = mPenPageDoc.undo();
+                mPenSurfaceView.updateUndo(userData);
             }
-            // Undo button is clicked.
-            if (v.equals(ibUndo)) {
-                if (mPenPageDoc.isUndoable()) {
-                    SpenPageDoc.HistoryUpdateInfo[] userData = mPenPageDoc.undo();
-                    mPenSurfaceView.updateUndo(userData);
-                }
-                // Redo button is clicked.
-            } else if (v.equals(ibRedo)) {
-                if (mPenPageDoc.isRedoable()) {
-                    SpenPageDoc.HistoryUpdateInfo[] userData = mPenPageDoc.redo();
-                    mPenSurfaceView.updateRedo(userData);
-                }
+            // Redo button is clicked.
+        } else if (view.equals(ibRedo)) {
+            if (mPenPageDoc.isRedoable()) {
+                SpenPageDoc.HistoryUpdateInfo[] userData = mPenPageDoc.redo();
+                mPenSurfaceView.updateRedo(userData);
             }
         }
     };
@@ -791,8 +796,11 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         protected Void doInBackground(FileResponse... fileResponses) {
             for (int i = 0; i < fileResponses[0].getFiles().size(); i++) {
                 File file = FileUtil.saveImage(fileResponses[0].getFiles().get(i).getFileName(), fileResponses[0].getFiles().get(i).getFileData());
-                mPenPageDoc.setBackgroundImage(file.getAbsolutePath());
-                mPenPageDoc.setBackgroundImageMode(SpenPageDoc.BACKGROUND_IMAGE_MODE_FIT);
+                SpenObjectImage imgObj = new SpenObjectImage();
+                imgObj.setImage(file.getAbsolutePath());
+                RectF rect1 = new RectF(0, 0, penViewContainer.getWidth(), penViewContainer.getHeight());
+                imgObj.setRect(rect1, true);
+                mPenPageDoc.appendObject(imgObj);
                 mPenPageDoc = mPenNoteDoc.insertPage(mPenNoteDoc.getPageIndexById(mPenPageDoc.getId()) + 1);
                 mPresenter.getBackgroundColor();
                 mPenPageDoc.clearHistory();
@@ -810,6 +818,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         protected void onPostExecute(Void aVoid) {
 //            super.onPostExecute(aVoid);
             hideLoading();
+            mPenPageDoc = mPenNoteDoc.getPage(0);
+            mPenSurfaceView.setPageDoc(mPenPageDoc, true);
             mPenSurfaceView.update();
         }
     }

@@ -162,5 +162,6 @@ dependencies {
     implementation 'life.knowledge4:k4l-video-trimmer:1.0'
     implementation 'com.deploygate:sdk:4.2.0'
     implementation 'com.github.duanhong169:colorpicker:1.1.6'
+    implementation 'org.greenrobot:eventbus:3.2.0'
 
 }

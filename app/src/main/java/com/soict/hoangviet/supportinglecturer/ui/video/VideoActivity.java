@@ -12,10 +12,15 @@ import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.adapter.VideoAdapter;
 import com.soict.hoangviet.supportinglecturer.base.BaseRecyclerView;
 import com.soict.hoangviet.supportinglecturer.entity.response.VideoResponse;
+import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.edit.EditActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.List;
@@ -146,5 +151,24 @@ public class VideoActivity extends BaseActivity implements VideoView {
         if (requestCode == EDIT_VIDEO_REQUEST && resultCode == EDIT_VIDEO_RESULT) {
             mPresenter.fetchVideo(true);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onMessageEvent(RecordSuccessEvent event) {
+        /* Do something */
+        mPresenter.fetchVideo(true);
+        EventBus.getDefault().removeStickyEvent(event);
     }
 }

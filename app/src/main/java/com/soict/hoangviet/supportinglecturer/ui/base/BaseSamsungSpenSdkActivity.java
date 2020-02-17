@@ -96,6 +96,11 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     @Override
     protected void initListener() {
         super.initListener();
+        mPenSurfaceView.setSetPageDocListener(spenPageDoc -> {
+            mPenSurfaceView.setPageDoc(spenPageDoc, true);
+            spenPageDoc.setHistoryListener(mHistoryListener);
+            spenPageDoc.setAutoUnloadable(true);
+        });
     }
 
     private void initSamSungPen() {
