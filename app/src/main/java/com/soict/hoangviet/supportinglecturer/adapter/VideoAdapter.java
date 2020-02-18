@@ -12,6 +12,9 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.supportinglecturer.entity.response.VideoResponse;
+import com.soict.hoangviet.supportinglecturer.utils.DateUtil;
+
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,7 +66,7 @@ public class VideoAdapter extends EndlessLoadingRecyclerViewAdapter {
         @Override
         public void bind(VideoResponse data) {
             tvName.setText(data.getVideoName());
-            tvDetail.setText("13/02/2020 15:30:45");
+            tvDetail.setText(DateUtil.getStampByDate(new Date(data.getVideoDate()), DateUtil.DATE_FORMAT_19));
             tvVideoDetail.setOnClickListener(view -> {
                 listener.onItemWatchVideo(getAdapterPosition());
             });
