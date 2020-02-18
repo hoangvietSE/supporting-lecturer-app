@@ -55,5 +55,12 @@
     <string name="setting_row_notification">Cài đặt thông báo</string>
     <string name="setting_row_language">Cài đặt ngôn ngữ</string>
     <string name="setting_row_zoom">Cài đặt chế độ màn hình</string>
+    <string name="setting_row_zoom_positive">Đồng ý</string>
+    <string name="setting_row_zoom_negative">Hủy bỏ</string>
+
+    <string-array name="setting_zoom_item">
+        <item>Chế độ zoom màn hình</item>
+        <item>Chế độ không zoom màn hình</item>
+    </string-array>
 
 </resources>

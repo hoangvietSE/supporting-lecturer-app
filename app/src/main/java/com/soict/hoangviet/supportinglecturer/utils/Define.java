@@ -138,11 +138,12 @@ public class Define {
         public static final String USER_ID = "userId";
         public static final String LOGIN_FROM_FACEBOOK = "isFacebookSignIn";
         public static final String RTMP_FACEBOOK = "rtmpFacebook";
-
         public static final String LOGIN_FROM_GOOGLE = "isGoogleSignIn";
         public static final String ACCOUNT_NAME = "accountName";
         public static final String BROADCAST_ID = "broadcastId";
         public static final String RTMP_GOOGLE = "rtmpGoogle";
+        public static final String SETTING_ZOOM = "settingZoom";
+
 
     }
 

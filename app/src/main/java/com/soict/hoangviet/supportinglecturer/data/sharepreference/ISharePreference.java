@@ -37,4 +37,8 @@ public interface ISharePreference {
 
     void setBroadcastId(String key, String value);
 
+    int getSettingZoomCheckedItem(String key);
+
+    void setZoomCheckedItem(String key, Integer value);
+
 }

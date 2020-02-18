@@ -152,4 +152,14 @@ public class SharePreference implements ISharePreference {
     public void setBroadcastId(String key, String value) {
         put(Define.PREF_FILE_NAME, key, value);
     }
+
+    @Override
+    public int getSettingZoomCheckedItem(String key) {
+        return get(Define.PREF_FILE_NAME, key, Integer.class);
+    }
+
+    @Override
+    public void setZoomCheckedItem(String key, Integer value) {
+        put(Define.PREF_FILE_NAME, key, value);
+    }
 }

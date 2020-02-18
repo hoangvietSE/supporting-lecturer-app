@@ -44,6 +44,12 @@ import com.samsung.android.sdk.pen.settingui.SpenSettingEraserLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingPenLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingTextLayout;
 import com.soict.hoangviet.supportinglecturer.R;
+import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
+import com.soict.hoangviet.supportinglecturer.eventbus.SettingZoomEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,6 +69,8 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     @BindView(R.id.ivRedo)
     protected ImageButton ibRedo;
     private final int CONTEXT_MENU_RUN_ID = 0;
+    protected final int IS_ZOOM = 0;
+    protected final int IS_NON_ZOOM = 1;
     protected SpenNoteDoc mPenNoteDoc;
     protected SpenPageDoc mPenPageDoc;
     protected SpenSurfaceView mPenSurfaceView;
@@ -189,13 +197,14 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
         mSpenObjectRuntimeManager = new SpenObjectRuntimeManager(this);
         mSpenObjectRuntimeInfoList = new ArrayList<>();
         mSpenObjectRuntimeInfoList = mSpenObjectRuntimeManager.getObjectRuntimeInfoList();
-
         if (!isSpenFeatureEnabled) {
             mPenSurfaceView.setToolTypeAction(SpenSurfaceView.TOOL_FINGER, SpenSurfaceView.ACTION_STROKE);
 //                    Toast.makeText(TeacherActivity.this, "Device does not support Spen. \n You can draw stroke by finger.", Toast.LENGTH_SHORT).show();
         }
-//        mPenSurfaceView.setToolTypeAction(SpenSimpleSurfaceView.TOOL_FINGER, SpenSimpleSurfaceView.ACTION_NONE);
+        initZoom();
     }
+
+    protected abstract void initZoom();
 
     private SpenPageDoc.HistoryListener mHistoryListener = new SpenPageDoc.HistoryListener() {
         @Override
@@ -623,4 +632,27 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
                 mPenSurfaceView.getFrameStartPosition(), penViewLayout);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onSettingZoomEvent(SettingZoomEvent event) {
+        /* Do something */
+//        if (event.getPosition() == IS_ZOOM) {
+//            mPenSurfaceView.setToolTypeAction(SpenSimpleSurfaceView.TOOL_FINGER, SpenSimpleSurfaceView.ACTION_GESTURE);
+//        } else if (event.getPosition() == IS_NON_ZOOM) {
+//            mPenSurfaceView.setToolTypeAction(SpenSimpleSurfaceView.TOOL_FINGER, SpenSimpleSurfaceView.ACTION_NONE);
+//        }
+        initZoom();
+        EventBus.getDefault().removeStickyEvent(event);
+    }
 }

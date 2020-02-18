@@ -13,7 +13,6 @@ import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseIntArray;
-import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
@@ -32,7 +31,7 @@ import com.pedro.rtplibrary.rtmp.RtmpDisplay;
 import com.samsung.android.sdk.pen.SpenSettingViewInterface;
 import com.samsung.android.sdk.pen.document.SpenObjectImage;
 import com.samsung.android.sdk.pen.document.SpenPageDoc;
-import com.samsung.android.sdk.pen.engine.SpenSetPageDocListener;
+import com.samsung.android.sdk.pen.engine.SpenSimpleSurfaceView;
 import com.samsung.android.sdk.pen.engine.SpenSurfaceView;
 import com.samsung.android.sdk.pen.settingui.SpenSettingEraserLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingPenLayout;
@@ -54,8 +53,6 @@ import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
 import net.ossrs.rtmp.ConnectCheckerRtmp;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -68,7 +65,6 @@ import butterknife.Unbinder;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.Response;
 
 public class TeacherActivity extends BaseSamsungSpenSdkActivity implements TeacherView, SettingVideoDFragment.OnClickSettingVideo, ConnectCheckerRtmp, SettingTimeTempBushDFragment.OnClickSettingTime, View.OnTouchListener {
     @Inject
@@ -120,7 +116,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     @BindView(R.id.rl_camera)
     RelativeLayout rlCamera;
     private int mToolType = SpenSurfaceView.TOOL_SPEN;
-    private final int CONTEXT_MENU_RUN_ID = 0;
     private long onTimeRecord = -1;
     private static final int REQUEST_CODE_SELECT_IMAGE_BACKGROUND = 99;
     private static final int REQUEST_CODE_SELECT_IMAGE = 98;
@@ -128,7 +123,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private static final int REQUEST_CODE_STREAM = 95;
     private static final int IS_CLOSED_RECORD = 0;
     private static final int IS_RECORDING = 1;
-
     //Check state orientation of output image
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final long MIN_TIME_RECORD = 6000L;
@@ -141,9 +135,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private static RtmpDisplay rtmpDisplay;
     private int recordStatus = 0;
     private boolean checkSessionRecord = false;
-    //Keep Screen alway on
-    protected PowerManager.WakeLock mWakeLock;
-
+    private boolean isShowCamera = true;
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -165,10 +157,15 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     @Override
     protected void initView() {
-        super.initView();
         onAttachPresenter();
+        super.initView();
         keepScreenAlwayOn();
         initMedia();
+    }
+
+    @Override
+    protected void initZoom() {
+        mPresenter.initZoom();
     }
 
     private void onAttachPresenter() {
@@ -384,18 +381,20 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         mfaTopDown.setOnClickListener(view -> {
             if (llMenuMore.getVisibility() == View.VISIBLE) {
                 llMenuMore.setVisibility(View.GONE);
-                tvNumberPage.setVisibility(View.GONE);
+//                tvNumberPage.setVisibility(View.GONE);
             } else {
                 llMenuMore.setVisibility(View.VISIBLE);
-                tvNumberPage.setVisibility(View.VISIBLE);
+//                tvNumberPage.setVisibility(View.VISIBLE);
             }
         });
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mfaLeftRight.setOnClickListener(view -> {
                 if (rlCamera.getVisibility() == View.VISIBLE) {
                     rlCamera.setVisibility(View.GONE);
+                    isShowCamera = false;
                 } else {
                     rlCamera.setVisibility(View.VISIBLE);
+                    isShowCamera = true;
                 }
             });
         } else {
@@ -562,6 +561,15 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     public void showFileConvert(FileResponse response) {
         SlowAsyncTask slowAsyncTask = new SlowAsyncTask();
         slowAsyncTask.execute(response);
+    }
+
+    @Override
+    public void setZoom(int settingZoomCheckedItem) {
+        if (settingZoomCheckedItem == IS_ZOOM) {
+            mPenSurfaceView.setToolTypeAction(SpenSimpleSurfaceView.TOOL_FINGER, SpenSimpleSurfaceView.ACTION_GESTURE);
+        } else if (settingZoomCheckedItem == IS_NON_ZOOM) {
+            mPenSurfaceView.setToolTypeAction(SpenSimpleSurfaceView.TOOL_FINGER, SpenSimpleSurfaceView.ACTION_NONE);
+        }
     }
 
     private void callGalleryForInputImage(int requestCode) {
@@ -791,11 +799,16 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         protected Void doInBackground(FileResponse... fileResponses) {
             for (int i = 0; i < fileResponses[0].getFiles().size(); i++) {
                 File file = FileUtil.saveImage(fileResponses[0].getFiles().get(i).getFileName(), fileResponses[0].getFiles().get(i).getFileData());
-                SpenObjectImage imgObj = new SpenObjectImage();
-                imgObj.setImage(file.getAbsolutePath());
-                RectF rect1 = new RectF(0, 0, penViewContainer.getWidth(), penViewContainer.getHeight());
-                imgObj.setRect(rect1, true);
-                mPenPageDoc.appendObject(imgObj);
+                if (isShowCamera) {
+                    SpenObjectImage imgObj = new SpenObjectImage();
+                    imgObj.setImage(file.getAbsolutePath());
+                    RectF rect1 = new RectF(0, 0, penViewContainer.getWidth(), penViewContainer.getHeight());
+                    imgObj.setRect(rect1, true);
+                    mPenPageDoc.appendObject(imgObj);
+                } else {
+                    mPenPageDoc.setBackgroundImage(file.getAbsolutePath());
+                    mPenPageDoc.setBackgroundImageMode(SpenPageDoc.BACKGROUND_IMAGE_MODE_FIT);
+                }
                 mPenPageDoc = mPenNoteDoc.insertPage(mPenNoteDoc.getPageIndexById(mPenPageDoc.getId()) + 1);
                 mPresenter.getBackgroundColor();
                 mPenPageDoc.clearHistory();

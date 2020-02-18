@@ -14,6 +14,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DialogUtil {
     private DialogUtil() {
@@ -134,11 +135,24 @@ public class DialogUtil {
             Context context,
             @StringRes int titleRes,
             @ArrayRes int itemRes,
-            DialogInterface.OnClickListener listener
+            int checkedItem,
+            @StringRes int positiveTitle,
+            @StringRes int negativeTitle,
+            SingleChoiceItemListener listener
     ) {
-        ArrayList mSelectedItems = new ArrayList();
+        AtomicInteger position = new AtomicInteger();
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setSingleChoiceItems(itemRes, 0, listener);
+        builder.setTitle(titleRes);
+        builder.setSingleChoiceItems(itemRes, checkedItem, (dialog, which) -> {
+            position.set(which);
+        });
+        builder.setPositiveButton(positiveTitle, (dialog, which) -> {
+            listener.onItem(position.get());
+            dialog.dismiss();
+        });
+        builder.setNegativeButton(negativeTitle, (dialog, which) -> {
+            dialog.dismiss();
+        });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
@@ -147,6 +161,10 @@ public class DialogUtil {
         void onPositiveClick(ArrayList mSelectedItems);
 
         void onNegativeClick();
+    }
+
+    public interface SingleChoiceItemListener {
+        void onItem(int position);
     }
 
     public interface OnAddDataToDialogListener {

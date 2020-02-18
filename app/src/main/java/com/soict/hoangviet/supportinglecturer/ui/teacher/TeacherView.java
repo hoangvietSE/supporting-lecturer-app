@@ -19,4 +19,6 @@ public interface TeacherView extends BaseView {
     void endEventTask(String broadcastID);
 
     void showFileConvert(FileResponse response);
+
+    void setZoom(int settingZoomCheckedItem);
 }

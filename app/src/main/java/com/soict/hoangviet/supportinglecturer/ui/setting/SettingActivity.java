@@ -1,6 +1,9 @@
 package com.soict.hoangviet.supportinglecturer.ui.setting;
 
+import android.os.Bundle;
+
 import com.soict.hoangviet.supportinglecturer.R;
+import com.soict.hoangviet.supportinglecturer.customview.BaseRowSetting;
 import com.soict.hoangviet.supportinglecturer.customview.BaseToolbar;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 
@@ -16,6 +19,13 @@ public class SettingActivity extends BaseActivity implements SettingView {
     SettingPresenter<SettingView> mPresenter;
     @BindView(R.id.toolbar)
     BaseToolbar toolbar;
+    @BindView(R.id.row_notification)
+    BaseRowSetting rowNotification;
+    @BindView(R.id.row_language)
+    BaseRowSetting rowLanguage;
+    @BindView(R.id.row_zoom)
+    BaseRowSetting rowZoom;
+
 
     @Override
     protected int getLayoutRes() {
@@ -49,6 +59,9 @@ public class SettingActivity extends BaseActivity implements SettingView {
                     finish();
                     break;
             }
+        });
+        rowZoom.setOnClickListener(view -> {
+            mPresenter.showDialogConfirmZoom(SettingActivity.this);
         });
     }
 }

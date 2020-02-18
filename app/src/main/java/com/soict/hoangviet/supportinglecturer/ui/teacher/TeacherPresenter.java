@@ -38,4 +38,6 @@ public interface TeacherPresenter<V extends BaseView> extends BasePresenter<V> {
     void onResumeRecord(String path, String name);
 
     void stopScreenSharing(RtmpDisplay rtmpDisplay);
+
+    void initZoom();
 }

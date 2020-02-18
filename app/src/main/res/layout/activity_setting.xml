@@ -33,16 +33,19 @@
             android:orientation="vertical">
 
             <com.soict.hoangviet.supportinglecturer.customview.BaseRowSetting
+                android:id="@+id/row_notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:settingName="@string/setting_row_notification" />
 
             <com.soict.hoangviet.supportinglecturer.customview.BaseRowSetting
+                android:id="@+id/row_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:settingName="@string/setting_row_language" />
 
             <com.soict.hoangviet.supportinglecturer.customview.BaseRowSetting
+                android:id="@+id/row_zoom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:disableLine="true"

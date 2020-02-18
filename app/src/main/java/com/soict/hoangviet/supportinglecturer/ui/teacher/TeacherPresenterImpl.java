@@ -11,6 +11,7 @@ import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.pedro.rtplibrary.rtmp.RtmpDisplay;
+import com.samsung.android.sdk.pen.engine.SpenSimpleSurfaceView;
 import com.soict.hoangviet.supportinglecturer.BuildConfig;
 import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
@@ -209,6 +210,11 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
             }
 
         }
+    }
+
+    @Override
+    public void initZoom() {
+        getView().setZoom(getmSharePreference().getSettingZoomCheckedItem(Define.KeyPreference.SETTING_ZOOM));
     }
 
 
