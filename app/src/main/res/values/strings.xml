@@ -4,40 +4,26 @@
     <string name="facebook_app_id">1192417877622499</string>
     <string name="fb_login_protocol_scheme">fb1192417877622499</string>
     <string name="google_services_api_key">AIzaSyDqb5zA6rS1Pf-PaAqHDeilZewyfxP_dgc</string>
-
     <!-- ERROR -->
     <string name="error">error</string>
     <string name="error_format">error format</string>
     <string name="error_try_later">Có lỗi xảy ra. Vui lòng thử lại!</string>
     <string name="error_disconnect">Hủy kết nối</string>
-
     <!-- DIALOG -->
-    <string name="dialog.loading">Processing&#8230;</string>
-
+    <string name="dialog_loading">Processing&#8230;</string>
     <!-- SIGN IN SCREEN -->
-    <string name="edt.sign.in.username">Username</string>
-    <string name="edt.sign.in.password">Password</string>
-    <string name="tv.sign.in.forgot">Forgot Password</string>
-    <string name="tv.sign.in.register">Register</string>
-    <string name="tv.login.divide">------ OR ------</string>
-    <string name="btn.login.google">Connect with Google</string>
-    <string name="btn.login.facebook">Connect with Facebook</string>
-
+    <string name="tv_sign_in_forgot">Forgot Password</string>
+    <string name="tv_sign_in_register">Register</string>
+    <string name="tv_login_divide">------ OR ------</string>
     <!-- HOME SCREEN -->
-    <string name="tv.home.live">Phát trực tiếp bài giảng</string>
-    <string name="tv.home.video">Tạo video bài giảng</string>
-
+    <string name="tv_home_live">Phát trực tiếp bài giảng</string>
+    <string name="tv_home_video">Tạo video bài giảng</string>
     <!-- VIDEO SCREEN -->
-    <string name="tv.title.action.bar">Bài giảng đã tạo</string>
-    <string name="dialog.syntax.login">Bạn cần phải đăng nhập để sử dụng chức năng này!</string>
-
+    <string name="tv_title_action_bar">Bài giảng đã tạo</string>
+    <string name="dialog_syntax_login">Bạn cần phải đăng nhập để sử dụng chức năng này!</string>
     <!-- TEACHER SCREEN-->
-    <string name="tv.teacher.page.number">Page %s</string>
-    <string name="dialog.confirm.logout">Bạn có muốn đăng xuất tài khoản bây giờ?</string>
-
-    <string name="tv.item.video.share">Share</string>
-    <string name="tv.item.video.delete">Delete</string>
-    <string name="tv.item.video.edit">Crop</string>
+    <string name="tv_teacher_page_number">Page %s</string>
+    <string name="dialog_confirm_logout">Bạn có muốn đăng xuất tài khoản bây giờ?</string>
     <string name="splash_no_internet_connection_warning">Kết nối Internet để có trải nghiệm tốt nhất</string>
     <string name="teacher_min_time_record_error">Vui lòng tạo bài giảng không quá ngắn</string>
     <string name="teacher_no_save_error">Vui lòng lưu video bài giảng</string>
@@ -48,10 +34,8 @@
     <string name="teacher_save_question">Bạn có muốn tiếp tục tạo bài giảng sau khi lưu?</string>
     <string name="teacher_save_negative">Không</string>
     <string name="teacher_save_positive">Đồng ý</string>
-
     <!--    ListVideo-->
     <string name="list_video_no_result">Bạn chưa có video bài giảng nào</string>
-
     <!--    Setting-->
     <string name="setting_toolbar_title">Cài đặt</string>
     <string name="setting_row_notification">Cài đặt thông báo</string>
@@ -60,10 +44,19 @@
     <string name="setting_row_zoom_positive">Đồng ý</string>
     <string name="setting_row_zoom_negative">Hủy bỏ</string>
     <string name="setting_feature_developing">Tính năng đang được phát triển</string>
-
+    <!--    Language-->
+    <string name="language_toolbar_title">Cài đặt ngôn ngữ</string>
     <string-array name="setting_zoom_item">
         <item>Chế độ zoom màn hình</item>
         <item>Chế độ không zoom màn hình</item>
     </string-array>
+    <string name="btn_login_facebook">Đăng nhập với Facebook</string>
+    <string name="btn_login_google">Đăng nhập với Google</string>
+    <string name="login_title">Đăng nhập</string>
+    <string name="edt_sign_in_username">Tài khoản</string>
+    <string name="edt_sign_in_password">Mật khẩu</string>
+    <string name="tv_item_video_delete">Xóa</string>
+    <string name="tv_item_video_edit">Cắt</string>
+    <string name="tv_item_video_share">Chia sẻ</string>
 
 </resources>

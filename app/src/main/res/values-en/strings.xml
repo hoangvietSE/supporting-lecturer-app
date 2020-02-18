@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="setting_row_zoom_negative">Cancel</string>
+    <string name="btn_login_facebook">Connect with Facebook</string>
+    <string name="btn_login_google">Connect with Google</string>
+    <string name="edt_sign_in_password">Password</string>
+    <string name="edt_sign_in_username">Username</string>
+    <string name="setting_row_language">Languages Setting</string>
+    <string name="setting_row_notification">Notification Setting</string>
+    <string name="setting_row_zoom">Screen Setting</string>
+    <string name="setting_toolbar_title">Setting</string>
+    <string name="tv_item_video_delete">Delete</string>
+    <string name="tv_item_video_edit">Crop</string>
+    <string name="tv_item_video_share">Share</string>
+    <string name="tv_home_live">Livestream Lecture</string>
+    <string name="tv_home_video">Create Lecture</string>
+    <string name="login_title">Login</string>
+</resources>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.chauthai.swipereveallayout.SwipeRevealLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.chauthai.swipereveallayout.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRevealLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/swipeRevealLayout"
     app:dragEdge="right"
     app:mode="same_level">
 
@@ -27,7 +26,7 @@
                 android:background="@color/teal"
                 android:gravity="center"
                 android:padding="@dimen/space_12"
-                android:text="@string/tv.item.video.edit"
+                android:text="@string/tv_item_video_edit"
                 android:textColor="@color/white" />
 
             <TextView
@@ -37,7 +36,7 @@
                 android:background="#8BC34A"
                 android:gravity="center"
                 android:padding="@dimen/space_12"
-                android:text="@string/tv.item.video.share"
+                android:text="@string/tv_item_video_share"
                 android:textColor="@color/white" />
 
             <TextView
@@ -47,7 +46,7 @@
                 android:background="@color/purple"
                 android:gravity="center"
                 android:padding="@dimen/space_12"
-                android:text="@string/tv.item.video.delete"
+                android:text="@string/tv_item_video_delete"
                 android:textColor="@color/white" />
 
         </LinearLayout>

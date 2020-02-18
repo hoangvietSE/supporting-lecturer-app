@@ -4,6 +4,8 @@ import com.soict.hoangviet.supportinglecturer.ui.edit.EditActivity;
 import com.soict.hoangviet.supportinglecturer.ui.edit.module.EditActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.home.HomeActivity;
 import com.soict.hoangviet.supportinglecturer.ui.home.module.HomeActivityModule;
+import com.soict.hoangviet.supportinglecturer.ui.language.LanguageActivity;
+import com.soict.hoangviet.supportinglecturer.ui.language.module.LanguageActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
 import com.soict.hoangviet.supportinglecturer.ui.login.module.LoginActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.main.MainActivity;
@@ -45,4 +47,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {SettingActivityModule.class})
     abstract SettingActivity bindSettingActivity();
+
+    @ContributesAndroidInjector(modules = {LanguageActivityModule.class})
+    abstract LanguageActivity bindLanguageActivity();
 }

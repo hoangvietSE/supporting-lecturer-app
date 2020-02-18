@@ -41,4 +41,8 @@ public interface ISharePreference {
 
     void setZoomCheckedItem(String key, Integer value);
 
+    String getCurrentLanguage(String key);
+
+    void setCurrentLanguage(String key, String value);
+
 }

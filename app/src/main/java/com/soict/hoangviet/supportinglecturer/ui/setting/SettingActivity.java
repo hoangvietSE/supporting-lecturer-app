@@ -6,6 +6,7 @@ import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.customview.BaseRowSetting;
 import com.soict.hoangviet.supportinglecturer.customview.BaseToolbar;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
+import com.soict.hoangviet.supportinglecturer.ui.language.LanguageActivity;
 import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
 
 import javax.inject.Inject;
@@ -68,7 +69,7 @@ public class SettingActivity extends BaseActivity implements SettingView {
             ToastUtil.show(this, getResources().getString(R.string.setting_feature_developing));
         });
         rowLanguage.setOnClickListener(view -> {
-            ToastUtil.show(this, getResources().getString(R.string.setting_feature_developing));
+            startActivity(LanguageActivity.class);
         });
     }
 }

@@ -107,7 +107,7 @@
         android:drawableLeft="@drawable/ic_google_normal"
         android:gravity="center"
         android:paddingLeft="@dimen/space_16"
-        android:text="@string/btn.login.google"
+        android:text="@string/btn_login_google"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16" />
 
@@ -122,7 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/tv.login.divide"
+        android:text="@string/tv_login_divide"
         android:textColor="@color/white"
         android:textSize="@dimen/text_20" />
 
@@ -136,7 +136,7 @@
         android:gravity="center"
         android:paddingLeft="@dimen/space_16"
         android:scaleType="fitCenter"
-        android:text="@string/btn.login.facebook"
+        android:text="@string/btn_login_facebook"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16" />
 </LinearLayout>

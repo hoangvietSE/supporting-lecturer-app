@@ -162,4 +162,14 @@ public class SharePreference implements ISharePreference {
     public void setZoomCheckedItem(String key, Integer value) {
         put(Define.PREF_FILE_NAME, key, value);
     }
+
+    @Override
+    public String getCurrentLanguage(String key) {
+        return get(Define.PREF_FILE_NAME, key, String.class);
+    }
+
+    @Override
+    public void setCurrentLanguage(String key, String value) {
+        put(Define.PREF_FILE_NAME, key, value);
+    }
 }

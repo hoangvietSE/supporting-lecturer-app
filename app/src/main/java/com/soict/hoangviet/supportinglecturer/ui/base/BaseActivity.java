@@ -106,6 +106,12 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
         startActivity(new Intent(this, tClass));
     }
 
+    protected <T> void startActivitySingleInstance(Class<T> tClass) {
+        Intent intent = new Intent(this, tClass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     protected abstract int getLayoutRes();
 
     protected abstract void initView();

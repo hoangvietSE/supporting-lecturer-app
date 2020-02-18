@@ -143,8 +143,7 @@ public class Define {
         public static final String BROADCAST_ID = "broadcastId";
         public static final String RTMP_GOOGLE = "rtmpGoogle";
         public static final String SETTING_ZOOM = "settingZoom";
-
-
+        public static final String LANGUAGE = "language";
     }
 
     public static final class RequestCode {
@@ -155,6 +154,11 @@ public class Define {
         public static final int REQUEST_RECOVERY_ACCOUNT = 203;
         public static final int RC_SIGN_IN = 9001;
 
+    }
+
+    public static class Languages {
+        public static final String VIETNAM = "vi";
+        public static final String ENGLAND = "en";
     }
 
     public static final class Action {

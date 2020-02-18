@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.deploygate.sdk.DeployGate;
+import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.di.component.DaggerAppComponent;
+import com.soict.hoangviet.supportinglecturer.utils.Define;
+import com.soict.hoangviet.supportinglecturer.utils.LanguageUtil;
 
 import javax.inject.Inject;
 
@@ -16,6 +19,8 @@ public class LecturerApplication extends Application implements HasActivityInjec
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
+    @Inject
+    ISharePreference sharePreference;
 
     @Override
     public void onCreate() {
@@ -26,6 +31,9 @@ public class LecturerApplication extends Application implements HasActivityInjec
                 .build()
                 .inject(this);
         initDeployedGate();
+        if (sharePreference.getCurrentLanguage(Define.KeyPreference.LANGUAGE) != "") {
+            LanguageUtil.setCurrentLanguage(this, sharePreference.getCurrentLanguage(Define.KeyPreference.LANGUAGE));
+        }
     }
 
     private void initDeployedGate() {
