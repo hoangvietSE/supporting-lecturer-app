@@ -12,9 +12,7 @@
     <!-- DIALOG -->
     <string name="dialog_loading">Processing&#8230;</string>
     <!-- SIGN IN SCREEN -->
-    <string name="tv_sign_in_forgot">Forgot Password</string>
-    <string name="tv_sign_in_register">Register</string>
-    <string name="tv_login_divide">------ OR ------</string>
+    <string name="tv_login_divide">------ Hoặc ------</string>
     <!-- HOME SCREEN -->
     <string name="tv_home_live">Phát trực tiếp bài giảng</string>
     <string name="tv_home_video">Tạo video bài giảng</string>
@@ -58,5 +56,11 @@
     <string name="tv_item_video_delete">Xóa</string>
     <string name="tv_item_video_edit">Cắt</string>
     <string name="tv_item_video_share">Chia sẻ</string>
+    
+<!--    Dialog video-->
+    <string name="dialog_video_high">Độ phân giải cao</string>
+    <string name="dialog_video_medium">Độ phân giải trung bình</string>
+    <string name="dialog_video_low">Độ phân giải thấp</string>
+    <string name="dialog_video_name">Tên bài giảng</string>
 
 </resources>

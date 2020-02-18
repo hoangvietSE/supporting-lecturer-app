@@ -21,7 +21,7 @@
                 android:id="@+id/high"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="High"
+                android:text="@string/dialog_video_high"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_16" />
 
@@ -29,7 +29,7 @@
                 android:id="@+id/medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medium"
+                android:text="@string/dialog_video_medium"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_16" />
 
@@ -37,7 +37,7 @@
                 android:id="@+id/low"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Low"
+                android:text="@string/dialog_video_low"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_16" />
 
@@ -54,7 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Name Video" />
+                android:hint="@string/dialog_video_name" />
 
             <ImageView
                 android:id="@+id/btnSettingVideoFolder"
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/space_8"
                 android:layout_weight="1"
-                android:text="Cancel"
+                android:text="@string/setting_row_zoom_negative"
                 android:textColor="#fff" />
 
             <Button
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/space_8"
                 android:layout_weight="1"
-                android:text="OK"
+                android:text="@string/teacher_save_positive"
                 android:textColor="#fff" />
 
         </LinearLayout>
