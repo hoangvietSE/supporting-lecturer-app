@@ -1,9 +1,15 @@
 package com.soict.hoangviet.supportinglecturer.ui.teacher;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.SparseIntArray;
+import android.view.Surface;
 import android.view.View;
 
 import com.facebook.AccessToken;
@@ -11,7 +17,6 @@ import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.pedro.rtplibrary.rtmp.RtmpDisplay;
-import com.samsung.android.sdk.pen.engine.SpenSimpleSurfaceView;
 import com.soict.hoangviet.supportinglecturer.BuildConfig;
 import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
@@ -24,7 +29,10 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 import top.defaults.colorpicker.ColorPickerPopup;
 
@@ -37,6 +45,14 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
     private String pathVideo;
     private int frameRate;
     private int bitRate;
+    private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+
+    static {
+        ORIENTATIONS.append(Surface.ROTATION_0, 90);
+        ORIENTATIONS.append(Surface.ROTATION_90, 0);
+        ORIENTATIONS.append(Surface.ROTATION_180, 270);
+        ORIENTATIONS.append(Surface.ROTATION_270, 180);
+    }
 
     @Inject
     public TeacherPresenterImpl(Context context, Repository repository, ISharePreference mSharePreference, CompositeDisposable mCompositeDisposable) {
@@ -103,14 +119,14 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
     public void initStream(int resultCode, Intent data) {
         if (!getmSharePreference().getRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK).isEmpty()
                 || !getmSharePreference().getRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE).isEmpty()) {
-            getView().executeSlowInitVideo(resultCode, data);
+            getView().executeStreamVideo(resultCode, data);
         } else {
-            getView().executeSlowInitRecordVideo(resultCode, data);
+            getView().executeRecordVideo(resultCode, data);
         }
     }
 
     @Override
-    public void startStreamSlowInitVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCode, Intent data) {
+    public void startStreamVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCode, Intent data) {
         if (getmSharePreference().getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
             // TODO RTMP FACEBOOK
             if (rtmpDisplay.prepareAudio() && rtmpDisplay.prepareVideo(DISPLAY_WIDTH, DISPLAY_HEIGHT, frameRate, bitRate, orientation, mScreenDensity)) {
@@ -140,7 +156,7 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
     }
 
     @Override
-    public void startStreamSlowInitRecordVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCodeTask, Intent dataTask) {
+    public void startRecordVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCodeTask, Intent dataTask) {
         if (rtmpDisplay.prepareAudio() && rtmpDisplay.prepareVideo(DISPLAY_WIDTH, DISPLAY_HEIGHT, frameRate, bitRate, orientation, mScreenDensity)) {
             rtmpDisplay.setIntentResult(resultCodeTask, dataTask);
             try {
@@ -156,18 +172,39 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
         rtmpDisplay.startRecord(pathVideo);
     }
 
+    @SuppressLint("CheckResult")
     @Override
-    public void endEventTask(Context context, String[] params) {
-        try {
-            if (params.length >= 1) {
-                YouTubeApi.endEvent(YouTubeNewSingleton.newInstance(getmSharePreference().getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME), context).getYoutube(), params[0]);
+    public void endYoutubeEventTask(Context context, String broadcastId) {
+        Observable.fromCallable(() -> {
+            try {
+                YouTubeApi.endEvent(YouTubeNewSingleton.newInstance(getmSharePreference().getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME), context).getYoutube(), broadcastId);
+            } catch (UserRecoverableAuthIOException userRecoverableException) {
+                Log.w(TAG, "getSubscription:recoverable exception", userRecoverableException);
+                ((TeacherActivity) context).startActivityForResult(userRecoverableException.getIntent(), Define.RequestCode.REQUEST_RECOVERY_ACCOUNT);
+                return false;
+            } catch (IOException e) {
+                Log.w(TAG, "getSubscription:exception", e);
+                return false;
             }
-        } catch (UserRecoverableAuthIOException userRecoverableException) {
-            Log.w(TAG, "getSubscription:recoverable exception", userRecoverableException);
-            ((TeacherActivity) context).startActivityForResult(userRecoverableException.getIntent(), Define.RequestCode.REQUEST_RECOVERY_ACCOUNT);
-        } catch (IOException e) {
-            Log.w(TAG, "getSubscription:exception", e);
-        }
+            return true;
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    getView().showLoading();
+                })
+                .doFinally(() -> {
+                    getView().hideLoading();
+                })
+                .subscribe(
+                        result -> {
+                            if (result){
+                            }
+                        },
+                        throwable -> {
+
+                        }
+                );
     }
 
     @Override
@@ -188,7 +225,6 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
         }
         if (rtmpDisplay.isStreaming()) rtmpDisplay.stopStream();
         if (getmSharePreference().getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
-            //  TODO STOP LIVE Facebook
             new GraphRequest(
                     AccessToken.getCurrentAccessToken(),
                     "/" + getmSharePreference().getUserId(Define.KeyPreference.USER_ID) + "?end_live_video=true",
@@ -200,10 +236,9 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
             ).executeAsync();
             getmSharePreference().setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, "");
         } else {
-            //  TODO STOP LIVE YouTube
             if (getmSharePreference().getLiveStreamStatus(Define.KeyPreference.IS_LIVESTREAMED)) {
                 String broadcastID = getmSharePreference().getBroadcastId(Define.KeyPreference.BROADCAST_ID);
-                getView().endEventTask(broadcastID);
+                getView().endYoutubeEventTask(broadcastID);
                 getmSharePreference().setLiveStreamStatus(Define.KeyPreference.IS_LIVESTREAMED, false);
                 getmSharePreference().setRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE, "");
                 getmSharePreference().setBroadcastId(Define.KeyPreference.BROADCAST_ID, "");
@@ -217,5 +252,78 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
         getView().setZoom(getmSharePreference().getSettingZoomCheckedItem(Define.KeyPreference.SETTING_ZOOM));
     }
 
+    @SuppressLint("CheckResult")
+    @Override
+    public void executeStreamVideo(Context context, RtmpDisplay rtmpDisplay, int resultCode, Intent data) {
+        Observable.fromCallable(() -> {
+            int currentOrientation = context.getResources().getConfiguration().orientation;
+            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+            } else {
+                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+            }
 
+            int rotation = ((TeacherActivity) context).getWindowManager().getDefaultDisplay().getRotation();
+            int orientation = ORIENTATIONS.get(rotation + 90);
+            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            int mScreenDensity = (int) (metrics.density * 160f);
+            startStreamVideo(rtmpDisplay, orientation, mScreenDensity, resultCode, data);
+            return true;
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    getView().preExecuteVideo();
+                })
+                .doFinally(() -> {
+                    getView().hideLoading();
+                })
+                .subscribe(
+                        result -> {
+                            if (true){
+                                getView().postExecuteStreamVideo();
+                            }
+                        },
+                        throwable -> {
+
+                        }
+                );
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void executeRecordVideo(Context context, RtmpDisplay rtmpDisplay, int resultCode, Intent data) {
+        Observable.fromCallable(() -> {
+            int currentOrientation = context.getResources().getConfiguration().orientation;
+            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+            } else {
+                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+            }
+
+            int rotation = ((TeacherActivity) context).getWindowManager().getDefaultDisplay().getRotation();
+            int orientation = ORIENTATIONS.get(rotation + 90);
+            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            int mScreenDensity = (int) (metrics.density * 160f);
+            startRecordVideo(rtmpDisplay, orientation, mScreenDensity, resultCode, data);
+            return true;
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    getView().preExecuteVideo();
+                })
+                .doFinally(() -> {
+                    getView().hideLoading();
+                })
+                .subscribe(
+                        result -> {
+                            if (result) {
+                                getView().postExecuteRecordVideo();
+                            }
+                        },
+                        throwable -> {
+                        }
+                );
+    }
 }

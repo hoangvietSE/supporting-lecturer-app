@@ -7,7 +7,9 @@
 
     <!-- ERROR -->
     <string name="error">error</string>
-    <string name="error.format">error format</string>
+    <string name="error_format">error format</string>
+    <string name="error_try_later">Có lỗi xảy ra. Vui lòng thử lại!</string>
+    <string name="error_disconnect">Hủy kết nối</string>
 
     <!-- DIALOG -->
     <string name="dialog.loading">Processing&#8230;</string>

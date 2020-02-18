@@ -25,19 +25,23 @@ public interface TeacherPresenter<V extends BaseView> extends BasePresenter<V> {
 
     void initStream(int resultCode, Intent data);
 
-    void startStreamSlowInitVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCode, Intent data);
+    void startStreamVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCode, Intent data);
 
     void onDoneSettingVideo(String pathVideo, int bitRate, int frameRate, String originName);
 
-    void startStreamSlowInitRecordVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCodeTask, Intent dataTask);
+    void startRecordVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCodeTask, Intent dataTask);
 
     void startRecord(RtmpDisplay rtmpDisplay) throws IOException;
 
-    void endEventTask(Context context, String[] params);
+    void endYoutubeEventTask(Context context, String broadcastId);
 
     void onResumeRecord(String path, String name);
 
     void stopScreenSharing(RtmpDisplay rtmpDisplay);
 
     void initZoom();
+
+    void executeStreamVideo(Context context, RtmpDisplay rtmpDisplay, int resultCode, Intent data);
+
+    void executeRecordVideo(Context context, RtmpDisplay rtmpDisplay, int resultCode, Intent data);
 }

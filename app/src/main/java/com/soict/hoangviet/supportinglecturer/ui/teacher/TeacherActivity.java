@@ -2,18 +2,13 @@ package com.soict.hoangviet.supportinglecturer.ui.teacher;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.PowerManager;
 import android.os.SystemClock;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.SparseIntArray;
-import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Chronometer;
@@ -62,6 +57,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -124,7 +122,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private static final int IS_CLOSED_RECORD = 0;
     private static final int IS_RECORDING = 1;
     //Check state orientation of output image
-    private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final long MIN_TIME_RECORD = 6000L;
     private boolean isSaveRecord = true;
     private ArrayList<String> listRecordsPath = new ArrayList<>();
@@ -136,13 +133,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private int recordStatus = 0;
     private boolean checkSessionRecord = false;
     private boolean isShowCamera = true;
-
-    static {
-        ORIENTATIONS.append(Surface.ROTATION_0, 90);
-        ORIENTATIONS.append(Surface.ROTATION_90, 0);
-        ORIENTATIONS.append(Surface.ROTATION_180, 270);
-        ORIENTATIONS.append(Surface.ROTATION_270, 180);
-    }
 
 
     @Override
@@ -471,19 +461,22 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 ibRecord.setImageResource(R.drawable.ic_stop);
             } catch (Exception e) {
                 rtmpDisplay.stopRecord();
-                Toast.makeText(this, "Có lỗi xảy ra. Vui lòng thử lại!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.error_try_later), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public void onConnectionFailedRtmp(@NonNull String reason) {
-
+        runOnUiThread(() -> {
+            hideLoading();
+            Toast.makeText(this, getResources().getString(R.string.error_try_later), Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
     public void onDisconnectRtmp() {
-
+        Toast.makeText(this, getResources().getString(R.string.error_disconnect), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -522,15 +515,13 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     }
 
     @Override
-    public void executeSlowInitVideo(int resultCode, Intent data) {
-        SlowInitVideoTask slowInitVideoTask = new SlowInitVideoTask(resultCode, data);
-        slowInitVideoTask.execute();
+    public void executeStreamVideo(int resultCode, Intent data) {
+        mPresenter.executeStreamVideo(TeacherActivity.this, rtmpDisplay, resultCode, data);
     }
 
     @Override
-    public void executeSlowInitRecordVideo(int resultCode, Intent data) {
-        SlowInitRecordVideoTask slowInitRecordVideoTask = new SlowInitRecordVideoTask(resultCode, data);
-        slowInitRecordVideoTask.execute();
+    public void executeRecordVideo(int resultCode, Intent data) {
+        mPresenter.executeRecordVideo(TeacherActivity.this, rtmpDisplay, resultCode, data);
     }
 
     @Override
@@ -552,9 +543,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     }
 
     @Override
-    public void endEventTask(String broadcastID) {
-        EndEventTask endEventTask = new EndEventTask();
-        endEventTask.execute(broadcastID);
+    public void endYoutubeEventTask(String broadcastID) {
+        mPresenter.endYoutubeEventTask(TeacherActivity.this, broadcastID);
     }
 
     @Override
@@ -570,6 +560,34 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         } else if (settingZoomCheckedItem == IS_NON_ZOOM) {
             mPenSurfaceView.setToolTypeAction(SpenSimpleSurfaceView.TOOL_FINGER, SpenSimpleSurfaceView.ACTION_NONE);
         }
+    }
+
+    @Override
+    public void preExecuteVideo() {
+        isSaveRecord = false;
+        onTimeRecord = System.currentTimeMillis();
+        showLoading();
+    }
+
+    @Override
+    public void postExecuteStreamVideo() {
+        if (listRecordsName.size() > 1 && listRecordsPath.size() > 1) {
+            ToastUtil.show(TeacherActivity.this, getString(R.string.teacher_save_resume));
+        } else {
+            ToastUtil.show(TeacherActivity.this, getString(R.string.teacher_record_start));
+        }
+        startCountUpTimer();
+    }
+
+    @Override
+    public void postExecuteRecordVideo() {
+        ibRecord.setImageResource(R.drawable.ic_stop);
+        if (listRecordsName.size() > 1 && listRecordsPath.size() > 1) {
+            ToastUtil.show(TeacherActivity.this, getString(R.string.teacher_save_resume));
+        } else {
+            ToastUtil.show(TeacherActivity.this, getString(R.string.teacher_record_start));
+        }
+        startCountUpTimer();
     }
 
     private void callGalleryForInputImage(int requestCode) {
@@ -622,8 +640,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
             }
             if (requestCode == REQUEST_CODE_RECORD) {
                 hideLoading();
-                SlowInitRecordVideoTask slowInitRecordVideoTask = new SlowInitRecordVideoTask(resultCode, data);
-                slowInitRecordVideoTask.execute();
+                executeRecordVideo(resultCode, data);
             }
         }
     }
@@ -632,130 +649,10 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         return DeviceUtil.getRealPathFromURI(this, contentURI);
     }
 
-    private class SlowInitVideoTask extends AsyncTask<String, Void, Void> {
-
-        private int resultCodeTask;
-        private Intent dataTask;
-
-        SlowInitVideoTask(int resultCode, Intent data) {
-            resultCodeTask = resultCode;
-            dataTask = data;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            isSaveRecord = false;
-            onTimeRecord = System.currentTimeMillis();
-//            super.onPreExecute();
-            showLoading();
-        }
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            int currentOrientation = getResources().getConfiguration().orientation;
-            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-            } else {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-            }
-
-            int rotation = getWindowManager().getDefaultDisplay().getRotation();
-            int orientation = ORIENTATIONS.get(rotation + 90);
-//            DisplayMetrics metrics = new DisplayMetrics();
-            DisplayMetrics metrics = getResources().getDisplayMetrics();
-//            getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            mScreenDensity = (int) (metrics.density * 160f);
-            mPresenter.startStreamSlowInitVideo(rtmpDisplay, orientation, mScreenDensity, resultCodeTask, dataTask);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-            hideLoading();
-            if (listRecordsName.size() > 1 && listRecordsPath.size() > 1) {
-                ToastUtil.show(TeacherActivity.this, getString(R.string.teacher_save_resume));
-            } else {
-                ToastUtil.show(TeacherActivity.this, getString(R.string.teacher_record_start));
-            }
-            startCountUpTimer();
-        }
-    }
-
-    private class SlowInitRecordVideoTask extends AsyncTask<String, Void, Void> {
-
-        private int resultCodeTask;
-        private Intent dataTask;
-
-        SlowInitRecordVideoTask(int resultCode, Intent data) {
-            resultCodeTask = resultCode;
-            dataTask = data;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            isSaveRecord = false;
-            onTimeRecord = System.currentTimeMillis();
-//            super.onPreExecute();
-            showLoading();
-        }
-
-        @Override
-        protected Void doInBackground(String... strings) {
-
-            int currentOrientation = getResources().getConfiguration().orientation;
-            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-            } else {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-            }
-
-            int rotation = getWindowManager().getDefaultDisplay().getRotation();
-            int orientation = ORIENTATIONS.get(rotation + 90);
-            //            DisplayMetrics metrics = new DisplayMetrics();
-            DisplayMetrics metrics = getResources().getDisplayMetrics();
-//            getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            mScreenDensity = (int) (metrics.density * 160f);
-            mPresenter.startStreamSlowInitRecordVideo(rtmpDisplay, orientation, mScreenDensity, resultCodeTask, dataTask);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-            hideLoading();
-            ibRecord.setImageResource(R.drawable.ic_stop);
-            if (listRecordsName.size() > 1 && listRecordsPath.size() > 1) {
-                ToastUtil.show(TeacherActivity.this, getString(R.string.teacher_save_resume));
-            } else {
-                ToastUtil.show(TeacherActivity.this, getString(R.string.teacher_record_start));
-            }
-            startCountUpTimer();
-        }
-    }
-
     private void stopScreenSharing() {
         Log.i(TAG, "MediaProjection Stopped");
         isSaveRecord = true;
         mPresenter.stopScreenSharing(rtmpDisplay);
-    }
-
-    private class EndEventTask extends AsyncTask<String, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            showLoading();
-        }
-
-        @Override
-        protected Void doInBackground(String... params) {
-            mPresenter.endEventTask(TeacherActivity.this, params);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void param) {
-            hideLoading();
-        }
     }
 
     private void startCountUpTimer() {
