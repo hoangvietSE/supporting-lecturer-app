@@ -30,15 +30,15 @@
                 android:text="@string/tv.item.video.edit"
                 android:textColor="@color/white" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tvItemVideoShare"-->
-                <!--android:layout_width="@dimen/height_80"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:background="#8BC34A"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="@dimen/space_12"-->
-                <!--android:text="@string/tv.item.video.share"-->
-                <!--android:textColor="@color/white" />-->
+            <TextView
+                android:id="@+id/tvItemVideoShare"
+                android:layout_width="@dimen/height_80"
+                android:layout_height="match_parent"
+                android:background="#8BC34A"
+                android:gravity="center"
+                android:padding="@dimen/space_12"
+                android:text="@string/tv.item.video.share"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/tvItemVideoDelete"

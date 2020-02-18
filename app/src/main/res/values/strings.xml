@@ -57,6 +57,7 @@
     <string name="setting_row_zoom">Cài đặt chế độ màn hình</string>
     <string name="setting_row_zoom_positive">Đồng ý</string>
     <string name="setting_row_zoom_negative">Hủy bỏ</string>
+    <string name="setting_feature_developing">Tính năng đang được phát triển</string>
 
     <string-array name="setting_zoom_item">
         <item>Chế độ zoom màn hình</item>

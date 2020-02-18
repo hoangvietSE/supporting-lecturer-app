@@ -48,8 +48,8 @@ public class VideoAdapter extends EndlessLoadingRecyclerViewAdapter {
         LinearLayout tvVideoDetail;
         @BindView(R.id.tvItemVideoCrop)
         TextView tvEdit;
-        //        @BindView(R.id.tvItemHomeDetail)
-//        TextView tvShare;
+        @BindView(R.id.tvItemVideoShare)
+        TextView tvShare;
         @BindView(R.id.tvItemVideoDelete)
         TextView tvDelete;
         @BindView(R.id.swipeRevealLayout)
@@ -67,7 +67,7 @@ public class VideoAdapter extends EndlessLoadingRecyclerViewAdapter {
             tvVideoDetail.setOnClickListener(view -> {
                 listener.onItemWatchVideo(getAdapterPosition());
             });
-            if(swipeRevealLayout.isOpened()){
+            if (swipeRevealLayout.isOpened()) {
                 swipeRevealLayout.close(true);
             }
             tvEdit.setOnClickListener(view -> {
@@ -75,6 +75,9 @@ public class VideoAdapter extends EndlessLoadingRecyclerViewAdapter {
             });
             tvDelete.setOnClickListener(view -> {
                 listener.onItemDeleteVideo(getAdapterPosition());
+            });
+            tvShare.setOnClickListener(view -> {
+                listener.onItemShareVideo(getAdapterPosition());
             });
         }
     }

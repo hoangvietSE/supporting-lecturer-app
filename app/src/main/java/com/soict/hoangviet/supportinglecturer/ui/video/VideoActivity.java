@@ -5,6 +5,7 @@ import android.net.Uri;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -74,7 +75,13 @@ public class VideoActivity extends BaseActivity implements VideoView {
 
             @Override
             public void onItemShareVideo(int position) {
-
+                VideoResponse videoResponse = videoAdapter.getItem(position, VideoResponse.class);
+                Uri uri = FileProvider.getUriForFile(VideoActivity.this, getApplicationContext().getPackageName() + ".provider", new File(videoResponse.getVideoPath()));
+                Intent videoshare = new Intent(Intent.ACTION_SEND);
+                videoshare.setType("*/*");
+                videoshare.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                videoshare.putExtra(Intent.EXTRA_STREAM, uri);
+                startActivity(videoshare);
             }
 
             @Override
