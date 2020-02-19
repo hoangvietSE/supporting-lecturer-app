@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- body layout -->
+    <RelativeLayout
+        android:id="@+id/spen_brush_body_layout"
+        android:layout_width="@dimen/palette_total_layout_width_tablet"
+        android:layout_height="@dimen/palette_main_view_height_tablet"
+        android:background="@drawable/drawing_palette_bg" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/spen_brush_consume_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/spen_brush_body_layout"
+        android:background="@android:color/transparent"
+        android:visibility="gone"/>
+
+</RelativeLayout>

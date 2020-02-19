@@ -18,6 +18,7 @@ import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.google.api.services.youtube.YouTube;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
@@ -76,6 +77,8 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         onAttachPresenter();
         initEvent();
         requestPermission();
+        FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        Log.d("myLog", mFirebaseRemoteConfig.getString("welcome_message"));
     }
 
     private void onAttachPresenter() {

@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="spen_setting_brush_color_table_1">
+        <item>#f44336</item>
+        <item>#ff9800</item>
+        <item>#ffeb3b</item>
+        <item>#8bc34a</item>
+        <item>#03a9f4</item>
+        <item>#0338d0</item>
+        <item>#8a00ff</item>
+        <item>#000000</item>
+    </array>
+    <array name="spen_setting_brush_color_table_2">
+        <item>#e91e63</item>
+        <item>#ff7043</item>
+        <item>#ffc107</item>
+        <item>#cddc39</item>
+        <item>#00bcd4</item>
+        <item>#2b61fb</item>
+        <item>#795548</item>
+        <item>#9d9d9d</item>
+    </array>
+    <string-array name="spen_setting_brush_color_table_string_1">
+        <item>@string/pen_string_color_red</item>
+        <item>@string/pen_string_color_orange</item>
+        <item>@string/pen_string_color_yellow</item>
+        <item>@string/pen_string_color_green</item>
+        <item>@string/pen_string_color_light_blue</item>
+        <item>@string/pen_string_color_royal_blue</item>
+        <item>@string/pen_string_color_purple</item>
+        <item>@string/pen_string_color_black</item>
+    </string-array>
+    <string-array name="spen_setting_brush_color_table_string_2">
+        <item>@string/pen_string_color_pink</item>
+        <item>@string/pen_string_color_deep_orange</item>
+        <item>@string/pen_string_color_amber</item>
+        <item>@string/pen_string_color_lime</item>
+        <item>@string/pen_string_color_cyan</item>
+        <item>@string/pen_string_color_vivid_blue</item>
+        <item>@string/pen_string_color_brown</item>
+        <item>@string/pen_string_color_grey</item>
+    </string-array>
+    <array name="spen_setting_color_table_1">
+        <item>#FFFFFFFF</item>
+        <item>#FFFDFF2D</item>
+        <item>#FFFF835D</item>
+        <item>#FFFF3B5B</item>
+        <item>#FFFF49C9</item>
+        <item>#FFCA85FF</item>
+        <item>#FF7A37DE</item>
+        <item>#FF01942E</item>
+        <item>#FF38A8FF</item>
+        <item>#FF3367FD</item>
+        <item>#FFA6A5A5</item>
+        <item>#FF000000</item>
+        <item>#FEFFFFFE</item>
+        <item>#FEEFFFFF</item>
+    </array>
+    <array name="spen_setting_color_table_2">
+        <item>#FF0338D0</item>
+        <item>#FF004C71</item>
+        <item>#FF281067</item>
+        <item>#FF0A090F</item>
+        <item>#FF545454</item>
+        <item>#FF155D3A</item>
+        <item>#FF456216</item>
+        <item>#FF623617</item>
+        <item>#FFE58A17</item>
+        <item>#FFA53B11</item>
+        <item>#FFA9364D</item>
+        <item>#FF7E0E41</item>
+        <item>#FEFFFFFE</item>
+        <item>#FEEFFFFF</item>
+    </array>
+    <array name="spen_setting_color_table_3">
+        <item>#FFFFCDC1</item>
+        <item>#FFF9A48F</item>
+        <item>#FFF57E60</item>
+        <item>#FFFF95A5</item>
+        <item>#FFF54D67</item>
+        <item>#FFED1A3B</item>
+        <item>#FFBC0421</item>
+        <item>#FF8B007C</item>
+        <item>#FFBC045B</item>
+        <item>#FF8C537A</item>
+        <item>#FF594254</item>
+        <item>#FF66300A</item>
+        <item>#FEFFFFFE</item>
+        <item>#FEEFFFFF</item>
+    </array>
+    <array name="spen_setting_color_table_4">
+        <item>#FFFCE33C</item>
+        <item>#FFFAC74B</item>
+        <item>#FFCBE36C</item>
+        <item>#FF5BDD38</item>
+        <item>#FF41A526</item>
+        <item>#FF0E8019</item>
+        <item>#FF667F2A</item>
+        <item>#FF0E8064</item>
+        <item>#FF139B69</item>
+        <item>#FF055975</item>
+        <item>#FF114B9D</item>
+        <item>#FF0A296C</item>
+        <item>#FEFFFFFE</item>
+        <item>#FEEFFFFF</item>
+    </array>
+    <array name="spen_setting_color_table_5">
+        <item>#FF1D2A44</item>
+        <item>#FF004C71</item>
+        <item>#FF281067</item>
+        <item>#FF0A090F</item>
+        <item>#FF545454</item>
+        <item>#FF155D3A</item>
+        <item>#FF456216</item>
+        <item>#FF623617</item>
+        <item>#FFE58A17</item>
+        <item>#FFA53B11</item>
+        <item>#FFA9364D</item>
+        <item>#FF632E47</item>
+        <item>#FEFFFFFE</item>
+        <item>#FEEFFFFF</item>
+    </array>
+    <string-array name="spen_setting_color_table_string_1">
+        <item>pen_string_color_royal_blue</item>
+        <item>pen_string_color_indigo</item>
+        <item>pen_string_color_permanent_violet</item>
+        <item>pen_string_color_pitch_black</item>
+        <item>pen_string_color_grey</item>
+        <item>pen_string_color_viridian</item>
+        <item>pen_string_color_sap_green</item>
+        <item>pen_string_color_vandyke_brown</item>
+        <item>pen_string_color_yellow_ochre</item>
+        <item>pen_string_color_burnt_umber</item>
+        <item>pen_string_color_lilac</item>
+        <item>pen_string_color_burgundy</item>
+        <item>pen_string_color_palette</item>
+        <item>pen_string_color_picker_tts</item>
+    </string-array>
+    <string-array name="spen_setting_color_table_string_2">
+        <item>pen_string_color_white</item>
+        <item>pen_string_color_yellow</item>
+        <item>pen_string_color_coral</item>
+        <item>pen_string_color_tomato</item>
+        <item>pen_string_color_hot_pink</item>
+        <item>pen_string_color_plum</item>
+        <item>pen_string_color_blue_violet</item>
+        <item>pen_string_color_forest_green</item>
+        <item>pen_string_color_sky_blue</item>
+        <item>pen_string_color_peacock_blue</item>
+        <item>pen_string_color_dark_grey</item>
+        <item>pen_string_color_black</item>
+        <item>pen_string_color_palette</item>
+        <item>pen_string_color_picker_tts</item>
+    </string-array>
+    <string-array name="spen_setting_color_table_string_3">
+        <item>pen_string_color_peach_puff</item>
+        <item>pen_string_color_light_salmon</item>
+        <item>pen_string_color_dark_salmon</item>
+        <item>pen_string_color_light_pink</item>
+        <item>pen_string_color_magenta</item>
+        <item>pen_string_color_crimson</item>
+        <item>pen_string_color_red</item>
+        <item>pen_string_color_maroon</item>
+        <item>pen_string_color_purple</item>
+        <item>pen_string_color_medium_orchid</item>
+        <item>pen_string_color_dim_grey</item>
+        <item>pen_string_color_saddle_brown</item>
+        <item>pen_string_color_palette</item>
+        <item>pen_string_color_picker_tts</item>
+    </string-array>
+    <string-array name="spen_setting_color_table_string_4">
+        <item>pen_string_color_gold</item>
+        <item>pen_string_color_orange</item>
+        <item>pen_string_color_chartreuse</item>
+        <item>pen_string_color_lime_green</item>
+        <item>pen_string_color_sea_green</item>
+        <item>pen_string_color_green</item>
+        <item>pen_string_color_olive_drab</item>
+        <item>pen_string_color_dark_cyan</item>
+        <item>pen_string_color_teal</item>
+        <item>pen_string_color_steel_blue</item>
+        <item>pen_string_color_blue</item>
+        <item>pen_string_color_dark_blue</item>
+        <item>pen_string_color_palette</item>
+        <item>pen_string_color_picker_tts</item>
+    </string-array>
+    <array name="spen_setting_handwriting_color_table_1">
+        <item>#f44336</item>
+        <item>#ff9800</item>
+        <item>#ffeb3b</item>
+        <item>#8bc34a</item>
+        <item>#03a9f4</item>
+        <item>#0338d0</item>
+        <item>#a703d0</item>
+        <item>#a5a5a5</item>
+        <item>#252525</item>
+        <item>#00000000</item>
+    </array>
+    <array name="spen_setting_handwriting_color_table_2">
+        <item>#b27a38</item>
+        <item>#c02070</item>
+        <item>#bd39d4</item>
+        <item>#cecece</item>
+        <item>#ffffff</item>
+        <item>#6b4a42</item>
+        <item>#680436</item>
+        <item>#6411a4</item>
+        <item>#7b7b7b</item>
+        <item>#00000000</item>
+    </array>
+    <string-array name="spen_setting_handwriting_color_table_string_1">
+        <item>pen_string_color_red</item>
+        <item>pen_string_color_orange</item>
+        <item>pen_string_color_yellow</item>
+        <item>pen_string_color_light_green</item>
+        <item>pen_string_color_light_blue</item>
+        <item>pen_string_color_blue</item>
+        <item>pen_string_color_purple</item>
+        <item>pen_string_color_grey</item>
+        <item>pen_string_color_black</item>
+        <item>pen_string_color_picker</item>
+    </string-array>
+    <string-array name="spen_setting_handwriting_color_table_string_2">
+        <item>pen_string_color_pink</item>
+        <item>pen_string_color_deep_orange</item>
+        <item>pen_string_color_amber</item>
+        <item>pen_string_color_lime</item>
+        <item>pen_string_color_cyan</item>
+        <item>pen_string_color_purple</item>
+        <item>pen_string_color_brown</item>
+        <item>pen_string_color_grey</item>
+        <item>pen_string_color_dark_blue</item>
+        <item>pen_string_color_palette</item>
+    </string-array>
+    <array name="spen_setting_v40_color_table_1">
+        <item>#F44336</item>
+        <item>#FF9800</item>
+        <item>#FFEB3B</item>
+        <item>#8BC34A</item>
+        <item>#03A9F4</item>
+        <item>#0338D0</item>
+        <item>#FAFAFA</item>
+        <item>#000000</item>
+        <item>#7E0E41</item>
+        <item>#FEEFFFFF</item>
+    </array>
+    <array name="spen_setting_v40_color_table_2">
+        <item>#E91E63</item>
+        <item>#FF7043</item>
+        <item>#FFC107</item>
+        <item>#CDDC39</item>
+        <item>#00BCD4</item>
+        <item>#9C27B0</item>
+        <item>#795548</item>
+        <item>#9D9D9D</item>
+        <item>#0A296C</item>
+        <item>#FEEFFFFF</item>
+    </array>
+    <array name="spen_setting_v40_color_table_3">
+        <item>#F44336</item>
+        <item>#FF9800</item>
+        <item>#FFEB3B</item>
+        <item>#8BC34A</item>
+        <item>#03A9F4</item>
+        <item>#E91E63</item>
+        <item>#FF7043</item>
+        <item>#FFC107</item>
+        <item>#CDDC39</item>
+        <item>#00BCD4</item>
+        <item>#0338D0</item>
+        <item>#FAFAFA</item>
+        <item>#000000</item>
+        <item>#88ff88</item>
+        <item>#773377</item>
+        <item>#9C27B0</item>
+        <item>#795548</item>
+        <item>#9D9D9D</item>
+        <item>#FEFFFFFE</item>
+        <item>#FEEFFFFF</item>
+    </array>
+    <array name="spen_setting_v40_color_table_4">
+        <item>#FF0000</item>
+        <item>#00FF00</item>
+        <item>#0000FF</item>
+        <item>#00FFFF</item>
+        <item>#FF00FF</item>
+        <item>#FFFF00</item>
+        <item>#000000</item>
+        <item>#FFFFFF</item>
+    </array>
+    <string-array name="spen_setting_v40_color_table_string_1">
+        <item>pen_string_color_red</item>
+        <item>pen_string_color_orange</item>
+        <item>pen_string_color_yellow</item>
+        <item>pen_string_color_green</item>
+        <item>pen_string_color_blue</item>
+        <item>pen_string_color_royal_blue</item>
+        <item>pen_string_color_white</item>
+        <item>pen_string_color_black</item>
+        <item>pen_string_color_burgundy</item>
+        <item>pen_string_color_palette</item>
+    </string-array>
+    <string-array name="spen_setting_v40_color_table_string_2">
+        <item>pen_string_color_pink</item>
+        <item>pen_string_color_deep_orange</item>
+        <item>pen_string_color_amber</item>
+        <item>pen_string_color_lime</item>
+        <item>pen_string_color_cyan</item>
+        <item>pen_string_color_purple</item>
+        <item>pen_string_color_brown</item>
+        <item>pen_string_color_grey</item>
+        <item>pen_string_color_dark_blue</item>
+        <item>pen_string_color_palette</item>
+    </string-array>
+    <string-array name="spen_setting_v40_color_table_string_3">
+        <item>pen_string_color_red</item>
+        <item>pen_string_color_orange</item>
+        <item>pen_string_color_yellow</item>
+        <item>pen_string_color_green</item>
+        <item>pen_string_color_blue</item>
+        <item>pen_string_color_pink</item>
+        <item>pen_string_color_deep_orange</item>
+        <item>pen_string_color_amber</item>
+        <item>pen_string_color_lime</item>
+        <item>pen_string_color_cyan</item>
+        <item>pen_string_color_royal_blue</item>
+        <item>pen_string_color_white</item>
+        <item>pen_string_color_black</item>
+        <item>pen_string_color_temp1</item>
+        <item>pen_string_color_temp2</item>
+        <item>pen_string_color_purple</item>
+        <item>pen_string_color_brown</item>
+        <item>pen_string_color_grey</item>
+        <item>pen_string_color_palette</item>
+        <item>pen_string_color_picker_tts</item>
+    </string-array>
+    <string-array name="spen_setting_v40_color_table_string_4">
+        <item>pen_string_color_red</item>
+        <item>pen_string_color_green</item>
+        <item>pen_string_color_blue</item>
+        <item>pen_string_color_cyan</item>
+        <item>pen_string_color_pink</item>
+        <item>pen_string_color_yellow</item>
+        <item>pen_string_color_black</item>
+        <item>pen_string_color_white</item>
+    </string-array>
+    <color name="composer_main_background">#FAFAFA</color>
+    <color name="drawing_btn_bg_pressed_color">#28000000</color>
+    <color name="drawing_btn_bg_selected_color">#B2d9d9d9</color>
+    <color name="notes_accent_color">#f46a4e</color>
+    <color name="notes_primary_color">#f46a4e</color>
+    <color name="notes_primary_dark_color">#FFdb5f46</color>
+    <color name="setting_bg_color">#fafafa</color>
+    <color name="setting_bg_stroke_color">#c7c7c7</color>
+    <color name="setting_title_close_string_color">#f46a4e</color>
+    <color name="setting_title_string_color">#676767</color>
+    <color name="setting_view_divider_color">#c7c7c7</color>
+    <color name="voice_floating_bg">#fafafa</color>
+    <color name="voice_floating_button_pressed">#25000000</color>
+    <color name="voice_floating_outline">#d3d3d3</color>
+    <dimen name="brush_pen_preview_padding">10dp</dimen>
+    <dimen name="color_picker_popup_color_focus_wheel_thickness">3dp</dimen>
+    <dimen name="color_picker_popup_content_point_size">34dp</dimen>
+    <dimen name="color_picker_popup_content_point_size_v41_2">27.5dp</dimen>
+    <dimen name="color_picker_popup_point_size_v41">36dp</dimen>
+    <dimen name="color_picker_popup_recent_color_text_width">255dp</dimen>
+    <dimen name="color_picker_popup_seekbar_offset">5dp</dimen>
+    <dimen name="color_picker_popup_seekbar_track_height">6dp</dimen>
+    <dimen name="color_picker_popup_width">305dp</dimen>
+    <dimen name="color_spoid_height">37dp</dimen>
+    <dimen name="color_spoid_width">134dp</dimen>
+    <dimen name="common_setting_title_layout_height">52dp</dimen>
+    <dimen name="common_total_layout_width">263dp</dimen>
+    <dimen name="drawing_brush_color_setting_circle_focus_margin">3.5dp</dimen>
+    <dimen name="drawing_brush_color_setting_circle_focus_size">37dp</dimen>
+    <dimen name="drawing_brush_color_setting_circle_size">30dp</dimen>
+    <dimen name="drawing_brush_color_setting_circle_size_tablet">33dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_colomn_1_margin_start">3.5dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_colomn_1_margin_start_tablet">4dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_colomn_2_margin_start">44.5dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_colomn_2_margin_start_tablet">56dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_colomn_3_margin_start">85.5dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_colomn_3_margin_start_tablet">108dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_colomn_4_margin_start">126.5dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_colomn_4_margin_start_tablet">160dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_indicator_bottom_margin">6dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_indicator_bottom_margin_tablet">5dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_indicator_margin_end">4dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_indicator_size">4dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_indicator_size_tablet">5dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_picker_button_height">66dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_picker_button_height_tablet">75dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_picker_button_width">28dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_picker_button_width_tablet">31dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_picker_width">46dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_picker_width_tablet">48dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_row_1_margin_top">3.5dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_row_1_margin_top_tablet">15dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_row_2_margin_top">40.5dp</dimen>
+    <dimen name="drawing_brush_color_setting_color_row_2_margin_top_tablet">57dp</dimen>
+    <dimen name="drawing_brush_color_setting_height">100dp</dimen>
+    <dimen name="drawing_brush_color_setting_height_tablet">114dp</dimen>
+    <dimen name="drawing_brush_color_setting_palette_ViewFlipper_height">74dp</dimen>
+    <dimen name="drawing_brush_color_setting_palette_ViewFlipper_height_tablet">105dp</dimen>
+    <dimen name="drawing_brush_color_setting_palette_margin_start">0dp</dimen>
+    <dimen name="drawing_brush_color_setting_palette_margin_start_tablet">29dp</dimen>
+    <dimen name="drawing_brush_color_setting_palette_width">160dp</dimen>
+    <dimen name="drawing_brush_color_setting_palette_width_tablet">197dp</dimen>
+    <dimen name="drawing_brush_color_setting_selector_width">160dp</dimen>
+    <dimen name="drawing_brush_color_setting_selector_width_tablet">226dp</dimen>
+    <dimen name="drawing_brush_color_setting_width">206.5dp</dimen>
+    <dimen name="drawing_brush_color_setting_width_tablet">284dp</dimen>
+    <dimen name="drawing_brush_preview_eraser_preview_height">14dp</dimen>
+    <dimen name="drawing_brush_preview_eraser_preview_width">181dp</dimen>
+    <dimen name="drawing_brush_preview_eraser_preview_width2">181dp</dimen>
+    <dimen name="drawing_brush_preview_height_eraser">65dp</dimen>
+    <dimen name="drawing_brush_preview_height_pen">72dp</dimen>
+    <dimen name="drawing_brush_preview_layout_height">68dp</dimen>
+    <dimen name="drawing_brush_preview_layout_height_eraser">64dp</dimen>
+    <dimen name="drawing_brush_preview_layout_margin_bottom">14dp</dimen>
+    <dimen name="drawing_brush_preview_layout_width">219dp</dimen>
+    <dimen name="drawing_brush_preview_margin">20dp</dimen>
+    <dimen name="drawing_brush_preview_margin_bottom_eraser">17dp</dimen>
+    <dimen name="drawing_brush_preview_margin_side">18dp</dimen>
+    <dimen name="drawing_brush_setting_height">100dp</dimen>
+    <dimen name="drawing_brush_setting_height_tablet">105dp</dimen>
+    <dimen name="drawing_brush_setting_penlist_height">95dp</dimen>
+    <dimen name="drawing_brush_setting_popup_clear_button_height">45dp</dimen>
+    <dimen name="drawing_brush_setting_popup_erase_all_border_line">2px</dimen>
+    <dimen name="drawing_brush_setting_popup_erase_all_text_size">14sp</dimen>
+    <dimen name="drawing_brush_setting_popup_layout_left_margin">7dp</dimen>
+    <dimen name="drawing_brush_setting_popup_layout_width">263dp</dimen>
+    <dimen name="drawing_brush_setting_popup_opacity_top_margin">12dp</dimen>
+    <dimen name="drawing_brush_setting_popup_scrollbar_size">20px</dimen>
+    <dimen name="drawing_brush_setting_popup_view_body_top_margin">13dp</dimen>
+    <dimen name="drawing_brush_setting_popup_view_title_done_size">14sp</dimen>
+    <dimen name="drawing_brush_setting_popup_view_title_layout_height">52dp</dimen>
+    <dimen name="drawing_brush_setting_popup_view_title_text_padding">20dp</dimen>
+    <dimen name="drawing_brush_setting_popup_view_title_text_size">17sp</dimen>
+    <dimen name="drawing_brush_setting_width">273dp</dimen>
+    <dimen name="drawing_brush_setting_width_tablet">668dp</dimen>
+    <dimen name="drawing_brush_type_airview_button_width_tablet">41dp</dimen>
+    <dimen name="drawing_brush_type_button_airbrush_mask_margin_top">24dp</dimen>
+    <dimen name="drawing_brush_type_button_height">86dp</dimen>
+    <dimen name="drawing_brush_type_button_height_tablet">95dp</dimen>
+    <dimen name="drawing_brush_type_button_margin_left">6dp</dimen>
+    <dimen name="drawing_brush_type_button_mask_cali_height">34dp</dimen>
+    <dimen name="drawing_brush_type_button_mask_height">27dp</dimen>
+    <dimen name="drawing_brush_type_button_width">26dp</dimen>
+    <dimen name="drawing_brush_type_button_width_tablet">32dp</dimen>
+    <dimen name="drawing_brush_type_setting_button_height_tablet">16dp</dimen>
+    <dimen name="drawing_brush_type_setting_button_margin_start_tablet">25dp</dimen>
+    <dimen name="drawing_brush_type_setting_button_width_tablet">16dp</dimen>
+    <dimen name="drawing_brush_type_setting_view_height_tablet">22dp</dimen>
+    <dimen name="drawing_brush_type_view_arrow_width_tablet">29.5dp</dimen>
+    <dimen name="drawing_brush_type_view_margin_start_close">3.5dp</dimen>
+    <dimen name="drawing_brush_type_view_margin_start_close_tablet">0dp</dimen>
+    <dimen name="drawing_brush_type_view_open_width">250dp</dimen>
+    <dimen name="drawing_brush_type_view_open_width_tablet">359dp</dimen>
+    <dimen name="drawing_brush_type_view_width">63dp</dimen>
+    <dimen name="drawing_brush_type_view_width_tablet">356dp</dimen>
+    <dimen name="drawing_btn_bg_pressed_ripple_shape_size">20dp</dimen>
+    <dimen name="drawing_btn_bg_selected_ripple_radius">2dp</dimen>
+    <dimen name="drawing_seekbar_attribute_text_size">12dp</dimen>
+    <dimen name="drawing_seekbar_bottom_margin">15dp</dimen>
+    <dimen name="drawing_seekbar_layout_height">73dp</dimen>
+    <dimen name="drawing_seekbar_layout_height2">57dp</dimen>
+    <dimen name="drawing_seekbar_opacity_bottom_margin">7dp</dimen>
+    <dimen name="drawing_seekbar_progress_text_size">10dp</dimen>
+    <dimen name="drawing_seekbar_radius_bottom_margin">12dp</dimen>
+    <dimen name="eraser_total_layout_height">175dp</dimen>
+    <dimen name="floating_controller_voice_button_height">24dp</dimen>
+    <dimen name="floating_controller_voice_button_width">24dp</dimen>
+    <dimen name="floating_controller_voice_cancel_button_margin_end">15dp</dimen>
+    <dimen name="floating_controller_voice_cancel_button_margin_start">9dp</dimen>
+    <dimen name="floating_controller_voice_draggable_view_height">24dp</dimen>
+    <dimen name="floating_controller_voice_draggable_view_margin_start">7dp</dimen>
+    <dimen name="floating_controller_voice_draggable_view_width">16dp</dimen>
+    <dimen name="floating_controller_voice_first_button_margin_start">6dp</dimen>
+    <dimen name="floating_controller_voice_layout_height">37dp</dimen>
+    <dimen name="floating_controller_voice_second_button_margin_start">9dp</dimen>
+    <dimen name="handwriting_color_setting_circle_margin">1dp</dimen>
+    <dimen name="handwriting_color_setting_circle_size">36dp</dimen>
+    <dimen name="handwriting_color_setting_focus_circle_padding_big">0dp</dimen>
+    <dimen name="handwriting_color_setting_focus_circle_padding_middle">0dp</dimen>
+    <dimen name="handwriting_color_setting_focus_circle_padding_small">5dp</dimen>
+    <dimen name="handwriting_color_setting_focus_circle_size">46dp</dimen>
+    <dimen name="handwriting_pen_setting_popup_margin">12dp</dimen>
+    <dimen name="handwriting_pen_type_button_bottom_margin">-27dp</dimen>
+    <dimen name="handwriting_pen_type_button_height">84dp</dimen>
+    <dimen name="handwriting_pen_type_button_margin">6dp</dimen>
+    <dimen name="handwriting_pen_type_button_selected_y">13dp</dimen>
+    <dimen name="handwriting_pen_type_button_unselected_y">40dp</dimen>
+    <dimen name="handwriting_pen_type_button_width">36dp</dimen>
+    <dimen name="handwriting_pen_type_focus_button_height">93dp</dimen>
+    <dimen name="handwriting_pen_type_focus_button_width">44dp</dimen>
+    <dimen name="handwriting_pen_type_layout_padding">4dp</dimen>
+    <dimen name="handwriting_size_setting_height">62dp</dimen>
+    <dimen name="handwriting_size_setting_margin_start">14.5dp</dimen>
+    <dimen name="handwriting_size_setting_padding_top">8dp</dimen>
+    <dimen name="handwriting_size_setting_preview_end_margin">7dp</dimen>
+    <dimen name="handwriting_size_setting_preview_margin_left">0dp</dimen>
+    <dimen name="handwriting_size_setting_preview_margin_right">@dimen/handwriting_size_setting_preview_end_margin</dimen>
+    <dimen name="handwriting_size_setting_preview_width">29dp</dimen>
+    <dimen name="handwriting_size_setting_preview_width_delta">@dimen/handwriting_size_setting_preview_end_margin</dimen>
+    <dimen name="palette_main_view_height">100dp</dimen>
+    <dimen name="palette_main_view_height_tablet">105dp</dimen>
+    <dimen name="palette_pen_type_airview_button_width">35dp</dimen>
+    <dimen name="palette_pen_type_airview_button_width_tablet">41dp</dimen>
+    <dimen name="palette_pen_type_button_height">86dp</dimen>
+    <dimen name="palette_pen_type_button_height_tablet">95dp</dimen>
+    <dimen name="palette_pen_type_button_margin_left">6dp</dimen>
+    <dimen name="palette_pen_type_setting_button_height">14dp</dimen>
+    <dimen name="palette_pen_type_setting_button_height_tablet">16dp</dimen>
+    <dimen name="palette_pen_type_setting_button_margin_bottom">1.5dp</dimen>
+    <dimen name="palette_pen_type_setting_button_margin_start">21dp</dimen>
+    <dimen name="palette_pen_type_setting_button_margin_start_tablet">25dp</dimen>
+    <dimen name="palette_pen_type_setting_button_width">14dp</dimen>
+    <dimen name="palette_pen_type_setting_button_width_tablet">16dp</dimen>
+    <dimen name="palette_pen_type_setting_view_height">20dp</dimen>
+    <dimen name="palette_pen_type_setting_view_height_tablet">22dp</dimen>
+    <dimen name="palette_pen_type_view_arrow_width">28dp</dimen>
+    <dimen name="palette_pen_type_view_arrow_width_tablet">29.5dp</dimen>
+    <dimen name="palette_pen_type_view_open_width">250dp</dimen>
+    <dimen name="palette_pen_type_view_open_width_tablet">359dp</dimen>
+    <dimen name="palette_total_layout_width">273dp</dimen>
+    <dimen name="palette_total_layout_width_tablet">668dp</dimen>
+    <dimen name="remover_layout_height_cutter">272dp</dimen>
+    <dimen name="remover_layout_height_remover">200dp</dimen>
+    <dimen name="remover_layout_total_width">263dp</dimen>
+    <dimen name="remover_seekbar_margin_top">20dp</dimen>
+    <dimen name="sdk_voice_menu_button_width_height">24dp</dimen>
+    <dimen name="sdk_voice_menu_play_height">37dp</dimen>
+    <dimen name="sdk_voice_menu_play_playB_left">9dp</dimen>
+    <dimen name="sdk_voice_menu_play_stopB_left">9dp</dimen>
+    <dimen name="sdk_voice_menu_play_touchB_left">9dp</dimen>
+    <dimen name="sdk_voice_menu_play_width">106dp</dimen>
+    <dimen name="sdk_voice_menu_record_deleteB_left">9dp</dimen>
+    <dimen name="sdk_voice_menu_record_height">37dp</dimen>
+    <dimen name="sdk_voice_menu_record_playB_left">9dp</dimen>
+    <dimen name="sdk_voice_menu_record_stopB_left">6dp</dimen>
+    <dimen name="sdk_voice_menu_record_touchB_left">7dp</dimen>
+    <dimen name="sdk_voice_menu_record_width">134dp</dimen>
+    <dimen name="sdk_voice_menu_touch_width">16dp</dimen>
+    <dimen name="seekbar_attribute_text_size">12dp</dimen>
+    <dimen name="seekbar_height">19dp</dimen>
+    <dimen name="seekbar_margin_top">22dp</dimen>
+    <dimen name="seekbar_padding_bottom">0dp</dimen>
+    <dimen name="seekbar_padding_side">7dp</dimen>
+    <dimen name="seekbar_padding_top">0dp</dimen>
+    <dimen name="seekbar_progress_text_check_width">55dp</dimen>
+    <dimen name="seekbar_progress_text_delta_position_x">7dp</dimen>
+    <dimen name="seekbar_progress_text_height">11dp</dimen>
+    <dimen name="seekbar_progress_text_margin_top">18dp</dimen>
+    <dimen name="seekbar_progress_text_margin_top2">7dp</dimen>
+    <dimen name="seekbar_progress_text_offset">26dp</dimen>
+    <dimen name="seekbar_progress_text_size">10dp</dimen>
+    <dimen name="seekbar_progress_text_width_normal">30dp</dimen>
+    <dimen name="seekbar_thumb_inset">1dp</dimen>
+    <dimen name="seekbar_thumb_offset">2.5dp</dimen>
+    <dimen name="selection_radio_button_compound_drawable_padding">6dp</dimen>
+    <dimen name="selection_total_layout_height">156dp</dimen>
+    <dimen name="setting_color_picker_color_wheel_margin_start_land">24dp</dimen>
+    <dimen name="setting_color_picker_color_wheel_margin_top">22dp</dimen>
+    <dimen name="setting_color_picker_color_wheel_margin_top_land">28.5dp</dimen>
+    <dimen name="setting_color_picker_color_wheel_size">231dp</dimen>
+    <dimen name="setting_color_picker_color_wheel_size_land">194dp</dimen>
+    <dimen name="setting_color_picker_divider_height">2px</dimen>
+    <dimen name="setting_color_picker_popup_height">538dp</dimen>
+    <dimen name="setting_color_picker_popup_height_land">295dp</dimen>
+    <dimen name="setting_color_picker_popup_width">305dp</dimen>
+    <dimen name="setting_color_picker_popup_width_land">529dp</dimen>
+    <dimen name="setting_color_picker_preview_color_height">30dp</dimen>
+    <dimen name="setting_color_picker_preview_color_width">59dp</dimen>
+    <dimen name="setting_color_picker_preview_layout_height">52dp</dimen>
+    <dimen name="setting_color_picker_preview_layout_margin_top">24dp</dimen>
+    <dimen name="setting_color_picker_preview_layout_side_margin">22dp</dimen>
+    <dimen name="setting_color_picker_preview_layout_side_margin_land">23dp</dimen>
+    <dimen name="setting_color_picker_preview_layout_width_land">261dp</dimen>
+    <dimen name="setting_color_picker_recent_color_layout_margin_top">8dp</dimen>
+    <dimen name="setting_color_picker_recent_color_layout_side_margin">22dp</dimen>
+    <dimen name="setting_color_picker_recent_color_text_margin_start">3dp</dimen>
+    <dimen name="setting_color_picker_seekbar_height">12dp</dimen>
+    <dimen name="setting_color_picker_seekbar_layout_height">68dp</dimen>
+    <dimen name="setting_color_picker_text_button_height">36dp</dimen>
+    <dimen name="setting_pen_color_layout_height">118dp</dimen>
+    <dimen name="setting_pen_color_view_color_layout_between_margin">1dp</dimen>
+    <dimen name="setting_pen_color_view_color_layout_margin_bottom">59dp</dimen>
+    <dimen name="setting_pen_color_view_color_layout_margin_start">14.5dp</dimen>
+    <dimen name="setting_pen_color_view_color_layout_margin_top_1">13dp</dimen>
+    <dimen name="setting_pen_color_view_color_layout_margin_top_2">59dp</dimen>
+    <dimen name="setting_pen_color_view_color_layout_size">46dp</dimen>
+    <dimen name="setting_pen_color_view_color_selector_padding">5dp</dimen>
+    <dimen name="setting_pen_color_view_color_view_size">36dp</dimen>
+    <dimen name="setting_pen_pen_type_layout_height">97dp</dimen>
+    <dimen name="setting_pen_title_close_button_text_size">14sp</dimen>
+    <dimen name="setting_pen_title_text_size">17sp</dimen>
+    <dimen name="setting_pen_total_layout_height">329dp</dimen>
+    <dimen name="setting_show_button_shape_margin_top_bottom">2dp</dimen>
+    <dimen name="setting_show_button_shape_side_margin">4dp</dimen>
+    <dimen name="setting_title_close_text_button_shape_side_margin">14dp</dimen>
+    <dimen name="setting_title_text_padding">22dp</dimen>
+    <dimen name="text_body_layout_height">45dp</dimen>
+    <dimen name="text_dropdown_align_list_item_height">54dp</dimen>
+    <dimen name="text_dropdown_align_list_item_padding_bottom">12dp</dimen>
+    <dimen name="text_dropdown_align_list_item_padding_left">12dp</dimen>
+    <dimen name="text_dropdown_align_list_item_padding_right">12dp</dimen>
+    <dimen name="text_dropdown_align_list_item_padding_top">14dp</dimen>
+    <dimen name="text_dropdown_align_list_width">54dp</dimen>
+    <dimen name="text_dropdown_align_width">54dp</dimen>
+    <dimen name="text_dropdown_font_name_end_size">33dp</dimen>
+    <dimen name="text_dropdown_font_name_width">160dp</dimen>
+    <dimen name="text_dropdown_font_size">16dp</dimen>
+    <dimen name="text_dropdown_font_size_width">52dp</dimen>
+    <dimen name="text_dropdown_height">216dp</dimen>
+    <dimen name="text_dropdown_position_y">33dp</dimen>
+    <dimen name="text_dropdown_window_elevation_value">4dp</dimen>
+    <dimen name="text_font_color_done_button_text_size">14sp</dimen>
+    <dimen name="text_font_color_layout_height">162dp</dimen>
+    <dimen name="text_font_color_layout_width">263dp</dimen>
+    <dimen name="text_font_color_popup_margine_bottom">19dp</dimen>
+    <dimen name="text_font_color_popup_min_y">25dp</dimen>
+    <dimen name="text_font_color_title_done_text_padding">22dp</dimen>
+    <dimen name="text_font_color_title_layout_height">52dp</dimen>
+    <dimen name="text_font_color_title_text_padding">22dp</dimen>
+    <dimen name="text_font_color_title_text_size">17sp</dimen>
+    <dimen name="text_scrollview_vi_start_x">67dp</dimen>
+    <integer name="color_picker_popup_content_point_correction_value">0</integer>
+    <integer name="color_picker_popup_point_circle_size">36</integer>
+    <integer name="common_device_type">0</integer>
+    <integer name="common_ripple_effect_opacity">41</integer>
+    <integer name="common_total_layout_width">263</integer>
+    <integer name="handwriting_pen_preview_inkpen_endshift_divide_value">4</integer>
+    <integer name="handwriting_pen_type_button_width">36</integer>
+    <integer name="handwriting_total_horizontal_scroll_size">4</integer>
+    <integer name="pen_pen_button_unselected_height">62</integer>
+    <integer name="pen_pen_type_scroll_view_side_padding">16</integer>
+    <integer name="seekbar_button_size">19</integer>
+    <integer name="seekbar_progress_height_size">2</integer>
+    <integer name="seekbar_progress_width">218</integer>
+    <integer name="selection_icon_image_size">24</integer>
+    <integer name="text_cover_animation_duration">50</integer>
+    <integer name="text_cover_animation_start_delay">200</integer>
+    <integer name="text_dropdown_align_image_width">30</integer>
+    <integer name="text_icon_image_height">30</integer>
+    <integer name="text_icon_image_width">30</integer>
+    <integer name="text_scroll_animation_duration">300</integer>
+    <integer name="text_upward_animation_duration">300</integer>
+    <integer name="text_visible_delay_time">700</integer>
+    <string did="IDS_MEMO_BODY_AFTERNOON" name="afternoon">Afternoon</string>
+    <string did="IDS_NOTES_MBODY_UNCATEGORISED" name="category_uncategorised">Uncategorised</string>
+    <string did="IDS_EMAIL_BUTTON_CANCEL" name="composer_cancel">Cancel</string>
+    <string did="IDS_IMGE_HEADER_CLIPBOARD" name="composer_ctx_menu_clipboard">CLIPBOARD</string>
+    <string did="IDS_MSG_OPT_COPY" name="composer_ctx_menu_copy">COPY</string>
+    <string did="IDS_MSGC_OPT_CUT" name="composer_ctx_menu_cut">CUT</string>
+    <string did="IDS_BR_OPT_DICTIONARY" name="composer_ctx_menu_dictionary">DICTIONARY</string>
+    <string did="IDS_SBOOK_BUTTON_EXTRACT_TEXT_ABB" name="composer_ctx_menu_extract_text">EXTRACT TEXT</string>
+    <string did="IDS_MSGC_OPT_PASTE" name="composer_ctx_menu_paste">PASTE</string>
+    <string did="IDS_NOTES_BUTTON_RENAME_ABB" name="composer_ctx_menu_rename">RENAME</string>
+    <string did="IDS_IMGE_BUTTON2_RESIZE" name="composer_ctx_menu_resize_image">RESIZE</string>
+    <string did="IDS_MEMO_OPT_SAVE_IN_GALLERY_ABB" name="composer_ctx_menu_save_to_gallery">SAVE TO GALLERY</string>
+    <string did="IDS_MEMO_HEADER_SELECT_ALL_ABB" name="composer_ctx_menu_select_all">SELECT ALL</string>
+    <string did="IDS_NOTES_BUTTON_SHARE_ABB2" name="composer_ctx_menu_share">SHARE</string>
+    <string did="IDS_KA_HEADER_JANUARY" name="composer_date_month_01">January</string>
+    <string did="IDS_KA_HEADER_FEBRUARY" name="composer_date_month_02">February</string>
+    <string did="IDS_KA_HEADER_MARCH" name="composer_date_month_03">March</string>
+    <string did="IDS_KA_HEADER_APRIL" name="composer_date_month_04">April</string>
+    <string did="IDS_SIDL_HEADER_MAY" name="composer_date_month_05">May</string>
+    <string did="IDS_KA_HEADER_JUNE" name="composer_date_month_06">June</string>
+    <string did="IDS_KA_HEADER_JULY" name="composer_date_month_07">July</string>
+    <string did="IDS_KA_HEADER_AUGUST" name="composer_date_month_08">August</string>
+    <string did="IDS_KA_HEADER_SEPTEMBER" name="composer_date_month_09">September</string>
+    <string did="IDS_KA_HEADER_OCTOBER" name="composer_date_month_10">October</string>
+    <string did="IDS_KA_HEADER_NOVEMBER" name="composer_date_month_11">November</string>
+    <string did="IDS_KA_HEADER_DECEMBER" name="composer_date_month_12">December</string>
+    <string did="IDS_NOTES_BUTTON_DELETE_ABB2" name="composer_delete">Delete</string>
+    <string did="IDS_NOTES_POP_THE_SELECTED_ITEM_WILL_BE_DELETED" name="composer_delete_popup">The selected item will be deleted.</string>
+    <string did="IDS_EMAIL_BUTTON_DISCARD_ABB" name="composer_discard">Discard</string>
+    <string did="IDS_NOTES_BUTTON_BRUSH_M_DRAWING" name="composer_drawing">Brush</string>
+    <string did="IDS_NOTES_BUTTON_IMAGE_ABB3" name="composer_image">Image</string>
+    <string did="IDS_SMEMO_POP_1_PAGE" name="composer_pdf_1_page">1 page</string>
+    <string did="MIDS_IS_BODY_PD_PAGES" name="composer_pdf_pages">%d pages</string>
+    <string did="IDS_MEMO_POP_PROCESSING_ING" name="composer_processing_ing">Processing\u2026</string>
+    <string did="IDS_SMEMO_BUTTON_SAVE_ABB" name="composer_save">Save</string>
+    <string did="IDS_NOTES_BUTTON_DRAWING_ABB2" name="composer_title_drawing">Drawing</string>
+    <string did="IDS_NOTES_BUTTON_PEN_M_HANDWRITING_ABB" name="composer_writing">Pen</string>
+    <string did="MIDS_SWALL_BODY_SUNDAY" name="day01">Sunday</string>
+    <string did="MIDS_SWALL_BODY_MONDAY" name="day02">Monday</string>
+    <string did="MIDS_SWALL_BODY_TUESDAY" name="day03">Tuesday</string>
+    <string did="MIDS_SWALL_BODY_WEDNESDAY" name="day04">Wednesday</string>
+    <string did="MIDS_SWALL_BODY_THURSDAY" name="day05">Thursday</string>
+    <string did="MIDS_SWALL_BODY_FRIDAY" name="day06">Friday</string>
+    <string did="MIDS_SWALL_BODY_SATURDAY" name="day07">Saturday</string>
+    <string did="IDS_NOTES_TBOPT_ERASER" name="drawing_menu_erase">Eraser</string>
+    <string did="IDS_NOTES_TBOPT_REDO" name="drawing_menu_redo">Redo</string>
+    <string did="IDS_NOTES_TBOPT_UNDO" name="drawing_menu_undo">Undo</string>
+    <string did="IDS_ACCS_OPT_NOT_SELECTED_TTS" name="drawing_string_not_selected">Not selected</string>
+    <string did="IDS_ACCS_OPT_SELECTED_TTS" name="drawing_string_selected">Selected</string>
+    <string did="DREAM_NOTES_NPBODY_WRITE_HERE_TO_RESIZE_AND_ALIGN_YOUR_HANDWRITING" name="easy_writing_pad_guide_text">Write here to resize and align your handwriting</string>
+    <string did="IDS_MEMO_BODY_EVENING" name="evening">Evening</string>
+    <string did="IDS_ST_HEADER_HANDWRITING" name="handwriting">Handwriting</string>
+    <string did="DREAM_NOTES_OPT_EMAIL" name="handwriting_string_email">Email</string>
+    <string did="IDS_MEMO_OPT_INSERT_IMAGE_ABB" name="handwriting_string_insert_image">Insert image</string>
+    <string did="DREAM_NOTES_OPT_INSERT_TEXT" name="handwriting_string_insert_text">Insert text</string>
+    <string did="APPNAME_MAIN_BODY_PHONE" name="handwriting_string_phone">Phone</string>
+    <string did="DREAM_PENUP_BODY_WEB_ADDRESS" name="handwriting_string_web_address">Web address</string>
+    <string did="DREAM_NOTES_TBOPT_EASY_WRITING_PAD" name="handwriting_string_zoompad">Easy Writing Pad</string>
+    <string did="WDS_SPD_ACBUTTON_VIEW_MORE_ABB" name="image_view_more">VIEW MORE</string>
+    <string name="kr_day_format">([일월화수목금토]요일)</string>
+    <string name="kr_hour">시</string>
+    <string name="kr_minute">분</string>
+    <string name="kr_morning2">새벽</string>
+    <string did="IDS_SIDL_BODY_JAN_ABB" name="month01_abb">Jan</string>
+    <string did="IDS_SIDL_BODY_FEB_ABB" name="month02_abb">Feb</string>
+    <string did="IDS_SIDL_BODY_MAR_ABB" name="month03_abb">Mar</string>
+    <string did="IDS_SIDL_BODY_APR_ABB" name="month04_abb">Apr</string>
+    <string did="IDS_SIDL_HEADER_MAY" name="month05_abb">May</string>
+    <string did="IDS_SIDL_BODY_JUN_ABB" name="month06_abb">Jun</string>
+    <string did="IDS_SIDL_BODY_JUL_ABB" name="month07_abb">Jul</string>
+    <string did="IDS_SIDL_BODY_AUG_ABB" name="month08_abb">Aug</string>
+    <string did="IDS_SIDL_BODY_SEP_ABB" name="month09_abb">Sep</string>
+    <string did="IDS_SIDL_BODY_OCT_ABB" name="month10_abb">Oct</string>
+    <string did="IDS_SIDL_BODY_NOV_ABB" name="month11_abb">Nov</string>
+    <string did="IDS_SIDL_BODY_DEC_ABB" name="month12_abb">Dec</string>
+    <string did="IDS_CLOCK_BODY_MORNING_M_RINGTONE" name="morining">Morning</string>
+    <string did="IDS_CAM_BODY_NIGHT_M_MODE_NAME_ABB" name="night">Night</string>
+    <string did="IDS_MEMO_SK3_ADD" name="pen_string_add">Add</string>
+    <string did="IDS_SMEMO_BODY_ADD_PRESET" name="pen_string_add_preset">Add preset</string>
+    <string did="IDS_NOTES_TBOPT_AIRBRUSH" name="pen_string_air_brush">Airbrush</string>
+    <string did="IDS_SMEMO_BODY_ALIGN" name="pen_string_align">Align</string>
+    <string did="IDS_SMEMO_TBOPT_ALIGN_TEXT_TO_CENTRE" name="pen_string_align_center">Align text to centre</string>
+    <string did="IDS_SMEMO_TBOPT_JUSTIFY" name="pen_string_align_justify">Justify</string>
+    <string did="IDS_SMEMO_TBOPT_ALIGN_TEXT_TO_LEFT" name="pen_string_align_left">Align text to left</string>
+    <string did="IDS_SMEMO_TBOPT_ALIGN_TEXT_TO_RIGHT" name="pen_string_align_right">Align text to right</string>
+    <string did="IDS_SMEMO_BODY_ALIGNMENT" name="pen_string_alignment">Alignment</string>
+    <string did="IDS_COM_POP_ALREADY_EXISTS" name="pen_string_already_exists">Already exists.</string>
+    <string did="IDS_SMEMO_BUTTON_MORE_ABB4" name="pen_string_amemo_more">More</string>
+    <string did="IDS_SMEMO_OPT_ADJUST_SIZE_OF_AUTO_MOVE_AREA" name="pen_string_auto_moving">Adjust size of auto-move area</string>
+    <string did="IDS_COM_SK_BACK_A" name="pen_string_back">Previous color set</string>
+    <string name="pen_string_beutify">Beautify</string>
+    <string did="IDS_EMAIL_OPT_BOLD" name="pen_string_bold">Bold</string>
+    <string did="IDS_SMEMO_BODY_ART_BRUSH" name="pen_string_brush">Art brush</string>
+    <string did="IDS_NOTES_HEADER_BRUSH_SETTINGS_M_DRAWING_TOOLS" name="pen_string_brush_settings">Brush settings</string>
+    <string did="IDS_SMEMO_BODY_BULLET_POINTS_TTS" name="pen_string_bullet">Bullet</string>
+    <string did="IDS_SMEMO_BODY_BUTTON_T_TTS" name="pen_string_button"> Button</string>
+    <string did="IDS_NOTES_TBOPT_CALLIGRAPHY_PEN" name="pen_string_calligraphy_pen">Calligraphy pen</string>
+    <string did="IDS_NOTES_BUTTON_CANCEL_ABB8" name="pen_string_cancel">Cancel</string>
+    <string did="IDS_NOTES_TBOPT_CALLIGRAPHY_BRUSH_M_DRAWING" name="pen_string_chinese_brush">Calligraphy brush</string>
+    <string did="IDS_NOTES_BUTTON_ERASE_ALL_ABB3" name="pen_string_clear_all">Erase all</string>
+    <string did="IDS_SBOOK_BUTTON_CLOSE" name="pen_string_close">Close</string>
+    <string did="IDS_SMEMO_BODY_COLOUR_TTS" name="pen_string_color">Colour</string>
+    <string did="IDS_NOTES_TBOPT_AMBER" name="pen_string_color_amber">Amber</string>
+    <string did="IDS_NOTES_TBOPT_BLACK" name="pen_string_color_black">Black</string>
+    <string did="IDS_NOTES_TBOPT_BLUE" name="pen_string_color_blue">Blue</string>
+    <string did="IDS_SMEMO_BODY_BLUE_VIOLET" name="pen_string_color_blue_violet">Blue-violet</string>
+    <string did="IDS_NOTES_TBOPT_BROWN" name="pen_string_color_brown">Brown</string>
+    <string did="IDS_SMEMO_POP_BURGUNDY" name="pen_string_color_burgundy">Burgundy</string>
+    <string did="IDS_SMEMO_POP_BURNT_UMBER" name="pen_string_color_burnt_umber">Burnt umber</string>
+    <string did="IDS_SMEMO_BODY_CHARTREUSE" name="pen_string_color_chartreuse">Chartreuse</string>
+    <string did="IDS_SMEMO_BODY_CORAL" name="pen_string_color_coral">Coral</string>
+    <string did="IDS_SMEMO_BODY_CRIMSON" name="pen_string_color_crimson">Crimson</string>
+    <string did="IDS_NOTES_BODY_CURRENT_M_COLOUR_ABB" name="pen_string_color_current">Current</string>
+    <string did="IDS_NOTES_TBOPT_CYAN" name="pen_string_color_cyan">Cyan</string>
+    <string did="IDS_SMEMO_BODY_DARK_BLUE_M_COLOUR_TTS" name="pen_string_color_dark_blue">Dark blue</string>
+    <string did="IDS_SMEMO_BODY_DARK_CYAN" name="pen_string_color_dark_cyan">Dark cyan</string>
+    <string did="IDS_SMEMO_BODY_DARK_GREY" name="pen_string_color_dark_grey">Dark grey</string>
+    <string did="IDS_SMEMO_BODY_DARK_SALMON" name="pen_string_color_dark_salmon">Dark salmon</string>
+    <string did="IDS_NOTES_TBOPT_DEEP_ORANGE" name="pen_string_color_deep_orange">Deep Orange</string>
+    <string did="IDS_SMEMO_BODY_DIM_GREY" name="pen_string_color_dim_grey">Dim grey</string>
+    <string did="IDS_AT_BODY_DOUBLE_TAP_AND_HOLD_TO_MOVE_T_TTS" name="pen_string_color_double_tap_and_hold_to_move">Double tap and hold to move.</string>
+    <string did="IDS_VDOE_TBBODY_DOUBLE_TAP_TO_APPLY" name="pen_string_color_double_tap_to_apply">Double tap to apply.</string>
+    <string did="IDS_SMEMO_BODY_FOREST_GREEN" name="pen_string_color_forest_green">Forest green</string>
+    <string did="IDS_SMEMO_BODY_GOLD" name="pen_string_color_gold">Gold</string>
+    <string did="IDS_NOTES_TBOPT_GREEN" name="pen_string_color_green">Green</string>
+    <string did="IDS_NOTES_TBOPT_GREY" name="pen_string_color_grey">Grey</string>
+    <string did="IDS_SMEMO_BODY_HOTPINK" name="pen_string_color_hot_pink">Hot pink</string>
+    <string did="IDS_CLD_BODY_INDIGO_M_COLOUR" name="pen_string_color_indigo">Indigo</string>
+    <string did="IDS_NOTES_TBOPT_LIGHT_BLUE" name="pen_string_color_light_blue">Light blue</string>
+    <string did="IDS_NOTES_TBOPT_LIGHT_GREEN" name="pen_string_color_light_green">Light green</string>
+    <string did="IDS_SMEMO_BODY_LIGHT_PINK" name="pen_string_color_light_pink">Light pink</string>
+    <string did="IDS_SMEMO_BODY_LIGHT_SALMON" name="pen_string_color_light_salmon">Light salmon</string>
+    <string did="IDS_SMEMO_POP_LILAC" name="pen_string_color_lilac">Lilac</string>
+    <string did="IDS_NOTES_TBOPT_LIME" name="pen_string_color_lime">Lime</string>
+    <string did="IDS_SMEMO_BODY_LIME_GREEN_M_COLOUR" name="pen_string_color_lime_green">Lime green</string>
+    <string did="IDS_SMEMO_BODY_MAGENTA_M_COLOUR" name="pen_string_color_magenta">Magenta</string>
+    <string did="IDS_SMEMO_BODY_MAROON" name="pen_string_color_maroon">Maroon</string>
+    <string did="IDS_SMEMO_BODY_MEDIUM_ORCHID" name="pen_string_color_medium_orchid">Medium orchid</string>
+    <string did="IDS_NOTES_BODY_NEW_M_COLOUR_ABB" name="pen_string_color_new">New</string>
+    <string did="IDS_SMEMO_BODY_OLIVE_DRAB" name="pen_string_color_olive_drab">Olive drab</string>
+    <string did="IDS_NOTES_TBOPT_ORANGE" name="pen_string_color_orange">Orange</string>
+    <string did="IDS_SMEMO_BODY_CUSTOM_COLOUR_PALETTE" name="pen_string_color_palette">Custom color palette</string>
+    <string did="IDS_SMEMO_BODY_PEACH_PUFF" name="pen_string_color_peach_puff">Peach puff</string>
+    <string did="IDS_SMEMO_BODY_PEACOCK_BLUE_M_COLOUR" name="pen_string_color_peacock_blue">Peacock blue</string>
+    <string did="IDS_SMEMO_POP_PERMANENT_VIOLET" name="pen_string_color_permanent_violet">Permanent violet</string>
+    <string did="IDS_NOTES_HEADER_COLOUR_PICKER" name="pen_string_color_picker">Colour picker</string>
+    <string did="IDS_SMEMO_BODY_COLOUR_PICKER" name="pen_string_color_picker_tts">Color picker</string>
+    <string did="IDS_NOTES_TBOPT_PINK" name="pen_string_color_pink">Pink</string>
+    <string did="IDS_SMEMO_BODY_PITCH_BLACK_M_COLOUR" name="pen_string_color_pitch_black">Pitch black</string>
+    <string did="IDS_SMEMO_BODY_PLUM" name="pen_string_color_plum">Plum</string>
+    <string did="IDS_NOTES_TBOPT_PURPLE" name="pen_string_color_purple">Purple</string>
+    <string did="IDS_NOTES_TBOPT_RED" name="pen_string_color_red">Red</string>
+    <string did="IDS_NOTES_TBOPT_ROYAL_BLUE" name="pen_string_color_royal_blue">Royal blue</string>
+    <string did="IDS_SMEMO_BODY_SADDLE_BROWN" name="pen_string_color_saddle_brown">Saddle brown</string>
+    <string did="IDS_SMEMO_POP_SAP_GREEN" name="pen_string_color_sap_green">Sap green</string>
+    <string did="IDS_SMEMO_BODY_SEA_GREEN" name="pen_string_color_sea_green">Sea green</string>
+    <string did="IDS_COM_POP_SET" name="pen_string_color_set">Set</string>
+    <string did="IDS_SMEMO_BODY_SKY_BLUE_M_COLOUR_TTS" name="pen_string_color_sky_blue">Sky blue</string>
+    <string did="IDS_NOTES_TBOPT_COLOUR_SPUIT" name="pen_string_color_spuit">Colour spuit</string>
+    <string did="IDS_SMEMO_BODY_STEEL_BLUE" name="pen_string_color_steel_blue">Steel blue</string>
+    <string did="IDS_SMEMO_BODY_TAP_TO_APPLY_T_TTS" name="pen_string_color_tap_to_apply">Tap to apply.</string>
+    <string did="IDS_SMEMO_BODY_TEAL" name="pen_string_color_teal">Teal</string>
+    <string did="IDS_SMEMO_BODY_TOMATO" name="pen_string_color_tomato">Tomato</string>
+    <string did="IDS_SMEMO_POP_VANDYKE_BROWN" name="pen_string_color_vandyke_brown">Vandyke brown</string>
+    <string did="IDS_SMEMO_POP_VIRIDIAN" name="pen_string_color_viridian">Viridian</string>
+    <string did="IDS_NOTES_TBOPT_VIVID_BLUE" name="pen_string_color_vivid_blue">Vivid blue</string>
+    <string did="IDS_SMEMO_BODY_WHITE_M_COLOUR_TTS" name="pen_string_color_white">White</string>
+    <string did="IDS_NOTES_TBOPT_YELLOW" name="pen_string_color_yellow">Yellow</string>
+    <string did="IDS_SMEMO_POP_YELLOW_OCHRE" name="pen_string_color_yellow_ochre">Yellow ochre</string>
+    <string did="IDS_COM_POP_COPIED_TO_CLIPBOARD" name="pen_string_copied_to_clipboard">Copied to clipboard.</string>
+    <string did="IDS_SMEMO_BODY_CORRECTION_PEN" name="pen_string_correction_pen">Correction pen</string>
+    <string did="IDS_NOTES_TBOPT_CRAYON" name="pen_string_crayon">Crayon</string>
+    <string did="IDS_SMEMO_BODY_CURSIVE_M_EFFECT_ABB_CHN" name="pen_string_cursive">Cursive</string>
+    <string did="DREAM_NOTES_OPT_DECREASE_M_SIZE" name="pen_string_decrease">Decrease</string>
+    <string did="IDS_SMEMO_OPT_DELETE" name="pen_string_delete_preset">Delete</string>
+    <string name="pen_string_delete_text">DELETE</string>
+    <string name="pen_string_dialog_cancel">Cancel</string>
+    <string name="pen_string_dialog_ok">OK</string>
+    <string did="IDS_NOTES_BUTTON_DONE_ABB8" name="pen_string_done">Done</string>
+    <string did="IDS_SMEMO_OPT_TAP_AND_DRAG_TO_RESIZE" name="pen_string_drag_to_resize">Tap and drag to resize.</string>
+    <string did="MIDS_SM_OPT_DROPDOWN_LIST" name="pen_string_dropdown_list">Dropdown list</string>
+    <string did="IDS_SMEMO_BODY_DUMMY_M_EFFECT_ABB_CHN" name="pen_string_dummy">Dummy</string>
+    <string did="IDS_SMEMO_OPT_ENTER_M_INPUT" name="pen_string_enter">Enter</string>
+    <string name="pen_string_erase_by_stroke">Erase by stroke</string>
+    <string did="IDS_NOTES_OPT_ERASE_LINE_BY_LINE" name="pen_string_erase_line_by_line">Erase line by line</string>
+    <string did="IDS_NOTES_OPT_ERASE_TOUCHED_AREA" name="pen_string_erase_touched_area">Erase touched area</string>
+    <string did="IDS_NOTES_HEADER_ERASER_SETTINGS_ABB" name="pen_string_eraser_settings">Eraser settings</string>
+    <string did="IDS_SMEMO_TPOP_FAILED_TO_RECOGNISE_SHAPE" name="pen_string_failed_to_recognise_shape">Failed to recognise shape.</string>
+    <string did="IDS_SMEMO_BODY_FONT_COLOUR_T_TTS" name="pen_string_font_color">Font color</string>
+    <string did="IDS_SMEMO_BODY_FONT_SIZE_TTS" name="pen_string_font_size">Font size</string>
+    <string did="IDS_ST_BODY_FONT_TYPE" name="pen_string_font_type">Font type</string>
+    <string did="IDS_NOTES_TBOPT_FOUNTAIN_PEN" name="pen_string_fountain_pen">Fountain pen</string>
+    <string did="IDS_WGT_HEADER_PICK_A_COLOR_UC_TMO" name="pen_string_gradation">pick a color.</string>
+    <string did="IDS_NOTES_TBOPT_SHOW_BRUSH" name="pen_string_handler_show_brush">Show brush</string>
+    <string did="IDS_NOTES_TBBODY_DOUBLE_TAP_TO_SHOW_BRUSH" name="pen_string_handler_show_brush_double_tap">Double tap to show brush.</string>
+    <string did="IDS_NOTES_TBOPT_SHOW_COLOUR" name="pen_string_handler_show_color">Show colour</string>
+    <string did="IDS_NOTES_TBBODY_DOUBLE_TAP_TO_SHOW_COLOUR" name="pen_string_handler_show_color_double_tap">Double tap to show colour.</string>
+    <string did="WDS_TTS_TBOPT_TOGGLE_SWITCH" name="pen_string_handler_toggle_switch">Toggle switch</string>
+    <string did="IDS_ACCS_POP_HEADER" name="pen_string_header">Header</string>
+    <string did="IDS_NOTES_TBOPT_HIGHLIGHTER_PEN" name="pen_string_highlighter_pen">Highlighter pen</string>
+    <string did="DREAM_NOTES_OPT_INCREASE_M_SIZE" name="pen_string_increase">Increase</string>
+    <string did="IDS_SMEMO_BODY_INDENT" name="pen_string_indent">Indent</string>
+    <string did="IDS_EMAIL_OPT_ITALIC" name="pen_string_italic">Italic</string>
+    <string did="IDS_VIDEO_OPT_LARGE" name="pen_string_large">Large</string>
+    <string did="IDS_SMEMO_BUTTON_LASSO" name="pen_string_lasso">Lasso</string>
+    <string did="IDS_SMEMO_BODY_LINE_SPACING" name="pen_string_line_spacing">Line spacing</string>
+    <string did="IDS_NOTES_TBOPT_MARKER_PEN" name="pen_string_marker_pen">Marker pen</string>
+    <string did="IDS_PB_BODY_MINUS" name="pen_string_minus">Minus</string>
+    <string did="IDS_SMEMO_BODY_MODULATION_M_EFFECT_ABB_CHN" name="pen_string_modulation">Modulation</string>
+    <string did="IDS_SMEMO_OPT_MOVE_DOWN" name="pen_string_move_down">Move down</string>
+    <string did="DREAM_NOTES_TBOPT_MOVE_HANDLE" name="pen_string_move_handler">Move handle</string>
+    <string did="IDS_SMEMO_OPT_MOVE_LEFT" name="pen_string_move_left">Move left</string>
+    <string did="IDS_SMEMO_OPT_MOVE_RIGHT" name="pen_string_move_right">Move right</string>
+    <string did="IDS_SMEMO_OPT_MOVE_UP" name="pen_string_move_up">Move up</string>
+    <string did="IDS_SMEMO_BODY_NEXT" name="pen_string_next">Next</string>
+    <string name="pen_string_no_pen_history">No pen history.</string>
+    <string did="IDS_SMEMO_BODY_NO_PRESET_PENS" name="pen_string_no_preset">No preset pens.</string>
+    <string did="IDS_ACCS_OPT_NOT_SELECTED_TTS" name="pen_string_not_selected">Not selected</string>
+    <string did="IDS_NOTES_TBOPT_OIL_BRUSH_M_DRAWING" name="pen_string_oil_brush">Oil brush</string>
+    <string did="IDS_NOTES_BODY_OPACITY" name="pen_string_opacity">Opacity</string>
+    <string did="DREAM_NOTES_OPT_DECREASE_M_OPACITY" name="pen_string_opacity_decrease">Decrease</string>
+    <string did="DREAM_NOTES_OPT_INCREASE_M_OPACITY" name="pen_string_opacity_increase">Increase</string>
+    <string did="IDS_SMEMO_OPT_OPAQUE" name="pen_string_opaque">Opaque</string>
+    <string did="IDS_EMAIL_POP_PALETTE_T_TTS" name="pen_string_palette">Palette</string>
+    <string did="IDS_SMEMO_OPT_PARAGRAPH_ABB2" name="pen_string_paragraph">Paragraph</string>
+    <string did="IDS_IME_BODY_PASTED_FROM_CLIPBOARD" name="pen_string_pasted_to_clipboard">Pasted from clipboard.</string>
+    <string did="IDS_NOTES_TBOPT_PEN" name="pen_string_pen">Pen</string>
+    <string did="IDS_SMEMO_BODY_PRESET_PD_T_TTS" name="pen_string_pen_preset">Preset %d</string>
+    <string did="IDS_MEMO_HEADER_PEN_SETTINGS_ABB" name="pen_string_pen_settings">Pen settings</string>
+    <string name="pen_string_pen_tab">Pen tab</string>
+    <string did="IDS_NOTES_TBOPT_PENCIL" name="pen_string_pencil">Pencil</string>
+    <string did="IDS_PB_BODY_PLUS" name="pen_string_plus">Plus</string>
+    <string did="IDS_ST_BODY_MYTHEME_POP_UP" name="pen_string_popup">Pop-up</string>
+    <string did="IDS_SMEMO_HEADER_PRESETS_ABB" name="pen_string_preset">Presets</string>
+    <string name="pen_string_preset_tab">Preset tab</string>
+    <string did="IDS_NOTES_TBOPT_PREVIEW" name="pen_string_preview">Preview</string>
+    <string did="IDS_SMEMO_BODY_PREVIOUS" name="pen_string_previous">Previous</string>
+    <string did="IDS_NOTES_BODY_RADIUS" name="pen_string_radius">Radius</string>
+    <string did="IDS_COM_POP_MAXIMUM_NUMBER_OF_CHARACTERS_HPD_REACHED" name="pen_string_reached_maximum_input">Maximum number of characters (%d) reached.</string>
+    <string did="IDS_VOLTE_BODY_MAXIMUM_NUMBER_OF_PRESET_PENS_HPD_REACHED" name="pen_string_reached_maximum_preset">Maximum number of preset pens(%d) reached.</string>
+    <string did="IDS_NOTES_HEADER_RECENTLY_USED_COLOURS" name="pen_string_recent_color">Recently used colours</string>
+    <string did="IDS_SC_BUTTON_RECTANGLE" name="pen_string_rectangle">Rectangle</string>
+    <string did="IDS_POPSYNC_BUTTON_RESET_ABB" name="pen_string_reset">Reset</string>
+    <string did="IDS_SMEMO_OPT_TAP_AND_DRAG_TO_RESIZE" name="pen_string_resize">Tap and drag to resize</string>
+    <string did="IDS_ST_BODY_SEEK_CONTROL" name="pen_string_seek_control">Seek control</string>
+    <string did="IDS_SSCHOL_BODY_SELECT_A_COLOUR" name="pen_string_select_color">Select a colour</string>
+    <string did="IDS_ACCS_OPT_SELECTED_TTS" name="pen_string_selected">Selected</string>
+    <string did="IDS_NOTES_TBOPT_SELECTION_MODE" name="pen_string_selection_mode">Selection mode</string>
+    <string did="IDS_NOTES_OPT_SETTINGS" name="pen_string_setting">Settings</string>
+    <string did="IDS_NOTES_BODY_SIZE" name="pen_string_size">Size</string>
+    <string did="IDS_VIDEO_OPT_SMALL" name="pen_string_small">Small</string>
+    <string did="IDS_SMEMO_BODY_SPECIAL_M_EFFECT_ABB_CHN" name="pen_string_special">Special</string>
+    <string did="IDS_SMEMO_BODY_SUSTENANCE_M_EFFECT_ABB_CHN" name="pen_string_sustenance">Sustenance</string>
+    <string did="IDS_SMEMO_OPT_SWITCH_TO_FRONT_CAMERA" name="pen_string_switch_to_front_camera">Switch to front camera</string>
+    <string did="IDS_SMEMO_OPT_SWITCH_TO_REAR_CAMERA" name="pen_string_switch_to_rear_camera">Switch to rear camera</string>
+    <string did="IDS_SMEMO_BODY_TAB_P1SD_OF_P2SD_TTS" name="pen_string_tab_selected_tts">Tab %1$d of %2$d</string>
+    <string did="IDS_SMT_POP_TEXT_SETTINGS" name="pen_string_text_settings">Text settings</string>
+    <string did="IDS_SMEMO_OPT_THICK" name="pen_string_thick">Thick</string>
+    <string did="IDS_ST_BODY_THICKNESS" name="pen_string_thickness">Thickness</string>
+    <string did="IDS_SMEMO_OPT_THIN" name="pen_string_thin">Thin</string>
+    <string name="pen_string_title"> Title</string>
+    <string did="IDS_PBD_OPT_TRANSFORM_BACK_TO_ORIGINAL_SHAPE" name="pen_string_transform_back_to_original_shape">Transform back to original shape</string>
+    <string did="IDS_PBD_BODY_TRANSFORM_INTO_AUTO_SHAPE" name="pen_string_transform_into_auto_shape">Transform into auto shape</string>
+    <string did="IDS_ST_MBODY_TRANSPARENCY" name="pen_string_transparency">Transparency</string>
+    <string did="IDS_SMEMO_OPT_TRANSPARENT" name="pen_string_transparent">Transparent</string>
+    <string did="IDS_NOTES_TPOP_SELECT_ERASE_LINE_BY_LINE_TO_ERASE_OVERLAPPING_AND_HEAVY_STROKES" name="pen_string_unable_to_erase_heavy_lines">Select Erase line by line to erase overlapping and heavy strokes.</string>
+    <string did="IDS_EMAIL_OPT_UNDERLINE" name="pen_string_underline">Underline</string>
+    <string name="pen_string_upgrade_notification">Upgrade notification</string>
+    <string name="pen_string_upgrade_recommended">SPen engine update is recommended to user this application. Would you like to go to installation page?\n(Please restart this application after the update is complete.)</string>
+    <string name="pen_string_upgrade_required">SPen engine update is required to use this application properly. Would you like to go to installation page?\n(Please restart this application after the update is complete.)</string>
+    <string did="IDS_NOTES_TBOPT_WATER_COLOUR_BRUSH_M_DRAWING" name="pen_string_water_color_brush">Water colour brush</string>
+    <string name="stms_appgroup">K_DEV_Spen_SPenSDK</string>
+    <string did="IDS_GCTS_OPT_P1SS_BUTTON_TTS" name="string_button_t_tts">%1$s button</string>
+    <string did="IDS_SMEMO_POP_LOADING_ING" name="string_loading_dot_dot_dot">Loading\u2026</string>
+    <string did="IDS_COM_POP_ALREDY_EXISTS" name="string_stroke_already_exists">Already exists.</string>
+    <string did="IDS_COM_POP_COPIED_TO_CLIPBOARD" name="string_stroke_copied_to_clipboard">Copied to clipboard.</string>
+    <string did="IDS_IME_BODY_PASTED_FROM_CLIPBOARD" name="string_stroke_pasted_from_clipboard">Pasted from clipboard.</string>
+    <string did="IDS_NOTES_BUTTON_TO_FRONT_M_MOVE_ABB" name="stroke_string_bring_to_front">To front</string>
+    <string did="IDS_COM_OPT_COPY" name="stroke_string_copy">Copy</string>
+    <string did="IDS_COM_BODY_CUT" name="stroke_string_cut">Cut</string>
+    <string did="IDS_NOTES_BUTTON_DELETE_ABB2" name="stroke_string_delete">Delete</string>
+    <string did="IDS_NOTES_BUTTON_OK_ABB6" name="stroke_string_ok">OK</string>
+    <string did="IDS_COM_BODY_PASTE_ABB" name="stroke_string_paste">Paste</string>
+    <string did="IDS_NOTES_TBOPT_PLAY" name="stroke_string_play">Play</string>
+    <string did="IDS_COM_BODY_SELECT_ALL" name="stroke_string_select_all">Select All</string>
+    <string did="IDS_NOTES_BUTTON_TO_BACK_M_MOVE_ABB" name="stroke_string_send_to_back">To back</string>
+    <string did="IDS_ALM_BODY_AM" name="time_am">AM</string>
+    <string did="IDS_ALM_BODY_PM" name="time_pm">PM</string>
+    <string did="IDS_GSRCH_BODY_TODAY" name="today">Today</string>
+    <string did="IDS_SF_BODY_TOMORROW" name="tomorrow">Tomorrow</string>
+    <string did="IDS_MEMO_BODY_TONIGHT" name="tonight">Tonight</string>
+    <string did="IDS_GCTS_OPT_DIMMED_TTS" name="tts_dimmed">Dimmed</string>
+    <string did="IDS_VR_POP_RECORDING_WILL_BE_STOPPED_SAVE_YOUR_RECORDING_OR_DISCARD_IT_Q_M_VOICE" name="voice_alertdialog_message">Recording will be stopped.\nSave your recording or discard it?</string>
+    <string did="DREAM_ACCS_TBOPT_DISABLED" name="voice_assistant_disabled">Disabled</string>
+    <string did="WDS_WMGR_TBOPT_EDIT_BOX" name="voice_assistant_editbox">Edit Box</string>
+    <string did="DREAM_MARSH_TBBODY_DOUBLE_TAP_TO_EDIT" name="voice_assistant_editbox_double_tab_to_edit">Double tap to edit.</string>
+    <string did="DREAM_HEALTH_TBBODY_EDITING" name="voice_assistant_editbox_editing">Editing</string>
+    <string did="DREAM_BIXVISION_BUTTON_MAP_22" name="voice_assistant_map">Map</string>
+    <string did="DREAM_G360M_TBOPT_SLIDER" name="voice_assistant_slider">Slider</string>
+    <string did="IDS_VR_BUTTON_CANCEL_ABB3" name="voice_cancel">Cancel</string>
+    <string did="IDS_SMEMO_OPT_DELETE" name="voice_delete">Delete</string>
+    <string did="DREAM_NOTES_TPOP_CANT_SAVE_RECORDING_RECORDING_TOO_SHORT" name="voice_error_not_enough_time">Can\'t save recording. Recording too short.</string>
+    <string did="DREAM_NOTES_TPOP_CANT_START_NEW_RECORDING_ALREADY_RECORDING_WITH_ANOTHER_APP" name="voice_error_other_app_is_already_recording">Unable to start new recording. Other application already recording.</string>
+    <string did="IDS_VR_POP_RECORDING_FAILED_M_VOICE" name="voice_error_prepare_failed">Recording failed.</string>
+    <string did="IDS_ST_TPOP_SECURITY_POLICY_PREVENTS_AUDIO_RECORDING" name="voice_error_security_policy_prevents_recording">Security policy prevents audio recording.</string>
+    <string did="DREAM_NOTES_TBOPT_MOVE_HANDLE" name="voice_move_handler">Move handle</string>
+    <string did="IDS_VR_POP_NOT_ENOUGH_MEMORY_DELETE_SOME_ITEMS" name="voice_not_enough_memory_delete_some_items">Not enough memory. Delete some items.</string>
+    <string did="DREAM_NOTES_POP_DISCARD_RECORDING_Q" name="voice_notes_pop_your_recording_will_be_discarded">Discard recording?</string>
+    <string did="IDS_VR_BODY_PAUSE" name="voice_pause">Pause</string>
+    <string did="IDS_VR_OPT_PLAY" name="voice_play">Play</string>
+    <string did="IDS_VR_OPT_RECORD" name="voice_rec">Record</string>
+    <string did="IDS_MEMO_TPOP_RECORDING_SAVED" name="voice_record_saved">Recording saved.</string>
+    <string did="IDS_CALL_POP_THE_VOICE_RECORDING_WILL_BE_SAVED_AUTOMATICALLY_WHEN_YOU_ACCEPT_THE_CALL" name="voice_recording_will_be_saved_automatically_when_you_accept_the_call">The voice recording will be saved automatically when you accept the call.</string>
+    <string did="IDS_VR_SK_STOP_LITE" name="voice_stop">Stop</string>
+    <string did="IDS_VR_BODY_VOICE" name="voice_title_prefix">Voice</string>
+    <string did="IDS_MUSIC_POP_UNABLE_TO_PLAY_DURING_CALL" name="voice_unable_to_play_during_call">Unable to play during call.</string>
+    <string did="IDS_VR_TPOP_UNABLE_TO_PLAY_VOICE_RECORDINGS_WHILE_RECORDING_AUDIO_OR_VIDEO" name="voice_unable_to_play_voice_recording_while_recording">Unable to play voice recordings while recording audio or video.</string>
+    <string did="DREAM_NOTES_TPOP_CANT_RECORD_SOUND_DURING_CALLS" name="voice_warning_call_isactive">Can\'t record sound during calls.</string>
+    <string did="IDS_VR_TPOP_RECORDING_WITH_EXTERNAL_MICROPHONE" name="voice_warning_earphone_plugged">Recording with external microphone.</string>
+    <string did="IDS_VR_TPOP_EXTERNAL_MICROPHONE_WILL_BE_USED_TO_RECORD_AUDIO" name="voice_warning_earphone_plugged_while_recording">External microphone will be used to record audio.</string>
+    <style name="AnimationPopupWindow">
+        <item name="android:windowEnterAnimation">@anim/spen_airview_popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/spen_airview_popup_exit</item>
+    </style>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="BrushPenSettingDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/brush_pen_setting_show_anim</item>
+        <item name="android:windowExitAnimation">@anim/brush_pen_setting_dismiss_anim</item>
+    </style>
+    <style name="ColorPickerDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/brush_pen_setting_show_anim</item>
+        <item name="android:windowExitAnimation">@anim/brush_pen_setting_dismiss_anim</item>
+    </style>
+    <style name="ComposerTextBoxPopupDialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog.Alert">
+    </style>
+</resources>

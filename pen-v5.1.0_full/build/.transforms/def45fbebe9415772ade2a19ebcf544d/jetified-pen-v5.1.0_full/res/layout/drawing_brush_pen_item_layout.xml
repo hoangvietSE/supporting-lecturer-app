@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pen_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom|center_horizontal"
+    android:focusable="true"
+    android:contentDescription="@string/pen_string_brush_settings"
+    android:nextFocusForward="@+id/brush_color_1_1_1">
+
+    <include
+        android:id="@+id/menu_pen1"
+        layout="@layout/drawing_setting_pen_view"
+        android:layout_width="@dimen/drawing_brush_type_button_width"
+        android:layout_height="@dimen/drawing_brush_type_button_height" />
+
+</LinearLayout>

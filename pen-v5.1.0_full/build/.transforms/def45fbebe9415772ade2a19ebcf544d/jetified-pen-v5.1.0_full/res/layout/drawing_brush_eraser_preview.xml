@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/brush_pen_preview_shape"
+    android:contentDescription="@string/pen_string_preview" >
+
+    <View
+        android:id="@+id/drawing_brush_setting_popup_eraser_preview"
+        android:layout_width="@dimen/drawing_brush_preview_eraser_preview_width2"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"/>
+</FrameLayout>
