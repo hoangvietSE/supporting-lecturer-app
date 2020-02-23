@@ -25,12 +25,12 @@ import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
 import com.soict.hoangviet.supportinglecturer.ui.video.VideoActivity;
+import com.soict.hoangviet.supportinglecturer.utils.CommonExtensionUtil;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 import com.soict.hoangviet.supportinglecturer.utils.PermissionUtil;
 import com.soict.hoangviet.supportinglecturer.youtube.EventData;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeNewSingleton;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -220,7 +220,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
                                 JSONObject data = response.getJSONObject();
                                 if (data.has("picture")) {
                                     String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
-                                    Picasso.get().load(profilePicUrl).into(ivAvatar);
+                                    CommonExtensionUtil.loadImageUrl(ivAvatar, profilePicUrl);
                                 }
                                 if (data.has("name")) {
                                     tvName.setText(data.getString("name"));

@@ -3,12 +3,15 @@ package com.soict.hoangviet.supportinglecturer.ui.splash;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Message;
 
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.home.HomeActivity;
 
 import java.lang.ref.WeakReference;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.inject.Inject;
 
@@ -18,6 +21,7 @@ import butterknife.Unbinder;
 public class SplashActivity extends BaseActivity implements SplashView {
     @Inject
     SplashPresenter<SplashView> mPresenter;
+    private Timer timer;
 
     @Override
     protected Unbinder getButterKnifeBinder() {
@@ -27,7 +31,11 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @Override
     protected void initView() {
         onAttachPresenter();
+        initHandler();
         mPresenter.checkNetworkConnection();
+    }
+
+    private void initHandler() {
     }
 
     private void onAttachPresenter() {
@@ -59,7 +67,8 @@ public class SplashActivity extends BaseActivity implements SplashView {
     }
 
     private void goToHomeScreen() {
-        new Handler().postDelayed(new SplashRunnable(this), 1000);
+        timer = new Timer();
+        timer.schedule(new SplashTimerTask(this), 2000);
     }
 
     private void showDialogAlert() {
@@ -71,10 +80,10 @@ public class SplashActivity extends BaseActivity implements SplashView {
         });
     }
 
-    private static class SplashRunnable implements Runnable {
+    private static class SplashTimerTask extends TimerTask {
         private final WeakReference<Activity> activityWeakReference;
 
-        SplashRunnable(Activity activity) {
+        SplashTimerTask(Activity activity) {
             activityWeakReference = new WeakReference<>(activity);
         }
 
@@ -82,8 +91,14 @@ public class SplashActivity extends BaseActivity implements SplashView {
         public void run() {
             Activity activity = activityWeakReference.get();
             activity.startActivity(new Intent(activity, HomeActivity.class));
-            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             activity.finish();
+            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer != null) timer.cancel();
     }
 }

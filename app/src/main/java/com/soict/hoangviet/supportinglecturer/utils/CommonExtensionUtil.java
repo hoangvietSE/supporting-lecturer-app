@@ -40,7 +40,7 @@ public class CommonExtensionUtil {
                 .into(imageView);
     }
 
-    public static void loadImageDrawable(ImageView imageView, String url) {
+    public static void loadImageUrl(ImageView imageView, String url) {
         GlideApp.with(imageView.getContext())
                 .load(url)
                 .into(imageView);
