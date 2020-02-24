@@ -24,9 +24,14 @@ public abstract class BaseFragment extends DaggerFragment implements BaseView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initProgressDialog();
         initView();
         initData();
         initListener();
+    }
+
+    private void initProgressDialog() {
+        mLoadingUtil = LoadingUtil.getInstance(getContext());
     }
 
     @Override

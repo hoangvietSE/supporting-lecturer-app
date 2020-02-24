@@ -139,6 +139,7 @@ dependencies {
 
     implementation 'life.knowledge4:k4l-video-trimmer:1.0'
     implementation project(':pen-v5.1.0_full')
+    implementation project(path: ':hbrecorder')
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'life.knowledge4:k4l-video-trimmer:1.0'
     implementation 'com.obsez.android.lib.filechooser:filechooser:1.1.10'

@@ -2,6 +2,7 @@ package com.soict.hoangviet.supportinglecturer.application;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Fragment;
 
 import com.deploygate.sdk.DeployGate;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
@@ -17,11 +18,14 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import dagger.android.HasFragmentInjector;
 
-public class LecturerApplication extends Application implements HasActivityInjector {
+public class LecturerApplication extends Application implements HasFragmentInjector, HasActivityInjector {
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
+    @Inject
+    DispatchingAndroidInjector<Fragment> mFragmentInjector;
     @Inject
     ISharePreference sharePreference;
 
@@ -62,5 +66,10 @@ public class LecturerApplication extends Application implements HasActivityInjec
     @Override
     public AndroidInjector<Activity> activityInjector() {
         return activityDispatchingAndroidInjector;
+    }
+
+    @Override
+    public AndroidInjector<android.app.Fragment> fragmentInjector() {
+        return mFragmentInjector;
     }
 }

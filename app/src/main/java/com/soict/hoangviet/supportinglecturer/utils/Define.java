@@ -144,6 +144,16 @@ public class Define {
         public static final String RTMP_GOOGLE = "rtmpGoogle";
         public static final String SETTING_ZOOM = "settingZoom";
         public static final String LANGUAGE = "language";
+
+        //Record
+        public static final String RECORD_AUDIO = "key_record_audio";
+        public static final String VIDEO_RESOLUTION = "key_video_resolution";
+        public static final String VIDEO_FPS = "key_video_fps";
+        public static final String VIDEO_BITRATE = "key_video_bitrate";
+        public static final String SHOW_NOTIFICATION = "key_show_notification";
+        public static final String VIDEO_ENCODER = "key_video_encoder";
+        public static final String AUDIO_SOURCE = "key_audio_source";
+        public static final String OUTPUT_FORMAT = "key_output_format";
     }
 
     public static final class RequestCode {

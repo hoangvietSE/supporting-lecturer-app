@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.soict.hoangviet.supportinglecturer.application.LecturerApplication;
 import com.soict.hoangviet.supportinglecturer.di.builder.ActivityBuilder;
+import com.soict.hoangviet.supportinglecturer.di.builder.FragmentBuilder;
 import com.soict.hoangviet.supportinglecturer.di.module.AppModule;
 import com.soict.hoangviet.supportinglecturer.di.module.NetworkModule;
 
@@ -17,6 +18,7 @@ import dagger.android.AndroidInjectionModule;
 @Component(modules = {
         AndroidInjectionModule.class,
         ActivityBuilder.class,
+        FragmentBuilder.class,
         AppModule.class,
         NetworkModule.class})
 public interface AppComponent {

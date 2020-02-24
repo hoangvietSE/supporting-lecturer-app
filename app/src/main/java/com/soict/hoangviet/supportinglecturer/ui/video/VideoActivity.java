@@ -2,6 +2,8 @@ package com.soict.hoangviet.supportinglecturer.ui.video;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +18,8 @@ import com.soict.hoangviet.supportinglecturer.entity.response.VideoResponse;
 import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.edit.EditActivity;
+import com.soict.hoangviet.supportinglecturer.ui.main.MainActivity;
+import com.soict.hoangviet.supportinglecturer.ui.prefences.PreferenceSettingActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 
@@ -136,6 +140,23 @@ public class VideoActivity extends BaseActivity implements VideoView {
             Intent intent = new Intent(VideoActivity.this, TeacherActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            // launch settings activity
+            startActivity(new Intent(VideoActivity.this, PreferenceSettingActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

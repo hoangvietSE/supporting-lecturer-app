@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.hardware.camera2.full" />
 
     <uses-feature
@@ -46,6 +47,7 @@
         <activity android:name=".ui.edit.EditActivity" />
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.language.LanguageActivity" />
+        <activity android:name=".ui.prefences.PreferenceSettingActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
