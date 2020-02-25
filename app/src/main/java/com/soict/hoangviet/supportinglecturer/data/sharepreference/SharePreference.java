@@ -172,4 +172,34 @@ public class SharePreference implements ISharePreference {
     public void setCurrentLanguage(String key, String value) {
         put(Define.PREF_FILE_NAME, key, value);
     }
+
+    @Override
+    public void setString(String key, String value) {
+        put(Define.PREF_FILE_NAME, key, value);
+    }
+
+    @Override
+    public String getString(String key) {
+        return get(Define.PREF_FILE_NAME, key, String.class);
+    }
+
+    @Override
+    public void setInt(String key, int value) {
+        put(Define.PREF_FILE_NAME, key, value);
+    }
+
+    @Override
+    public int getInt(String key) {
+        return get(Define.PREF_FILE_NAME, key, Integer.class);
+    }
+
+    @Override
+    public void setBoolean(String key, boolean value) {
+        put(Define.PREF_FILE_NAME, key, value);
+    }
+
+    @Override
+    public boolean getBoolean(String key) {
+        return get(Define.PREF_FILE_NAME, key, Boolean.class);
+    }
 }

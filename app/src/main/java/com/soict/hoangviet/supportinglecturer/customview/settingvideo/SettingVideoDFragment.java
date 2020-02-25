@@ -28,17 +28,15 @@ import java.util.Calendar;
 public class SettingVideoDFragment extends DialogFragment {
 
     private View view;
-
     private RadioGroup rgQuality;
     private EditText edtName;
     private TextView tvPathName;
     private ImageView ivFolder;
     private Button btnCancel;
     private Button btnDone;
-
     private OnClickSettingVideo mCallback;
 
-    private String pathFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + "/";
+    private String pathFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath();
     private int bitRate, frameRate;
 
     @Override
@@ -110,15 +108,11 @@ public class SettingVideoDFragment extends DialogFragment {
         btnDone.setOnClickListener(view -> {
             dismiss();
             pathFile = pathFile + (edtName.getText().toString().isEmpty() ? Calendar.getInstance().getTimeInMillis() : edtName.getText().toString()) + ".mp4";
-            mCallback.onDone(pathFile, bitRate, frameRate, edtName.getText().toString());
+            mCallback.onDone(pathFile, edtName.getText().toString());
         });
     }
 
-    public void resumeRecord(String pathFile, String name){
-        mCallback.onDone(pathFile, bitRate, frameRate, name);
-    }
-
     public interface OnClickSettingVideo {
-        void onDone(String pathVideo, int bitRate, int frameRate, String originName);
+        void onDone(String pathVideo, String originName);
     }
 }

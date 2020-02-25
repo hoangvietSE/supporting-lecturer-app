@@ -2,7 +2,9 @@ package com.soict.hoangviet.supportinglecturer.ui.prefences;
 
 import android.os.Bundle;
 
-public class PreferenceSettingActivity extends AppCompatPreferenceActivity  {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class PreferenceSettingActivity extends AppCompatActivity {
     private static final String TAG = PreferenceSettingActivity.class.getSimpleName();
 
     @Override
@@ -12,6 +14,4 @@ public class PreferenceSettingActivity extends AppCompatPreferenceActivity  {
         // load settings fragment
         getFragmentManager().beginTransaction().add(android.R.id.content, new PreferencesSettingFragment()).commit();
     }
-
-
 }

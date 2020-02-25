@@ -45,4 +45,16 @@ public interface ISharePreference {
 
     void setCurrentLanguage(String key, String value);
 
+    void setString(String key, String value);
+
+    String getString(String key);
+
+    void setInt(String key, int value);
+
+    int getInt(String key);
+
+    void setBoolean(String key, boolean value);
+
+    boolean getBoolean(String key);
+
 }

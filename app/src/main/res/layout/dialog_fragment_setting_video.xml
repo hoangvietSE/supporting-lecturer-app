@@ -15,7 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_8"
             android:checkedButton="@+id/medium"
-            android:gravity="center|left">
+            android:gravity="center|left"
+            android:visibility="gone">
 
             <RadioButton
                 android:id="@+id/high"

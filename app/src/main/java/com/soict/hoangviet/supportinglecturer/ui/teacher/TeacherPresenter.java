@@ -1,9 +1,11 @@
 package com.soict.hoangviet.supportinglecturer.ui.teacher;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import com.hbisoft.hbrecorder.HBRecorder;
 import com.pedro.rtplibrary.rtmp.RtmpDisplay;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenter;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
@@ -27,7 +29,7 @@ public interface TeacherPresenter<V extends BaseView> extends BasePresenter<V> {
 
     void startStreamVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCode, Intent data);
 
-    void onDoneSettingVideo(String pathVideo, int bitRate, int frameRate, String originName);
+    void onDoneSettingVideo(String pathVideo, String originName);
 
     void startRecordVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCodeTask, Intent dataTask);
 
@@ -43,5 +45,7 @@ public interface TeacherPresenter<V extends BaseView> extends BasePresenter<V> {
 
     void executeStreamVideo(Context context, RtmpDisplay rtmpDisplay, int resultCode, Intent data);
 
-    void executeRecordVideo(Context context, RtmpDisplay rtmpDisplay, int resultCode, Intent data);
+    void executeRecordVideo(Activity context, int resultCode, Intent data, String fileName);
+
+    void baseCcnfig(HBRecorder hbRecorder);
 }

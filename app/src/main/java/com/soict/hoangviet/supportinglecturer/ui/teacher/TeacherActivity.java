@@ -1,12 +1,15 @@
 package com.soict.hoangviet.supportinglecturer.ui.teacher;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.RectF;
+import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +24,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.hbisoft.hbrecorder.HBRecorder;
+import com.hbisoft.hbrecorder.HBRecorderListener;
 import com.obsez.android.lib.filechooser.ChooserDialog;
 import com.pedro.rtplibrary.rtmp.RtmpDisplay;
 import com.samsung.android.sdk.pen.SpenSettingViewInterface;
@@ -57,14 +62,11 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class TeacherActivity extends BaseSamsungSpenSdkActivity implements TeacherView, SettingVideoDFragment.OnClickSettingVideo, ConnectCheckerRtmp, SettingTimeTempBushDFragment.OnClickSettingTime, View.OnTouchListener {
+public class TeacherActivity extends BaseSamsungSpenSdkActivity implements TeacherView, SettingVideoDFragment.OnClickSettingVideo, ConnectCheckerRtmp, SettingTimeTempBushDFragment.OnClickSettingTime, View.OnTouchListener, HBRecorderListener {
     @Inject
     TeacherPresenter<TeacherView> mPresenter;
     private static final String TAG = TeacherActivity.class.getSimpleName();
@@ -123,16 +125,17 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private static final int IS_RECORDING = 1;
     //Check state orientation of output image
     private static final long MIN_TIME_RECORD = 6000L;
-    private boolean isSaveRecord = true;
+    private boolean isSaveRecord = true;// true: đã ấn nút Save, false: khi chưa ấn nút save, đang record
     private ArrayList<String> listRecordsPath = new ArrayList<>();
     private ArrayList<String> listRecordsName = new ArrayList<>();
     private Boolean runningChronometer = false;
     private Long pauseOffset = 0L;
-    private int mScreenDensity;
     private static RtmpDisplay rtmpDisplay;
-    private int recordStatus = 0;
+    private int recordStatus = 0;//0: record đã close, 1: đang record
     private boolean checkSessionRecord = false;
     private boolean isShowCamera = true;
+    //Declare HBRecorder
+    private HBRecorder hbRecorder;
 
 
     @Override
@@ -151,6 +154,11 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         super.initView();
         keepScreenAlwayOn();
         initMedia();
+        baseConfigforHBRecorder();
+    }
+
+    private void baseConfigforHBRecorder() {
+        mPresenter.baseCcnfig(hbRecorder);
     }
 
     @Override
@@ -169,6 +177,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     private void initMedia() {
         rtmpDisplay = getInstanceRtmp();
+        hbRecorder = new HBRecorder(this, this);
     }
 
     private RtmpDisplay getInstanceRtmp() {
@@ -322,7 +331,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
             mPenPageDoc.clearHistory();
             view.setClickable(false);
             mPenSurfaceView.setPageDoc(mPenPageDoc, SpenSurfaceView.PAGE_TRANSITION_EFFECT_RIGHT, SpenSurfaceView.PAGE_TRANSITION_EFFECT_TYPE_SHADOW, 0);
-            tvNumberPage.setText(String.format(getString(R.string.tv_teacher_page_number), mPenNoteDoc.getPageIndexById(mPenPageDoc.getId())));
+//            tvNumberPage.setText(String.format(getString(R.string.tv_teacher_page_number), mPenNoteDoc.getPageIndexById(mPenPageDoc.getId())));
         });
         ibUndo.setOnClickListener(undoRedoOnClickListener);
         ibUndo.setEnabled(mPenPageDoc.isUndoable());
@@ -341,7 +350,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                     Log.v(TAG, "Stopping Recording");
                     ToastUtil.show(this, getString(R.string.teacher_save_pause));
                     stopScreenSharing();
-                    stopCountUpTimer();
                 }
             } else {
                 if (listRecordsName.size() >= 1 && listRecordsPath.size() >= 1) {
@@ -402,12 +410,10 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                     R.string.teacher_save_positive,
                     (dialogInterface, postion) -> {
                         normalSave();
-                        EventBus.getDefault().postSticky(new RecordSuccessEvent());
                         finish();
                     },
                     (dialogInterface, postion) -> {
                         normalSave();
-                        EventBus.getDefault().postSticky(new RecordSuccessEvent());
                         startActivity(new Intent(this, TeacherActivity.class));
                         finish();
                     }
@@ -417,18 +423,15 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     private void normalSave() {
         closeSettingView();
+        isSaveRecord = true;
+        checkSessionRecord = false;
 //                    Toast.makeText(TeacherActivity.this, "Video is saved", Toast.LENGTH_SHORT).show();
         Log.v(TAG, "Stopping Recording");
         stopScreenSharing();
-        if (checkSessionRecord == true && listRecordsPath.size() >= 2) {
-            RecordUtil.getInstance().appendVideo(listRecordsPath, listRecordsName);
-        }
-        clearRecord();
     }
 
     private void clearRecord() {
-        recordStatus = 0;
-        checkSessionRecord = false;
+        recordStatus = IS_CLOSED_RECORD;
         listRecordsName.clear();
         listRecordsPath.clear();
         showListVideo();
@@ -445,10 +448,10 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     }
 
     @Override
-    public void onDone(String pathVideo, int bitRate, int frameRate, String originName) {
+    public void onDone(String pathVideo, String originName) {
         checkSessionRecord = true;
         recordStatus = IS_RECORDING;
-        mPresenter.onDoneSettingVideo(pathVideo, bitRate, frameRate, originName);
+        mPresenter.onDoneSettingVideo(pathVideo, originName);
     }
 
     @Override
@@ -521,7 +524,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     @Override
     public void executeRecordVideo(int resultCode, Intent data) {
-        mPresenter.executeRecordVideo(TeacherActivity.this, rtmpDisplay, resultCode, data);
+        mPresenter.executeRecordVideo(TeacherActivity.this, resultCode, data, listRecordsName.get(listRecordsName.size() - 1));
     }
 
     @Override
@@ -532,7 +535,9 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         if (isLogin) {
             startActivityForResult(rtmpDisplay.sendIntent(), REQUEST_CODE_STREAM);
         } else {
-            startActivityForResult(rtmpDisplay.sendIntent(), REQUEST_CODE_RECORD);
+            MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+            Intent permissionIntent = mediaProjectionManager != null ? mediaProjectionManager.createScreenCaptureIntent() : null;
+            startActivityForResult(permissionIntent, REQUEST_CODE_RECORD);
         }
     }
 
@@ -651,8 +656,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     private void stopScreenSharing() {
         Log.i(TAG, "MediaProjection Stopped");
-        isSaveRecord = true;
-        mPresenter.stopScreenSharing(rtmpDisplay);
+        hbRecorder.stopScreenRecording();
+//        mPresenter.stopScreenSharing(rtmpDisplay);
     }
 
     private void startCountUpTimer() {
@@ -689,6 +694,34 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
             }
         }
     };
+
+    @Override
+    public void HBRecorderOnComplete() {
+        if (recordStatus == IS_RECORDING) {
+            if (System.currentTimeMillis() - onTimeRecord < MIN_TIME_RECORD) {
+                showCautionDialog(getResources().getString(R.string.teacher_min_time_record_error), "", liveDialog -> {
+                    liveDialog.dismiss();
+                });
+            } else {
+                recordStatus = IS_CLOSED_RECORD;
+                closeSettingView();
+                Log.v(TAG, "Stopping Recording");
+                ToastUtil.show(this, getString(R.string.teacher_save_pause));
+            }
+        }
+        setImageRecordStop();
+        stopCountUpTimer();
+        if (isSaveRecord == true && listRecordsPath.size() >= 2) {
+            RecordUtil.getInstance().appendVideo(listRecordsPath, listRecordsName);
+            clearRecord();
+        }
+        EventBus.getDefault().postSticky(new RecordSuccessEvent());
+    }
+
+    @Override
+    public void HBRecorderOnError(int errorCode, String reason) {
+
+    }
 
     private class SlowAsyncTask extends AsyncTask<FileResponse, Void, Void> {
 

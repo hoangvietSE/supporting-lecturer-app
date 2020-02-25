@@ -75,6 +75,15 @@
     <string name="title_record_audio">"Ghi âm "</string>
     <string name="summary_notification">Thông báo nên được hiển thị</string>
     <string name="summary_record_audio">Âm thanh nên được ghi lại</string>
+    <string name="teacher_notification_title">Đang quay bài giảng</string>
+    <string name="teacher_notification_des">Kéo xuống để dừng quay bài giảng</string>
+    <string name="title_audio">Cấu hình âm thanh</string>
+    <string name="title_video">Cấu hình bài giảng</string>
+    <string name="title_audio_source">Nguồn âm thanh</string>
+    <string name="title_video_encoder">Mã hóa video</string>
+    <string name="title_video_frame_rate">Tỉ lệ khung hình</string>
+    <string name="title_video_output_format">Định dạng</string>
+    <string name="title_more">Thêm</string>
 
     <string name="key_record_audio">key_record_audio</string>
     <string name="key_video_resolution">key_video_resolution</string>
@@ -85,5 +94,6 @@
     <string name="key_audio_source">key_audio_source</string>
     <string name="key_output_format">key_output_format</string>
     <string name="action_settings">Cài đặt bài giảng</string>
+
 
 </resources>

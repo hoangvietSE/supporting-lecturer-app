@@ -65,4 +65,13 @@
     <string name="key_video_encoder">key_video_encoder</string>
     <string name="key_audio_source">key_audio_source</string>
     <string name="key_output_format">key_output_format</string>
+    <string name="teacher_notification_des">Recording your screen</string>
+    <string name="teacher_notification_title">Drag down to stop the recording</string>
+    <string name="title_audio">Audio Configuration</string>
+    <string name="title_audio_source">Audio Source</string>
+    <string name="title_more">More</string>
+    <string name="title_video">Video Configuration</string>
+    <string name="title_video_encoder">Video Encoder</string>
+    <string name="title_video_frame_rate">Frame Rate</string>
+    <string name="title_video_output_format">Output Format</string>
 </resources>
