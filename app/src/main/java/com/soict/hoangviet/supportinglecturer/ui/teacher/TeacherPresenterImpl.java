@@ -133,13 +133,14 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
 
     @Override
     public void startStreamVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCode, Intent data) {
-//        if (getmSharePreference().getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
-//            // TODO RTMP FACEBOOK
-//            if (rtmpDisplay.prepareAudio() && rtmpDisplay.prepareVideo(DISPLAY_WIDTH, DISPLAY_HEIGHT, frameRate, bitRate, orientation, mScreenDensity)) {
-//                rtmpDisplay.setIntentResult(resultCode, data);
-//                rtmpDisplay.startStream(getmSharePreference().getRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK));
-//            }
-//        } else {
+        if (getmSharePreference().getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
+            // TODO RTMP FACEBOOK
+            if (rtmpDisplay.prepareAudio() && rtmpDisplay.prepareVideo(DISPLAY_WIDTH, DISPLAY_HEIGHT, 60, 4000000, orientation, mScreenDensity)) {
+                rtmpDisplay.setIntentResult(resultCode, data);
+                rtmpDisplay.startStream(getmSharePreference().getRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK));
+            }
+        }
+//        else {
 //            // TODO RTMP YOUTUBE
 //            if (rtmpDisplay.prepareAudio() && rtmpDisplay.prepareVideo(DISPLAY_WIDTH, DISPLAY_HEIGHT, frameRate, bitRate, orientation, mScreenDensity)) {
 //                rtmpDisplay.setIntentResult(resultCode, data);
@@ -153,12 +154,8 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
     public void onDoneSettingVideo(String pathVideo, String originName) {
         this.pathVideo = pathVideo;
         hbRecorder.enableCustomSettings();
+        getView().startRtmpDisplay(false, originName);
 //        customSettings();
-        if (getmSharePreference().getLoginStatus(Define.KeyPreference.IS_LOGINED)) {
-            getView().startRtmpDisplay(true, originName);
-        } else {
-            getView().startRtmpDisplay(false, originName);
-        }
     }
 
     private void customSettings() {
@@ -353,11 +350,7 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
     @Override
     public void onResumeRecord(String path, String name) {
         this.pathVideo = path;
-        if (getmSharePreference().getLoginStatus(Define.KeyPreference.IS_LOGINED)) {
-            getView().startRtmpDisplay(true, name);
-        } else {
-            getView().startRtmpDisplay(false, name);
-        }
+        getView().startRtmpDisplay(false, name);
     }
 
     @Override
@@ -416,7 +409,7 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
-                    getView().preExecuteVideo();
+//                    getView().preExecuteVideo();
                 })
                 .doFinally(() -> {
                     getView().hideLoading();
@@ -424,11 +417,11 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
                 .subscribe(
                         result -> {
                             if (true) {
-                                getView().postExecuteStreamVideo();
+//                                getView().postExecuteStreamVideo();
                             }
                         },
                         throwable -> {
-
+                            handleFailure(throwable);
                         }
                 );
     }
@@ -439,16 +432,6 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
         hbRecorder.setFileName(fileName);
         hbRecorder.startScreenRecording(data, resultCode, context);
         Observable.fromCallable(() -> {
-            int currentOrientation = context.getResources().getConfiguration().orientation;
-            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-            } else {
-                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-            }
-            int rotation = ((TeacherActivity) context).getWindowManager().getDefaultDisplay().getRotation();
-            int orientation = ORIENTATIONS.get(rotation + 90);
-            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-            int mScreenDensity = (int) (metrics.density * 160f);
             return true;
         })
                 .subscribeOn(Schedulers.io())

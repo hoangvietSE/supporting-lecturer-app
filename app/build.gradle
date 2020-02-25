@@ -71,7 +71,7 @@ android {
         }
         release {
             signingConfig signingConfigs.release
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '"https://v2.convertapi.com/convert/"'
             buildConfigField("String", "API_KEY", "\"L9LbnJA0icf9EoHB\"")

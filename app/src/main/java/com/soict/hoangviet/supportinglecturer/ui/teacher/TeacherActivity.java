@@ -9,7 +9,6 @@ import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
@@ -117,6 +116,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     RelativeLayout rlCamera;
     private int mToolType = SpenSurfaceView.TOOL_SPEN;
     private long onTimeRecord = -1;
+    public static final String EXTRA_LIVESTREAM = "extra_livestream";
     private static final int REQUEST_CODE_SELECT_IMAGE_BACKGROUND = 99;
     private static final int REQUEST_CODE_SELECT_IMAGE = 98;
     private static final int REQUEST_CODE_RECORD = 94;
@@ -155,6 +155,14 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         keepScreenAlwayOn();
         initMedia();
         baseConfigforHBRecorder();
+        getDataIntent();
+    }
+
+    private void getDataIntent() {
+        boolean liveFacebook = getIntent().getBooleanExtra(EXTRA_LIVESTREAM, false);
+        if (liveFacebook) {
+            startActivityForResult(rtmpDisplay.sendIntent(), REQUEST_CODE_STREAM);
+        }
     }
 
     private void baseConfigforHBRecorder() {
@@ -425,7 +433,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         closeSettingView();
         isSaveRecord = true;
         checkSessionRecord = false;
-//                    Toast.makeText(TeacherActivity.this, "Video is saved", Toast.LENGTH_SHORT).show();
         Log.v(TAG, "Stopping Recording");
         stopScreenSharing();
     }
@@ -656,7 +663,17 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     private void stopScreenSharing() {
         Log.i(TAG, "MediaProjection Stopped");
-        hbRecorder.stopScreenRecording();
+        if (hbRecorder.isBusyRecording()) {
+            hbRecorder.stopScreenRecording();
+        } else {
+            setImageRecordStop();
+            stopCountUpTimer();
+            if (isSaveRecord == true && listRecordsPath.size() >= 2) {
+                RecordUtil.getInstance().appendVideo(listRecordsPath, listRecordsName);
+                clearRecord();
+            }
+            EventBus.getDefault().postSticky(new RecordSuccessEvent());
+        }
 //        mPresenter.stopScreenSharing(rtmpDisplay);
     }
 
@@ -720,7 +737,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
     @Override
     public void HBRecorderOnError(int errorCode, String reason) {
-
+        ToastUtil.show(this, getString(R.string.error_try_later));
     }
 
     private class SlowAsyncTask extends AsyncTask<FileResponse, Void, Void> {
@@ -748,13 +765,11 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
         @Override
         protected void onPreExecute() {
-//            super.onPreExecute();
             showLoading();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
             hideLoading();
             mPenPageDoc = mPenNoteDoc.getPage(0);
             mPenSurfaceView.setPageDoc(mPenPageDoc, true);

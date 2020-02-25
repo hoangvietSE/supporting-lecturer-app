@@ -8,6 +8,7 @@ import android.content.Intent;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.soict.hoangviet.supportinglecturer.R;
+import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
@@ -22,10 +23,12 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> implements HomePresenter<V> {
+    private Repository repository;
 
     @Inject
-    public HomePresenterImpl(Context context, ISharePreference mSharePreference, CompositeDisposable mCompositeDisposable) {
+    public HomePresenterImpl(Context context, Repository repository, ISharePreference mSharePreference, CompositeDisposable mCompositeDisposable) {
         super(context, mSharePreference, mCompositeDisposable);
+        this.repository = repository;
     }
 
     @Override
@@ -83,5 +86,29 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
         getmSharePreference().setLoginStatusFromGoogle(Define.KeyPreference.LOGIN_FROM_GOOGLE, false);
         getmSharePreference().setAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME, "");
         getmSharePreference().setRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE, "");
+    }
+
+    @Override
+    public void getRtmpFacebookLive() {
+        getmCompositeDisposable().add(
+                repository.getRtmpFacebookLive("LIVE_NOW", AccessToken.getCurrentAccessToken().getToken())
+                        .doOnSubscribe(disposable -> {
+                            getView().showLoading();
+                        })
+                        .doFinally(() -> {
+                            getView().hideLoading();
+                        })
+                        .subscribe(
+                                response -> {
+                                    if (response.getStreamUrl() != null) {
+                                        getmSharePreference().setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, response.getStreamUrl());
+                                        getView().goToTeacherScreenLiveStream();
+                                    }
+                                },
+                                throwable -> {
+                                    handleFailure(throwable);
+                                }
+                        )
+        );
     }
 }

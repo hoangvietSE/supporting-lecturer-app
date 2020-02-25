@@ -6,4 +6,6 @@ public interface HomeView extends BaseView {
     void goToLoginScreen();
 
     void showConfirmLogout();
+
+    void goToTeacherScreenLiveStream();
 }

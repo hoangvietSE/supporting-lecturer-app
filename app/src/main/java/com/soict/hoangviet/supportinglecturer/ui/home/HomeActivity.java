@@ -32,7 +32,6 @@ import com.soict.hoangviet.supportinglecturer.youtube.EventData;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeNewSingleton;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -130,27 +129,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
                         createLiveEventTask.execute(mSharePreference.getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME));
                     } else {
                         if (!mSharePreference.getUserId(Define.KeyPreference.USER_ID).isEmpty()) {
-                            showLoading();
-                            new GraphRequest(
-                                    AccessToken.getCurrentAccessToken(),
-                                    "/" + mSharePreference.getUserId(Define.KeyPreference.USER_ID) + "/live_videos",
-                                    null,
-                                    HttpMethod.POST,
-                                    responseStream -> {
-                                        hideLoading();
-                                        Log.d(TAG, "onCompleted: " + responseStream);
-                                        try {
-                                            JSONObject dataStream = responseStream.getJSONObject();
-                                            if (dataStream.has("stream_url")) {
-                                                mSharePreference.setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, dataStream.getString("stream_url"));
-                                                Intent intent = new Intent(HomeActivity.this, TeacherActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                            ).executeAsync();
+                            mPresenter.getRtmpFacebookLive();
                         } else {
                             getUserProfile();
                         }
@@ -278,6 +257,13 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
             mSharePreference.setLoginStatus(Define.KeyPreference.IS_LOGINED, false);
             changeUI(false);
         });
+    }
+
+    @Override
+    public void goToTeacherScreenLiveStream() {
+        Intent intent = new Intent(HomeActivity.this, TeacherActivity.class);
+        intent.putExtra(TeacherActivity.EXTRA_LIVESTREAM, true);
+        startActivity(intent);
     }
 
     private class CreateLiveEventTask extends AsyncTask<String, Void, EventData> {
