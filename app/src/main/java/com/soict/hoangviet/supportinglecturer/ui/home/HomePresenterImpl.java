@@ -4,12 +4,16 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
 import com.facebook.login.LoginManager;
+import com.google.gson.Gson;
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
+import com.soict.hoangviet.supportinglecturer.entity.response.FacebookResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
 import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
@@ -110,5 +114,23 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
                                 }
                         )
         );
+    }
+
+    @Override
+    public void getInfoFacebook() {
+        //OnCompleted is invoked once the GraphRequest is successful
+        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), (object, response) -> {
+            try {
+                FacebookResponse facebookResponse = new Gson().fromJson(object.toString(), FacebookResponse.class);
+                getView().showInfoFacebook(facebookResponse);
+            } catch (Exception e) {
+            }
+        });
+        // We set parameters to the GraphRequest using a Bundle.
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,picture.width(163)");
+        request.setParameters(parameters);
+        // Initiate the GraphRequest
+        request.executeAsync();
     }
 }

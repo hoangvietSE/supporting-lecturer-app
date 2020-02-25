@@ -18,4 +18,6 @@ public interface HomePresenter<V extends BaseView> extends BasePresenter<V> {
     void logoutGoogle();
 
     void getRtmpFacebookLive();
+
+    void getInfoFacebook();
 }

@@ -97,7 +97,6 @@ public class DeviceUtil {
     }
 
     public static void transformImage(Activity activity, TextureView textureView, int width, int height) {
-
         if (textureView == null) {
             return;
         } else try {
@@ -120,7 +119,6 @@ public class DeviceUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static String getRealPathFromURI(Context context, Uri contentURI) {

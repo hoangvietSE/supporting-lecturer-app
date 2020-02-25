@@ -1,5 +1,6 @@
 package com.soict.hoangviet.supportinglecturer.ui.home;
 
+import com.soict.hoangviet.supportinglecturer.entity.response.FacebookResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
 
 public interface HomeView extends BaseView {
@@ -8,4 +9,6 @@ public interface HomeView extends BaseView {
     void showConfirmLogout();
 
     void goToTeacherScreenLiveStream();
+
+    void showInfoFacebook(FacebookResponse facebookResponse);
 }

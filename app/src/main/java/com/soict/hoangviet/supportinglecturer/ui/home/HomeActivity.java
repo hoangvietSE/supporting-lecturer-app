@@ -21,6 +21,7 @@ import com.google.api.services.youtube.YouTube;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
+import com.soict.hoangviet.supportinglecturer.entity.response.FacebookResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
@@ -128,11 +129,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
                         CreateLiveEventTask createLiveEventTask = new CreateLiveEventTask();
                         createLiveEventTask.execute(mSharePreference.getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME));
                     } else {
-                        if (!mSharePreference.getUserId(Define.KeyPreference.USER_ID).isEmpty()) {
-                            mPresenter.getRtmpFacebookLive();
-                        } else {
-                            getUserProfile();
-                        }
+                        mPresenter.getRtmpFacebookLive();
                     }
                 }
                 break;
@@ -188,50 +185,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
 
     private void getUserProfile() {
         if (mSharePreference.getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
-            Bundle params = new Bundle();
-            params.putString("fields", "id,name,cover,picture.type(large)");
-            showLoading();
-            new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
-                    response -> {
-                        hideLoading();
-                        if (response != null) {
-                            try {
-                                JSONObject data = response.getJSONObject();
-                                if (data.has("picture")) {
-                                    String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
-                                    CommonExtensionUtil.loadImageUrl(ivAvatar, profilePicUrl);
-                                }
-                                if (data.has("name")) {
-                                    tvName.setText(data.getString("name"));
-                                }
-                                if (data.has("id")) {
-                                    mSharePreference.setUserId(Define.KeyPreference.USER_ID, data.getString("id"));
-                                    new GraphRequest(
-                                            AccessToken.getCurrentAccessToken(),
-                                            "/" + data.getString("id") + "/live_videos",
-                                            null,
-                                            HttpMethod.POST,
-                                            responseStream -> {
-                                                Log.d(TAG, "onCompleted: " + responseStream);
-                                                try {
-                                                    JSONObject dataStream = responseStream.getJSONObject();
-                                                    if (dataStream != null) {
-                                                        if (dataStream.has("stream_url")) {
-                                                            mSharePreference.setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, dataStream.getString("stream_url"));
-                                                        }
-                                                    }
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                    ).executeAsync();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).executeAsync();
-
+            mPresenter.getInfoFacebook();
         } else {
             if (!mSharePreference.getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME).isEmpty()) {
                 tvName.setText(mSharePreference.getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME));
@@ -264,6 +218,13 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         Intent intent = new Intent(HomeActivity.this, TeacherActivity.class);
         intent.putExtra(TeacherActivity.EXTRA_LIVESTREAM, true);
         startActivity(intent);
+    }
+
+    @Override
+    public void showInfoFacebook(FacebookResponse facebookResponse) {
+        tvName.setText(facebookResponse.getName());
+        CommonExtensionUtil.loadImageUrl(ivAvatar, facebookResponse.getPicture().getData().getUrl());
+        mSharePreference.setUserId(Define.KeyPreference.USER_ID, facebookResponse.getId());
     }
 
     private class CreateLiveEventTask extends AsyncTask<String, Void, EventData> {

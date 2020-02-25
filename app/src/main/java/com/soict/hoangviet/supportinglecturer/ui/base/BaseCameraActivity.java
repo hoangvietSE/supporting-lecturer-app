@@ -137,6 +137,7 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
             texture.setDefaultBufferSize(imageDimension.getWidth(), imageDimension.getHeight());
             Surface surface = new Surface(texture);
             captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+//            captureRequestBuilder.set(CaptureRequest.CONTROL_EFFECT_MODE, CaptureRequest.CONTROL_EFFECT_MODE_SEPIA);
             captureRequestBuilder.addTarget(surface);
             cameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback() {
                 @Override
@@ -248,7 +249,7 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
                 newX = motionEvent.getRawX() + dX;
                 newY = motionEvent.getRawY() + dY;
                 // check if the view out of screen
-                if ((newX <= 0 || newX >= screenWidth-view.getWidth()) || (newY <= 0 || newY >= screenHight-view.getHeight())) {
+                if ((newX <= 0 || newX >= screenWidth - view.getWidth()) || (newY <= 0 || newY >= screenHight - view.getHeight())) {
                     lastAction = MotionEvent.ACTION_MOVE;
                     break;
                 }
@@ -258,7 +259,7 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
                 break;
             case MotionEvent.ACTION_UP:
                 if (lastAction == MotionEvent.ACTION_DOWN)
-                break;
+                    break;
             default:
                 return false;
         }
