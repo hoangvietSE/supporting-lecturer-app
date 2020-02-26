@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
     android:orientation="horizontal">
 
     <RelativeLayout
@@ -18,11 +17,16 @@
             android:src="@mipmap/ic_launcher"
             android:visibility="gone" />
 
+        <include
+            android:visibility="gone"
+            android:id="@+id/cam_loading"
+            layout="@layout/dialog_loading" />
+
         <com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView
             android:id="@+id/textureView"
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:layout_centerInParent="true" />
+            android:layout_centerVertical="true" />
 
     </RelativeLayout>
 
@@ -266,7 +270,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/llMenuMore"
             android:layout_gravity="top|start"
-
             android:scaleX="0.6"
             android:scaleY="0.6"
             android:src="@drawable/ic_top_down" />
@@ -281,6 +284,5 @@
             android:scaleX="0.6"
             android:scaleY="0.6"
             android:src="@drawable/ic_left_right" />
-
     </RelativeLayout>
 </LinearLayout>

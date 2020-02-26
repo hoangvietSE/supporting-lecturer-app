@@ -1,6 +1,7 @@
 package com.soict.hoangviet.supportinglecturer.ui.base;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -15,14 +16,15 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Size;
-import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import com.soict.hoangviet.supportinglecturer.R;
@@ -30,13 +32,25 @@ import com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView;
 import com.soict.hoangviet.supportinglecturer.customview.SonnyJackDragView;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 
-
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-public abstract class BaseCameraActivity extends BaseActivity implements View.OnTouchListener {
+public abstract class BaseCameraActivity extends BaseActivity {
+    @BindView(R.id.textureView)
     protected AutoFitTextureView textureView;
+    @BindView(R.id.drawView)
+    protected RelativeLayout drawView;
+    @Nullable
+    @BindView(R.id.cam_loading)
+    protected RelativeLayout camLoading;
+    @Nullable
+    @BindView(R.id.rl_camera)
+    protected RelativeLayout rlCamera;
     private SonnyJackDragView mSonnyJackDragView;
     private CameraDevice.StateCallback stateCallback;
     private CameraDevice cameraDevice;
@@ -62,25 +76,24 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
     protected void initView() {
         initStateCallback();
         initTextureListener();
-        initOnTouch();
     }
 
     @Override
     protected void initListener() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             textureView.setOnClickListener(view -> {
-                if (effect == 12) {
-                    effect = 0;
-                }
-                captureRequestBuilder.set(CaptureRequest.CONTROL_SCENE_MODE, effect++);
-                try {
-                    cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
-                } catch (CameraAccessException e) {
-                    e.printStackTrace();
-                }
+//                if (effect == 12) {
+//                    effect = 0;
+//                }
+//                captureRequestBuilder.set(CaptureRequest.CONTROL_EFFECT_MODE, effect++);
+//                try {
+//                    cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
+//                } catch (CameraAccessException e) {
+//                    e.printStackTrace();
+//                }
             });
         } else {
-//            textureView.setOnTouchListener(this);
+            initOnTouch();
         }
     }
 
@@ -90,7 +103,6 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
     }
 
     private void initOnTouch() {
-        textureView = new AutoFitTextureView(this);
         textureView.setOnClickListener(view -> {
 
         });
@@ -98,8 +110,6 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
                 .setActivity(this)
                 .setNeedNearEdge(true)
                 .setView(textureView)
-                .setWidth(DeviceUtil.convertDpToPx(this,180))
-                .setHeight(DeviceUtil.convertDpToPx(this,230))
                 .build();
     }
 
@@ -180,7 +190,6 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
     private void updatePreview() {
         if (cameraDevice == null)
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-        captureRequestBuilder.set(CaptureRequest.CONTROL_EFFECT_MODE, CaptureRequest.CONTROL_MODE_AUTO);
         try {
             cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
         } catch (CameraAccessException e) {
@@ -256,33 +265,54 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
         }
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        float newX, newY;
-        switch (motionEvent.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                dX = view.getX() - motionEvent.getRawX();
-                dY = view.getY() - motionEvent.getRawY();
-                lastAction = MotionEvent.ACTION_DOWN;
-                break;
-            case MotionEvent.ACTION_MOVE:
-                newX = motionEvent.getRawX() + dX;
-                newY = motionEvent.getRawY() + dY;
-                // check if the view out of screen
-                if ((newX <= 0 || newX >= screenWidth - view.getWidth()) || (newY <= 0 || newY >= screenHight - view.getHeight())) {
-                    lastAction = MotionEvent.ACTION_MOVE;
-                    break;
-                }
-                view.setX(newX);
-                view.setY(newY);
-                lastAction = MotionEvent.ACTION_MOVE;
-                break;
-            case MotionEvent.ACTION_UP:
-                if (lastAction == MotionEvent.ACTION_DOWN)
-                    break;
-            default:
-                return false;
+    protected void showTextureViewSmall() {
+        RelativeLayout.LayoutParams layoutParams = createLayoutParams(
+                DeviceUtil.convertDpToPx(this, 180),
+                DeviceUtil.convertDpToPx(this, 230)
+        );
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        removeViewParent(textureView);
+        drawView.addView(textureView, layoutParams);
+        mSonnyJackDragView = new SonnyJackDragView.Builder()
+                .setActivity(this)
+                .setNeedNearEdge(true)
+                .setView(textureView)
+                .build();
+    }
+
+    @SuppressLint("CheckResult")
+    protected void showTextureViewBig() {
+        RelativeLayout.LayoutParams layoutParams = createLayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                DeviceUtil.convertDpToPx(this, 450)
+        );
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        textureView.setOnTouchListener(null);
+        removeViewParent(textureView);
+        Completable.timer(400, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    camLoading.setVisibility(View.VISIBLE);
+                })
+                .doFinally(()->{
+                    camLoading.setVisibility(View.GONE);
+                })
+                .subscribe(() -> {
+                    rlCamera.addView(textureView, layoutParams);
+                });
+    }
+
+    private RelativeLayout.LayoutParams createLayoutParams(int width, int height) {
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width, height);
+        return layoutParams;
+    }
+
+    private void removeViewParent(AutoFitTextureView view) {
+        if (view.getParent() != null) {
+            ((RelativeLayout) view.getParent()).endViewTransition(view);
+            ((RelativeLayout) view.getParent()).removeView(view);
         }
-        return true;
     }
 }

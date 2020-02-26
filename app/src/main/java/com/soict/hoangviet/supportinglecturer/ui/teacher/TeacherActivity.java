@@ -65,7 +65,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class TeacherActivity extends BaseSamsungSpenSdkActivity implements TeacherView, SettingVideoDFragment.OnClickSettingVideo, ConnectCheckerRtmp, SettingTimeTempBushDFragment.OnClickSettingTime, View.OnTouchListener, HBRecorderListener {
+public class TeacherActivity extends BaseSamsungSpenSdkActivity implements TeacherView, SettingVideoDFragment.OnClickSettingVideo, ConnectCheckerRtmp, SettingTimeTempBushDFragment.OnClickSettingTime, HBRecorderListener {
     @Inject
     TeacherPresenter<TeacherView> mPresenter;
     private static final String TAG = TeacherActivity.class.getSimpleName();
@@ -101,8 +101,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     LinearLayout llMenuMore;
     @BindView(R.id.mfa_top_down)
     MovableFloatingActionButton mfaTopDown;
-    @BindView(R.id.drawView)
-    RelativeLayout drawView;
     @BindView(R.id.simpleChronometer)
     Chronometer chronometer;
     @BindView(R.id.imv_setting)
@@ -111,9 +109,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     @Nullable
     @BindView(R.id.mfa_left_right)
     MovableFloatingActionButton mfaLeftRight;
-    @Nullable
-    @BindView(R.id.rl_camera)
-    RelativeLayout rlCamera;
     private int mToolType = SpenSurfaceView.TOOL_SPEN;
     private long onTimeRecord = -1;
     public static final String EXTRA_LIVESTREAM = "extra_livestream";
@@ -397,9 +392,11 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
             mfaLeftRight.setOnClickListener(view -> {
                 if (rlCamera.getVisibility() == View.VISIBLE) {
                     rlCamera.setVisibility(View.GONE);
+                    showTextureViewSmall();
                     isShowCamera = false;
                 } else {
                     rlCamera.setVisibility(View.VISIBLE);
+                    showTextureViewBig();
                     isShowCamera = true;
                 }
             });

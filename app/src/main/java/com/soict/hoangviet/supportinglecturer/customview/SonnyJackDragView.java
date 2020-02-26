@@ -11,6 +11,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+
+import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 
 import java.lang.reflect.Field;
 
@@ -87,11 +90,11 @@ public class SonnyJackDragView implements View.OnTouchListener {
             }
         }
 
-        int left = mBuilder.needNearEdge ? 0 : mBuilder.defaultLeft;
-        FrameLayout.LayoutParams layoutParams = createLayoutParams(left, mStatusBarHeight + mBuilder.defaultTop, 0, 0);
-        layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
-        FrameLayout rootLayout = (FrameLayout) getActivity().getWindow().getDecorView();
-        rootLayout.addView(getDragView(), layoutParams);
+//        int left = mBuilder.needNearEdge ? 0 : mBuilder.defaultLeft;
+//        FrameLayout.LayoutParams layoutParams = createLayoutParams(left, mStatusBarHeight + mBuilder.defaultTop, 0, 0);
+//        layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+//        FrameLayout rootLayout = (FrameLayout) getActivity().getWindow().getDecorView();
+//        rootLayout.addView(getDragView(), layoutParams);
         getDragView().setOnTouchListener(this);
     }
 
@@ -177,26 +180,23 @@ public class SonnyJackDragView implements View.OnTouchListener {
 //        valueAnimator.setDuration(1000);
 //        valueAnimator.setRepeatCount(0);
 //        valueAnimator.setInterpolator(new BounceInterpolator());
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int left = (int) animation.getAnimatedValue();
-                getDragView().setLayoutParams(createLayoutParams(left, getDragView().getTop(), 0, 0));
-            }
+        valueAnimator.addUpdateListener(animation -> {
+            int left1 = (int) animation.getAnimatedValue();
+            getDragView().setLayoutParams(createLayoutParams(left1, getDragView().getTop(), 0, 0));
         });
         valueAnimator.start();
     }
 
-    private FrameLayout.LayoutParams createLayoutParams(int left, int top, int right, int bottom) {
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(mBuilder.width, mBuilder.height);
+    private RelativeLayout.LayoutParams createLayoutParams(int left, int top, int right, int bottom) {
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(mBuilder.width, mBuilder.height);
         layoutParams.setMargins(left, top, right, bottom);
         return layoutParams;
     }
 
     public static class Builder {
         private Activity activity;
-        private int width = FrameLayout.LayoutParams.WRAP_CONTENT;
-        private int height = FrameLayout.LayoutParams.WRAP_CONTENT;
+        private int width = WindowManager.LayoutParams.WRAP_CONTENT;
+        private int height = WindowManager.LayoutParams.WRAP_CONTENT;
         private int defaultTop = 0;
         private int defaultLeft = 0;
         private boolean needNearEdge = false;
@@ -204,6 +204,8 @@ public class SonnyJackDragView implements View.OnTouchListener {
 
         public Builder setActivity(Activity activity) {
             this.activity = activity;
+            this.width = DeviceUtil.convertDpToPx(activity, 180);
+            this.height = DeviceUtil.convertDpToPx(activity, 230);
             return this;
         }
 
