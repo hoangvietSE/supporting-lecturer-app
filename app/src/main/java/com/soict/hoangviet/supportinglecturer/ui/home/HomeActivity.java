@@ -3,7 +3,6 @@ package com.soict.hoangviet.supportinglecturer.ui.home;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,9 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.HttpMethod;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.google.api.services.youtube.YouTube;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
@@ -32,8 +28,6 @@ import com.soict.hoangviet.supportinglecturer.utils.PermissionUtil;
 import com.soict.hoangviet.supportinglecturer.youtube.EventData;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeNewSingleton;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Date;

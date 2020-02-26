@@ -14,12 +14,12 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.util.DisplayMetrics;
 import android.util.Size;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,15 +27,17 @@ import androidx.core.app.ActivityCompat;
 
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView;
+import com.soict.hoangviet.supportinglecturer.customview.SonnyJackDragView;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
+
 
 import java.util.Arrays;
 
 import butterknife.BindView;
 
 public abstract class BaseCameraActivity extends BaseActivity implements View.OnTouchListener {
-    @BindView(R.id.textureView)
     protected AutoFitTextureView textureView;
+    private SonnyJackDragView mSonnyJackDragView;
     private CameraDevice.StateCallback stateCallback;
     private CameraDevice cameraDevice;
     private CaptureRequest.Builder captureRequestBuilder;
@@ -54,6 +56,7 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
     private float dY;
     private int screenHight;
     private int screenWidth;
+    int effect = 0;
 
     @Override
     protected void initView() {
@@ -65,9 +68,19 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
     @Override
     protected void initListener() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
+            textureView.setOnClickListener(view -> {
+                if (effect == 12) {
+                    effect = 0;
+                }
+                captureRequestBuilder.set(CaptureRequest.CONTROL_SCENE_MODE, effect++);
+                try {
+                    cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+            });
         } else {
-            textureView.setOnTouchListener(this);
+//            textureView.setOnTouchListener(this);
         }
     }
 
@@ -77,10 +90,17 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
     }
 
     private void initOnTouch() {
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        screenHight = displaymetrics.heightPixels;
-        screenWidth = displaymetrics.widthPixels;
+        textureView = new AutoFitTextureView(this);
+        textureView.setOnClickListener(view -> {
+
+        });
+        mSonnyJackDragView = new SonnyJackDragView.Builder()
+                .setActivity(this)
+                .setNeedNearEdge(true)
+                .setView(textureView)
+                .setWidth(DeviceUtil.convertDpToPx(this,180))
+                .setHeight(DeviceUtil.convertDpToPx(this,230))
+                .build();
     }
 
     private void initStateCallback() {
@@ -137,7 +157,7 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
             texture.setDefaultBufferSize(imageDimension.getWidth(), imageDimension.getHeight());
             Surface surface = new Surface(texture);
             captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-//            captureRequestBuilder.set(CaptureRequest.CONTROL_EFFECT_MODE, CaptureRequest.CONTROL_EFFECT_MODE_SEPIA);
+//            captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_EFFECT_MODE_AQUA);
             captureRequestBuilder.addTarget(surface);
             cameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback() {
                 @Override
@@ -160,7 +180,7 @@ public abstract class BaseCameraActivity extends BaseActivity implements View.On
     private void updatePreview() {
         if (cameraDevice == null)
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-        captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO);
+        captureRequestBuilder.set(CaptureRequest.CONTROL_EFFECT_MODE, CaptureRequest.CONTROL_MODE_AUTO);
         try {
             cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
         } catch (CameraAccessException e) {

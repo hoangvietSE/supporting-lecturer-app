@@ -16,7 +16,6 @@ import com.google.api.services.youtube.YouTubeScopes;
 import com.google.gson.Gson;
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.entity.response.FacebookResponse;
-import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseSocialActivity;
 
 import org.json.JSONObject;

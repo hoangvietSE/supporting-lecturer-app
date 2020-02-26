@@ -77,6 +77,10 @@ public class DeviceUtil {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, inputDp, resources.getDisplayMetrics());
     }
 
+    public static float convertPixelsToDp(float px, Context context){
+        return px / ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+
     public static int getSoftButtonsBarHeight(Context context) {
         Resources resources = context.getResources();
         int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");

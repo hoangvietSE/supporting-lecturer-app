@@ -3,27 +3,19 @@ package com.soict.hoangviet.supportinglecturer.ui.home;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.login.LoginManager;
 import com.google.gson.Gson;
-import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.entity.response.FacebookResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
-import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
-import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
-import com.soict.hoangviet.supportinglecturer.ui.login.LoginView;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 import com.soict.hoangviet.supportinglecturer.utils.NetworkUtil;
 import com.soict.hoangviet.supportinglecturer.utils.PermissionUtil;
-
 import javax.inject.Inject;
-
 import io.reactivex.disposables.CompositeDisposable;
 
 public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> implements HomePresenter<V> {
