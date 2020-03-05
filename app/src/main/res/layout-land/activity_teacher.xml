@@ -16,12 +16,6 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher"
             android:visibility="gone" />
-
-        <include
-            android:visibility="gone"
-            android:id="@+id/cam_loading"
-            layout="@layout/dialog_loading" />
-
         <com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView
             android:id="@+id/textureView"
             android:layout_width="match_parent"

@@ -392,11 +392,9 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
             mfaLeftRight.setOnClickListener(view -> {
                 if (rlCamera.getVisibility() == View.VISIBLE) {
                     rlCamera.setVisibility(View.GONE);
-                    showTextureViewSmall();
                     isShowCamera = false;
                 } else {
                     rlCamera.setVisibility(View.VISIBLE);
-                    showTextureViewBig();
                     isShowCamera = true;
                 }
             });
