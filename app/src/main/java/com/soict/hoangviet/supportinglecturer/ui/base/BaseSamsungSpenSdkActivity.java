@@ -9,8 +9,11 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -68,6 +71,10 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     protected ImageButton ibUndo;
     @BindView(R.id.ivRedo)
     protected ImageButton ibRedo;
+    @BindView(R.id.imv_setting)
+    protected ImageView imvSetting;
+    @BindView(R.id.llMenuMore)
+    protected LinearLayout llMenuMore;
     private final int CONTEXT_MENU_RUN_ID = 0;
     protected final int IS_ZOOM = 0;
     protected final int IS_NON_ZOOM = 1;
@@ -90,6 +97,11 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     protected int mMode = MODE_PEN;
     private int mToolType = SpenSurfaceView.TOOL_SPEN;
     protected SpenObjectRuntimeInfo mObjectRuntimeInfo;
+    private Handler handler = new Handler();
+    private Runnable runnable = () -> {
+        imvSetting.setVisibility(View.GONE);
+        llMenuMore.setVisibility(View.GONE);
+    };
 
     @Override
     protected void initView() {
@@ -171,7 +183,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
 
         // Set PageDoc to View.
         mPenSurfaceView.setPageDoc(mPenPageDoc, true);
-        tvNumberPage.setText(String.format(getString(R.string.tv_teacher_page_number), mPenNoteDoc.getPageIndexById(mPenPageDoc.getId())));
+//        tvNumberPage.setText(String.format(getString(R.string.tv_teacher_page_number), mPenNoteDoc.getPageIndexById(mPenPageDoc.getId())));
         initPenSettingInfo();
         // Register the listeners.
         mPenSurfaceView.setColorPickerListener((color, x, y) -> {
@@ -299,7 +311,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
                     }
                 }
                 if (checkSetPageDoc) {
-                    tvNumberPage.setText(String.format(getString(R.string.tv_teacher_page_number), mPenNoteDoc.getPageIndexById(mPenPageDoc.getId())));
+//                    tvNumberPage.setText(String.format(getString(R.string.tv_teacher_page_number), mPenNoteDoc.getPageIndexById(mPenPageDoc.getId())));
                 }
                 return true;
             }
@@ -435,6 +447,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     private SpenTouchListener onPreTouchSurfaceViewListener = (view, event) -> {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                showSetting();
             case MotionEvent.ACTION_POINTER_DOWN:
 //                enableButton(false);
                 break;
@@ -654,5 +667,12 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
 //        }
         initZoom();
         EventBus.getDefault().removeStickyEvent(event);
+    }
+
+    protected void showSetting() {
+        imvSetting.setVisibility(View.VISIBLE);
+        llMenuMore.setVisibility(View.VISIBLE);
+        handler.removeCallbacks(runnable);
+        handler.postDelayed(runnable, 5000);
     }
 }

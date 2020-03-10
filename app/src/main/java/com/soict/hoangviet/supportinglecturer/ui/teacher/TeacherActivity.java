@@ -9,11 +9,14 @@ import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Chronometer;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -97,14 +100,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     ImageButton ibRecord;
     @BindView(R.id.ibSave)
     ImageButton ibSave;
-    @BindView(R.id.llMenuMore)
-    LinearLayout llMenuMore;
-    @BindView(R.id.mfa_top_down)
-    MovableFloatingActionButton mfaTopDown;
     @BindView(R.id.simpleChronometer)
     Chronometer chronometer;
-    @BindView(R.id.imv_setting)
-    ImageView imvSetting;
     //LANDSCAPE
     @Nullable
     @BindView(R.id.mfa_left_right)
@@ -151,6 +148,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         initMedia();
         baseConfigforHBRecorder();
         getDataIntent();
+        showSetting();
     }
 
     private void getDataIntent() {
@@ -378,15 +376,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         selectButton(ibBrush);
         imvSetting.setOnClickListener(view -> {
             startActivity(SettingActivity.class);
-        });
-        mfaTopDown.setOnClickListener(view -> {
-            if (llMenuMore.getVisibility() == View.VISIBLE) {
-                llMenuMore.setVisibility(View.GONE);
-//                tvNumberPage.setVisibility(View.GONE);
-            } else {
-                llMenuMore.setVisibility(View.VISIBLE);
-//                tvNumberPage.setVisibility(View.VISIBLE);
-            }
         });
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mfaLeftRight.setOnClickListener(view -> {
