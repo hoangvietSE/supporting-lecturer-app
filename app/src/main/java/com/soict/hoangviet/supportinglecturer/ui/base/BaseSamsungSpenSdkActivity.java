@@ -49,6 +49,7 @@ import com.samsung.android.sdk.pen.settingui.SpenSettingTextLayout;
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
 import com.soict.hoangviet.supportinglecturer.eventbus.SettingZoomEvent;
+import com.soict.hoangviet.supportinglecturer.utils.CameraEnum;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

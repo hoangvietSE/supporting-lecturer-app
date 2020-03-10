@@ -9,18 +9,13 @@ import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Chronometer;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,6 +41,7 @@ import com.soict.hoangviet.supportinglecturer.entity.response.FileResponse;
 import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseSamsungSpenSdkActivity;
 import com.soict.hoangviet.supportinglecturer.ui.setting.SettingActivity;
+import com.soict.hoangviet.supportinglecturer.utils.CameraEnum;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 import com.soict.hoangviet.supportinglecturer.utils.DialogUtil;
 import com.soict.hoangviet.supportinglecturer.utils.FileUtil;
@@ -102,10 +98,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     ImageButton ibSave;
     @BindView(R.id.simpleChronometer)
     Chronometer chronometer;
-    //LANDSCAPE
-    @Nullable
-    @BindView(R.id.mfa_left_right)
-    MovableFloatingActionButton mfaLeftRight;
     private int mToolType = SpenSurfaceView.TOOL_SPEN;
     private long onTimeRecord = -1;
     public static final String EXTRA_LIVESTREAM = "extra_livestream";
@@ -125,10 +117,8 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private static RtmpDisplay rtmpDisplay;
     private int recordStatus = 0;//0: record đã close, 1: đang record
     private boolean checkSessionRecord = false;
-    private boolean isShowCamera = true;
     //Declare HBRecorder
     private HBRecorder hbRecorder;
-
 
     @Override
     protected int getLayoutRes() {
@@ -377,18 +367,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         imvSetting.setOnClickListener(view -> {
             startActivity(SettingActivity.class);
         });
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            mfaLeftRight.setOnClickListener(view -> {
-                if (rlCamera.getVisibility() == View.VISIBLE) {
-                    rlCamera.setVisibility(View.GONE);
-                    isShowCamera = false;
-                } else {
-                    rlCamera.setVisibility(View.VISIBLE);
-                    isShowCamera = true;
-                }
-            });
-        } else {
-        }
     }
 
     private void showConfirmSaveDialog() {

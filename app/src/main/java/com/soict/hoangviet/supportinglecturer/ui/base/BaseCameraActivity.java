@@ -19,7 +19,9 @@ import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -30,7 +32,9 @@ import androidx.core.app.ActivityCompat;
 
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView;
+import com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionButton;
 import com.soict.hoangviet.supportinglecturer.customview.SonnyJackDragView;
+import com.soict.hoangviet.supportinglecturer.utils.CameraEnum;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 
 import java.util.Arrays;
@@ -49,6 +53,12 @@ public abstract class BaseCameraActivity extends BaseActivity {
     @Nullable
     @BindView(R.id.rl_camera)
     protected RelativeLayout rlCamera;
+    @Nullable
+    @BindView(R.id.camLoading)
+    protected RelativeLayout camLoading;
+    @Nullable
+    @BindView(R.id.frameCamera)
+    protected FrameLayout frameCamera;
     private SonnyJackDragView mSonnyJackDragView;
     private CameraDevice.StateCallback stateCallback;
     private CameraDevice cameraDevice;
@@ -69,11 +79,31 @@ public abstract class BaseCameraActivity extends BaseActivity {
     private int screenHight;
     private int screenWidth;
     int effect = 0;
+    //LANDSCAPE
+    @Nullable
+    @BindView(R.id.mfa_left_right)
+    MovableFloatingActionButton mfaLeftRight;
+    protected CameraEnum mCameraEnum;
+    protected boolean isShowCamera = true;
 
     @Override
     protected void initView() {
+        hideFrameCamera();
         initStateCallback();
         initTextureListener();
+        initEnum();
+    }
+
+    private void hideFrameCamera() {
+        frameCamera.setVisibility(View.GONE);
+    }
+
+    private void showFrameCamera() {
+        frameCamera.setVisibility(View.VISIBLE);
+    }
+
+    private void initEnum() {
+        mCameraEnum = CameraEnum.SHOW_HALF_CAMERA;
     }
 
     @Override
@@ -88,6 +118,28 @@ public abstract class BaseCameraActivity extends BaseActivity {
                     cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
                 } catch (CameraAccessException e) {
                     e.printStackTrace();
+                }
+            });
+            mfaLeftRight.setOnClickListener(view -> {
+                switch (mCameraEnum) {
+                    case SHOW_HALF_CAMERA:
+                        hideFrameCamera();
+                        rlCamera.setVisibility(View.GONE);
+                        mCameraEnum = CameraEnum.HIDE_CAMERA;
+                        isShowCamera = false;
+                        break;
+                    case HIDE_CAMERA:
+                        showFrameCamera();
+                        mCameraEnum = CameraEnum.SHOW_FULL_CAMERA;
+                        showTextureFull();
+                        break;
+                    case SHOW_FULL_CAMERA:
+                        hideFrameCamera();
+                        showTextureViewHalf();
+                        rlCamera.setVisibility(View.VISIBLE);
+                        isShowCamera = true;
+                        mCameraEnum = CameraEnum.SHOW_HALF_CAMERA;
+                        break;
                 }
             });
         } else {
@@ -263,54 +315,57 @@ public abstract class BaseCameraActivity extends BaseActivity {
         }
     }
 
-//    protected void showTextureViewSmall() {
-//        RelativeLayout.LayoutParams layoutParams = createLayoutParams(
-//                DeviceUtil.convertDpToPx(this, 180),
-//                DeviceUtil.convertDpToPx(this, 230)
-//        );
-//        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-//        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-//        removeViewParent(textureView);
-//        drawView.addView(textureView, layoutParams);
+    protected void showTextureFull() {
+        FrameLayout.LayoutParams layoutParams = createFrameLayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT
+        );
+        removeViewParent(textureView);
+        frameCamera.addView(textureView, layoutParams);
 //        mSonnyJackDragView = new SonnyJackDragView.Builder()
 //                .setActivity(this)
 //                .setNeedNearEdge(true)
 //                .setView(textureView)
 //                .build();
-//    }
+    }
 
-//    @SuppressLint("CheckResult")
-//    protected void showTextureViewBig() {
-//        RelativeLayout.LayoutParams layoutParams = createLayoutParams(
-//                WindowManager.LayoutParams.MATCH_PARENT,
-//                DeviceUtil.convertDpToPx(this, 450)
-//        );
-//        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+    @SuppressLint("CheckResult")
+    protected void showTextureViewHalf() {
+        RelativeLayout.LayoutParams layoutParams = createRelativeLayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                DeviceUtil.convertDpToPx(this, 450)
+        );
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 //        textureView.setOnTouchListener(null);
-//        removeViewParent(textureView);
-//        Completable.timer(400, TimeUnit.MILLISECONDS)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .doOnSubscribe(disposable -> {
-//                    camLoading.setVisibility(View.VISIBLE);
-//                })
-//                .doFinally(()->{
-//                    camLoading.setVisibility(View.GONE);
-//                })
-//                .subscribe(() -> {
-//                    rlCamera.addView(textureView, layoutParams);
-//                });
-//    }
+        removeViewParent(textureView);
+        Completable.timer(400, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    camLoading.setVisibility(View.VISIBLE);
+                })
+                .doFinally(() -> {
+                    camLoading.setVisibility(View.GONE);
+                })
+                .subscribe(() -> {
+                    rlCamera.addView(textureView, layoutParams);
+                });
+    }
 
-    private RelativeLayout.LayoutParams createLayoutParams(int width, int height) {
+    private RelativeLayout.LayoutParams createRelativeLayoutParams(int width, int height) {
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width, height);
+        return layoutParams;
+    }
+
+    private FrameLayout.LayoutParams createFrameLayoutParams(int width, int height) {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
         return layoutParams;
     }
 
     private void removeViewParent(AutoFitTextureView view) {
         if (view.getParent() != null) {
-            ((RelativeLayout) view.getParent()).endViewTransition(view);
-            ((RelativeLayout) view.getParent()).removeView(view);
+            ((ViewGroup) view.getParent()).endViewTransition(view);
+            ((ViewGroup) view.getParent()).removeView(view);
         }
     }
 }
