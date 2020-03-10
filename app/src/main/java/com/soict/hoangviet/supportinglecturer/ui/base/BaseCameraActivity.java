@@ -121,25 +121,27 @@ public abstract class BaseCameraActivity extends BaseActivity {
                 }
             });
             mfaLeftRight.setOnClickListener(view -> {
-                switch (mCameraEnum) {
-                    case SHOW_HALF_CAMERA:
-                        hideFrameCamera();
-                        rlCamera.setVisibility(View.GONE);
-                        mCameraEnum = CameraEnum.HIDE_CAMERA;
-                        isShowCamera = false;
-                        break;
-                    case HIDE_CAMERA:
-                        showFrameCamera();
-                        mCameraEnum = CameraEnum.SHOW_FULL_CAMERA;
-                        showTextureFull();
-                        break;
-                    case SHOW_FULL_CAMERA:
-                        hideFrameCamera();
-                        showTextureViewHalf();
-                        rlCamera.setVisibility(View.VISIBLE);
-                        isShowCamera = true;
-                        mCameraEnum = CameraEnum.SHOW_HALF_CAMERA;
-                        break;
+                if(!avoidDuplicateClick()){
+                    switch (mCameraEnum) {
+                        case SHOW_HALF_CAMERA:
+                            hideFrameCamera();
+                            rlCamera.setVisibility(View.GONE);
+                            mCameraEnum = CameraEnum.HIDE_CAMERA;
+                            isShowCamera = false;
+                            break;
+                        case HIDE_CAMERA:
+                            showFrameCamera();
+                            mCameraEnum = CameraEnum.SHOW_FULL_CAMERA;
+                            showTextureFull();
+                            break;
+                        case SHOW_FULL_CAMERA:
+                            hideFrameCamera();
+                            showTextureViewHalf();
+                            rlCamera.setVisibility(View.VISIBLE);
+                            isShowCamera = true;
+                            mCameraEnum = CameraEnum.SHOW_HALF_CAMERA;
+                            break;
+                    }
                 }
             });
         } else {

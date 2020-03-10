@@ -10,7 +10,7 @@ public class Define {
     public static final String REALM_NAME = "oab_database";
 
     public static final long DEFAULT_TIMEOUT = 5L;
-    public static final long CLICK_TIME_INTERVAL = 500L;
+    public static final long CLICK_TIME_INTERVAL = 1200L;
 
     public static class Api {
 
