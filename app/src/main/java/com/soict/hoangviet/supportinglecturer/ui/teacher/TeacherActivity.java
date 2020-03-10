@@ -1,6 +1,5 @@
 package com.soict.hoangviet.supportinglecturer.ui.teacher;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -19,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.hbisoft.hbrecorder.HBRecorder;
 import com.hbisoft.hbrecorder.HBRecorderListener;
@@ -34,14 +32,12 @@ import com.samsung.android.sdk.pen.settingui.SpenSettingEraserLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingPenLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingTextLayout;
 import com.soict.hoangviet.supportinglecturer.R;
-import com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionButton;
 import com.soict.hoangviet.supportinglecturer.customview.settime.SettingTimeTempBushDFragment;
 import com.soict.hoangviet.supportinglecturer.customview.settingvideo.SettingVideoDFragment;
 import com.soict.hoangviet.supportinglecturer.entity.response.FileResponse;
 import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseSamsungSpenSdkActivity;
 import com.soict.hoangviet.supportinglecturer.ui.setting.SettingActivity;
-import com.soict.hoangviet.supportinglecturer.utils.CameraEnum;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
 import com.soict.hoangviet.supportinglecturer.utils.DialogUtil;
 import com.soict.hoangviet.supportinglecturer.utils.FileUtil;
@@ -572,7 +568,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
             String[] mimeTypes = {"image/jpeg", "image/png"};
             galleryIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
             startActivityForResult(galleryIntent, requestCode);
-        } catch (ActivityNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

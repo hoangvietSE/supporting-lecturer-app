@@ -81,8 +81,6 @@ android {
 
     lintOptions {
         checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
         abortOnError false
     }
 
@@ -92,7 +90,7 @@ android {
         develop {
             dimension "version"
             applicationId "com.soict.hoangviet.supportinglecturer.dev"
-            resValue "string", "app_name", "Ứng dụng hỗ trợ giảng dạy development"
+            resValue "string", "app_name", "Ứng dụng hỗ trợ giảng dạy"
         }
         product {
             dimension "version"

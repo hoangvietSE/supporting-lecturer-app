@@ -19,19 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
--optimizationpasses 5
--dontusemixedcaseclassnames
--dontskipnonpubliclibraryclasses
--dontpreverify
--verbose
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
--keepattributes SourceFile,LineNumberTable
--dontwarn com.soict.hoangviet.supportinglecturer.customview.**
--keep class com.soict.hoangviet.supportinglecturer.customview.SonnyJackDragView
--keepclassmembers class com.soict.hoangviet.supportinglecturer.customview.SonnyJackDragView {
-    public *;
+-keepattributes *Annotation*
+-keepclassmembers class * {
+    @org.greenrobot.eventbus.Subscribe <methods>;
 }
-
--keep class com.soict.hoangviet.supportinglecturer.customview.SonnyJackDragView$* {
-    public *;
-}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }

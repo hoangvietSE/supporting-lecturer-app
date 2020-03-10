@@ -2,6 +2,7 @@ package com.soict.hoangviet.supportinglecturer.ui.video;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,7 +19,6 @@ import com.soict.hoangviet.supportinglecturer.entity.response.VideoResponse;
 import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.edit.EditActivity;
-import com.soict.hoangviet.supportinglecturer.ui.main.MainActivity;
 import com.soict.hoangviet.supportinglecturer.ui.prefences.PreferenceSettingActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
 import com.soict.hoangviet.supportinglecturer.utils.Define;

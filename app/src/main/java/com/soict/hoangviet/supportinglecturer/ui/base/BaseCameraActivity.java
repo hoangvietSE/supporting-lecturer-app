@@ -2,6 +2,7 @@ package com.soict.hoangviet.supportinglecturer.ui.base;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -21,13 +22,16 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
 import com.soict.hoangviet.supportinglecturer.R;
@@ -85,10 +89,12 @@ public abstract class BaseCameraActivity extends BaseActivity {
     MovableFloatingActionButton mfaLeftRight;
     protected CameraEnum mCameraEnum;
     protected boolean isShowCamera = true;
+    @Nullable
+    @BindView(R.id.webView)
+    WebView webView;
 
     @Override
     protected void initView() {
-        hideFrameCamera();
         initStateCallback();
         initTextureListener();
         initEnum();
@@ -109,6 +115,7 @@ public abstract class BaseCameraActivity extends BaseActivity {
     @Override
     protected void initListener() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            hideFrameCamera();
             textureView.setOnClickListener(view -> {
                 if (effect == 12) {
                     effect = 0;
@@ -144,6 +151,20 @@ public abstract class BaseCameraActivity extends BaseActivity {
                     }
                 }
             });
+            webView.getSettings().setJavaScriptEnabled(true); // enable javascript
+            webView.setWebViewClient(new WebViewClient() {
+                @SuppressWarnings("deprecation")
+                @Override
+                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                }
+                @TargetApi(android.os.Build.VERSION_CODES.M)
+                @Override
+                public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
+                    // Redirect to deprecated method, so you can use it in all SDK versions
+                    onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
+                }
+            });
+            webView .loadUrl("https://vndoc.com/de-thi-hoc-ki-1-mon-tieng-anh-lop-4-truong-tieu-hoc-an-vinh-2/download");
         } else {
             initOnTouch();
         }

@@ -77,15 +77,12 @@ public class LoginActivity extends BaseSocialActivity implements LoginView {
         return new SocialFacebookListener() {
             @Override
             public void onSuccess(AccessToken accessToken) {
-                GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
-                    //OnCompleted is invoked once the GraphRequest is successful
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        try {
-                            FacebookResponse facebookResponse = new Gson().fromJson(object.toString(), FacebookResponse.class);
-                            mPresenter.loginFacebookSuccess(facebookResponse);
-                        } catch (Exception e) {
-                        }
+                //OnCompleted is invoked once the GraphRequest is successful
+                GraphRequest request = GraphRequest.newMeRequest(accessToken, (object, response) -> {
+                    try {
+                        FacebookResponse facebookResponse = new Gson().fromJson(object.toString(), FacebookResponse.class);
+                        mPresenter.loginFacebookSuccess(facebookResponse);
+                    } catch (Exception e) {
                     }
                 });
                 // We set parameters to the GraphRequest using a Bundle.
