@@ -125,7 +125,7 @@ public class SharePreference implements ISharePreference {
 
     @Override
     public String getRtmpGoogle(String key) {
-        return null;
+        return get(Define.PREF_FILE_NAME, key, String.class);
     }
 
     @Override

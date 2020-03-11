@@ -294,6 +294,8 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
             mSharePreference.setRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE, rtmpLink);
             mSharePreference.setBroadcastId(Define.KeyPreference.BROADCAST_ID, broadCastId);
             Intent intent = new Intent(HomeActivity.this, TeacherActivity.class);
+            intent.putExtra(TeacherActivity.EXTRA_LIVESTREAM, true);
+            startActivity(intent);
             startActivity(intent);
         }
     }

@@ -36,6 +36,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -126,8 +127,6 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
         if (!getmSharePreference().getRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK).isEmpty()
                 || !getmSharePreference().getRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE).isEmpty()) {
             getView().executeStreamVideo(resultCode, data);
-        } else {
-            getView().executeRecordVideo(resultCode, data);
         }
     }
 
@@ -140,14 +139,13 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
                 rtmpDisplay.startStream(getmSharePreference().getRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK));
             }
         }
-//        else {
-//            // TODO RTMP YOUTUBE
-//            if (rtmpDisplay.prepareAudio() && rtmpDisplay.prepareVideo(DISPLAY_WIDTH, DISPLAY_HEIGHT, frameRate, bitRate, orientation, mScreenDensity)) {
-//                rtmpDisplay.setIntentResult(resultCode, data);
-//                rtmpDisplay.startStream(getmSharePreference().getRtmpFacebook(Define.KeyPreference.RTMP_GOOGLE));
-//
-//            }
-//        }
+        else {
+            // TODO RTMP YOUTUBE
+            if (rtmpDisplay.prepareAudio() && rtmpDisplay.prepareVideo(DISPLAY_WIDTH, DISPLAY_HEIGHT, 60, 4000000, orientation, mScreenDensity)) {
+                rtmpDisplay.setIntentResult(resultCode, data);
+                rtmpDisplay.startStream(getmSharePreference().getRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE));
+            }
+        }
     }
 
     @Override
@@ -393,11 +391,11 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
     public void executeStreamVideo(Context context, RtmpDisplay rtmpDisplay, int resultCode, Intent data) {
         Observable.fromCallable(() -> {
             int currentOrientation = context.getResources().getConfiguration().orientation;
-            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-            } else {
-                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-            }
+//            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+//                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+//            } else {
+//                ((TeacherActivity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+//            }
 
             int rotation = ((TeacherActivity) context).getWindowManager().getDefaultDisplay().getRotation();
             int orientation = ORIENTATIONS.get(rotation + 90);

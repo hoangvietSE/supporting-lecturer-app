@@ -103,7 +103,6 @@ public class HBRecorder implements MyListener {
     //Enable Custom Settings
     public void enableCustomSettings(){
         enableCustomSettings = true;
-
     }
 
     //Set Video Frame Rate

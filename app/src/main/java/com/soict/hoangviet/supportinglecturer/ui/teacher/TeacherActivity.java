@@ -424,13 +424,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         runOnUiThread(() -> {
             hideLoading();
             Toast.makeText(TeacherActivity.this, "Kết nối thành công", Toast.LENGTH_SHORT).show();
-            try {
-                mPresenter.startRecord(rtmpDisplay);
-                ibRecord.setImageResource(R.drawable.ic_stop);
-            } catch (Exception e) {
-                rtmpDisplay.stopRecord();
-                Toast.makeText(this, getResources().getString(R.string.error_try_later), Toast.LENGTH_SHORT).show();
-            }
         });
     }
 
@@ -498,8 +491,9 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         listRecordsPath.add(RecordUtil.baseDir + "/" + originName + ".mp4");
         showLoading();
         if (isLogin) {
-            startActivityForResult(rtmpDisplay.sendIntent(), REQUEST_CODE_STREAM);
+//            startActivityForResult(rtmpDisplay.sendIntent(), REQUEST_CODE_STREAM);
         } else {
+            //Record
             MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
             Intent permissionIntent = mediaProjectionManager != null ? mediaProjectionManager.createScreenCaptureIntent() : null;
             startActivityForResult(permissionIntent, REQUEST_CODE_RECORD);
