@@ -100,8 +100,8 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     protected SpenObjectRuntimeInfo mObjectRuntimeInfo;
     private Handler handler = new Handler();
     private Runnable runnable = () -> {
-        imvSetting.setVisibility(View.GONE);
-        llMenuMore.setVisibility(View.GONE);
+        if (imvSetting != null) imvSetting.setVisibility(View.GONE);
+        if (llMenuMore != null) llMenuMore.setVisibility(View.GONE);
     };
 
     @Override
@@ -513,6 +513,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
             }
             mPenNoteDoc = null;
         }
+        if (handler != null) handler.removeCallbacks(runnable);
     }
 
     @NonNull
@@ -676,4 +677,6 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
         handler.removeCallbacks(runnable);
         handler.postDelayed(runnable, 5000);
     }
+
+
 }
