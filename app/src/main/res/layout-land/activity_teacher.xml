@@ -26,11 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="450dp"
             android:layout_centerVertical="true" />
-
-        <WebView
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -44,13 +39,19 @@
         <FrameLayout
             android:id="@+id/spenViewContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true">
 
             <RelativeLayout
                 android:id="@+id/spenViewLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false" />
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </FrameLayout>
 
         <FrameLayout
@@ -284,5 +285,15 @@
             android:scaleX="0.6"
             android:scaleY="0.6"
             android:src="@drawable/ic_left_right" />
+
+        <ImageView
+            android:id="@+id/btnWebView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_8_dp"
+            android:background="@drawable/bg_btn_web_view"
+            android:src="@drawable/ic_bottom" />
     </RelativeLayout>
 </LinearLayout>

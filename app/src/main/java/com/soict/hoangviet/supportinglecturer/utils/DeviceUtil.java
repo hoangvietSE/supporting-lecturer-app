@@ -2,6 +2,7 @@ package com.soict.hoangviet.supportinglecturer.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Matrix;
@@ -137,5 +138,9 @@ public class DeviceUtil {
         String imgDecodableString = cursor.getString(columnIndex);
         cursor.close();
         return imgDecodableString;
+    }
+
+    public static boolean isLandscape(Context context){
+        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 }

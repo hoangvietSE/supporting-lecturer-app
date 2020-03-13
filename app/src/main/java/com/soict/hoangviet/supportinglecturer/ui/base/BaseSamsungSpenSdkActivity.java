@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.pen.Spen;
@@ -76,6 +77,9 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     protected ImageView imvSetting;
     @BindView(R.id.llMenuMore)
     protected LinearLayout llMenuMore;
+    @Nullable
+    @BindView(R.id.btnWebView)
+    protected ImageView btnWebView;
     private final int CONTEXT_MENU_RUN_ID = 0;
     protected final int IS_ZOOM = 0;
     protected final int IS_NON_ZOOM = 1;
@@ -102,6 +106,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     private Runnable runnable = () -> {
         if (imvSetting != null) imvSetting.setVisibility(View.GONE);
         if (llMenuMore != null) llMenuMore.setVisibility(View.GONE);
+        if (btnWebView != null) btnWebView.setVisibility(View.GONE);
     };
 
     @Override
@@ -674,6 +679,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     protected void showSetting() {
         imvSetting.setVisibility(View.VISIBLE);
         llMenuMore.setVisibility(View.VISIBLE);
+        btnWebView.setVisibility(View.VISIBLE);
         handler.removeCallbacks(runnable);
         handler.postDelayed(runnable, 5000);
     }

@@ -1,5 +1,6 @@
 package com.soict.hoangviet.supportinglecturer.ui.teacher;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -10,14 +11,21 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.hbisoft.hbrecorder.HBRecorder;
 import com.hbisoft.hbrecorder.HBRecorderListener;
@@ -94,6 +102,9 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     ImageButton ibSave;
     @BindView(R.id.simpleChronometer)
     Chronometer chronometer;
+    @Nullable
+    @BindView(R.id.webView)
+    WebView webView;
     private int mToolType = SpenSurfaceView.TOOL_SPEN;
     private long onTimeRecord = -1;
     public static final String EXTRA_LIVESTREAM = "extra_livestream";
@@ -135,6 +146,27 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         baseConfigforHBRecorder();
         getDataIntent();
         showSetting();
+        showWebView();
+    }
+
+    private void showWebView() {
+        if (DeviceUtil.isLandscape(this)) {
+            webView.getSettings().setJavaScriptEnabled(true); // enable javascript
+            webView.setWebViewClient(new WebViewClient() {
+                @SuppressWarnings("deprecation")
+                @Override
+                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                }
+
+                @TargetApi(android.os.Build.VERSION_CODES.M)
+                @Override
+                public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
+                    // Redirect to deprecated method, so you can use it in all SDK versions
+                    onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
+                }
+            });
+            webView.loadUrl("https://google.com");
+        }
     }
 
     private void getDataIntent() {
@@ -363,6 +395,21 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         imvSetting.setOnClickListener(view -> {
             startActivity(SettingActivity.class);
         });
+        if (DeviceUtil.isLandscape(this)) {
+            webView.setOnTouchListener((v, event) -> {
+                showSetting();
+                return false;
+            });
+            btnWebView.setOnClickListener(view -> {
+                if (webView.getVisibility() == View.VISIBLE) {
+                    webView.setVisibility(View.GONE);
+                    btnWebView.setImageResource(R.drawable.ic_top);
+                } else {
+                    webView.setVisibility(View.VISIBLE);
+                    btnWebView.setImageResource(R.drawable.ic_bottom);
+                }
+            });
+        }
     }
 
     private void showConfirmSaveDialog() {
@@ -744,5 +791,22 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 });
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_BACK:
+                    if (webView.canGoBack()) {
+                        webView.goBack();
+                    } else {
+                        finish();
+                    }
+                    return true;
+            }
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

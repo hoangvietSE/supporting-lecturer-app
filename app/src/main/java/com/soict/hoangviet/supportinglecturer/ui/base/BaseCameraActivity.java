@@ -89,9 +89,6 @@ public abstract class BaseCameraActivity extends BaseActivity {
     MovableFloatingActionButton mfaLeftRight;
     protected CameraEnum mCameraEnum;
     protected boolean isShowCamera = true;
-    @Nullable
-    @BindView(R.id.webView)
-    WebView webView;
 
     @Override
     protected void initView() {
@@ -151,20 +148,6 @@ public abstract class BaseCameraActivity extends BaseActivity {
                     }
                 }
             });
-            webView.getSettings().setJavaScriptEnabled(true); // enable javascript
-            webView.setWebViewClient(new WebViewClient() {
-                @SuppressWarnings("deprecation")
-                @Override
-                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                }
-                @TargetApi(android.os.Build.VERSION_CODES.M)
-                @Override
-                public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
-                    // Redirect to deprecated method, so you can use it in all SDK versions
-                    onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
-                }
-            });
-            webView .loadUrl("https://vndoc.com/de-thi-hoc-ki-1-mon-tieng-anh-lop-4-truong-tieu-hoc-an-vinh-2/download");
         } else {
             initOnTouch();
         }
