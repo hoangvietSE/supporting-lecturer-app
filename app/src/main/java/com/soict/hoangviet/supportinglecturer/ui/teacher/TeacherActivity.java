@@ -3,12 +3,14 @@ package com.soict.hoangviet.supportinglecturer.ui.teacher;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.RectF;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -40,9 +42,11 @@ import com.samsung.android.sdk.pen.settingui.SpenSettingEraserLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingPenLayout;
 import com.samsung.android.sdk.pen.settingui.SpenSettingTextLayout;
 import com.soict.hoangviet.supportinglecturer.R;
+import com.soict.hoangviet.supportinglecturer.broadcast.NetworkBroadcast;
 import com.soict.hoangviet.supportinglecturer.customview.settime.SettingTimeTempBushDFragment;
 import com.soict.hoangviet.supportinglecturer.customview.settingvideo.SettingVideoDFragment;
 import com.soict.hoangviet.supportinglecturer.entity.response.FileResponse;
+import com.soict.hoangviet.supportinglecturer.eventbus.NetworkBroadcastEvent;
 import com.soict.hoangviet.supportinglecturer.eventbus.RecordSuccessEvent;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseSamsungSpenSdkActivity;
 import com.soict.hoangviet.supportinglecturer.ui.setting.SettingActivity;
@@ -55,6 +59,8 @@ import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
 import net.ossrs.rtmp.ConnectCheckerRtmp;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -126,6 +132,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     private boolean checkSessionRecord = false;
     //Declare HBRecorder
     private HBRecorder hbRecorder;
+    private NetworkBroadcast networkBroadcast;
 
     @Override
     protected int getLayoutRes() {
@@ -141,32 +148,36 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     protected void initView() {
         onAttachPresenter();
         super.initView();
+        registerBroadcast();
         keepScreenAlwayOn();
         initMedia();
         baseConfigforHBRecorder();
         getDataIntent();
-        showSetting();
+        showSetting(5000);
         showWebView();
     }
 
-    private void showWebView() {
-        if (DeviceUtil.isLandscape(this)) {
-            webView.getSettings().setJavaScriptEnabled(true); // enable javascript
-            webView.setWebViewClient(new WebViewClient() {
-                @SuppressWarnings("deprecation")
-                @Override
-                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                }
+    private void registerBroadcast() {
+        networkBroadcast = new NetworkBroadcast();
+        registerReceiver(networkBroadcast, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+    }
 
-                @TargetApi(android.os.Build.VERSION_CODES.M)
-                @Override
-                public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
-                    // Redirect to deprecated method, so you can use it in all SDK versions
-                    onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
-                }
-            });
-            webView.loadUrl("https://google.com");
-        }
+    private void showWebView() {
+        webView.getSettings().setJavaScriptEnabled(true); // enable javascript
+        webView.setWebViewClient(new WebViewClient() {
+            @SuppressWarnings("deprecation")
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            }
+
+            @TargetApi(android.os.Build.VERSION_CODES.M)
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
+                // Redirect to deprecated method, so you can use it in all SDK versions
+                onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
+            }
+        });
+        webView.loadUrl("https://google.com");
     }
 
     private void getDataIntent() {
@@ -395,21 +406,19 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         imvSetting.setOnClickListener(view -> {
             startActivity(SettingActivity.class);
         });
-        if (DeviceUtil.isLandscape(this)) {
-            webView.setOnTouchListener((v, event) -> {
-                showSetting();
-                return false;
-            });
-            btnWebView.setOnClickListener(view -> {
-                if (webView.getVisibility() == View.VISIBLE) {
-                    webView.setVisibility(View.GONE);
-                    btnWebView.setImageResource(R.drawable.ic_top);
-                } else {
-                    webView.setVisibility(View.VISIBLE);
-                    btnWebView.setImageResource(R.drawable.ic_bottom);
-                }
-            });
-        }
+        webView.setOnTouchListener((v, event) -> {
+            showSetting(2000);
+            return false;
+        });
+        btnWebView.setOnClickListener(view -> {
+            if (webView.getVisibility() == View.VISIBLE) {
+                webView.setVisibility(View.GONE);
+                btnWebView.setImageResource(R.drawable.ic_top);
+            } else {
+                webView.setVisibility(View.VISIBLE);
+                btnWebView.setImageResource(R.drawable.ic_bottom);
+            }
+        });
     }
 
     private void showConfirmSaveDialog() {
@@ -808,5 +817,20 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
 
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(networkBroadcast);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onNetworkEvent(NetworkBroadcastEvent event) {
+        /* Reload webView */
+        new Handler().postDelayed(() -> {
+            webView.reload();
+        }, 500);
+        EventBus.getDefault().removeStickyEvent(event);
     }
 }

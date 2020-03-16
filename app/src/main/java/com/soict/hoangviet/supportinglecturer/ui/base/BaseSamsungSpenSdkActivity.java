@@ -453,7 +453,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
     private SpenTouchListener onPreTouchSurfaceViewListener = (view, event) -> {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                showSetting();
+                showSetting(3500);
             case MotionEvent.ACTION_POINTER_DOWN:
 //                enableButton(false);
                 break;
@@ -676,12 +676,12 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
         EventBus.getDefault().removeStickyEvent(event);
     }
 
-    protected void showSetting() {
+    protected void showSetting(long delay) {
         imvSetting.setVisibility(View.VISIBLE);
         llMenuMore.setVisibility(View.VISIBLE);
         btnWebView.setVisibility(View.VISIBLE);
         handler.removeCallbacks(runnable);
-        handler.postDelayed(runnable, 5000);
+        handler.postDelayed(runnable, delay);
     }
 
 
