@@ -2,8 +2,6 @@ package com.soict.hoangviet.supportinglecturer.ui.splash;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;

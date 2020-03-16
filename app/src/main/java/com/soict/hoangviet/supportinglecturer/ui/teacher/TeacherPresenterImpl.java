@@ -29,6 +29,7 @@ import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
+import com.soict.hoangviet.supportinglecturer.utils.NetworkUtil;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeNewSingleton;
 
@@ -470,6 +471,15 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
             hbRecorder.setNotificationSmallIcon(R.drawable.icon);
             hbRecorder.setNotificationTitle(getContext().getString(R.string.teacher_notification_title));
             hbRecorder.setNotificationDescription(getContext().getString(R.string.teacher_notification_des));
+        }
+    }
+
+    @Override
+    public void checkNetworkConnection() {
+        if (NetworkUtil.isConnectedToNetwork(getContext())) {
+            getView().onNetworkConnection(true);
+        } else {
+            getView().onNetworkConnection(false);
         }
     }
 }

@@ -14,7 +14,6 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebResourceError;
@@ -155,6 +154,11 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         getDataIntent();
         showSetting(5000);
         showWebView();
+        checkNetworkConnection();
+    }
+
+    private void checkNetworkConnection() {
+        mPresenter.checkNetworkConnection();
     }
 
     private void registerBroadcast() {
@@ -608,6 +612,25 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
             ToastUtil.show(TeacherActivity.this, getString(R.string.teacher_record_start));
         }
         startCountUpTimer();
+    }
+
+    @Override
+    public void onNetworkConnection(boolean isConnected) {
+        if (!isConnected) {
+            DialogUtil.showConfirmDialog(
+                    this,
+                    getString(R.string.teacher_dialog_network_title),
+                    getString(R.string.teacher_dialog_network_message),
+                    getString(R.string.teacher_dialog_network_positive),
+                    getString(R.string.teacher_dialog_network_negative),
+                    (dialog, which) -> {
+                        dialog.cancel();
+                        startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
+                    },
+                    (dialog, which) -> {
+                        dialog.cancel();
+                    });
+        }
     }
 
     private void callGalleryForInputImage(int requestCode) {

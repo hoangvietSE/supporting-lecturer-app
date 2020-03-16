@@ -27,4 +27,6 @@ public interface TeacherView extends BaseView {
     void postExecuteStreamVideo();
 
     void postExecuteRecordVideo();
+
+    void onNetworkConnection(boolean isConnected);
 }

@@ -94,6 +94,10 @@
     <string name="key_audio_source">key_audio_source</string>
     <string name="key_output_format">key_output_format</string>
     <string name="action_settings">Cài đặt bài giảng</string>
+    <string name="teacher_dialog_network_title">Thông báo</string>
+    <string name="teacher_dialog_network_message">Vui lòng kết nối Internet để có trải nghiệm tốt nhất</string>
+    <string name="teacher_dialog_network_positive">Đồng ý</string>
+    <string name="teacher_dialog_network_negative">Hủy</string>
 
 
 </resources>

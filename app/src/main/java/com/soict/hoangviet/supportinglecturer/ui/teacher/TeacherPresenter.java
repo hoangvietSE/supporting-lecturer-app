@@ -48,4 +48,6 @@ public interface TeacherPresenter<V extends BaseView> extends BasePresenter<V> {
     void executeRecordVideo(Activity context, int resultCode, Intent data, String fileName);
 
     void baseCcnfig(HBRecorder hbRecorder);
+
+    void checkNetworkConnection();
 }

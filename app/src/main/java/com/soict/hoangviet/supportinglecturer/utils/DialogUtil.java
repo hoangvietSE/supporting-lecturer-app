@@ -52,10 +52,10 @@ public class DialogUtil {
 
     public static void showConfirmDialog(
             Context context,
-            @StringRes int titleRes,
-            @StringRes int messageRes,
-            @StringRes int positiveRes,
-            @StringRes int negativeRes,
+            @StringRes String titleRes,
+            @StringRes String messageRes,
+            @StringRes String positiveRes,
+            @StringRes String negativeRes,
             DialogInterface.OnClickListener positiveListener,
             DialogInterface.OnClickListener negativeListener
     ) {
@@ -159,7 +159,6 @@ public class DialogUtil {
 
     public interface ChoiceItemListener {
         void onPositiveClick(ArrayList mSelectedItems);
-
         void onNegativeClick();
     }
 

@@ -74,4 +74,8 @@
     <string name="title_video_encoder">Video Encoder</string>
     <string name="title_video_frame_rate">Frame Rate</string>
     <string name="title_video_output_format">Output Format</string>
+    <string name="teacher_dialog_network_message">Please connect to wifi or mobile internet</string>
+    <string name="teacher_dialog_network_positive">OK</string>
+    <string name="teacher_dialog_network_negative">Cancel</string>
+    <string name="teacher_dialog_network_title">Notification</string>
 </resources>
