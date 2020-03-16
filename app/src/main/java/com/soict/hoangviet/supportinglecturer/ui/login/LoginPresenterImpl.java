@@ -1,6 +1,7 @@
 package com.soict.hoangviet.supportinglecturer.ui.login;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
@@ -25,6 +26,7 @@ public class LoginPresenterImpl<V extends LoginView> extends BasePresenterImpl<V
         getmSharePreference().setLoginStatus(Define.KeyPreference.IS_LOGINED, true);
         getmSharePreference().setLoginStatusFromGoogle(Define.KeyPreference.LOGIN_FROM_GOOGLE, true);
         getView().onResultToHomeScreen();
+        Log.d("myLog",account.getDisplayName());
     }
 
     @Override

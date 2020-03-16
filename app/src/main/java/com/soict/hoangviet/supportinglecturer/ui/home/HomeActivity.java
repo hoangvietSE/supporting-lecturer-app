@@ -25,6 +25,7 @@ import com.soict.hoangviet.supportinglecturer.ui.video.VideoActivity;
 import com.soict.hoangviet.supportinglecturer.utils.CommonExtensionUtil;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 import com.soict.hoangviet.supportinglecturer.utils.PermissionUtil;
+import com.soict.hoangviet.supportinglecturer.utils.ToastUtil;
 import com.soict.hoangviet.supportinglecturer.youtube.EventData;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeNewSingleton;
@@ -60,6 +61,8 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     TextView tvName;
     @BindView(R.id.ivHomeAvatar)
     ImageView ivAvatar;
+    @BindView(R.id.btnYoutube)
+    TextView btnYoutube;
 
     @Override
     protected Unbinder getButterKnifeBinder() {
@@ -101,6 +104,9 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         llLiveStream.setOnClickListener(this);
         llCreateVideo.setOnClickListener(this);
         llProfile.setOnClickListener(this);
+        btnYoutube.setOnClickListener(view -> {
+            ToastUtil.show(this, "Youtube");
+        });
     }
 
     @Override
