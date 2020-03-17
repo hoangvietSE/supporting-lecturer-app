@@ -172,4 +172,14 @@ public class SharePreference implements ISharePreference {
     public void setCurrentLanguage(String value) {
         put(Define.PREF_FILE_NAME, Define.KeyPreference.LANGUAGE, value);
     }
+
+    @Override
+    public String getYoutubeName() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.YOUTUBE_NAME, String.class);
+    }
+
+    @Override
+    public void setYoutubeName(String value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.YOUTUBE_NAME, value);
+    }
 }

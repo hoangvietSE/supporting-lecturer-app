@@ -4,13 +4,17 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.login.LoginManager;
 import com.google.gson.Gson;
+import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
+import com.soict.hoangviet.supportinglecturer.entity.response.ChannelResponse;
 import com.soict.hoangviet.supportinglecturer.entity.response.FacebookResponse;
+import com.soict.hoangviet.supportinglecturer.entity.response.youtube.YoutubeVideoResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 import com.soict.hoangviet.supportinglecturer.utils.NetworkUtil;
@@ -20,7 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+
+import io.reactivex.SingleSource;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Function;
 
 public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> implements HomePresenter<V> {
     private Repository repository;
@@ -128,15 +135,5 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
         request.setParameters(parameters);
         // Initiate the GraphRequest
         request.executeAsync();
-    }
-
-    @Override
-    public void fetchListVideoYoutube() {
-        Map<String,Object> data = new HashMap<>();
-        data.put("part","id");
-        data.put("q","");
-        data.put("type","id");
-        data.put("key","id");
-
     }
 }

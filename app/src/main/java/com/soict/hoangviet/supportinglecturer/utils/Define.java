@@ -17,7 +17,7 @@ public class Define {
         public static final String CONTENT_TYPE = "Content-Type: application/json";
 
         public static class Url {
-            public static final String YOUTUBE_URL = "https://www.googleapis.com/youtube/v3/";
+            public static final String YOUTUBE_URL = "https://www.googleapis.com/youtube/v3/search";
             public static final String FACEBOOK_URL = "https://graph.facebook.com/v6.0/me/live_videos";
         }
 
@@ -143,6 +143,7 @@ public class Define {
         public static final String RTMP_FACEBOOK = "rtmpFacebook";
         public static final String LOGIN_FROM_GOOGLE = "isGoogleSignIn";
         public static final String ACCOUNT_NAME = "accountName";
+        public static final String YOUTUBE_NAME = "youtubeName";
         public static final String BROADCAST_ID = "broadcastId";
         public static final String RTMP_GOOGLE = "rtmpGoogle";
         public static final String SETTING_ZOOM = "settingZoom";

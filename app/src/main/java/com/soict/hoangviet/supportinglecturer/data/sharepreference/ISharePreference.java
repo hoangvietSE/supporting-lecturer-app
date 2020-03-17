@@ -45,4 +45,8 @@ public interface ISharePreference {
 
     void setCurrentLanguage(String value);
 
+    String getYoutubeName();
+
+    void setYoutubeName(String value);
+
 }

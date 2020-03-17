@@ -18,6 +18,8 @@ import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.module.TeacherActivityModule;
 import com.soict.hoangviet.supportinglecturer.ui.video.VideoActivity;
 import com.soict.hoangviet.supportinglecturer.ui.video.module.VideoActivityModule;
+import com.soict.hoangviet.supportinglecturer.ui.youtube.YoutubeActivity;
+import com.soict.hoangviet.supportinglecturer.ui.youtube.module.YoutubeActivityModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -50,4 +52,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {LanguageActivityModule.class})
     abstract LanguageActivity bindLanguageActivity();
+
+    @ContributesAndroidInjector(modules = {YoutubeActivityModule.class})
+    abstract YoutubeActivity bindYoutubeActivity();
 }

@@ -22,6 +22,7 @@ import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
 import com.soict.hoangviet.supportinglecturer.ui.login.LoginActivity;
 import com.soict.hoangviet.supportinglecturer.ui.teacher.TeacherActivity;
 import com.soict.hoangviet.supportinglecturer.ui.video.VideoActivity;
+import com.soict.hoangviet.supportinglecturer.ui.youtube.YoutubeActivity;
 import com.soict.hoangviet.supportinglecturer.utils.CommonExtensionUtil;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 import com.soict.hoangviet.supportinglecturer.utils.PermissionUtil;
@@ -108,7 +109,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
             if (!mSharePreference.getLoginStatus() || !mSharePreference.getLoginStatusFromGoogle()) {
                 ToastUtil.show(this, getString(R.string.dialog_syntax_login));
             } else {
-                mPresenter.fetchListVideoYoutube();
+                startActivity(new Intent(HomeActivity.this, YoutubeActivity.class));
             }
         });
     }

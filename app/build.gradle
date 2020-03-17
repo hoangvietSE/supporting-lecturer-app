@@ -159,5 +159,5 @@ dependencies {
     implementation 'com.github.duanhong169:colorpicker:1.1.6'
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'com.google.firebase:firebase-config:19.1.1'
-
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 }

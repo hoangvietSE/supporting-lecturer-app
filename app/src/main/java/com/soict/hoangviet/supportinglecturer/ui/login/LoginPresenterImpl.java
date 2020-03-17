@@ -23,6 +23,7 @@ public class LoginPresenterImpl<V extends LoginView> extends BasePresenterImpl<V
     @Override
     public void loginGoogleSuccess(GoogleSignInAccount account) {
         getmSharePreference().setAccountNameGoogle(account.getAccount().name);
+        getmSharePreference().setYoutubeName(account.getDisplayName());
         getmSharePreference().setLoginStatus(true);
         getmSharePreference().setLoginStatusFromGoogle(true);
         getView().onResultToHomeScreen();
