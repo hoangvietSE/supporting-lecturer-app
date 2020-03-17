@@ -22,17 +22,16 @@ public class LoginPresenterImpl<V extends LoginView> extends BasePresenterImpl<V
 
     @Override
     public void loginGoogleSuccess(GoogleSignInAccount account) {
-        getmSharePreference().setAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME, account.getAccount().name);
-        getmSharePreference().setLoginStatus(Define.KeyPreference.IS_LOGINED, true);
-        getmSharePreference().setLoginStatusFromGoogle(Define.KeyPreference.LOGIN_FROM_GOOGLE, true);
+        getmSharePreference().setAccountNameGoogle(account.getAccount().name);
+        getmSharePreference().setLoginStatus(true);
+        getmSharePreference().setLoginStatusFromGoogle(true);
         getView().onResultToHomeScreen();
-        Log.d("myLog",account.getDisplayName());
     }
 
     @Override
     public void loginFacebookSuccess(FacebookResponse facebookResponse) {
-        getmSharePreference().setLoginStatus(Define.KeyPreference.IS_LOGINED, true);
-        getmSharePreference().setLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK, true);
+        getmSharePreference().setLoginStatus(true);
+        getmSharePreference().setLoginStatusFromFacebook(true);
         getView().onResultToHomeScreen();
     }
 }

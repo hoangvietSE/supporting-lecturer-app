@@ -15,6 +15,10 @@ import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 import com.soict.hoangviet.supportinglecturer.utils.NetworkUtil;
 import com.soict.hoangviet.supportinglecturer.utils.PermissionUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -42,23 +46,23 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
     @Override
     public void checkConnectedToNetwork(Context context) {
         if (!NetworkUtil.isConnectedToNetwork(context)) {
-            getmSharePreference().setLoginStatus(Define.KeyPreference.IS_LOGINED, false);
-            if (getmSharePreference().getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
-                getmSharePreference().setLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK, false);
-                getmSharePreference().setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, "");
-                getmSharePreference().setUserId(Define.KeyPreference.USER_ID, "");
+            getmSharePreference().setLoginStatus(false);
+            if (getmSharePreference().getLoginStatusFromFacebook()) {
+                getmSharePreference().setLoginStatusFromFacebook(false);
+                getmSharePreference().setRtmpFacebook("");
+                getmSharePreference().setUserId("");
                 LoginManager.getInstance().logOut();
             } else {
-                getmSharePreference().setLoginStatusFromGoogle(Define.KeyPreference.LOGIN_FROM_GOOGLE, false);
-                getmSharePreference().setAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME, "");
-                getmSharePreference().setRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE, "");
+                getmSharePreference().setLoginStatusFromGoogle(false);
+                getmSharePreference().setAccountNameGoogle("");
+                getmSharePreference().setRtmpGoogle("");
             }
         }
     }
 
     @Override
     public void onLoginButtonClick() {
-        if (!getmSharePreference().getLoginStatus(Define.KeyPreference.IS_LOGINED)) {
+        if (!getmSharePreference().getLoginStatus()) {
             getView().goToLoginScreen();
         } else {
             getView().showConfirmLogout();
@@ -70,18 +74,18 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
         if (isLoggedIn) {
-            getmSharePreference().setLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK, false);
-            getmSharePreference().setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, "");
-            getmSharePreference().setUserId(Define.KeyPreference.USER_ID, "");
+            getmSharePreference().setLoginStatusFromFacebook(false);
+            getmSharePreference().setRtmpFacebook("");
+            getmSharePreference().setUserId("");
             LoginManager.getInstance().logOut();
         }
     }
 
     @Override
     public void logoutGoogle() {
-        getmSharePreference().setLoginStatusFromGoogle(Define.KeyPreference.LOGIN_FROM_GOOGLE, false);
-        getmSharePreference().setAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME, "");
-        getmSharePreference().setRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE, "");
+        getmSharePreference().setLoginStatusFromGoogle(false);
+        getmSharePreference().setAccountNameGoogle("");
+        getmSharePreference().setRtmpGoogle("");
     }
 
     @Override
@@ -97,7 +101,7 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
                         .subscribe(
                                 response -> {
                                     if (response.getStreamUrl() != null) {
-                                        getmSharePreference().setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, response.getStreamUrl());
+                                        getmSharePreference().setRtmpFacebook(response.getStreamUrl());
                                         getView().goToTeacherScreenLiveStream();
                                     }
                                 },
@@ -124,5 +128,15 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
         request.setParameters(parameters);
         // Initiate the GraphRequest
         request.executeAsync();
+    }
+
+    @Override
+    public void fetchListVideoYoutube() {
+        Map<String,Object> data = new HashMap<>();
+        data.put("part","id");
+        data.put("q","");
+        data.put("type","id");
+        data.put("key","id");
+
     }
 }

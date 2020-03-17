@@ -15,8 +15,11 @@ public class Define {
     public static class Api {
 
         public static final String CONTENT_TYPE = "Content-Type: application/json";
-        public static final String LOGIN_URL = "app_api/v1/auth/user";
 
+        public static class Url {
+            public static final String YOUTUBE_URL = "https://www.googleapis.com/youtube/v3/";
+            public static final String FACEBOOK_URL = "https://graph.facebook.com/v6.0/me/live_videos";
+        }
 
         public static class BaseResponse {
             public static final String SUCCESS = "success";

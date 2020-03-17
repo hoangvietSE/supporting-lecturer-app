@@ -20,7 +20,7 @@ public class LanguagePresenterImpl<V extends LanguageView> extends BasePresenter
 
     @Override
     public void setLanguage(Context context, String codeLocale) {
-        getmSharePreference().setCurrentLanguage(Define.KeyPreference.LANGUAGE, codeLocale);
+        getmSharePreference().setCurrentLanguage(codeLocale);
         LanguageUtil.setCurrentLanguage(context, codeLocale);
         getView().hideLoading();
         getView().goToHomeScreen();
@@ -28,6 +28,6 @@ public class LanguagePresenterImpl<V extends LanguageView> extends BasePresenter
 
     @Override
     public void getCurrentLanguage() {
-        getView().showCurrentLanguage(getmSharePreference().getCurrentLanguage(Define.KeyPreference.LANGUAGE));
+        getView().showCurrentLanguage(getmSharePreference().getCurrentLanguage());
     }
 }

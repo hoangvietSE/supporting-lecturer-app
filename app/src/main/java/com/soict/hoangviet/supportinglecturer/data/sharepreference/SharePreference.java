@@ -64,142 +64,112 @@ public class SharePreference implements ISharePreference {
     }
 
     @Override
-    public boolean getLoginStatus(String key) {
-        return get(Define.PREF_FILE_NAME, key, Boolean.class);
+    public boolean getLoginStatus() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.IS_LOGINED, Boolean.class);
     }
 
     @Override
-    public void setLoginStatus(String key, boolean value) {
-        put(Define.PREF_FILE_NAME, key, value);
+    public void setLoginStatus(boolean value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.IS_LOGINED, value);
     }
 
     @Override
-    public void setLoginStatusFromFacebook(String key, boolean value) {
-        put(Define.PREF_FILE_NAME, key, value);
+    public void setLoginStatusFromFacebook(boolean value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.LOGIN_FROM_FACEBOOK, value);
     }
 
     @Override
-    public boolean getLoginStatusFromFacebook(String key) {
-        return get(Define.PREF_FILE_NAME, key, Boolean.class);
+    public boolean getLoginStatusFromFacebook() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.LOGIN_FROM_FACEBOOK, Boolean.class);
     }
 
     @Override
-    public void setRtmpFacebook(String key, String value) {
-        put(Define.PREF_FILE_NAME, key, value);
+    public void setRtmpFacebook(String value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.RTMP_FACEBOOK, value);
     }
 
     @Override
-    public String getRtmpFacebook(String key) {
-        return get(Define.PREF_FILE_NAME, key, String.class);
+    public String getRtmpFacebook() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.RTMP_FACEBOOK, String.class);
     }
 
     @Override
-    public void setUserId(String key, String userId) {
-        put(Define.PREF_FILE_NAME, key, userId);
+    public void setUserId(String userId) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.USER_ID, userId);
     }
 
     @Override
-    public String getUserId(String key) {
-        return get(Define.PREF_FILE_NAME, key, String.class);
+    public String getUserId() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.USER_ID, String.class);
     }
 
     @Override
-    public boolean getLoginStatusFromGoogle(String key) {
-        return get(Define.PREF_FILE_NAME, key, Boolean.class);
+    public boolean getLoginStatusFromGoogle() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.LOGIN_FROM_GOOGLE, Boolean.class);
     }
 
     @Override
-    public void setLoginStatusFromGoogle(String key, boolean value) {
-        put(Define.PREF_FILE_NAME, key, value);
+    public void setLoginStatusFromGoogle(boolean value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.LOGIN_FROM_GOOGLE, value);
     }
 
     @Override
-    public String getAccountNameGoogle(String key) {
-        return get(Define.PREF_FILE_NAME, key, String.class);
+    public String getAccountNameGoogle() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.ACCOUNT_NAME, String.class);
     }
 
     @Override
-    public void setAccountNameGoogle(String key, String value) {
-        put(Define.PREF_FILE_NAME, key, value);
+    public void setAccountNameGoogle(String value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.ACCOUNT_NAME, value);
     }
 
     @Override
-    public String getRtmpGoogle(String key) {
-        return get(Define.PREF_FILE_NAME, key, String.class);
+    public String getRtmpGoogle() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.RTMP_GOOGLE, String.class);
     }
 
     @Override
-    public void setRtmpGoogle(String key, String value) {
-        put(Define.PREF_FILE_NAME, key, value);
+    public void setRtmpGoogle(String value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.RTMP_GOOGLE, value);
     }
 
     @Override
-    public boolean getLiveStreamStatus(String key) {
-        return get(Define.PREF_FILE_NAME, key, Boolean.class);
+    public boolean getLiveStreamStatus() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.IS_LIVESTREAMED, Boolean.class);
     }
 
     @Override
-    public void setLiveStreamStatus(String key, boolean value) {
-        put(Define.PREF_FILE_NAME, key, value);
+    public void setLiveStreamStatus(boolean value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.IS_LIVESTREAMED, value);
     }
 
     @Override
-    public String getBroadcastId(String key) {
-        return get(Define.PREF_FILE_NAME, key, String.class);
+    public String getBroadcastId() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.BROADCAST_ID, String.class);
     }
 
     @Override
-    public void setBroadcastId(String key, String value) {
-        put(Define.PREF_FILE_NAME, key, value);
+    public void setBroadcastId(String value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.BROADCAST_ID, value);
     }
 
     @Override
-    public int getSettingZoomCheckedItem(String key) {
-        return get(Define.PREF_FILE_NAME, key, Integer.class);
+    public int getSettingZoomCheckedItem() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.SETTING_ZOOM, Integer.class);
     }
 
     @Override
-    public void setZoomCheckedItem(String key, Integer value) {
-        put(Define.PREF_FILE_NAME, key, value);
+    public void setZoomCheckedItem(Integer value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.SETTING_ZOOM, value);
     }
 
     @Override
-    public String getCurrentLanguage(String key) {
-        return get(Define.PREF_FILE_NAME, key, String.class);
+    public String getCurrentLanguage() {
+        return get(Define.PREF_FILE_NAME, Define.KeyPreference.LANGUAGE, String.class);
     }
 
     @Override
-    public void setCurrentLanguage(String key, String value) {
-        put(Define.PREF_FILE_NAME, key, value);
-    }
-
-    @Override
-    public void setString(String key, String value) {
-        put(Define.PREF_FILE_NAME, key, value);
-    }
-
-    @Override
-    public String getString(String key) {
-        return get(Define.PREF_FILE_NAME, key, String.class);
-    }
-
-    @Override
-    public void setInt(String key, int value) {
-        put(Define.PREF_FILE_NAME, key, value);
-    }
-
-    @Override
-    public int getInt(String key) {
-        return get(Define.PREF_FILE_NAME, key, Integer.class);
-    }
-
-    @Override
-    public void setBoolean(String key, boolean value) {
-        put(Define.PREF_FILE_NAME, key, value);
-    }
-
-    @Override
-    public boolean getBoolean(String key) {
-        return get(Define.PREF_FILE_NAME, key, Boolean.class);
+    public void setCurrentLanguage(String value) {
+        put(Define.PREF_FILE_NAME, Define.KeyPreference.LANGUAGE, value);
     }
 }

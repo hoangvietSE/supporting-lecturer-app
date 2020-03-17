@@ -1,60 +1,48 @@
 package com.soict.hoangviet.supportinglecturer.data.sharepreference;
 
 public interface ISharePreference {
-    boolean getLoginStatus(String key);
+    boolean getLoginStatus();
 
-    void setLoginStatus(String key, boolean value);
+    void setLoginStatus(boolean value);
 
-    void setLoginStatusFromFacebook(String key, boolean value);
+    void setLoginStatusFromFacebook(boolean value);
 
-    boolean getLoginStatusFromFacebook(String key);
+    boolean getLoginStatusFromFacebook();
 
-    void setRtmpFacebook(String key, String value);
+    void setRtmpFacebook(String value);
 
-    String getRtmpFacebook(String key);
+    String getRtmpFacebook();
 
-    void setUserId(String key, String userId);
+    void setUserId(String userId);
 
-    String getUserId(String key);
+    String getUserId();
 
-    boolean getLoginStatusFromGoogle(String key);
+    boolean getLoginStatusFromGoogle();
 
-    void setLoginStatusFromGoogle(String key, boolean value);
+    void setLoginStatusFromGoogle(boolean value);
 
-    String getAccountNameGoogle(String key);
+    String getAccountNameGoogle();
 
-    void setAccountNameGoogle(String key, String value);
+    void setAccountNameGoogle(String value);
 
-    String getRtmpGoogle(String key);
+    String getRtmpGoogle();
 
-    void setRtmpGoogle(String key, String value);
+    void setRtmpGoogle(String value);
 
-    boolean getLiveStreamStatus(String key);
+    boolean getLiveStreamStatus();
 
-    void setLiveStreamStatus(String key, boolean value);
+    void setLiveStreamStatus(boolean value);
 
-    String getBroadcastId(String key);
+    String getBroadcastId();
 
-    void setBroadcastId(String key, String value);
+    void setBroadcastId(String value);
 
-    int getSettingZoomCheckedItem(String key);
+    int getSettingZoomCheckedItem();
 
-    void setZoomCheckedItem(String key, Integer value);
+    void setZoomCheckedItem(Integer value);
 
-    String getCurrentLanguage(String key);
+    String getCurrentLanguage();
 
-    void setCurrentLanguage(String key, String value);
-
-    void setString(String key, String value);
-
-    String getString(String key);
-
-    void setInt(String key, int value);
-
-    int getInt(String key);
-
-    void setBoolean(String key, boolean value);
-
-    boolean getBoolean(String key);
+    void setCurrentLanguage(String value);
 
 }

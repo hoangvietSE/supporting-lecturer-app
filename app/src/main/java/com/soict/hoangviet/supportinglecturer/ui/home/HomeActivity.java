@@ -84,7 +84,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
 
     private void initEvent() {
         mPresenter.checkConnectedToNetwork(this);
-        changeUI(mSharePreference.getLoginStatus(Define.KeyPreference.IS_LOGINED));
+        changeUI(mSharePreference.getLoginStatus());
         llLiveStream.setOnClickListener(this);
         llCreateVideo.setOnClickListener(this);
         llProfile.setOnClickListener(this);
@@ -105,7 +105,11 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         llCreateVideo.setOnClickListener(this);
         llProfile.setOnClickListener(this);
         btnYoutube.setOnClickListener(view -> {
-            ToastUtil.show(this, "Youtube");
+            if (!mSharePreference.getLoginStatus() || !mSharePreference.getLoginStatusFromGoogle()) {
+                ToastUtil.show(this, getString(R.string.dialog_syntax_login));
+            } else {
+                mPresenter.fetchListVideoYoutube();
+            }
         });
     }
 
@@ -118,16 +122,16 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.llLiveStream:
-                if (!mSharePreference.getLoginStatus(Define.KeyPreference.IS_LOGINED)) {
+                if (!mSharePreference.getLoginStatus()) {
                     showCautionDialog(getString(R.string.dialog_syntax_login), "", liveDialog -> {
                         liveDialog.dismiss();
                         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivityForResult(intent, Define.RequestCode.REQUEST_LOGIN);
                     });
                 } else {
-                    if (mSharePreference.getLoginStatusFromGoogle(Define.KeyPreference.LOGIN_FROM_GOOGLE)) {
+                    if (mSharePreference.getLoginStatusFromGoogle()) {
                         CreateLiveEventTask createLiveEventTask = new CreateLiveEventTask();
-                        createLiveEventTask.execute(mSharePreference.getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME));
+                        createLiveEventTask.execute(mSharePreference.getAccountNameGoogle());
                     } else {
                         mPresenter.getRtmpFacebookLive();
                     }
@@ -148,7 +152,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Define.RequestCode.REQUEST_LOGIN) {
             if (resultCode == RESULT_OK) {
-                changeUI(mSharePreference.getLoginStatus(Define.KeyPreference.IS_LOGINED));
+                changeUI(mSharePreference.getLoginStatus());
             }
         } else if (requestCode == Define.RequestCode.REQUEST_RECOVERY_ACCOUNT) {
 //            changeUI(AppPreferences.INSTANCE.getKeyBoolean(Constants.KeyPreference.IS_LOGINED));
@@ -184,11 +188,11 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     }
 
     private void getUserProfile() {
-        if (mSharePreference.getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
+        if (mSharePreference.getLoginStatusFromFacebook()) {
             mPresenter.getInfoFacebook();
         } else {
-            if (!mSharePreference.getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME).isEmpty()) {
-                tvName.setText(mSharePreference.getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME));
+            if (!mSharePreference.getAccountNameGoogle().isEmpty()) {
+                tvName.setText(mSharePreference.getAccountNameGoogle());
             }
         }
     }
@@ -202,13 +206,13 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     @Override
     public void showConfirmLogout() {
         showConfirmDialog(getString(R.string.dialog_confirm_logout), "", liveDialog -> {
-            if (mSharePreference.getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
+            if (mSharePreference.getLoginStatusFromFacebook()) {
                 mPresenter.logoutFacebook();
             } else {
                 mPresenter.logoutGoogle();
             }
             liveDialog.dismiss();
-            mSharePreference.setLoginStatus(Define.KeyPreference.IS_LOGINED, false);
+            mSharePreference.setLoginStatus(false);
             changeUI(false);
         });
     }
@@ -224,7 +228,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     public void showInfoFacebook(FacebookResponse facebookResponse) {
         tvName.setText(facebookResponse.getName());
         CommonExtensionUtil.loadImageUrl(ivAvatar, facebookResponse.getPicture().getData().getUrl());
-        mSharePreference.setUserId(Define.KeyPreference.USER_ID, facebookResponse.getId());
+        mSharePreference.setUserId(facebookResponse.getId());
     }
 
     private class CreateLiveEventTask extends AsyncTask<String, Void, EventData> {
@@ -280,7 +284,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
             streamId = params[1];
             rtmpLink = params[2];
             mScheduleTaskExecutor = Executors.newSingleThreadScheduledExecutor();
-            YouTube youTube = YouTubeNewSingleton.newInstance(mSharePreference.getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME), HomeActivity.this).getYoutube();
+            YouTube youTube = YouTubeNewSingleton.newInstance(mSharePreference.getAccountNameGoogle(), HomeActivity.this).getYoutube();
             mScheduleTaskExecutor.scheduleAtFixedRate(() -> {
                 try {
                     if (streamId != null) {
@@ -296,9 +300,9 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         @Override
         protected void onPostExecute(Void param) {
             hideLoading();
-            mSharePreference.setLiveStreamStatus(Define.KeyPreference.IS_LIVESTREAMED, true);
-            mSharePreference.setRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE, rtmpLink);
-            mSharePreference.setBroadcastId(Define.KeyPreference.BROADCAST_ID, broadCastId);
+            mSharePreference.setLiveStreamStatus(true);
+            mSharePreference.setRtmpGoogle(rtmpLink);
+            mSharePreference.setBroadcastId(broadCastId);
             Intent intent = new Intent(HomeActivity.this, TeacherActivity.class);
             intent.putExtra(TeacherActivity.EXTRA_LIVESTREAM, true);
             startActivity(intent);

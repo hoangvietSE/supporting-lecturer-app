@@ -125,26 +125,26 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
 
     @Override
     public void initStream(int resultCode, Intent data) {
-        if (!getmSharePreference().getRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK).isEmpty()
-                || !getmSharePreference().getRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE).isEmpty()) {
+        if (!getmSharePreference().getRtmpFacebook().isEmpty()
+                || !getmSharePreference().getRtmpGoogle().isEmpty()) {
             getView().executeStreamVideo(resultCode, data);
         }
     }
 
     @Override
     public void startStreamVideo(RtmpDisplay rtmpDisplay, int orientation, int mScreenDensity, int resultCode, Intent data) {
-        if (getmSharePreference().getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
+        if (getmSharePreference().getLoginStatusFromFacebook()) {
             // TODO RTMP FACEBOOK
             if (rtmpDisplay.prepareAudio() && rtmpDisplay.prepareVideo(DISPLAY_WIDTH, DISPLAY_HEIGHT, 60, 4000000, orientation, mScreenDensity)) {
                 rtmpDisplay.setIntentResult(resultCode, data);
-                rtmpDisplay.startStream(getmSharePreference().getRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK));
+                rtmpDisplay.startStream(getmSharePreference().getRtmpFacebook());
             }
         }
         else {
             // TODO RTMP YOUTUBE
             if (rtmpDisplay.prepareAudio() && rtmpDisplay.prepareVideo(DISPLAY_WIDTH, DISPLAY_HEIGHT, 60, 4000000, orientation, mScreenDensity)) {
                 rtmpDisplay.setIntentResult(resultCode, data);
-                rtmpDisplay.startStream(getmSharePreference().getRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE));
+                rtmpDisplay.startStream(getmSharePreference().getRtmpGoogle());
             }
         }
     }
@@ -316,7 +316,7 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
     public void endYoutubeEventTask(Context context, String broadcastId) {
         Observable.fromCallable(() -> {
             try {
-                YouTubeApi.endEvent(YouTubeNewSingleton.newInstance(getmSharePreference().getAccountNameGoogle(Define.KeyPreference.ACCOUNT_NAME), context).getYoutube(), broadcastId);
+                YouTubeApi.endEvent(YouTubeNewSingleton.newInstance(getmSharePreference().getAccountNameGoogle(), context).getYoutube(), broadcastId);
             } catch (UserRecoverableAuthIOException userRecoverableException) {
                 Log.w(TAG, "getSubscription:recoverable exception", userRecoverableException);
                 ((TeacherActivity) context).startActivityForResult(userRecoverableException.getIntent(), Define.RequestCode.REQUEST_RECOVERY_ACCOUNT);
@@ -359,24 +359,24 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
             getView().setImageRecordStop();
         }
         if (rtmpDisplay.isStreaming()) rtmpDisplay.stopStream();
-        if (getmSharePreference().getLoginStatusFromFacebook(Define.KeyPreference.LOGIN_FROM_FACEBOOK)) {
+        if (getmSharePreference().getLoginStatusFromFacebook()) {
             new GraphRequest(
                     AccessToken.getCurrentAccessToken(),
-                    "/" + getmSharePreference().getUserId(Define.KeyPreference.USER_ID) + "?end_live_video=true",
+                    "/" + getmSharePreference().getUserId() + "?end_live_video=true",
                     null,
                     HttpMethod.POST,
                     responseStream -> {
                         Log.d(TAG, "stopScreenSharing: " + responseStream.toString());
                     }
             ).executeAsync();
-            getmSharePreference().setRtmpFacebook(Define.KeyPreference.RTMP_FACEBOOK, "");
+            getmSharePreference().setRtmpFacebook("");
         } else {
-            if (getmSharePreference().getLiveStreamStatus(Define.KeyPreference.IS_LIVESTREAMED)) {
-                String broadcastID = getmSharePreference().getBroadcastId(Define.KeyPreference.BROADCAST_ID);
+            if (getmSharePreference().getLiveStreamStatus()) {
+                String broadcastID = getmSharePreference().getBroadcastId();
                 getView().endYoutubeEventTask(broadcastID);
-                getmSharePreference().setLiveStreamStatus(Define.KeyPreference.IS_LIVESTREAMED, false);
-                getmSharePreference().setRtmpGoogle(Define.KeyPreference.RTMP_GOOGLE, "");
-                getmSharePreference().setBroadcastId(Define.KeyPreference.BROADCAST_ID, "");
+                getmSharePreference().setLiveStreamStatus(false);
+                getmSharePreference().setRtmpGoogle("");
+                getmSharePreference().setBroadcastId("");
             }
 
         }
@@ -384,7 +384,7 @@ public class TeacherPresenterImpl<V extends TeacherView> extends BasePresenterIm
 
     @Override
     public void initZoom() {
-        getView().setZoom(getmSharePreference().getSettingZoomCheckedItem(Define.KeyPreference.SETTING_ZOOM));
+        getView().setZoom(getmSharePreference().getSettingZoomCheckedItem());
     }
 
     @SuppressLint("CheckResult")

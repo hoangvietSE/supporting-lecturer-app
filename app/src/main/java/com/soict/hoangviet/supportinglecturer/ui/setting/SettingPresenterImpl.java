@@ -28,11 +28,11 @@ public class SettingPresenterImpl<V extends SettingView> extends BasePresenterIm
                 context,
                 R.string.setting_row_zoom,
                 R.array.setting_zoom_item,
-                getmSharePreference().getSettingZoomCheckedItem(Define.KeyPreference.SETTING_ZOOM),
+                getmSharePreference().getSettingZoomCheckedItem(),
                 R.string.setting_row_zoom_positive,
                 R.string.setting_row_zoom_negative,
                 position -> {
-                    getmSharePreference().setZoomCheckedItem(Define.KeyPreference.SETTING_ZOOM, position);
+                    getmSharePreference().setZoomCheckedItem(position);
                     EventBus.getDefault().postSticky(new SettingZoomEvent(position));
                 }
         );

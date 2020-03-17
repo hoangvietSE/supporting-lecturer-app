@@ -38,8 +38,8 @@ public class LecturerApplication extends Application implements HasFragmentInjec
                 .build()
                 .inject(this);
         initDeployedGate();
-        if (sharePreference.getCurrentLanguage(Define.KeyPreference.LANGUAGE) != "") {
-            LanguageUtil.setCurrentLanguage(this, sharePreference.getCurrentLanguage(Define.KeyPreference.LANGUAGE));
+        if (sharePreference.getCurrentLanguage() != "") {
+            LanguageUtil.setCurrentLanguage(this, sharePreference.getCurrentLanguage());
         }
         remoteConfig();
     }
