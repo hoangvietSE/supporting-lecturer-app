@@ -6,10 +6,8 @@ import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.data.network.Repository;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.entity.response.ChannelResponse;
-import com.soict.hoangviet.supportinglecturer.entity.response.youtube.ItemsItem;
 import com.soict.hoangviet.supportinglecturer.entity.response.youtube.YoutubeVideoResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenterImpl;
-import com.soict.hoangviet.supportinglecturer.utils.DialogUtil;
 
 import java.util.HashMap;
 import java.util.Map;
