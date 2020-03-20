@@ -4,5 +4,5 @@ import com.soict.hoangviet.supportinglecturer.entity.response.youtube.YoutubeVid
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
 
 public interface YoutubeView extends BaseView {
-    void showListVideoYoutube(YoutubeVideoResponse response);
+    void showListVideoYoutube(YoutubeVideoResponse response, boolean isRefresh);
 }

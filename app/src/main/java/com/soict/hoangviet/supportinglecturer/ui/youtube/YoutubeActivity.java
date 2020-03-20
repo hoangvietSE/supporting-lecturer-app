@@ -3,7 +3,6 @@ package com.soict.hoangviet.supportinglecturer.ui.youtube;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -51,10 +50,10 @@ public class YoutubeActivity extends BaseActivity implements YoutubeView {
                     new DialogUtil.OnAddDataToDialogListener() {
                         @Override
                         public <T> void onData(View view, T data) {
-                            ((YouTubePlayerView)view.findViewById(R.id.youtube_player_view)).addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                            ((YouTubePlayerView) view.findViewById(R.id.youtube_player_view)).addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
                                 @Override
                                 public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                                    youTubePlayer.loadVideo(((ItemsItem)data).getId().getVideoId(), 0);
+                                    youTubePlayer.loadVideo(((ItemsItem) data).getId().getVideoId(), 0);
                                 }
                             });
 
@@ -62,10 +61,11 @@ public class YoutubeActivity extends BaseActivity implements YoutubeView {
                     }
             );
         });
+        youtubeAdapter.enableLoadingMore(false);
         brvListYoutube.setAdapter(youtubeAdapter);
-        brvListYoutube.setListLayoutManager(LinearLayoutManager.VERTICAL);
+        brvListYoutube.setGridLayoutManager(2);
         brvListYoutube.setOnRefreshListener(() -> {
-
+            fetchVideoYoutube(true);
         });
     }
 
@@ -75,11 +75,11 @@ public class YoutubeActivity extends BaseActivity implements YoutubeView {
 
     @Override
     protected void initData() {
-        fetchVideoYoutube();
+        fetchVideoYoutube(false);
     }
 
-    private void fetchVideoYoutube() {
-        mPresenter.fetchListVideoYoutube();
+    private void fetchVideoYoutube(boolean isRefresh) {
+        mPresenter.fetchListVideoYoutube(isRefresh);
     }
 
     @Override
@@ -93,7 +93,11 @@ public class YoutubeActivity extends BaseActivity implements YoutubeView {
     }
 
     @Override
-    public void showListVideoYoutube(YoutubeVideoResponse response) {
-        brvListYoutube.addItem(response.getItems());
+    public void showListVideoYoutube(YoutubeVideoResponse response, boolean isRefresh) {
+        if (isRefresh) {
+            brvListYoutube.refresh(response.getItems());
+        } else {
+            brvListYoutube.addItem(response.getItems());
+        }
     }
 }

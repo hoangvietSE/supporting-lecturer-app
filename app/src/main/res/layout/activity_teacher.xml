@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawView"
     android:layout_width="match_parent"
@@ -7,20 +8,21 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:animateLayoutChanges="true"
         android:id="@+id/spenViewContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
 
         <RelativeLayout
             android:id="@+id/spenViewLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <WebView
-            android:layout_marginTop="50dp"
             android:id="@+id/webView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp" />
     </FrameLayout>
 
     <LinearLayout
@@ -243,7 +245,33 @@
         android:layout_width="180dp"
         android:layout_height="230dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
+    <!-- Camera -->
+    <com.otaliastudios.cameraview.CameraView
+        android:id="@+id/camera"
+        android:layout_width="180dp"
+        android:layout_height="230dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:keepScreenOn="true"
+        app:cameraAudio="on"
+        app:cameraAutoFocusMarker="@string/cameraview_default_autofocus_marker"
+        app:cameraEngine="camera2"
+        app:cameraExperimental="true"
+        app:cameraFacing="front"
+        app:cameraFlash="auto"
+        app:cameraGestureLongTap="none"
+        app:cameraGesturePinch="zoom"
+        app:cameraGestureScrollHorizontal="filterControl1"
+        app:cameraGestureScrollVertical="exposureCorrection"
+        app:cameraGestureTap="autoFocus"
+        app:cameraGrid="off"
+        app:cameraMode="picture"
+        app:cameraPlaySounds="false"
+        app:cameraPreview="glSurface" />
 
     <ImageView
         android:id="@+id/btnWebView"

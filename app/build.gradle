@@ -116,48 +116,66 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.14.2'
+
     //RxJava
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+
     //Dagger2
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
     //Social
     implementation "com.google.android.gms:play-services-auth:$gms_play_service"
     implementation 'com.facebook.android:facebook-login:[4,5)'
-    //Butterknife
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-config:19.1.1'
+
+    //ButterKnife
     implementation "com.jakewharton:butterknife:$butter_knife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butter_knife_version"
 
-    implementation 'life.knowledge4:k4l-video-trimmer:1.0'
-    implementation project(':pen-v5.1.0_full')
-    implementation project(path: ':hbrecorder')
-    implementation 'com.karumi:dexter:5.0.0'
-    implementation 'life.knowledge4:k4l-video-trimmer:1.0'
-    implementation 'com.obsez.android.lib.filechooser:filechooser:1.1.10'
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
-    implementation 'com.github.pedroSG94.rtmp-rtsp-stream-client-java:rtplibrary:1.4.2'
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+    //Google Service
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.apis:google-api-services-youtube:v3-rev120-1.19.0'
     implementation 'com.google.http-client:google-http-client-android:1.25.0'
     implementation 'com.google.api-client:google-api-client-android:1.25.0'
-    implementation files('libs/sdk-v1.0.1.jar')
-    implementation 'com.camerakit:camerakit:1.0.0-beta3.11'
-    implementation 'com.camerakit:jpegkit:0.1.0'
-    implementation 'com.googlecode.mp4parser:isoparser:1.1.9'
-    implementation 'com.writingminds:FFmpegAndroid:0.3.2'
+
+    //Camera
+    implementation 'com.otaliastudios:cameraview:2.6.2'
+
+    //Video
     implementation 'life.knowledge4:k4l-video-trimmer:1.0'
+    implementation 'com.writingminds:FFmpegAndroid:0.3.2'
+    implementation 'com.googlecode.mp4parser:isoparser:1.1.9'
+    implementation 'com.github.pedroSG94.rtmp-rtsp-stream-client-java:rtplibrary:1.4.2'
+
+    //DeployedGate
     implementation 'com.deploygate:sdk:4.2.0'
-    implementation 'com.github.duanhong169:colorpicker:1.1.6'
+
+    //EventBus
     implementation 'org.greenrobot:eventbus:3.2.0'
-    implementation 'com.google.firebase:firebase-config:19.1.1'
+
+    //Color picker
+    implementation 'com.github.duanhong169:colorpicker:1.1.6'
+
+    //Import Module
+    implementation project(':pen-v5.1.0_full')
+    implementation project(path: ':hbrecorder')
+    implementation files('libs/sdk-v1.0.1.jar')
+
+    implementation 'com.karumi:dexter:5.0.0'
+    implementation 'com.obsez.android.lib.filechooser:filechooser:1.1.10'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 }

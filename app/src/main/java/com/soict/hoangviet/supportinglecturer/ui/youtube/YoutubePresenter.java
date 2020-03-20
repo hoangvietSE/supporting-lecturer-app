@@ -5,5 +5,5 @@ import com.soict.hoangviet.supportinglecturer.ui.base.BasePresenter;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseView;
 
 public interface YoutubePresenter<V extends BaseView> extends BasePresenter<V> {
-    void fetchListVideoYoutube();
+    void fetchListVideoYoutube(boolean isRefresh);
 }

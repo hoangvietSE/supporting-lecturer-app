@@ -27,7 +27,7 @@ public class YoutubePresenterImpl<V extends YoutubeView> extends BasePresenterIm
     }
 
     @Override
-    public void fetchListVideoYoutube() {
+    public void fetchListVideoYoutube(boolean isRefresh) {
         Map<String, Object> dataChannel = new HashMap<>();
         dataChannel.put("part", "id");
         dataChannel.put("q", getmSharePreference().getYoutubeName());
@@ -36,7 +36,7 @@ public class YoutubePresenterImpl<V extends YoutubeView> extends BasePresenterIm
         getmCompositeDisposable().add(
                 repository.getChannelYoutube(dataChannel)
                         .doOnSubscribe(disposable -> {
-                            getView().showLoading();
+                            if(!isRefresh) getView().showLoading();
                         })
                         .doFinally(() -> {
                             getView().hideLoading();
@@ -55,7 +55,7 @@ public class YoutubePresenterImpl<V extends YoutubeView> extends BasePresenterIm
                             }
                         })
                         .subscribe(response -> {
-                            getView().showListVideoYoutube(response);
+                            getView().showListVideoYoutube(response, isRefresh);
                         }, throwable -> {
                             handleFailure(throwable);
                         })

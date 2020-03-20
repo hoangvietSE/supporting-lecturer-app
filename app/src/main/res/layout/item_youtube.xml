@@ -11,20 +11,13 @@
         android:padding="@dimen/content_padding_16_dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guide"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4" />
-
         <ImageView
             android:id="@+id/imv_video"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="16:9"
-            app:layout_constraintEnd_toStartOf="@id/guide"
+            app:layout_constraintDimensionRatio="2:1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/background_default" />
@@ -33,10 +26,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@id/imv_video"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guide"
-            app:layout_constraintTop_toTopOf="@id/imv_video">
+            app:layout_constraintEnd_toEndOf="@id/imv_video"
+            app:layout_constraintStart_toStartOf="@id/imv_video"
+            app:layout_constraintTop_toBottomOf="@id/imv_video">
 
             <TextView
                 android:id="@+id/tv_name"
@@ -68,9 +60,9 @@
             app:layout_constraintTop_toTopOf="@id/imv_video" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent" />
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="1dp"-->
+    <!--        android:background="@color/colorPrimary"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

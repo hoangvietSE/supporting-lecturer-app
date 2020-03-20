@@ -2,7 +2,6 @@ package com.soict.hoangviet.supportinglecturer.ui.base;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -22,10 +21,6 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -34,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
+import com.otaliastudios.cameraview.CameraView;
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView;
 import com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionButton;
@@ -52,17 +48,19 @@ import io.reactivex.schedulers.Schedulers;
 public abstract class BaseCameraActivity extends BaseActivity {
     @BindView(R.id.textureView)
     protected AutoFitTextureView textureView;
+    @BindView(R.id.camera)
+    protected CameraView cameraView;
     @BindView(R.id.drawView)
     protected RelativeLayout drawView;
     @Nullable
     @BindView(R.id.rl_camera)
     protected RelativeLayout rlCamera;
-    @Nullable
-    @BindView(R.id.camLoading)
-    protected RelativeLayout camLoading;
-    @Nullable
-    @BindView(R.id.frameCamera)
-    protected FrameLayout frameCamera;
+    //    @Nullable
+//    @BindView(R.id.camLoading)
+//    protected RelativeLayout camLoading;
+//    @Nullable
+//    @BindView(R.id.frameCamera)
+//    protected FrameLayout frameCamera;
     private SonnyJackDragView mSonnyJackDragView;
     private CameraDevice.StateCallback stateCallback;
     private CameraDevice cameraDevice;
@@ -92,18 +90,19 @@ public abstract class BaseCameraActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        cameraView.setLifecycleOwner(this);
         initStateCallback();
         initTextureListener();
         initEnum();
     }
 
-    private void hideFrameCamera() {
-        frameCamera.setVisibility(View.GONE);
-    }
+//    private void hideFrameCamera() {
+//        frameCamera.setVisibility(View.GONE);
+//    }
 
-    private void showFrameCamera() {
-        frameCamera.setVisibility(View.VISIBLE);
-    }
+//    private void showFrameCamera() {
+//        frameCamera.setVisibility(View.VISIBLE);
+//    }
 
     private void initEnum() {
         mCameraEnum = CameraEnum.SHOW_HALF_CAMERA;
@@ -112,40 +111,34 @@ public abstract class BaseCameraActivity extends BaseActivity {
     @Override
     protected void initListener() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            hideFrameCamera();
-            textureView.setOnClickListener(view -> {
-                if (effect == 12) {
-                    effect = 0;
-                }
-                captureRequestBuilder.set(CaptureRequest.CONTROL_EFFECT_MODE, effect++);
-                try {
-                    cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
-                } catch (CameraAccessException e) {
-                    e.printStackTrace();
-                }
-            });
+//            hideFrameCamera();
             mfaLeftRight.setOnClickListener(view -> {
-                if(!avoidDuplicateClick()){
-                    switch (mCameraEnum) {
-                        case SHOW_HALF_CAMERA:
-                            hideFrameCamera();
-                            rlCamera.setVisibility(View.GONE);
-                            mCameraEnum = CameraEnum.HIDE_CAMERA;
-                            isShowCamera = false;
-                            break;
-                        case HIDE_CAMERA:
-                            showFrameCamera();
-                            mCameraEnum = CameraEnum.SHOW_FULL_CAMERA;
-                            showTextureFull();
-                            break;
-                        case SHOW_FULL_CAMERA:
-                            hideFrameCamera();
-                            showTextureViewHalf();
-                            rlCamera.setVisibility(View.VISIBLE);
-                            isShowCamera = true;
-                            mCameraEnum = CameraEnum.SHOW_HALF_CAMERA;
-                            break;
+                if (!avoidDuplicateClick()) {
+                    if (rlCamera.getVisibility() == View.VISIBLE) {
+                        rlCamera.setVisibility(View.GONE);
+                    } else {
+                        rlCamera.setVisibility(View.VISIBLE);
                     }
+//                    switch (mCameraEnum) {
+//                        case SHOW_HALF_CAMERA:
+//                            hideFrameCamera();
+//                            rlCamera.setVisibility(View.GONE);
+//                            mCameraEnum = CameraEnum.HIDE_CAMERA;
+//                            isShowCamera = false;
+//                            break;
+//                        case HIDE_CAMERA:
+//                            showFrameCamera();
+//                            mCameraEnum = CameraEnum.SHOW_FULL_CAMERA;
+//                            showTextureFull();
+//                            break;
+//                        case SHOW_FULL_CAMERA:
+//                            hideFrameCamera();
+//                            showTextureViewHalf();
+//                            rlCamera.setVisibility(View.VISIBLE);
+//                            isShowCamera = true;
+//                            mCameraEnum = CameraEnum.SHOW_HALF_CAMERA;
+//                            break;
+//                    }
                 }
             });
         } else {
@@ -165,7 +158,7 @@ public abstract class BaseCameraActivity extends BaseActivity {
         mSonnyJackDragView = new SonnyJackDragView.Builder()
                 .setActivity(this)
                 .setNeedNearEdge(true)
-                .setView(textureView)
+                .setView(cameraView)
                 .build();
     }
 
@@ -321,19 +314,14 @@ public abstract class BaseCameraActivity extends BaseActivity {
         }
     }
 
-    protected void showTextureFull() {
-        FrameLayout.LayoutParams layoutParams = createFrameLayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT
-        );
-        removeViewParent(textureView);
-        frameCamera.addView(textureView, layoutParams);
-//        mSonnyJackDragView = new SonnyJackDragView.Builder()
-//                .setActivity(this)
-//                .setNeedNearEdge(true)
-//                .setView(textureView)
-//                .build();
-    }
+//    protected void showTextureFull() {
+//        FrameLayout.LayoutParams layoutParams = createFrameLayoutParams(
+//                WindowManager.LayoutParams.MATCH_PARENT,
+//                WindowManager.LayoutParams.MATCH_PARENT
+//        );
+//        removeViewParent(textureView);
+//        frameCamera.addView(textureView, layoutParams);
+//    }
 
     @SuppressLint("CheckResult")
     protected void showTextureViewHalf() {
@@ -348,10 +336,10 @@ public abstract class BaseCameraActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
-                    camLoading.setVisibility(View.VISIBLE);
+//                    camLoading.setVisibility(View.VISIBLE);
                 })
                 .doFinally(() -> {
-                    camLoading.setVisibility(View.GONE);
+//                    camLoading.setVisibility(View.GONE);
                 })
                 .subscribe(() -> {
                     rlCamera.addView(textureView, layoutParams);

@@ -41,8 +41,6 @@ public class YoutubeAdapter extends EndlessLoadingRecyclerViewAdapter {
     }
 
     class YoutubeViewHolder extends NormalViewHolder<ItemsItem> {
-        @BindView(R.id.guide)
-        Guideline guide;
         @BindView(R.id.imv_video)
         ImageView imvVideo;
         @BindView(R.id.tv_name)
