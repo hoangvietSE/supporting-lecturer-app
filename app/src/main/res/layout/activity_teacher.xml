@@ -29,7 +29,9 @@
         android:id="@+id/llMenuMore"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:padding="@dimen/space_8">
+        android:paddingStart="@dimen/space_8"
+        android:paddingTop="@dimen/space_8"
+        android:paddingEnd="@dimen/space_8">
 
         <ImageButton
             android:id="@+id/ivPen"
@@ -222,10 +224,11 @@
         tools:text="Page 0" />
 
     <Chronometer
+        android:paddingTop="@dimen/content_padding_16_dp"
         android:id="@+id/simpleChronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvPageNumber"
+        android:layout_below="@id/llMenuMore"
         android:layout_centerHorizontal="true"
         android:textColor="@color/blue"
         android:textSize="@dimen/text_16"

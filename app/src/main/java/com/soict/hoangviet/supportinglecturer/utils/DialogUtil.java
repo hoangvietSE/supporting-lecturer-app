@@ -30,7 +30,7 @@ public class DialogUtil {
         View view = LayoutInflater.from(context).inflate(layoutId, null, false);
         dialog.setCancelable(cancelable);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        listener.onData(view, data);
+        listener.onData(dialog, view, data);
         dialog.setContentView(view);
         dialog.show();
     }
@@ -159,6 +159,7 @@ public class DialogUtil {
 
     public interface ChoiceItemListener {
         void onPositiveClick(ArrayList mSelectedItems);
+
         void onNegativeClick();
     }
 
@@ -167,7 +168,7 @@ public class DialogUtil {
     }
 
     public interface OnAddDataToDialogListener {
-        <T> void onData(View view, T data);
+        <T> void onData(Dialog dialog, View view, T data);
     }
 
 }

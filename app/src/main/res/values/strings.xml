@@ -1,4 +1,5 @@
 <resources>
+    <string name="file_provider">com.soict.hoangviet.provider</string>
     <!--    <string name="app_name">Ngoại ngữ 24h</string>-->
     226981998041-iutk0tsccke1drjaqlpc2ung74qta131.apps.googleusercontent.com
     <string name="facebook_app_id">1192417877622499</string>
@@ -98,6 +99,9 @@
     <string name="teacher_dialog_network_message">Vui lòng kết nối Internet để có trải nghiệm tốt nhất</string>
     <string name="teacher_dialog_network_positive">Đồng ý</string>
     <string name="teacher_dialog_network_negative">Hủy</string>
+
+<!--    Splash-->
+    <string name="splash_button_title">Bắt đầu</string>
 
 
 </resources>

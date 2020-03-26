@@ -1,6 +1,7 @@
 package com.soict.hoangviet.supportinglecturer.ui.teacher;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -157,6 +158,31 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         checkNetworkConnection();
     }
 
+    @Override
+    protected CameraListener createCameraListener() {
+        return new CameraListener() {
+            @Override
+            public void onTakeImageFileCaptureSuccess(String cameraFilePath, Uri uriImage) {
+                SpenObjectImage imgObj = new SpenObjectImage();
+                imgObj.setImage(cameraFilePath);
+                RectF rect1 = new RectF(0, 0, penViewContainer.getWidth(), penViewContainer.getHeight());
+                imgObj.setRect(rect1, true);
+                mPenPageDoc.appendObject(imgObj);
+                mPenSurfaceView.update();
+            }
+
+            @Override
+            public void onTakeAbsolutePathImageSuccess(String absoluteFilePathImage, Uri uriImage) {
+                SpenObjectImage imgObj = new SpenObjectImage();
+                imgObj.setImage(absoluteFilePathImage);
+                RectF rect1 = new RectF(0, 0, penViewContainer.getWidth(), penViewContainer.getHeight());
+                imgObj.setRect(rect1, true);
+                mPenPageDoc.appendObject(imgObj);
+                mPenSurfaceView.update();
+            }
+        };
+    }
+
     private void checkNetworkConnection() {
         mPresenter.checkNetworkConnection();
     }
@@ -286,7 +312,25 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         });
         ibInsertImage.setOnClickListener(view -> {
             closeSettingView();
-            callGalleryForInputImage(REQUEST_CODE_SELECT_IMAGE);
+            DialogUtil.showContentDialog(
+                    this,
+                    R.layout.dialog_camera,
+                    true,
+                    null,
+                    new DialogUtil.OnAddDataToDialogListener() {
+                        @Override
+                        public <T> void onData(Dialog dialog, View view, T data) {
+                            view.findViewById(R.id.btn_capture).setOnClickListener(v -> {
+                                openCamera();
+                                dialog.dismiss();
+                            });
+                            view.findViewById(R.id.btn_gallery).setOnClickListener(v -> {
+                                openGallery();
+                                dialog.dismiss();
+                            });
+                        }
+                    }
+            );
         });
         ibAddCamera.setOnClickListener(view -> {
             ibAddCamera.setClickable(false);
@@ -633,19 +677,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
         }
     }
 
-    private void callGalleryForInputImage(int requestCode) {
-        // Get an image from the gallery.
-        try {
-            Intent galleryIntent = new Intent(Intent.ACTION_PICK);
-            galleryIntent.setType("image/*");
-            String[] mimeTypes = {"image/jpeg", "image/png"};
-            galleryIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-            startActivityForResult(galleryIntent, requestCode);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -666,17 +697,6 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
                 }
                 mPenSurfaceView.update();
             }
-            if (requestCode == REQUEST_CODE_SELECT_IMAGE) {
-                Uri imageFileUri = data.getData();
-                String imageRealPath = getRealPathFromURI(imageFileUri);
-                SpenObjectImage imgObj = new SpenObjectImage();
-                imgObj.setImage(imageRealPath);
-                RectF rect1 = new RectF(0, 0, penViewContainer.getWidth(), penViewContainer.getHeight());
-                imgObj.setRect(rect1, true);
-                mPenPageDoc.appendObject(imgObj);
-                mPenSurfaceView.update();
-            }
-
             if (requestCode == REQUEST_CODE_STREAM) {
                 hideLoading();
                 mPresenter.initStream(resultCode, data);
@@ -851,9 +871,7 @@ public class TeacherActivity extends BaseSamsungSpenSdkActivity implements Teach
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onNetworkEvent(NetworkBroadcastEvent event) {
         /* Reload webView */
-        new Handler().postDelayed(() -> {
-            webView.reload();
-        }, 500);
+        webView.reload();
         EventBus.getDefault().removeStickyEvent(event);
     }
 }

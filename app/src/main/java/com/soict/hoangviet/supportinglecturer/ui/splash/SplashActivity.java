@@ -2,6 +2,8 @@ package com.soict.hoangviet.supportinglecturer.ui.splash;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
 
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
@@ -13,12 +15,15 @@ import java.util.TimerTask;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class SplashActivity extends BaseActivity implements SplashView {
     @Inject
     SplashPresenter<SplashView> mPresenter;
+    @BindView(R.id.btn_start)
+    TextView btnStart;
     private Timer timer;
 
     @Override
@@ -47,7 +52,11 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     protected void initListener() {
-
+        btnStart.setOnClickListener(view -> {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        });
     }
 
     @Override
@@ -58,7 +67,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @Override
     public void onNetworkConnection(boolean hasNetwork) {
         if (hasNetwork) {
-            goToHomeScreen();
+//            goToHomeScreen();
         } else {
             showDialogAlert();
         }
@@ -76,6 +85,13 @@ public class SplashActivity extends BaseActivity implements SplashView {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish();
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     private static class SplashTimerTask extends TimerTask {

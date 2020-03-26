@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
 
     <RelativeLayout
@@ -20,16 +20,16 @@
             android:visibility="gone" />
 
         <include
-            android:visibility="gone"
             android:id="@+id/camLoading"
-            layout="@layout/dialog_loading" />
+            layout="@layout/dialog_loading"
+            android:visibility="gone" />
 
         <com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView
-            android:visibility="gone"
             android:id="@+id/textureView"
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
 
         <!-- Camera -->
         <com.otaliastudios.cameraview.CameraView
@@ -54,7 +54,11 @@
             app:cameraPlaySounds="false"
             app:cameraPreview="glSurface" />
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvFilter"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -84,17 +88,20 @@
                 android:layout_marginTop="50dp" />
         </FrameLayout>
 
-<!--        <FrameLayout-->
-<!--            android:id="@+id/frameCamera"-->
-<!--            android:layout_width="700dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_centerHorizontal="true" />-->
+        <!--        <FrameLayout-->
+        <!--            android:id="@+id/frameCamera"-->
+        <!--            android:layout_width="700dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_centerHorizontal="true" />-->
 
         <LinearLayout
             android:id="@+id/llMenuMore"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:padding="@dimen/space_8">
+            android:paddingStart="@dimen/space_8"
+            android:paddingTop="@dimen/space_8"
+            android:paddingEnd="@dimen/space_8"
+            android:visibility="visible">
 
             <ImageButton
                 android:id="@+id/ivPen"
@@ -290,8 +297,9 @@
             android:id="@+id/simpleChronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvPageNumber"
+            android:layout_below="@id/llMenuMore"
             android:layout_centerHorizontal="true"
+            android:paddingTop="@dimen/content_padding_16_dp"
             android:textColor="@color/blue"
             android:textSize="@dimen/text_16"
             android:textStyle="bold" />

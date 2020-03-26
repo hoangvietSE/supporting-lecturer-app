@@ -17,15 +17,16 @@
     <!-- TEXT -->
     <dimen name="text_8">8sp</dimen>
     <dimen name="text_11">11sp</dimen>
-    <dimen name="text_13">13sp</dimen> <!-- Leading 20/24pt -->
+    <dimen name="text_13">13sp</dimen>
     <dimen name="text_14">14sp</dimen>
-    <dimen name="text_15">15sp</dimen> <!-- Leading 24/28pt -->
+    <dimen name="text_15">15sp</dimen>
     <dimen name="text_16">16sp</dimen>
     <dimen name="text_18">18sp</dimen>
     <dimen name="text_20">20sp</dimen>
-    <dimen name="text_24">24sp</dimen> <!-- Leading 32pt -->
-    <dimen name="text_34">34sp</dimen> <!-- Leading 40pt -->
-    <dimen name="text_45">45sp</dimen> <!-- Leading 48pt -->
+    <dimen name="text_24">24sp</dimen>
+    <dimen name="text_30">30sp</dimen>
+    <dimen name="text_34">34sp</dimen>
+    <dimen name="text_45">45sp</dimen>
     <dimen name="spl_default_splitter_size">8dp</dimen>
 
     <!--Margin-->

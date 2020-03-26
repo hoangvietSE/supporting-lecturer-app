@@ -2,9 +2,12 @@ package com.soict.hoangviet.supportinglecturer.ui.base;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -13,8 +16,12 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.MediaStore;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
@@ -28,16 +35,28 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.otaliastudios.cameraview.CameraView;
+import com.otaliastudios.cameraview.filter.NoFilter;
+import com.soict.hoangviet.supportinglecturer.BuildConfig;
 import com.soict.hoangviet.supportinglecturer.R;
+import com.soict.hoangviet.supportinglecturer.adapter.FilterImageAdapter;
 import com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView;
 import com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionButton;
 import com.soict.hoangviet.supportinglecturer.customview.SonnyJackDragView;
 import com.soict.hoangviet.supportinglecturer.utils.CameraEnum;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
+import com.soict.hoangviet.supportinglecturer.utils.LogUtil;
+import com.soict.hoangviet.supportinglecturer.utils.PermissionUtil;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -46,15 +65,27 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public abstract class BaseCameraActivity extends BaseActivity {
+    private static final int REQUEST_CHOOSE_IMAGE = 9001;
+    private static final int REQUEST_IMAGE_CAPTURE = 9002;
+    private static final int REQUEST_PERMISSION_GALLERY = 9003;
+    private static final int REQUEST_PERMISSION_CAPTURE_CAMERA = 9004;
+    private static final int REQUEST_SETTING = 9005;
+    private static final int CAMERA_BACK = 0;
+    private static final int CAMERA_FONT = 1;
+
     @BindView(R.id.textureView)
     protected AutoFitTextureView textureView;
-    @BindView(R.id.camera)
-    protected CameraView cameraView;
     @BindView(R.id.drawView)
     protected RelativeLayout drawView;
     @Nullable
     @BindView(R.id.rl_camera)
     protected RelativeLayout rlCamera;
+    @Nullable
+    @BindView(R.id.rcvFilter)
+    protected RecyclerView rcvFilter;
+    @Nullable
+    @BindView(R.id.camera)
+    protected CameraView cameraView;
     //    @Nullable
 //    @BindView(R.id.camLoading)
 //    protected RelativeLayout camLoading;
@@ -69,8 +100,6 @@ public abstract class BaseCameraActivity extends BaseActivity {
     private Size imageDimension;
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
-    private static final int CAMERA_BACK = 0;
-    private static final int CAMERA_FONT = 1;
     TextureView.SurfaceTextureListener textureListener;
     private String cameraId;
     CameraCharacteristics characteristics;
@@ -87,13 +116,38 @@ public abstract class BaseCameraActivity extends BaseActivity {
     MovableFloatingActionButton mfaLeftRight;
     protected CameraEnum mCameraEnum;
     protected boolean isShowCamera = true;
+    private FilterImageAdapter filterImageAdapter;
+    private String cameraFilePath;
+    private File mFileCreateImage;
+    private Uri mPhotoCaptureUri;
+    private CameraListener cameraListener;
 
     @Override
     protected void initView() {
+        cameraListener = createCameraListener();
         cameraView.setLifecycleOwner(this);
         initStateCallback();
         initTextureListener();
         initEnum();
+        initFilterAdapter();
+    }
+
+    protected abstract CameraListener createCameraListener();
+
+    private void initFilterAdapter() {
+        if (DeviceUtil.isLandscape(this)) {
+            filterImageAdapter = new FilterImageAdapter(this, false, data -> {
+                try {
+                    cameraView.setFilter(data.getFilterClass().newInstance());
+                } catch (IllegalAccessException e) {
+                    cameraView.setFilter(new NoFilter());
+                } catch (InstantiationException e) {
+                    cameraView.setFilter(new NoFilter());
+                }
+            });
+            rcvFilter.setAdapter(filterImageAdapter);
+            rcvFilter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        }
     }
 
 //    private void hideFrameCamera() {
@@ -312,6 +366,23 @@ public abstract class BaseCameraActivity extends BaseActivity {
                 finish();
             }
         }
+        for (String permission : permissions) {
+            if (PermissionUtil.hasPermission(permission)) {
+                switch (requestCode) {
+                    case REQUEST_PERMISSION_GALLERY:
+                        LogUtil.d("Accept Permission: GALLERY");
+                        pickImageFromGallery();
+                        break;
+                    case REQUEST_PERMISSION_CAPTURE_CAMERA:
+                        LogUtil.d("Accept Permission: CAMERA");
+                        dispatchTakePictureIntent();
+                        break;
+                }
+            } else {
+                LogUtil.d("Denied: Permission");
+                PermissionUtil.goToSettingPermission(this);
+            }
+        }
     }
 
 //    protected void showTextureFull() {
@@ -361,5 +432,133 @@ public abstract class BaseCameraActivity extends BaseActivity {
             ((ViewGroup) view.getParent()).endViewTransition(view);
             ((ViewGroup) view.getParent()).removeView(view);
         }
+    }
+
+    protected void openCamera() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            LogUtil.d("Above Android LOLLIPOP");
+            if (PermissionUtil.hasPermission(android.Manifest.permission.CAMERA)) {
+                dispatchTakePictureIntent();
+            } else {
+                LogUtil.d("Request: Permission Camera");
+                PermissionUtil.requestPermission(
+                        this,
+                        new String[]{android.Manifest.permission.CAMERA},
+                        REQUEST_PERMISSION_CAPTURE_CAMERA
+                );
+            }
+        } else {
+            LogUtil.d("Below Android LOLLIPOP");
+            dispatchTakePictureIntentPreLollipop();
+        }
+    }
+
+    protected void openGallery() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (PermissionUtil.hasPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                pickImageFromGallery();
+            } else {
+                PermissionUtil.requestPermission(
+                        this,
+                        new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_PERMISSION_GALLERY
+                );
+            }
+        } else {
+            pickImageFromGallery();
+        }
+    }
+
+    private void pickImageFromGallery() {
+        //Create an Intent with action as ACTION_PICK
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        // Sets the type as image/*. This ensures only components of type image are selected
+        intent.setType("image/*");
+        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+        String[] mimeTypes = new String[]{"image/jpeg", "image/png"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        // Launching the Intent
+        startActivityForResult(intent, REQUEST_CHOOSE_IMAGE);
+    }
+
+    private void dispatchTakePictureIntentPreLollipop() {
+
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intentCamera.resolveActivity(getPackageManager()) != null) {
+            try {
+                mFileCreateImage = createImageFile();
+                mPhotoCaptureUri = FileProvider.getUriForFile(
+                        this,
+                        getResources().getString(R.string.file_provider),
+                        mFileCreateImage
+                );
+                intentCamera.putExtra(
+                        MediaStore.EXTRA_OUTPUT,
+                        mPhotoCaptureUri
+                );
+                startActivityForResult(intentCamera, REQUEST_IMAGE_CAPTURE);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir =
+                getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        cameraFilePath = image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (cameraFilePath != null) {
+                LogUtil.d("Success: Capture Image");
+                if (cameraListener != null) {
+                    cameraListener.onTakeImageFileCaptureSuccess(cameraFilePath, mPhotoCaptureUri);
+                }
+            }
+            return;
+        }
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CHOOSE_IMAGE && data != null) {
+            LogUtil.d("Success: Pick Image");
+            handleImageUri(data.getData());
+            return;
+        }
+    }
+
+    private void handleImageUri(Uri uriImage) {
+        String[] filePathColumn = new String[]{MediaStore.Images.Media.DATA};
+        // Get the cursor
+        Cursor cursor = getContentResolver().query(uriImage, filePathColumn, null, null, null, null);
+        // Move to first row
+        cursor.moveToFirst();
+        //Get the column index of MediaStore.Images.Media.DATA
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        //Gets the String value in the column
+        String imgDecodableString = cursor.getString(columnIndex);
+        cameraListener.onTakeAbsolutePathImageSuccess(imgDecodableString, uriImage);
+        cursor.close();
+    }
+
+    public interface CameraListener {
+        void onTakeImageFileCaptureSuccess(String cameraFilePath, Uri uriImage);
+
+        void onTakeAbsolutePathImageSuccess(String absoluteFilePathImage, Uri uriImage);
     }
 }

@@ -1,5 +1,6 @@
 package com.soict.hoangviet.supportinglecturer.ui.youtube;
 
+import android.app.Dialog;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -49,14 +50,13 @@ public class YoutubeActivity extends BaseActivity implements YoutubeView {
                     data,
                     new DialogUtil.OnAddDataToDialogListener() {
                         @Override
-                        public <T> void onData(View view, T data) {
+                        public <T> void onData(Dialog dialog, View view, T data) {
                             ((YouTubePlayerView) view.findViewById(R.id.youtube_player_view)).addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
                                 @Override
                                 public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                                     youTubePlayer.loadVideo(((ItemsItem) data).getId().getVideoId(), 0);
                                 }
                             });
-
                         }
                     }
             );

@@ -3,6 +3,7 @@ package com.soict.hoangviet.supportinglecturer.application;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
+import android.content.Context;
 
 import com.deploygate.sdk.DeployGate;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
@@ -10,7 +11,6 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.di.component.DaggerAppComponent;
-import com.soict.hoangviet.supportinglecturer.utils.Define;
 import com.soict.hoangviet.supportinglecturer.utils.LanguageUtil;
 
 import javax.inject.Inject;
@@ -28,10 +28,12 @@ public class LecturerApplication extends Application implements HasFragmentInjec
     DispatchingAndroidInjector<Fragment> mFragmentInjector;
     @Inject
     ISharePreference sharePreference;
+    public static Context instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         DaggerAppComponent
                 .builder()
                 .application(this)

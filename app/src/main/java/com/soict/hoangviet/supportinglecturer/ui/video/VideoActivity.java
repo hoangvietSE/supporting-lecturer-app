@@ -80,7 +80,9 @@ public class VideoActivity extends BaseActivity implements VideoView {
             @Override
             public void onItemShareVideo(int position) {
                 VideoResponse videoResponse = videoAdapter.getItem(position, VideoResponse.class);
-                Uri uri = FileProvider.getUriForFile(VideoActivity.this, getApplicationContext().getPackageName() + ".provider", new File(videoResponse.getVideoPath()));
+                Uri uri = FileProvider.getUriForFile(VideoActivity.this,
+                        getResources().getString(R.string.file_provider)
+                        , new File(videoResponse.getVideoPath()));
                 Intent videoShare = new Intent(Intent.ACTION_SEND);
                 videoShare.setType("*/*");
                 videoShare.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

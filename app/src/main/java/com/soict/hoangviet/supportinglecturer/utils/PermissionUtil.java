@@ -10,14 +10,16 @@ import android.provider.Settings;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.soict.hoangviet.supportinglecturer.application.LecturerApplication;
+
 public class PermissionUtil {
     private PermissionUtil() {
     }
 
-    public static boolean hasPermission(Context context, String... permissions) {
+    public static boolean hasPermission(String... permissions) {
         if (permissions != null) {
             for (String permission : permissions) {
-                if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(LecturerApplication.instance, permission) != PackageManager.PERMISSION_GRANTED) {
                     return false;
                 }
             }
@@ -25,7 +27,7 @@ public class PermissionUtil {
         return true;
     }
 
-    public static void reuqestPermission(Activity activity, String[] permissions, int requestCode) {
+    public static void requestPermission(Activity activity, String[] permissions, int requestCode) {
         ActivityCompat.requestPermissions(activity, permissions, requestCode);
     }
 

@@ -45,8 +45,8 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.RECORD_AUDIO};
-        if (!PermissionUtil.hasPermission(getContext(), permissions)) {
-            PermissionUtil.reuqestPermission(activity, permissions, HomeActivity.REQUEST_CODE_PERMISSION);
+        if (!PermissionUtil.hasPermission(permissions)) {
+            PermissionUtil.requestPermission(activity, permissions, HomeActivity.REQUEST_CODE_PERMISSION);
         }
     }
 

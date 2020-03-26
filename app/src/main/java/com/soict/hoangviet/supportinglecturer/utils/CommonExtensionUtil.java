@@ -34,7 +34,7 @@ public class CommonExtensionUtil {
 
     }
 
-    public static void loadImageDrawable(ImageView imageView, Drawable drawable) {
+    public static void loadImageDrawable(ImageView imageView, int drawable) {
         GlideApp.with(imageView.getContext())
                 .load(drawable)
                 .into(imageView);
