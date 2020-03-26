@@ -469,7 +469,7 @@ public abstract class BaseSamsungSpenSdkActivity extends BaseCameraActivity {
         if (backgroundColor != null) {
             mPenPageDoc.setBackgroundColor(backgroundColor);
         } else {
-            mPenPageDoc.setBackgroundColor(0xFFD6E6F5);
+            mPenPageDoc.setBackgroundColor(0xFFf9f6ff);
         }
         mPenSurfaceView.update();
     }

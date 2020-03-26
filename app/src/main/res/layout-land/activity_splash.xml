@@ -7,12 +7,11 @@
     android:orientation="vertical">
 
     <ImageView
-        android:scaleY="0.8"
-        android:scaleX="0.8"
+        android:background="@color/splash_bg"
         android:id="@+id/imv_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/splash_crop"
+        android:src="@drawable/splash_fill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +19,6 @@
         app:layout_constraintVertical_bias="0" />
 
     <TextView
-        app:layout_constraintHorizontal_bias="0.96"
         android:id="@+id/btn_start"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -30,9 +28,10 @@
         android:text="@string/splash_button_title"
         android:textColor="@color/white"
         android:textSize="@dimen/textsize_26_sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintWidth_percent="0.2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

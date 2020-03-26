@@ -3,16 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/splash_bg"
     android:orientation="vertical">
 
     <ImageView
-        android:scaleY="0.8"
-        android:scaleX="0.8"
         android:id="@+id/imv_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/splash_crop"
+        android:src="@drawable/splash_fill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
