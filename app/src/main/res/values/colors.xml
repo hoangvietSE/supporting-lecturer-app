@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#ff99af</color>
     <color name="colorPrimaryDark">#FF7B98</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#fee600</color>
 
     <color name="fuchsia">#FF00FF</color>
     <color name="yellow">#FFFF00</color>
@@ -32,4 +32,9 @@
     <color name="splash_bg">#f9f6ff</color>
     <color name="color_google">#DC4A3D</color>
     <color name="color_fb">#3C5A9A</color>
+    <color name="home_text_color">#394d97</color>
+    <color name="home_color_one">#F7C5B6</color>
+    <color name="home_color_two">#ABA6F5</color>
+    <color name="home_color_three">#EDB6DD</color>
+    <color name="home_color_four">#B1F8AE</color>
 </resources>

@@ -6,182 +6,400 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        app:layout_constraintVertical_bias="0.75"
-        android:id="@+id/llHomeMenu"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/cvHome"
-        app:layout_constraintTop_toBottomOf="@id/ivHomeTitle">
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
-        <LinearLayout
-            android:id="@+id/llLiveStream"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivHomeTitle"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_live_stream" />
-
-            <TextView
-
-                android:id="@+id/tvHomeLive"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/tv_home_live"
-                android:textColor="@color/blue_dark"
-                android:textSize="@dimen/text_24" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llCreateVideo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivHomeTitle"
-            android:layout_alignParentEnd="true"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_create_video" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/tv_home_video"
-                android:textColor="@color/blue_dark"
-                android:textSize="@dimen/text_24" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/ivHomeBottom"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_home_bottom" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guide_home"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        card_view:cardCornerRadius="@dimen/space_4">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/circle_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_32_dp"
+            app:ci_drawable="@drawable/bg_ci_selected"
+            app:ci_drawable_unselected="@drawable/bg_ci_unselected" />
+    </RelativeLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guide_home">
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/llHomeMenu"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:gravity="center"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/cvHome"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/ivHomeTitle"-->
+        <!--            app:layout_constraintVertical_bias="0.75">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/llLiveStream"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_below="@+id/ivHomeTitle"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:orientation="vertical">-->
+
+        <!--                <ImageView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center"-->
+        <!--                    android:scaleType="fitCenter"-->
+        <!--                    android:src="@drawable/ic_live_stream" />-->
+
+        <!--                <TextView-->
+
+        <!--                    android:id="@+id/tvHomeLive"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:gravity="center"-->
+        <!--                    android:text="@string/tv_home_live"-->
+        <!--                    android:textColor="@color/blue_dark"-->
+        <!--                    android:textSize="@dimen/text_24" />-->
+        <!--            </LinearLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/llCreateVideo"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_below="@+id/ivHomeTitle"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:orientation="vertical">-->
+
+        <!--                <ImageView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center"-->
+        <!--                    android:scaleType="fitCenter"-->
+        <!--                    android:src="@drawable/ic_create_video" />-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:gravity="center"-->
+        <!--                    android:text="@string/tv_home_video"-->
+        <!--                    android:textColor="@color/blue_dark"-->
+        <!--                    android:textSize="@dimen/text_24" />-->
+        <!--            </LinearLayout>-->
+        <!--        </LinearLayout>-->
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/ivHomeBottom"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_alignParentBottom="true"-->
+        <!--            android:scaleType="fitCenter"-->
+        <!--            android:src="@drawable/ic_home_bottom" />-->
+
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/cvHome"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            card_view:cardCornerRadius="@dimen/space_4">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/llHome"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:gravity="center"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:id="@+id/llHomeProfile"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center"-->
+        <!--                    android:background="@color/colorPrimary"-->
+        <!--                    android:gravity="center"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:paddingLeft="@dimen/space_48"-->
+        <!--                    android:paddingTop="@dimen/space_8"-->
+        <!--                    android:paddingRight="@dimen/space_48"-->
+        <!--                    android:paddingBottom="@dimen/space_8">-->
+
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/tvHomeSignIn"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:text="@string/login_title"-->
+        <!--                        android:textColor="@color/white"-->
+        <!--                        android:textSize="@dimen/text_20"-->
+        <!--                        android:visibility="gone" />-->
+
+        <!--                    <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                        android:id="@+id/ivHomeAvatar"-->
+        <!--                        android:layout_width="@dimen/height_80"-->
+        <!--                        android:layout_height="@dimen/height_80"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:src="@drawable/ic_default_avatar"-->
+        <!--                        android:visibility="visible"-->
+        <!--                        app:civ_border_color="#FF000000"-->
+        <!--                        app:civ_border_width="2dp" />-->
+
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/tvHomeName"-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:paddingLeft="@dimen/space_8"-->
+        <!--                        android:textColor="@color/white"-->
+        <!--                        android:textSize="@dimen/text_20"-->
+        <!--                        android:visibility="visible"-->
+        <!--                        tools:text="Mike Hoffman" />-->
+        <!--                </LinearLayout>-->
+        <!--            </LinearLayout>-->
+        <!--        </androidx.cardview.widget.CardView>-->
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/ivHomeTitle"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentTop="true"-->
+        <!--            android:layout_margin="@dimen/space_24"-->
+        <!--            android:adjustViewBounds="true"-->
+        <!--            android:src="@drawable/ic_title_black"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--        <androidx.constraintlayout.widget.Guideline-->
+        <!--            android:id="@+id/guide_bottom"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintGuide_percent="0.87" />-->
+
+        <!--        <androidx.constraintlayout.widget.Guideline-->
+        <!--            android:id="@+id/guide_top"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintGuide_percent="0.57" />-->
+
+        <!--        <androidx.constraintlayout.widget.Guideline-->
+        <!--            android:id="@+id/guide_end"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:orientation="vertical"-->
+        <!--            app:layout_constraintGuide_percent="0.67" />-->
+
+        <!--        <androidx.constraintlayout.widget.Guideline-->
+        <!--            android:id="@+id/guide_start"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:orientation="vertical"-->
+        <!--            app:layout_constraintGuide_percent="0.37" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/btnYoutube"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/guide_bottom"-->
+        <!--            app:layout_constraintEnd_toEndOf="@id/guide_end"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/guide_start"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/guide_top" />-->
+
+        <TextView
+            android:id="@+id/tv_knowledge"
+            style="@style/HomeTextItem"
+            android:paddingStart="@dimen/margin_40_dp"
+            android:text="@string/home_title"
+            android:textSize="@dimen/text_30"
+            app:layout_constraintBottom_toBottomOf="@id/imv_home"
+            app:layout_constraintEnd_toStartOf="@id/imv_home"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imv_home" />
+
+        <ImageView
+            android:id="@+id/imv_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/book_home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_home_main"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
         <LinearLayout
-            android:id="@+id/llHome"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_32_dp"
+            android:orientation="vertical"
+            android:padding="@dimen/content_padding_32_dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guide_home_main"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guide_item_two">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llCreateVideo"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/margin_16_dp"
+                android:layout_weight="5.5"
+                android:background="@drawable/bg_home_one">
+
+                <ImageView
+                    android:id="@+id/imv_home_one"
+                    android:layout_width="122dp"
+                    android:layout_height="154dp"
+                    android:src="@drawable/home_one"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/HomeTextItem"
+                    android:text="@string/tv_home_video"
+                    android:textSize="@dimen/text_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imv_home_one"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llLiveStream"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4.5"
+                android:background="@drawable/bg_home_two">
+
+                <ImageView
+                    android:id="@+id/imv_home_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:src="@drawable/home_two"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/HomeTextItem"
+                    android:text="@string/tv_home_live"
+                    android:textSize="@dimen/text_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imv_home_two"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_item_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
 
-            <LinearLayout
-                android:id="@+id/llHomeProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/space_48"
-                android:paddingTop="@dimen/space_8"
-                android:paddingRight="@dimen/space_48"
-                android:paddingBottom="@dimen/space_8">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_item_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.62" />
 
-                <TextView
-                    android:id="@+id/tvHomeSignIn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/login_title"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_20"
-                    android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:padding="@dimen/content_padding_32_dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guide_home_main"
+            app:layout_constraintTop_toBottomOf="@id/guide_item_one">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ivHomeAvatar"
-                    android:layout_width="@dimen/height_80"
-                    android:layout_height="@dimen/height_80"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_default_avatar"
-                    android:visibility="visible"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btnYoutube"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/margin_16_dp"
+                android:layout_weight="5.5"
+                android:background="@drawable/bg_home_three">
 
-                <TextView
-                    android:id="@+id/tvHomeName"
+                <ImageView
+                    android:id="@+id/imv_home_three"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/space_8"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_20"
-                    android:visibility="visible"
-                    tools:text="Mike Hoffman" />
-            </LinearLayout>
+                    android:layout_height="0dp"
+                    android:src="@drawable/home_three"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/HomeTextItem"
+                    android:text="@string/home_youtube"
+                    android:textSize="@dimen/text_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imv_home_three"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llHomeProfile"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4.5"
+                android:background="@drawable/bg_home_four">
+
+                <ImageView
+                    android:id="@+id/imv_home_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:src="@drawable/home_four"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/HomeTextItem"
+                    android:text="@string/login_title"
+                    android:textSize="@dimen/text_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imv_home_four"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/ivHomeTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/space_24"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_title_black"
-        app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.87" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_top"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.57" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_end"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.67" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_start"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.37" />
-
-    <TextView
-        android:id="@+id/btnYoutube"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/guide_bottom"
-        app:layout_constraintEnd_toEndOf="@id/guide_end"
-        app:layout_constraintStart_toStartOf="@id/guide_start"
-        app:layout_constraintTop_toTopOf="@id/guide_top" />
 </androidx.constraintlayout.widget.ConstraintLayout>

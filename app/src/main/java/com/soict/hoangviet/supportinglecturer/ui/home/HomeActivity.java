@@ -3,7 +3,6 @@ package com.soict.hoangviet.supportinglecturer.ui.home;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,8 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.Guideline;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
@@ -37,7 +35,6 @@ import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeNewSingleton;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -60,11 +57,11 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     public static final String TAG = HomeActivity.class.getSimpleName();
     public static final int REQUEST_CODE_PERMISSION = 9001;
     @BindView(R.id.llHomeProfile)
-    LinearLayout llProfile;
+    ConstraintLayout llProfile;
     @BindView(R.id.llLiveStream)
-    LinearLayout llLiveStream;
+    ConstraintLayout llLiveStream;
     @BindView(R.id.llCreateVideo)
-    LinearLayout llCreateVideo;
+    ConstraintLayout llCreateVideo;
     @BindView(R.id.tvHomeSignIn)
     TextView tvSignIn;
     @BindView(R.id.tvHomeName)
@@ -72,12 +69,14 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     @BindView(R.id.ivHomeAvatar)
     ImageView ivAvatar;
     @BindView(R.id.btnYoutube)
-    TextView btnYoutube;
+    ConstraintLayout btnYoutube;
     HomeViewPagerAdapter homeViewPagerAdapter;
     @BindView(R.id.vp_home)
     ViewPager2 vpHome;
     @BindView(R.id.circle_indicator)
     CircleIndicator3 circleIndicator;
+    @BindView(R.id.tv_login)
+    TextView tvLogin;
     int currentItem = 0;
 
     @Override
@@ -155,11 +154,12 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         switch (view.getId()) {
             case R.id.llLiveStream:
                 if (!mSharePreference.getLoginStatus()) {
-                    showCautionDialog(getString(R.string.dialog_syntax_login), "", liveDialog -> {
-                        liveDialog.dismiss();
-                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                        startActivityForResult(intent, Define.RequestCode.REQUEST_LOGIN);
-                    });
+                    ToastUtil.show(this, getString(R.string.dialog_syntax_login));
+//                    showCautionDialog(getString(R.string.dialog_syntax_login), "", liveDialog -> {
+//                        liveDialog.dismiss();
+//                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+//                        startActivityForResult(intent, Define.RequestCode.REQUEST_LOGIN);
+//                    });
                 } else {
                     if (mSharePreference.getLoginStatusFromGoogle()) {
                         CreateLiveEventTask createLiveEventTask = new CreateLiveEventTask();
@@ -208,14 +208,9 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
 
     private void changeUI(boolean isLogin) {
         if (isLogin) {
-            tvSignIn.setVisibility(View.GONE);
-            tvName.setVisibility(View.VISIBLE);
-            ivAvatar.setVisibility(View.VISIBLE);
-            getUserProfile();
+            tvLogin.setText(getResources().getString(R.string.login_logout_title));
         } else {
-            tvSignIn.setVisibility(View.VISIBLE);
-            tvName.setVisibility(View.GONE);
-            ivAvatar.setVisibility(View.GONE);
+            tvLogin.setText(getResources().getString(R.string.login_title));
         }
     }
 
@@ -268,14 +263,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         if (currentItem == homeViewPagerAdapter.getItemCount() - 1) {
             currentItem = 0;
         }
-        vpHome.setCurrentItem(++currentItem);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+        vpHome.setCurrentItem(currentItem++);
     }
 
     private class CreateLiveEventTask extends AsyncTask<String, Void, EventData> {

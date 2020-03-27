@@ -103,5 +103,11 @@
 <!--    Splash-->
     <string name="splash_button_title">Bắt đầu</string>
 
+<!--    Home-->
+    <string name="home_title">Kiến thức\nlà sức mạnh</string>
+    <string name="home_youtube">Youtube</string>
+
+<!--    Login-->
+    <string name="login_logout_title">Đăng xuất</string>
 
 </resources>
