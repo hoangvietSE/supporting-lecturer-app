@@ -7,9 +7,14 @@ import com.soict.hoangviet.supportinglecturer.entity.response.youtube.YoutubeVid
 import com.soict.hoangviet.supportinglecturer.utils.Define;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -58,5 +63,9 @@ public class Repository {
         return apiInterface.getListVideoYoutube(Define.Api.Url.YOUTUBE_URL, data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable getHomeObservable(){
+        return Observable.interval(2, TimeUnit.SECONDS);
     }
 }

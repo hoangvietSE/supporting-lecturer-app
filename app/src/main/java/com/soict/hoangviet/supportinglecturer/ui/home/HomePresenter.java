@@ -20,4 +20,6 @@ public interface HomePresenter<V extends BaseView> extends BasePresenter<V> {
     void getRtmpFacebookLive();
 
     void getInfoFacebook();
+
+    void loopIndicator();
 }

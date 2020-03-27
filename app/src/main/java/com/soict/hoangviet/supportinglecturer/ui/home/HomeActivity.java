@@ -78,6 +78,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     ViewPager2 vpHome;
     @BindView(R.id.circle_indicator)
     CircleIndicator3 circleIndicator;
+    int currentItem = 0;
 
     @Override
     protected Unbinder getButterKnifeBinder() {
@@ -106,6 +107,7 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         vpHome.setAdapter(homeViewPagerAdapter);
         vpHome.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         circleIndicator.setViewPager(vpHome);
+        mPresenter.loopIndicator();
     }
 
     private void onAttachPresenter() {
@@ -259,6 +261,14 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         tvName.setText(facebookResponse.getName());
         CommonExtensionUtil.loadImageUrl(ivAvatar, facebookResponse.getPicture().getData().getUrl());
         mSharePreference.setUserId(facebookResponse.getId());
+    }
+
+    @Override
+    public void loopViewPager() {
+        if (currentItem == homeViewPagerAdapter.getItemCount() - 1) {
+            currentItem = 0;
+        }
+        vpHome.setCurrentItem(++currentItem);
     }
 
     @Override

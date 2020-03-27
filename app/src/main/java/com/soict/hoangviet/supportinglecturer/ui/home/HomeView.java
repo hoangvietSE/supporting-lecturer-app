@@ -11,4 +11,7 @@ public interface HomeView extends BaseView {
 
     void goToTeacherScreenLiveStream();
 
-    void showInfoFacebook(FacebookResponse facebookResponse);}
+    void showInfoFacebook(FacebookResponse facebookResponse);
+
+    void loopViewPager();
+}

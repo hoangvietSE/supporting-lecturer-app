@@ -22,12 +22,18 @@ import com.soict.hoangviet.supportinglecturer.utils.PermissionUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.SingleSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> implements HomePresenter<V> {
     private Repository repository;
@@ -135,5 +141,19 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
         request.setParameters(parameters);
         // Initiate the GraphRequest
         request.executeAsync();
+    }
+
+    @Override
+    public void loopIndicator() {
+        getmCompositeDisposable().add(
+                repository.getHomeObservable()
+                        .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response->{
+                    getView().loopViewPager();
+                }, throwable -> {
+
+                })
+        );
     }
 }
