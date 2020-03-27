@@ -3,6 +3,7 @@ package com.soict.hoangviet.supportinglecturer.ui.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -34,9 +35,9 @@ public class LoginActivity extends BaseSocialActivity implements LoginView {
     public static final String SCOPE_PROFILE = Scopes.PROFILE;
 
     @BindView(R.id.btnFacebook)
-    AppCompatButton btnFacebook;
+    TextView btnFacebook;
     @BindView(R.id.btnGoogle)
-    Button btnGoogle;
+    TextView btnGoogle;
 
     @Override
     protected Unbinder getButterKnifeBinder() {

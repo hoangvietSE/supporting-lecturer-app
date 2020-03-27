@@ -43,8 +43,8 @@ public class LoadingDialog extends Dialog implements View.OnClickListener, Dialo
     private ImageView ivIcon;
     private TextView tvText;
     private TextView tvSubtext;
-    private Button btnAffirmative;
-    private Button btnNegative;
+    private TextView btnAffirmative;
+    private TextView btnNegative;
 
     private View content;
 

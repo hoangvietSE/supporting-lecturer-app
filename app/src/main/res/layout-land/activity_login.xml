@@ -4,32 +4,22 @@
     android:layout_height="match_parent"
     android:background="@color/splash_bg">
 
-    <RelativeLayout
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/guide_login"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/logo_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guide_login"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/splash_bg"
-            android:scaleType="centerCrop"
-            android:scaleX="0.7"
-            android:scaleY="0.7"
-            android:src="@drawable/logo_login" />
-
-    </RelativeLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -37,9 +27,9 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guide_login"
-        app:layout_constraintWidth_percent="0.7">
+        app:layout_constraintStart_toStartOf="@id/guide_login"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.35">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGoogle"
@@ -55,4 +45,6 @@
             app:backgroundTint="@color/color_fb"
             app:icon="@drawable/ic_facebook_normal" />
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

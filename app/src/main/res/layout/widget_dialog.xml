@@ -85,7 +85,7 @@
                 android:layout_gravity="end|bottom"
                 android:orientation="horizontal">
 
-                <Button
+                <TextView
                     android:id="@+id/btnAffirmative"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"/>
 
-                <Button
+                <TextView
                     android:id="@+id/btnNegative"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"

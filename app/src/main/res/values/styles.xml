@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -29,5 +29,12 @@
         <attr name="brv_enable_refresh" format="boolean" />
         <attr name="brv_text_no_result" format="string|reference" />
     </declare-styleable>
+
+    <style name="ButtonLogin" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:padding">@dimen/content_padding_10_dp</item>
+        <item name="cornerRadius">@dimen/margin_40_dp</item>
+    </style>
 
 </resources>
