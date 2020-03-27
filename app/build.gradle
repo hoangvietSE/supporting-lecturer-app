@@ -172,10 +172,15 @@ dependencies {
     implementation project(':pen-v5.1.0_full')
     implementation project(path: ':hbrecorder')
     implementation files('libs/sdk-v1.0.1.jar')
-
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'com.obsez.android.lib.filechooser:filechooser:1.1.10'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
+    //ViewPager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    //Circle Indicator
+    implementation 'me.relex:circleindicator:2.1.4'
 }

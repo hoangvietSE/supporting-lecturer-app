@@ -3,6 +3,7 @@ package com.soict.hoangviet.supportinglecturer.ui.home;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,11 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.Guideline;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.google.api.services.youtube.YouTube;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.soict.hoangviet.supportinglecturer.R;
+import com.soict.hoangviet.supportinglecturer.adapter.HomeViewPagerAdapter;
 import com.soict.hoangviet.supportinglecturer.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.supportinglecturer.entity.response.FacebookResponse;
 import com.soict.hoangviet.supportinglecturer.ui.base.BaseActivity;
@@ -32,6 +37,9 @@ import com.soict.hoangviet.supportinglecturer.youtube.YouTubeApi;
 import com.soict.hoangviet.supportinglecturer.youtube.YouTubeNewSingleton;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -42,6 +50,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeActivity extends BaseActivity implements HomeView, View.OnClickListener {
     @Inject
@@ -64,6 +73,11 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     ImageView ivAvatar;
     @BindView(R.id.btnYoutube)
     TextView btnYoutube;
+    HomeViewPagerAdapter homeViewPagerAdapter;
+    @BindView(R.id.vp_home)
+    ViewPager2 vpHome;
+    @BindView(R.id.circle_indicator)
+    CircleIndicator3 circleIndicator;
 
     @Override
     protected Unbinder getButterKnifeBinder() {
@@ -77,6 +91,21 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         requestPermission();
         FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         Log.d("myLog", mFirebaseRemoteConfig.getString("welcome_message"));
+        initViewPager();
+    }
+
+    private void initViewPager() {
+
+        homeViewPagerAdapter = new HomeViewPagerAdapter(this, false);
+        homeViewPagerAdapter.addModels(new ArrayList<>(Arrays.asList(
+                R.drawable.ic_home_one,
+                R.drawable.ic_home_two,
+                R.drawable.ic_home_three,
+                R.drawable.ic_home_four
+        )), false);
+        vpHome.setAdapter(homeViewPagerAdapter);
+        vpHome.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        circleIndicator.setViewPager(vpHome);
     }
 
     private void onAttachPresenter() {
@@ -230,6 +259,13 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         tvName.setText(facebookResponse.getName());
         CommonExtensionUtil.loadImageUrl(ivAvatar, facebookResponse.getPicture().getData().getUrl());
         mSharePreference.setUserId(facebookResponse.getId());
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     private class CreateLiveEventTask extends AsyncTask<String, Void, EventData> {
