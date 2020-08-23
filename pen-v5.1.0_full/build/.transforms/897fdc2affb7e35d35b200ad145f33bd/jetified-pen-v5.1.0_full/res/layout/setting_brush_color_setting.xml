@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/brush_color_pallete_setting_layout"
+    android:layout_width="@dimen/drawing_brush_color_setting_width"
+    android:layout_height="@dimen/drawing_brush_color_setting_height"
+    android:background="@drawable/drawing_palette_bg">
+
+    <!-- color select view -->
+    <RelativeLayout
+        android:id="@+id/brush_color_select_view_body"
+        android:layout_width="@dimen/drawing_brush_color_setting_selector_width"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true">
+
+        <!-- color select flipper -->
+        <RelativeLayout
+            android:id="@+id/brush_color_select_view"
+            android:layout_width="@dimen/drawing_brush_color_setting_palette_width"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/drawing_brush_color_setting_palette_margin_start">
+
+            <ViewFlipper
+                android:id="@+id/brush_color_pallete_flipper"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/drawing_brush_color_setting_palette_ViewFlipper_height"
+                android:layout_centerVertical="true">
+
+                <RelativeLayout
+                    android:id="@+id/brush_color_pallete_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true">
+
+                    <!-- row 1 -->
+                    <RelativeLayout
+                        android:id="@+id/brush_color_1_1_1"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_1_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_1_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_1_1_2"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_1_1_2"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_2_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_1_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_1_1_3"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_1_1_3"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_3_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_1_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_1_1_4"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_1_1_4"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_4_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_1_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_picker_btn"/>
+
+                    <!-- row 2 -->
+                    <RelativeLayout
+                        android:id="@+id/brush_color_1_2_1"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_1_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_2_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_1_2_2"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_1_2_2"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_2_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_2_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_1_2_3"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_1_2_3"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_3_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_2_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_1_2_4"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_1_2_4"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_4_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_2_margin_top"
+                        android:focusable="true" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/brush_color_pallete_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true">
+
+                    <!-- row 1 -->
+                    <RelativeLayout
+                        android:id="@+id/brush_color_2_1_1"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_1_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_1_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_2_1_2"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_2_1_2"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_2_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_1_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_2_1_3" />
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_2_1_3"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_3_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_1_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_2_1_4"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_2_1_4"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_4_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_1_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_picker_btn" />
+
+                    <!-- row 2 -->
+                    <RelativeLayout
+                        android:id="@+id/brush_color_2_2_1"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_1_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_2_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_2_2_2"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_2_2_2"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_2_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_2_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_2_2_3"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_2_2_3"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_3_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_2_margin_top"
+                        android:focusable="true"
+                        android:nextFocusForward="@+id/brush_color_2_2_4"/>
+
+                    <RelativeLayout
+                        android:id="@+id/brush_color_2_2_4"
+                        android:layout_width="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_height="@dimen/drawing_brush_color_setting_circle_size"
+                        android:layout_marginStart="@dimen/drawing_brush_color_setting_color_colomn_4_margin_start"
+                        android:layout_marginTop="@dimen/drawing_brush_color_setting_color_row_2_margin_top"
+                        android:focusable="true" />
+
+                </RelativeLayout>
+
+            </ViewFlipper>
+
+            <!-- pallete activation -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/drawing_brush_color_setting_color_indicator_bottom_margin">
+
+                <ImageView
+                    android:id="@+id/brush_color_pallete_activation1"
+                    android:layout_width="@dimen/drawing_brush_color_setting_color_indicator_size"
+                    android:layout_height="@dimen/drawing_brush_color_setting_color_indicator_size"
+                    android:layout_marginEnd="@dimen/drawing_brush_color_setting_color_indicator_margin_end" />
+
+                <ImageView
+                    android:id="@+id/brush_color_pallete_activation2"
+                    android:layout_width="@dimen/drawing_brush_color_setting_color_indicator_size"
+                    android:layout_height="@dimen/drawing_brush_color_setting_color_indicator_size"
+                    android:layout_toEndOf="@+id/brush_color_pallete_activation1" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!-- color picker -->
+    <RelativeLayout
+        android:layout_width="@dimen/drawing_brush_color_setting_color_picker_width"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true">
+
+        <FrameLayout
+            android:id="@+id/brush_color_picker_view"
+            android:layout_width="@dimen/drawing_brush_color_setting_color_picker_button_width"
+            android:layout_height="@dimen/drawing_brush_color_setting_color_picker_button_height"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <View
+                android:id="@+id/brush_color_picker_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:background="@drawable/note_drawing_picker" />
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/brush_color_picker_btn_air_view"
+            android:layout_width="@dimen/drawing_brush_color_setting_color_picker_button_width"
+            android:layout_height="@dimen/drawing_brush_color_setting_color_picker_button_height"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:id="@+id/brush_color_picker_btn_focus"
+            android:layout_width="@dimen/drawing_brush_color_setting_color_picker_button_width"
+            android:layout_height="@dimen/drawing_brush_color_setting_color_picker_button_height"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:focusable="true"
+            android:src="@drawable/snote_popup_pensetting_focused"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</RelativeLayout>

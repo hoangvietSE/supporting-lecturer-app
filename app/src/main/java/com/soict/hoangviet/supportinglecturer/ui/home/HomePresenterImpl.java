@@ -133,6 +133,7 @@ public class HomePresenterImpl<V extends HomeView> extends BasePresenterImpl<V> 
                 FacebookResponse facebookResponse = new Gson().fromJson(object.toString(), FacebookResponse.class);
                 getView().showInfoFacebook(facebookResponse);
             } catch (Exception e) {
+
             }
         });
         // We set parameters to the GraphRequest using a Bundle.

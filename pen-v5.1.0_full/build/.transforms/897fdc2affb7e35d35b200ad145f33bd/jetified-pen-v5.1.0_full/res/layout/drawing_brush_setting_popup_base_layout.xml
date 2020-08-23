@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/drawing_brush_setting_popup_layout_left_margin">
+
+    <!-- content -->
+    <com.samsung.android.sdk.pen.settingui.SpenHorizontalScrollView
+        android:id="@+id/drawing_brush_setting_popup_horizontal_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:nestedScrollingEnabled="true">
+        <FrameLayout
+            android:id="@+id/drawing_brush_setting_popup_view"
+            android:layout_width="@dimen/drawing_brush_setting_popup_layout_width"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+
+            <RelativeLayout
+                android:id="@+id/drawing_brush_setting_popup_view_body"
+                android:layout_width="@dimen/drawing_brush_setting_popup_layout_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:animateLayoutChanges="true"
+                android:background="@drawable/spen_common_setting_bg" >
+
+                <!-- title layout -->
+                <FrameLayout
+                    android:id="@+id/drawing_brush_setting_popup_view_title"
+                    android:layout_width="@dimen/drawing_brush_setting_popup_layout_width"
+                    android:layout_height="@dimen/drawing_brush_setting_popup_view_title_layout_height"
+                    android:layout_alignParentTop="true"
+                    android:background="#00000000">
+
+                    <!-- title -->
+                    <TextView
+                        android:id="@+id/drawing_brush_setting_popup_view_title_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="@dimen/drawing_brush_setting_popup_view_title_text_padding"
+                        android:paddingStart="@dimen/drawing_brush_setting_popup_view_title_text_padding"
+                        android:maxLines="1"
+                        android:text="@string/pen_string_setting"
+                        android:focusable="true"
+                        android:textColor="@color/setting_title_string_color"
+                        android:textSize="@dimen/drawing_brush_setting_popup_view_title_text_size" />
+
+                    <!-- DONE button -->
+                    <TextView
+                        android:id="@+id/drawing_brush_setting_popup_view_title_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:paddingEnd="@dimen/setting_title_text_padding"
+                        android:paddingStart="@dimen/setting_title_text_padding"
+                        android:text="@string/pen_string_close"
+                        android:textColor="#f46a4e"
+                        android:textSize="@dimen/drawing_brush_setting_popup_view_title_done_size" />
+                </FrameLayout>
+
+                <com.samsung.android.sdk.pen.settingui.SpenScrollView
+                    android:id="@+id/drawing_brush_setting_popup_body_scrollview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/drawing_brush_setting_popup_view_title"
+                    android:scrollbarSize="@dimen/drawing_brush_setting_popup_scrollbar_size"
+                    android:fillViewport="true"
+                    android:animateLayoutChanges="true">
+
+                    <LinearLayout
+                        android:id="@+id/drawing_brush_setting_popup_item_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:animateLayoutChanges="true">
+
+                        <!-- let penlist inserted here for pen setting popup -->
+
+                        <!-- Preview layout -->
+                        <FrameLayout
+                            android:id="@+id/drawing_brush_setting_popup_preview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/pen_string_preview" >
+
+                            <!-- let preview inserted here -->
+
+                        </FrameLayout>
+
+                        <!-- seekbar button -->
+                        <RelativeLayout
+                            android:id="@+id/drawing_brush_setting_popup_seekbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:animateLayoutChanges="true" >
+
+                        </RelativeLayout>
+
+                        <!-- let erase all button inserted here for Eraser setting popup -->
+                    </LinearLayout>
+                </com.samsung.android.sdk.pen.settingui.SpenScrollView>
+            </RelativeLayout>
+        </FrameLayout>
+
+    </com.samsung.android.sdk.pen.settingui.SpenHorizontalScrollView>
+
+</FrameLayout>

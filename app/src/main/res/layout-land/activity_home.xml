@@ -44,184 +44,184 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guide_home">
 
-        <!--        <LinearLayout-->
-        <!--            android:id="@+id/llHomeMenu"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:gravity="center"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/cvHome"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/ivHomeTitle"-->
-        <!--            app:layout_constraintVertical_bias="0.75">-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/llHomeMenu"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintBottom_toTopOf="@id/cvHome"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/ivHomeTitle"-->
+<!--                    app:layout_constraintVertical_bias="0.75">-->
 
-        <!--            <LinearLayout-->
-        <!--                android:id="@+id/llLiveStream"-->
-        <!--                android:layout_width="0dp"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_below="@+id/ivHomeTitle"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:orientation="vertical">-->
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/llLiveStream"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/ivHomeTitle"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
 
-        <!--                <ImageView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:scaleType="fitCenter"-->
-        <!--                    android:src="@drawable/ic_live_stream" />-->
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:scaleType="fitCenter"-->
+<!--                            android:src="@drawable/ic_live_stream" />-->
 
-        <!--                <TextView-->
+<!--                        <TextView-->
 
-        <!--                    android:id="@+id/tvHomeLive"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:text="@string/tv_home_live"-->
-        <!--                    android:textColor="@color/blue_dark"-->
-        <!--                    android:textSize="@dimen/text_24" />-->
-        <!--            </LinearLayout>-->
+<!--                            android:id="@+id/tvHomeLive"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/tv_home_live"-->
+<!--                            android:textColor="@color/blue_dark"-->
+<!--                            android:textSize="@dimen/text_24" />-->
+<!--                    </LinearLayout>-->
 
-        <!--            <LinearLayout-->
-        <!--                android:id="@+id/llCreateVideo"-->
-        <!--                android:layout_width="0dp"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_below="@+id/ivHomeTitle"-->
-        <!--                android:layout_alignParentEnd="true"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:orientation="vertical">-->
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/llCreateVideo"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/ivHomeTitle"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
 
-        <!--                <ImageView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:scaleType="fitCenter"-->
-        <!--                    android:src="@drawable/ic_create_video" />-->
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:scaleType="fitCenter"-->
+<!--                            android:src="@drawable/ic_create_video" />-->
 
-        <!--                <TextView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:text="@string/tv_home_video"-->
-        <!--                    android:textColor="@color/blue_dark"-->
-        <!--                    android:textSize="@dimen/text_24" />-->
-        <!--            </LinearLayout>-->
-        <!--        </LinearLayout>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/tv_home_video"-->
+<!--                            android:textColor="@color/blue_dark"-->
+<!--                            android:textSize="@dimen/text_24" />-->
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/ivHomeBottom"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_alignParentBottom="true"-->
-        <!--            android:scaleType="fitCenter"-->
-        <!--            android:src="@drawable/ic_home_bottom" />-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ivHomeBottom"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_alignParentBottom="true"-->
+<!--                    android:scaleType="fitCenter"-->
+<!--                    android:src="@drawable/ic_home_bottom" />-->
 
-        <!--        <androidx.cardview.widget.CardView-->
-        <!--            android:id="@+id/cvHome"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            card_view:cardCornerRadius="@dimen/space_4">-->
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/cvHome"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    card_view:cardCornerRadius="@dimen/space_4">-->
 
-        <!--            <LinearLayout-->
-        <!--                android:id="@+id/llHome"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:gravity="center"-->
-        <!--                android:orientation="horizontal">-->
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/llHome"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:orientation="horizontal">-->
 
-        <!--                <LinearLayout-->
-        <!--                    android:id="@+id/llHomeProfile"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:background="@color/colorPrimary"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:orientation="horizontal"-->
-        <!--                    android:paddingLeft="@dimen/space_48"-->
-        <!--                    android:paddingTop="@dimen/space_8"-->
-        <!--                    android:paddingRight="@dimen/space_48"-->
-        <!--                    android:paddingBottom="@dimen/space_8">-->
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/llHomeProfile"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:background="@color/colorPrimary"-->
+<!--                            android:gravity="center"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:paddingLeft="@dimen/space_48"-->
+<!--                            android:paddingTop="@dimen/space_8"-->
+<!--                            android:paddingRight="@dimen/space_48"-->
+<!--                            android:paddingBottom="@dimen/space_8">-->
 
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/tvHomeSignIn"-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="@string/login_title"-->
-        <!--                        android:textColor="@color/white"-->
-        <!--                        android:textSize="@dimen/text_20"-->
-        <!--                        android:visibility="gone" />-->
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvHomeSignIn"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/login_title"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/text_20"-->
+<!--                                android:visibility="gone" />-->
 
-        <!--                    <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                        android:id="@+id/ivHomeAvatar"-->
-        <!--                        android:layout_width="@dimen/height_80"-->
-        <!--                        android:layout_height="@dimen/height_80"-->
-        <!--                        android:layout_gravity="center"-->
-        <!--                        android:src="@drawable/ic_default_avatar"-->
-        <!--                        android:visibility="visible"-->
-        <!--                        app:civ_border_color="#FF000000"-->
-        <!--                        app:civ_border_width="2dp" />-->
+<!--                            <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                                android:id="@+id/ivHomeAvatar"-->
+<!--                                android:layout_width="@dimen/height_80"-->
+<!--                                android:layout_height="@dimen/height_80"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:src="@drawable/ic_default_avatar"-->
+<!--                                android:visibility="visible"-->
+<!--                                app:civ_border_color="#FF000000"-->
+<!--                                app:civ_border_width="2dp" />-->
 
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/tvHomeName"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:paddingLeft="@dimen/space_8"-->
-        <!--                        android:textColor="@color/white"-->
-        <!--                        android:textSize="@dimen/text_20"-->
-        <!--                        android:visibility="visible"-->
-        <!--                        tools:text="Mike Hoffman" />-->
-        <!--                </LinearLayout>-->
-        <!--            </LinearLayout>-->
-        <!--        </androidx.cardview.widget.CardView>-->
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvHomeName"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:paddingLeft="@dimen/space_8"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/text_20"-->
+<!--                                android:visibility="visible"-->
+<!--                                tools:text="Mike Hoffman" />-->
+<!--                        </LinearLayout>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/ivHomeTitle"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_alignParentTop="true"-->
-        <!--            android:layout_margin="@dimen/space_24"-->
-        <!--            android:adjustViewBounds="true"-->
-        <!--            android:src="@drawable/ic_title_black"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ivHomeTitle"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_margin="@dimen/space_24"-->
+<!--                    android:adjustViewBounds="true"-->
+<!--                    android:src="@drawable/ic_title_black"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-        <!--        <androidx.constraintlayout.widget.Guideline-->
-        <!--            android:id="@+id/guide_bottom"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="1dp"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            app:layout_constraintGuide_percent="0.87" />-->
+<!--                <androidx.constraintlayout.widget.Guideline-->
+<!--                    android:id="@+id/guide_bottom"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintGuide_percent="0.87" />-->
 
-        <!--        <androidx.constraintlayout.widget.Guideline-->
-        <!--            android:id="@+id/guide_top"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="1dp"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            app:layout_constraintGuide_percent="0.57" />-->
+<!--                <androidx.constraintlayout.widget.Guideline-->
+<!--                    android:id="@+id/guide_top"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintGuide_percent="0.57" />-->
 
-        <!--        <androidx.constraintlayout.widget.Guideline-->
-        <!--            android:id="@+id/guide_end"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="1dp"-->
-        <!--            android:orientation="vertical"-->
-        <!--            app:layout_constraintGuide_percent="0.67" />-->
+<!--                <androidx.constraintlayout.widget.Guideline-->
+<!--                    android:id="@+id/guide_end"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    app:layout_constraintGuide_percent="0.67" />-->
 
-        <!--        <androidx.constraintlayout.widget.Guideline-->
-        <!--            android:id="@+id/guide_start"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="1dp"-->
-        <!--            android:orientation="vertical"-->
-        <!--            app:layout_constraintGuide_percent="0.37" />-->
+<!--                <androidx.constraintlayout.widget.Guideline-->
+<!--                    android:id="@+id/guide_start"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    app:layout_constraintGuide_percent="0.37" />-->
 
-        <!--        <TextView-->
-        <!--            android:id="@+id/btnYoutube"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@id/guide_bottom"-->
-        <!--            app:layout_constraintEnd_toEndOf="@id/guide_end"-->
-        <!--            app:layout_constraintStart_toStartOf="@id/guide_start"-->
-        <!--            app:layout_constraintTop_toTopOf="@id/guide_top" />-->
+<!--                <TextView-->
+<!--                    android:id="@+id/btnYoutube"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/guide_bottom"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/guide_end"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/guide_start"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/guide_top" />-->
 
         <TextView
             android:id="@+id/tv_knowledge"
@@ -387,6 +387,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_login"
                     style="@style/HomeTextItem"
                     android:text="@string/login_title"
                     android:textSize="@dimen/text_16"

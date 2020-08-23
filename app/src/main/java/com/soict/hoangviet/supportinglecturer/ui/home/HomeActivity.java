@@ -62,12 +62,12 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
     ConstraintLayout llLiveStream;
     @BindView(R.id.llCreateVideo)
     ConstraintLayout llCreateVideo;
-    @BindView(R.id.tvHomeSignIn)
-    TextView tvSignIn;
-    @BindView(R.id.tvHomeName)
-    TextView tvName;
-    @BindView(R.id.ivHomeAvatar)
-    ImageView ivAvatar;
+//    @BindView(R.id.tvHomeSignIn)
+//    TextView tvSignIn;
+//    @BindView(R.id.tvHomeName)
+//    TextView tvName;
+//    @BindView(R.id.ivHomeAvatar)
+//    ImageView ivAvatar;
     @BindView(R.id.btnYoutube)
     ConstraintLayout btnYoutube;
     HomeViewPagerAdapter homeViewPagerAdapter;
@@ -214,16 +214,6 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
         }
     }
 
-    private void getUserProfile() {
-        if (mSharePreference.getLoginStatusFromFacebook()) {
-            mPresenter.getInfoFacebook();
-        } else {
-            if (!mSharePreference.getAccountNameGoogle().isEmpty()) {
-                tvName.setText(mSharePreference.getAccountNameGoogle());
-            }
-        }
-    }
-
     @Override
     public void goToLoginScreen() {
         Intent intentLogin = new Intent(HomeActivity.this, LoginActivity.class);
@@ -253,8 +243,8 @@ public class HomeActivity extends BaseActivity implements HomeView, View.OnClick
 
     @Override
     public void showInfoFacebook(FacebookResponse facebookResponse) {
-        tvName.setText(facebookResponse.getName());
-        CommonExtensionUtil.loadImageUrl(ivAvatar, facebookResponse.getPicture().getData().getUrl());
+//        tvName.setText(facebookResponse.getName());
+//        CommonExtensionUtil.loadImageUrl(ivAvatar, facebookResponse.getPicture().getData().getUrl());
         mSharePreference.setUserId(facebookResponse.getId());
     }
 

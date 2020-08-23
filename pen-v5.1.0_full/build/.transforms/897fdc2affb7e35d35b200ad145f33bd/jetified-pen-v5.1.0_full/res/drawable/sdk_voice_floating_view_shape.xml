@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <size android:height="@dimen/floating_controller_voice_layout_height" />
+    <solid android:color="@color/voice_floating_bg" />
+    <stroke
+        android:width="2px"
+        android:color="@color/voice_floating_outline" />
+    <corners android:radius="18dp" />
+</shape>

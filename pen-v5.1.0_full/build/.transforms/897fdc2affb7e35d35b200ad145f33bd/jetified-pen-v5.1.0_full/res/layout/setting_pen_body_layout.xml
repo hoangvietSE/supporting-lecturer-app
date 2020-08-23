@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/common_total_layout_width"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <HorizontalScrollView
+        android:id="@+id/setting_pen_pen_type_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+        <RelativeLayout
+            android:id="@+id/setting_pen_pen_type_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/setting_pen_pen_type_layout_height"
+            android:layout_gravity="center_horizontal" >
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+    <ImageView
+        android:layout_width="@dimen/common_total_layout_width"
+        android:layout_height="@dimen/common_setting_divider_stroke"
+        android:background="@color/setting_view_divider_color"/>
+
+    <RelativeLayout
+        android:id="@+id/setting_pen_pen_size_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="@dimen/common_total_layout_width"
+        android:layout_height="@dimen/common_setting_divider_stroke"
+        android:background="@color/setting_view_divider_color" />
+
+</LinearLayout>
