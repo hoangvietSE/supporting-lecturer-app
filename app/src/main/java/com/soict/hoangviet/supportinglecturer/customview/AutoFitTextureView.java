@@ -3,6 +3,7 @@ package com.soict.hoangviet.supportinglecturer.customview;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.TextureView;
 
 /**
@@ -40,6 +41,11 @@ public class AutoFitTextureView extends TextureView {
         mRatioWidth = width;
         mRatioHeight = height;
         requestLayout();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return false;
     }
 
     @Override

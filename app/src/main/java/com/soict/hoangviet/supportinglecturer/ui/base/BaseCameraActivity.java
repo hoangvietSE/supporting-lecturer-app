@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,6 +47,7 @@ import com.soict.hoangviet.supportinglecturer.R;
 import com.soict.hoangviet.supportinglecturer.adapter.FilterImageAdapter;
 import com.soict.hoangviet.supportinglecturer.customview.AutoFitTextureView;
 import com.soict.hoangviet.supportinglecturer.customview.MovableFloatingActionButton;
+import com.soict.hoangviet.supportinglecturer.customview.OnDragTouchListener;
 import com.soict.hoangviet.supportinglecturer.customview.SonnyJackDragView;
 import com.soict.hoangviet.supportinglecturer.utils.CameraEnum;
 import com.soict.hoangviet.supportinglecturer.utils.DeviceUtil;
@@ -75,6 +77,8 @@ public abstract class BaseCameraActivity extends BaseActivity {
 
     @BindView(R.id.textureView)
     protected AutoFitTextureView textureView;
+    @BindView(R.id.cv_camera)
+    protected CardView cardView;
     @BindView(R.id.drawView)
     protected RelativeLayout drawView;
     @Nullable
@@ -130,6 +134,7 @@ public abstract class BaseCameraActivity extends BaseActivity {
         initTextureListener();
         initEnum();
         initFilterAdapter();
+        cardView.setOnTouchListener(new OnDragTouchListener(cardView));
     }
 
     protected abstract CameraListener createCameraListener();
@@ -206,9 +211,6 @@ public abstract class BaseCameraActivity extends BaseActivity {
     }
 
     private void initOnTouch() {
-        textureView.setOnClickListener(view -> {
-
-        });
         mSonnyJackDragView = new SonnyJackDragView.Builder()
                 .setActivity(this)
                 .setNeedNearEdge(true)
@@ -320,7 +322,7 @@ public abstract class BaseCameraActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        startBackgroundThread();
+//        startBackgroundThread();
         if (textureView.isAvailable()) {
             DeviceUtil.transformImage(this, textureView, textureView.getWidth(), textureView.getHeight());
             openCamera(CAMERA_FONT);
@@ -331,7 +333,7 @@ public abstract class BaseCameraActivity extends BaseActivity {
 
     @Override
     protected void onPause() {
-        stopBackgroundThread();
+//        stopBackgroundThread();
         super.onPause();
     }
 
